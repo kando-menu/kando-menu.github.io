@@ -1,8 +1,9 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: Kando
+description: The cross-platform pie menu.
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+url: https://kando.menu
+baseurl: /documentation
 
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
