@@ -7,9 +7,9 @@ export default defineConfig({
   site: 'https://kando.menu',
   integrations: [
     starlight({
-      title: 'My Docs',
+      title: 'Kando',
       social: {
-        github: 'https://github.com/withastro/starlight',
+        github: 'https://github.com/kando-menu/kando',
       },
       sidebar: [
         {
