@@ -4,7 +4,7 @@ import {defineConfig} from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'kando.menu',
+  site: 'https://kando.menu',
   integrations: [
     starlight({
       title: 'My Docs',
