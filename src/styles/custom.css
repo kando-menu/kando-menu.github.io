@@ -1,0 +1,41 @@
+:root {
+    --sl-nav-gap: 1rem;
+}
+
+[data-has-hero] header {
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+/* Dark mode colors. */
+:root {
+    --sl-color-accent-low: #331b27;
+    --sl-color-accent: #9f4575;
+    --sl-color-accent-high: #e0becd;
+    --sl-color-white: #ffffff;
+    --sl-color-gray-1: #ebeef2;
+    --sl-color-gray-2: #bec2c7;
+    --sl-color-gray-3: #858c96;
+    --sl-color-gray-4: #525962;
+    --sl-color-gray-5: #323941;
+    --sl-color-gray-6: #21272f;
+    --sl-color-black: #15181c;
+}
+
+/* Light mode colors. */
+:root[data-theme='light'] {
+    --sl-color-accent-low: #e9cfda;
+    --sl-color-accent: #a14777;
+    --sl-color-accent-high: #4a2337;
+    --sl-color-white: #15181c;
+    --sl-color-gray-1: #21272f;
+    --sl-color-gray-2: #323941;
+    --sl-color-gray-3: #525962;
+    --sl-color-gray-4: #858c96;
+    --sl-color-gray-5: #bec2c7;
+    --sl-color-gray-6: #ebeef2;
+    --sl-color-gray-7: #f5f6f8;
+    --sl-color-black: #ffffff;
+}
