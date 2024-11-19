@@ -9,7 +9,7 @@ SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-![](/src/assets/banner02.png)
+![](../../assets/banner02.png)
 
 ## Our Pledge
 
