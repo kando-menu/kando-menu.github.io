@@ -5,40 +5,63 @@ banner:
   content: 🚧 This page is under construction! 🚧
 sidebar:
   order: 2
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 4
 ---
 
-import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Aside, FileTree } from '@astrojs/starlight/components';
 
 ![banner](../../../assets/banner03.png)
 
-All settings of Kando are stored in **two configuration files** JSON files which you can also edit manually.
+All settings of Kando are stored in **two configuration files** JSON files which you can edit with any text editor.
 `config.json` stores the general configuration of the application and `menus.json` stores the configuration of the individual menus.
-Depending on your platform, the configuration files are located in different directories:
+
+<Aside type="tip" title="Edit the config files while Kando is running!">
+Whenever you save a file, Kando will automatically 🔥 **hot-reload** the configuration.
+Kando will ✅ **validate** the configuration files. If you [launched Kando from a terminal](../../advanced-usage/launch-from-cli), it will print errors to the console if it finds any. In this case, the configuration will not be reloaded. If a configuration file is invalid at startup, Kando will refuse to start.
+</Aside>
+
+## Location of the Configuration Files
+
+Depending on your platform, the configuration files are located in different directories.
+Use you file manager or terminal to navigate to the following directories.
 
 <Tabs>
   <TabItem label="Windows" icon="seti:windows">
-    `%appdata%\kando\`
+    ```
+    %appdata%\kando\
+    ```
   </TabItem>
   <TabItem label="macOS" icon="apple">
-    `~/Library/Application Support/kando/`
+    ```
+    ~/Library/Application Support/kando/
+    ```
   </TabItem>
   <TabItem label="Linux" icon="linux">
-    `~/.config/kando/`
+    ```
+    ~/.config/kando/
+    ```
   </TabItem>
 </Tabs>
 
-**📝 JSON Format**: Both configuration files are JSON files. You can edit them with any text editor.
+<FileTree>
 
-**🔥 Hot Reloading:** Whenever you save a file, Kando will automatically reload the configuration.
+- kando
+  - menu-themes/
+  - icon-themes/
+  - config.json Contains the general configuration of Kando.
+  - menus.json Contains the configuration of the menus.
 
-**✅ Validation:** Kando will validate the configuration files and [print errors to the console](installing.md#running-kando-from-the-command-line) if it finds any. In this case, the configuration will not be reloaded. If a configuration file is invalid at startup, Kando will use the default configuration instead.
+</FileTree>
+
 
 
 ## General Configuration: `config.json`
 
 This file contains the general configuration of Kando.
 
-Property | Default | Description
+<div style="width:150px">Property</div> | <div style="width:100px">Default</div> | Description
 -------- | ------------- | -----------
 `menuTheme` | `"default"` | The directory name of the menu theme to use. Kando will first look for a directory with this name in the `menu-themes` subdirectory of the config directory. If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/menu-themes` in Kando's installation directory.
 `darkMenuTheme` | `"default"` | The name of the theme which should be used if the system is in dark mode.
@@ -53,7 +76,7 @@ Property | Default | Description
 
 ### The `menuOptions` Property
 
-Property | Default | Description
+<div style="width:150px">Property</div> | <div style="width:100px">Default</div> | Description
 -------- | ------------- | -----------
 `centerDeadZone` | `50` | Clicking inside this radius (in pixels) will select the parent element or close the menu.
 `minParentDistance` | `150` | The distance in pixels at which the parent menu item is placed if a submenu is selected close to the parent.
@@ -73,7 +96,7 @@ Property | Default | Description
 
 ### The `editorOptions` Property
 
-Property | Default | Description
+<div style="width:150px">Property</div> | <div style="width:100px">Default</div> | Description
 -------- | ------------- | -----------
 `showSidebarButtonVisible` | `true` | Set this to `false` to hide the show-sidebar button. It will still be clickable, though.
 `showEditorButtonVisible` | `true` | Set this to `false` to hide the show-editor button. It will still be clickable, though.
@@ -83,7 +106,7 @@ Property | Default | Description
 This file contains the configuration of the individual menus.
 There are two top-level JSON objects: `menus` contains a list of _Menu Descriptions_ and `templates` contains a list of _Menu Descriptions_ or _Menu Item Descriptions_.
 
-```js
+```json5 title=menus.json
 {
   "menus": [
     {
@@ -111,7 +134,7 @@ You can have a look at a the example menu configurations [here](https://github.c
 The items in the `menus` list are called menu descriptions.
 They are JSON objects with the following properties:
 
-Property | Default | Description
+<div style="width:150px">Property</div> | <div style="width:100px">Default</div> | Description
 -------- | ------------- | -----------
 `shortcut` | `""` | The shortcut which opens the menu. This is a string which can contain multiple keys separated by `+`. For example, `"Ctrl+Shift+K"` or `"Cmd+Shift+K"`. If empty, the menu will not have a shortcut. See [Menu Shortcuts vs. Simulated Hotkeys](configuring.md#keyboard-menu-shortcuts-vs-simulated-hotkeys) for details.
 `shortcutID` | `""` | On some platforms, Kando can not bind shortcuts directly. In this case, you can use this property to assign an ID which can be used in the global shortcut configuration of your desktop environment. This should be lowercase and contain only ASCII characters and dashes. For example, `"main-trigger"`.
@@ -126,7 +149,7 @@ Property | Default | Description
 The `conditions` property of a menu description can contain a dictionary of conditions.
 Only if all conditions are met, the menu will be shown.
 
-Property | Default | Description
+<div style="width:150px">Property</div> | <div style="width:100px">Default</div> | Description
 -------- | ------------- | -----------
 `appName` | `""` | The name of the application which must be focused for the menu to be shown. If it is a simple string, the condition is met if the name of the focused application contains the given string (case-insensitive). If the string starts with a `/`, it is interpreted as a regular expression.
 `windowName` | `""` | The name of the window which must be focused for the menu to be shown. It is interpreted in the same way as `appName`.
@@ -137,7 +160,7 @@ Property | Default | Description
 The layout of the menu is described by a tree of menu items.
 Each menu item is a JSON object with the following properties:
 
-Property | Default | Description
+<div style="width:150px">Property</div> | <div style="width:100px">Default</div> | Description
 -------- | ------------- | -----------
 `name` | `"undefined"` | The name of the menu item. This is shown in the center of the menu when the item is hovered. The name of the root item defines the name of the menu.
 `iconTheme` | `""` | This can either be one of the built-in icon themes (`"material-symbols-rounded"`, `"simple-icons"`, `"simple-icons-colored"`, `"base64"`, or `"emoji"`) or a subdirectory of the `icon-themes` subdirectory in Kando's config directory. The built-in icon themes use icons from [Google's Material Symbols](https://fonts.google.com/icons) or [Simple Icons](https://simpleicons.org/) respectively.
