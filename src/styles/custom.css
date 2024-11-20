@@ -9,6 +9,18 @@
     backdrop-filter: blur(16px);
 }
 
+@media (prefers-color-scheme: light) {
+    .banner-light {
+        display: block;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .banner-dark {
+        display: block;
+    }
+}
+
 /* Dark mode colors. */
 :root {
     --sl-color-accent-low: #331b27;

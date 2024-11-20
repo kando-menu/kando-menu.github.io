@@ -1,11 +1,13 @@
 // @ts-check
 import starlight from '@astrojs/starlight';
-import {defineConfig} from 'astro/config';
+import icon from 'astro-icon';
+import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://kando.menu',
   integrations: [
+    icon(),
     starlight({
       title: 'Kando',
       logo: {
@@ -13,8 +15,7 @@ export default defineConfig({
         alt: 'Kando Logo',
       },
       editLink: {
-        baseUrl:
-            'https://github.com/kando-menu/kando-menu.github.io/edit/main/',
+        baseUrl: 'https://github.com/kando-menu/kando-menu.github.io/edit/main/',
       },
       social: {
         github: 'https://github.com/kando-menu/kando',
@@ -24,20 +25,44 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Getting Started',
-          autogenerate: {directory: 'getting-started'},
+          autogenerate: { directory: 'getting-started' },
         },
         {
-          label: 'Reference',
-          autogenerate: {directory: 'reference'},
+          label: 'Advanced Usage',
+          autogenerate: { directory: 'advanced-usage' },
         },
-        {label: 'Changelog', link: '/changelog'},
-        {label: 'Code of Conduct', link: '/code-of-conduct'},
+        {
+          label: 'Getting Involved',
+          autogenerate: { directory: 'getting-involved' },
+        },
+        {
+          label: 'API References',
+          autogenerate: { directory: 'reference' },
+          collapsed: true,
+        },
+        {
+          label: 'Discord 🗗',
+          link: 'https://discord.gg/hZwbVSDkhy',
+          attrs: { target: '_blank' },
+        },
+        {
+          label: 'Issue Tracker 🗗',
+          link: 'https://github.com/kando-menu/kando/issues',
+          attrs: { target: '_blank' },
+        },
+        {
+          label: 'Changelog 🗗',
+          link: 'https://github.com/kando-menu/kando/blob/main/docs/changelog.md',
+          attrs: { target: '_blank' },
+        },
+        {
+          label: 'Code of Conduct 🗗',
+          link: 'https://github.com/kando-menu/kando/blob/main/docs/code-of-conduct.md',
+          attrs: { target: '_blank' },
+        },
       ],
       lastUpdated: true,
-      customCss: [
-        // Relative path to your custom CSS file
-        './src/styles/custom.css',
-      ],
+      customCss: ['./src/styles/custom.css'],
     }),
   ],
 });

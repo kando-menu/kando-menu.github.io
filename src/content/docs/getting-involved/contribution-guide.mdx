@@ -1,0 +1,100 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Writing Code for Kando
+description: Some guidelines for contributing to Kando.
+banner:
+  content: 🚧 This page is under construction! 🚧
+sidebar:
+  order: 4
+---
+
+import { Aside, LinkButton } from '@astrojs/starlight/components';
+
+![banner](../../../assets/banner05.png)
+
+Whenever you encounter a 🐛 **bug** or have 🎉 **feature request**,
+report this as a [GitHub issue](https://github.com/kando-menu/kando/issues)!
+
+If you want to contribute by fixing a bug or implementing a feature yourself, you are very welcome to do so!
+We are happy to receive contributions in the form of **pull requests** on GitHub.
+Feel free to fork the repository, implement your changes and create a merge request to the `main` branch!
+
+<Aside type="tip">
+There are always some issues labelled as [good first issue](https://github.com/kando-menu/kando/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22). Feel free to pick one of these and ask for some pointers for how to get started in the comments!
+</Aside>
+
+## 1. Fork the Kando Repository
+
+As you do not have write access to the main repository, you need to fork it first.
+For this, click the button below:
+
+<LinkButton
+  href="https://github.com/kando-menu/kando/fork"
+  icon="external"
+  iconPlacement="start"
+>
+  Fork Kando on GitHub!
+</LinkButton>
+
+Kando uses a simplified version of [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/):
+New features are usually implemented in `feature/*` branches and are merged to `main` once they are finished.
+Similarly, bugfixes are implemented in `fix/*` branches, where the `*` is usually the issue number (e.g. `fix/#123`).
+
+While it does not matter how you name the branches in your fork, it is a good idea to follow this convention to organize your work.
+
+## 2. Write Some Code
+
+Kando uses [Prettier](https://prettier.io/) for code formatting.
+You can either configure your editor to format the code on save or run `npm run format` before committing your changes.
+
+Commits should start with a Capital letter and should be written in imperative mood (e.g. **:tada: Add cool new feature** instead of **:tada: Added cool new feature**).
+It's a great idea to start the commit message with an applicable emoji.
+This does not only look great but also makes you rethink what to add to a commit:
+Commits should be small and focused on a single task.
+Therefore, only one emoji should be used per commit.
+
+- 🎉 `:tada:` when adding a cool new feature.
+- 🐛 `:bug:` when fixing a bug.
+- 🔧 `:wrench:` when adding small piece of code.
+- 🚀 `:rocket:` when improving performance.
+- ♻️ `:recycle:` when refactoring the code.
+- 🔥 `:fire:` when removing files or code.
+- 🚚 `:truck:` when moving / renaming files or classes.
+- ✨ `:sparkles:` when formatting the code.
+- 🎨 `:art:` improving or adding assets like themes or fonts.
+- 💄 `:lipstick:` when working on the UI styling.
+- 📝 `:memo:` when writing docs.
+- 🌐 `:globe_with_meridians:` when working on localization.
+- 💞 `:revolving_hearts:` when updating credits.
+- ✔️ `:heavy_check_mark:` when working on tests.
+- 🔼 `:arrow_up_small:` when adding / upgrading dependencies.
+- 🔽 `:arrow_down_small:` when removing / downgrading dependencies.
+- 🔀 `:twisted_rightwards_arrows:` when merging branches.
+
+**Usage of these emojis is not mandatory.**
+We will still accept your pull request if you don't use them.
+However, we will be very happy if you do :smile:.
+
+<Aside type="note" title="Keep a Changelog!">
+Kando uses [semantic versioning](https://semver.org) and the [changelog](changelog.md) follows the rules of [Keep a Changelog](http://keepachangelog.com/).
+Whenever you add a new feature or fix a bug, please add an entry to the top of the changelog in the `[unreleased]` section.
+When a new version is released, this section will be marked as released and a tag is created on the `main` branch.
+</Aside>
+
+<Aside type="tip" title="Need Help?">
+If you encounter any issues while working on Kando, feel free to ask for help in the comments of the corresponding issue or join the development chat on [Discord](https://discord.gg/hZwbVSDkhy)!
+</Aside>
+
+## 3. Create a Pull Request
+
+Finally, when you are finished with your changes, push them to your fork and create a pull request to the `main` branch of Kando's repository.
+
+Several checks will be performed automatically.
+Kando uses [Github Actions](https://github.com/kando-menu/kando/actions) for continuous integration.
+
+- For **each commit**, several checks are performed. These include code formatting, linting, [REUSE](https://reuse.software/) compliance and unit tests.
+- For **pull requests**, it is checked in addition that the application can be packaged for Linux, Windows, and macOS.
+
+💞 **Thank you very much for your contribution! You are awesome!** 💞
