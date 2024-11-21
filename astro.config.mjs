@@ -63,6 +63,9 @@ export default defineConfig({
       ],
       lastUpdated: true,
       customCss: ['./src/styles/custom.css'],
+      components: {
+        Footer: './src/components/Footer.astro',
+      },
     }),
   ],
 });

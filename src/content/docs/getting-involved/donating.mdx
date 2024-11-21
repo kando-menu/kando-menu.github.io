@@ -1,36 +1,37 @@
 ---
 title: Become a Sponsor! 💖
 description: A guide in my new Starlight docs site.
-banner:
-  content: 🚧 This page is under construction! 🚧
 tableOfContents: false
 sidebar:
   order: 1
 ---
 
-import { Aside, CardGrid } from '@astrojs/starlight/components';
-import Card from '../../../components/Card.astro';
+import { CardGrid } from '@astrojs/starlight/components';
+import CustomCard from '../../../components/CustomCard.astro';
+import CustomAside from '../../../components/CustomAside.astro';
+import Intro from '../../../components/Intro.astro';
 
 ![banner](../../../assets/banner04.png)
 
-**I am creating Kando out of sheer passion.** While direct contributions are the most awesome way to support the development, donations will encourage me to invest my spare time for developing free and open-source software!
-
-Every little donation means a lot to me. 
+<Intro>
+**I am creating Kando out of sheer passion.** Donations will encourage me to invest my spare time for developing free and open-source software!
 If you want to support me, you can do so in the following ways:
+</Intro>
+
 
 <CardGrid stagger>
-  <Card title="Via Ko-fi!" icon="simple-icons:kofi">
+  <CustomCard title="Via Ko-fi!" icon="simple-icons:kofi">
     Send a single cup of coffee or a monthly supply <a href="https://ko-fi.com/schneegans" target="_blank">here 🗗</a>!
-  </Card>
-  <Card title="Via GitHub!" icon="simple-icons:github">
+  </CustomCard>
+  <CustomCard title="Via GitHub!" icon="simple-icons:github">
     You can also donate via the <a href="https://github.com/sponsors/Schneegans" target="_blank">GitHub Sponsors Program 🗗</a>.
-  </Card>
-  <Card title="Via PayPal!" icon="simple-icons:paypal">
+  </CustomCard>
+  <CustomCard title="Via PayPal!" icon="simple-icons:paypal">
     There's also a <a href="https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE" target="_blank">PayPal donation 🗗</a> link available.
-  </Card>
-  <Card title="Via Crypto!" icon="simple-icons:bitcoin">
+  </CustomCard>
+  <CustomCard title="Via Crypto!" icon="simple-icons:bitcoin">
     Send a single cup of coffee or a monthly supply <a href="https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE" target="_blank">schneegans.cb.id 🗗</a>!
-  </Card>
+  </CustomCard>
 </CardGrid>
 
 
@@ -43,3 +44,10 @@ Thank you so much for your support! 💖
   <img class="light:sl-hidden" src="https://schneegans.github.io/sponsors/sponsors_dark_small.svg" />
   <img class="dark:sl-hidden" src="https://schneegans.github.io/sponsors/sponsors_light_small.svg" />
 </a>
+
+<br />
+<br />
+
+<CustomAside type="thanks" title="Thank you!">
+Every donation, no matter how small, is highly appreciated and helps me to continue developing Kando and other open-source projects.
+</CustomAside>

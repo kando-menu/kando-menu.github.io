@@ -1,0 +1,83 @@
+---
+title: Installing Kando on macOS
+description: How to install Kando on macOS.
+tableOfContents: false
+sidebar:
+  label: Installing on macOS
+  order: 2
+prev:
+  link: /getting-started/intro
+  label: What is Kando?
+next:
+  link: /getting-started/usage
+  label: How to Use the Menu
+---
+
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import Intro from '../../../components/Intro.astro';
+
+<YouTube id="q1H64iPYnAE" />
+
+<Intro>
+On macOS, you can either install Kando from your package manager, via an installer or by downloading a ZIP archive.
+You can follow the steps below or watch the video above to get started!
+</Intro>
+
+## 📦 Installation via a Package Manager
+
+<Steps>
+
+1. Kando is available as a Homebrew Cask. You can install it by running:
+
+   ```bash
+   brew install kando
+   ```
+
+2. After the installation, you can start Kando from your launchpad! Not much will happen, as Kando is a tray application and will run in the background.
+
+3. Press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu! The only thing left to do is to grant the required permissions. See the [Grant Required Permissions](#grant-required-permissions) section below for more information.
+
+</Steps>
+
+## ⬇️ Installation via the Installer
+
+<Steps>
+
+1. Just head over to the [releases page](https://github.com/kando-menu/kando/releases) and download the latest installer. It's called differently depending on your hardware:
+   * `Kando-*-arm64.dmg` if you are on Apple Silicon.
+   * `Kando-*-x64.dmg` if you are on Intel hardware.
+
+2. Double-click the downloaded file and drag the Kando icon to the Applications folder.
+
+3. After the installation, you can start Kando from your launchpad! Not much will happen, as Kando is a tray application and will run in the background.
+
+4. Press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu! The only thing left to do is to grant the required permissions. See the [Grant Required Permissions](#grant-required-permissions) section below for more information.
+
+</Steps>
+
+## 🗜️ Installation via the ZIP Archive
+
+<Steps>
+
+1. Just head over to the [releases page](https://github.com/kando-menu/kando/releases) and download the latest zip. It's called differently depending on your hardware:
+   * `Kando-darwin-arm64-*.zip` if you are on Apple Silicon.
+   * `Kando-darwin-x64-*.zip` if you are on Intel hardware.
+
+2. Extract the application from the downloaded file and store it in any directory you like.
+
+3. Double-click the app to start it. Not much will happen, as Kando is a tray application and will run in the background.
+
+4. Press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu! The only thing left to do is to grant the required permissions. See the [Grant Required Permissions](#grant-required-permissions) section below for more information.
+
+</Steps>
+
+## Grant Required Permissions
+
+<Aside type="caution" title="Important">
+    Regardless of the installation method you chose, 
+You will have to grant Kando **Accessibility** and **Screen Recording** permissions in the system settings.
+</Aside>
+
+Accessibility permissions are required to simulate key presses and move the mouse cursor. Screen Recording permissions are required to get the name of the currently focused window.

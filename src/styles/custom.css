@@ -9,16 +9,20 @@
     backdrop-filter: blur(16px);
 }
 
-@media (prefers-color-scheme: light) {
-    .banner-light {
-        display: block;
-    }
+.content-panel kbd {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.1em 0.5em;
+    margin: 0 0.2em;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+    background-color: #f7f7f7;
 }
 
-@media (prefers-color-scheme: dark) {
-    .banner-dark {
-        display: block;
-    }
+:root[data-theme='dark'] .content-panel kbd {
+    border: 1px solid #555;
+    border-top-color: #666;
+    box-shadow: 0 2px 0px rgba(0, 0, 0, 1), 0 0 0 2px #383838 inset;
+    background-color: #333;
 }
 
 /* Dark mode colors. */

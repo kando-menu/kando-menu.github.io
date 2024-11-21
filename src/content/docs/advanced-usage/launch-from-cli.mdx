@@ -1,0 +1,39 @@
+---
+title: Launch Kando from a Command Line
+description: How to run Kando from the command line.
+tableOfContents: false
+sidebar:
+  label: Launch from CLI
+  order: 3
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+Sometimes it is useful to run Kando from the command line in order to see the output of the application.
+If you installed Kando via a package manager or via one of the installers from GitHub, Kando's executable will be located in one of the following directories:
+
+<Tabs>
+  <TabItem label="Windows" icon="seti:windows">
+    On Windows, the path to the executable depends on the current version number. Just copy `%localappdata%\Kando` into the address bar of the Windows Explorer and check the contained directories.
+    ```
+    %localappdata%\Kando\app-<version number>\Kando.exe
+    ```
+  </TabItem>
+  <TabItem label="macOS" icon="apple">
+    On macOS, the executable is located in the following directory:
+    ```
+    /Applications/Kando.app/Contents/MacOS/Kando
+    ```
+    <Aside type="caution" title="Grant Permissions!">
+    If you run Kando from the command line, you need to grant the required permissions _to the terminal_. See [Installing on macOS](/getting-started/installation-macos#grant-required-permissions) to learn which permissions are required.
+    </Aside>
+
+  </TabItem>
+  <TabItem label="Linux" icon="linux">
+    On Linux, this depends on the installation method. The executable is usually located in one of the following directories:
+    ```
+    /usr/bin/kando
+    /usr/local/bin/kando
+    ```
+  </TabItem>
+</Tabs>

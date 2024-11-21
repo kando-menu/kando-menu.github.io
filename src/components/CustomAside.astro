@@ -1,0 +1,54 @@
+---
+// This is a plain copy of the original Aside component from Starlight. The only addition is the
+// `thanks` variant. Original source:
+// https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Aside.astro
+
+import { AstroError } from 'astro/errors';
+import { Icon } from '@astrojs/starlight/components';
+
+const asideVariants = ['note', 'tip', 'caution', 'danger', 'thanks'] as const;
+const icons = {
+  note: 'information',
+  tip: 'rocket',
+  caution: 'warning',
+  danger: 'error',
+  thanks: 'heart',
+} as const;
+
+interface Props {
+  type?: (typeof asideVariants)[number];
+  title?: string;
+  icon?: string;
+}
+
+let { type = 'note', title, icon } = Astro.props;
+
+if (!asideVariants.includes(type)) {
+  throw new AstroError(
+    'Invalid `type` prop passed to the `<Aside>` component.\n',
+    `Received: ${JSON.stringify(type)}\n` +
+      `Expected one of ${asideVariants.map((i) => JSON.stringify(i)).join(', ')}`
+  );
+}
+
+if (!title) {
+  title = Astro.locals.t(`aside.${type}`);
+}
+---
+
+<aside aria-label={title} class={`starlight-aside starlight-aside--${type}`}>
+  <p class="starlight-aside__title" aria-hidden="true">
+    <Icon name={icons[type]} class="starlight-aside__icon" />{title}
+  </p>
+  <div class="starlight-aside__content">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .starlight-aside--thanks {
+    --sl-color-asides-text-accent: var(--sl-color-green-high);
+    --sl-color-asides-border: var(--sl-color-green);
+    background-color: var(--sl-color-green-low);
+  }
+</style>
