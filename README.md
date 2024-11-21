@@ -13,3 +13,6 @@ npm run dev
 ```
 
 This will start a local development server at http://localhost:4321.
+
+This page uses the [Starlight](https://starlight.astro.build/getting-started/) theme for the [Astro](https://docs.astro.build/en/getting-started/) framework to generate static HTML files.
+You can find some documentation about the frameworks by using these links.
