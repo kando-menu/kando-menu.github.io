@@ -1,30 +1,38 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
-import { Icon } from 'astro-icon/components';
+import { Icon as AstroIcon } from 'astro-icon/components';
 import Default from '@astrojs/starlight/components/Footer.astro';
+import { Icon } from '@astrojs/starlight/components';
 ---
 
 <Default {...Astro.props}><slot /></Default>
 
 <div class="kudos">
-  <Icon name="simple-icons:creativecommons" /> Content Licensed under CC-BY-4.0 by Simon Schneegans
-  and all other Kando Documentation Contributors
+  <AstroIcon name="simple-icons:creativecommons" /> Content Licensed under CC-BY-4.0 by Simon
+  Schneegans and all other Kando Documentation Contributors
+  <br />
+  Build with <a href="https://docs.astro.build/en/getting-started/"
+    ><Icon name="astro" />
+    Astro</a
+  > using the <a href="https://docs.astro.build/en/getting-started/"
+    ><Icon name="starlight" />
+    Starlight</a
+  > theme
   <br />
   <a href="https://github.com/kando-menu/kando-menu.github.io">
-    <Icon name="simple-icons:github" /> Hosted on GitHub Pages
+    <AstroIcon name="simple-icons:github" /> Hosted on GitHub Pages
   </a>
 </div>
 
 <style>
   .kudos {
     text-align: center;
-    line-height: 2rem;
+    line-height: 1.8rem;
     font-size: var(--sl-text-xs);
     color: var(--sl-color-gray-3);
   }
 
   .kudos a {
-    margin: 1.5rem auto;
     color: var(--sl-color-gray-3);
   }
 
