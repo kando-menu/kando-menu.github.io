@@ -14,14 +14,20 @@ const icons = {
   danger: 'error',
   thanks: 'heart',
 } as const;
+const labels = {
+  note: 'Note',
+  tip: 'Tip',
+  caution: 'Caution',
+  danger: 'Danger',
+  thanks: 'Thank you!',
+} as const;
 
 interface Props {
   type?: (typeof asideVariants)[number];
   title?: string;
-  icon?: string;
 }
 
-let { type = 'note', title, icon } = Astro.props;
+let { type = 'note', title } = Astro.props;
 
 if (!asideVariants.includes(type)) {
   throw new AstroError(
@@ -32,7 +38,7 @@ if (!asideVariants.includes(type)) {
 }
 
 if (!title) {
-  title = Astro.locals.t(`aside.${type}`);
+  title = labels[type];
 }
 ---
 
