@@ -25,20 +25,46 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Getting Started',
-          autogenerate: { directory: 'getting-started' },
+          items: [
+            'getting-started/intro',
+            'getting-started/installation-windows',
+            'getting-started/installation-macos',
+            'getting-started/installation-linux',
+            'getting-started/usage',
+            {
+              label: 'Available Item Types',
+              items: [
+                'getting-started/item-types/open-uri',
+                'getting-started/item-types/paste-text',
+                'getting-started/item-types/run-command',
+                'getting-started/item-types/simulate-hotkey',
+                'getting-started/item-types/simulate-macro',
+                'getting-started/item-types/submenu',
+              ],
+            },
+          ],
         },
         {
           label: 'Advanced Usage',
-          autogenerate: { directory: 'advanced-usage' },
+          items: [
+            'advanced-usage/opening-menus',
+            'advanced-usage/launch-from-cli',
+            'advanced-usage/create-menu-themes',
+          ],
         },
         {
           label: 'Getting Involved',
-          autogenerate: { directory: 'getting-involved' },
+          items: [
+            'getting-involved/donating',
+            'getting-involved/translating',
+            'getting-involved/compile-from-source',
+            'getting-involved/contribution-guide',
+          ],
         },
         {
           label: 'API References',
-          autogenerate: { directory: 'reference' },
           collapsed: true,
+          items: ['reference/cli', 'reference/config-files'],
         },
         {
           label: 'Discord 🗗',
