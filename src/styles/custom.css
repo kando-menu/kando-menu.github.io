@@ -25,6 +25,13 @@
     background-color: #333;
 }
 
+/* The astro icons are not displayed correctly as they get an display: block;
+   from somewhere. We add this class manually to make them inline again. */
+.inline-icon {
+    display: inline-block !important;
+    transform: translateY(0.1em);
+}
+
 /* Dark mode colors. */
 :root {
     --sl-color-accent-low: #331b27;

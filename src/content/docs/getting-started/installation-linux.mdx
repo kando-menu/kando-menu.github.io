@@ -1,8 +1,6 @@
 ---
 title: Installing Kando on Linux
 description: How to install Kando on Linux.
-banner:
-  content: 🚧 This page is under construction! 🚧
 sidebar:
   label: Installing on Linux
   order: 3
@@ -13,3 +11,166 @@ next:
   link: /getting-started/usage
   label: How to Use the Menu
 ---
+
+import { Steps, Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import Intro from '../../../components/Intro.astro';
+
+![banner](../../../assets/banner06.png)
+
+<Intro>
+On Linux, you can either install Kando from your package manager, or via any of the pre-packaged binaries from GitHub releases.
+</Intro>
+
+## 📦 Installation via a Package Manager
+
+<Steps>
+
+1. Kando is already available in several package managers. 
+   <Tabs>
+    <TabItem label="AUR">
+      You can install [`kando-bin`](https://aur.archlinux.org/packages/kando-bin/) from the AUR.
+      ```bash
+      yay -S kando-bin
+      ```
+    </TabItem>
+    <TabItem label="NixOS">
+      A [`kando`](https://search.nixos.org/packages?channel=24.11&show=kando) package is available in Nixpkgs.
+      ```bash
+      nix-shell -p kando
+      ```
+    </TabItem>
+    <TabItem label="AM or AppMan">
+      You can install Kando from the [AppMan](https://portable-linux-apps.github.io/apps) package manager.
+      ```bash
+      am -i kando
+      ```
+    </TabItem>
+   </Tabs>
+
+2. After the installation, you can start Kando from your application launcher! Not much will happen, as Kando is a tray application and will run in the background.
+
+3. On most X11 based distributions, you can now press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu!
+   <Aside type="note" title='This does not work?'>
+    On some desktop environments, especially those based on Wayland, you will have to perform some additional steps. Read more in the [Desktop Specifics](#desktop-specifics) section below for more information.
+   </Aside>
+
+</Steps>
+
+## 🗜️ Installation via a Pre-Packaged Binary
+
+<Steps>
+
+1. Just head over to the [releases page](https://github.com/kando-menu/kando/releases) and download a package that fits your distribution.
+   <Tabs syncKey="download-type">
+    <TabItem label="Ubuntu">
+      On Ubuntu and other Debian-based distributions, you can download the `Kando_*_amd64.deb` package.
+    </TabItem>
+    <TabItem label="Fedora">
+      On Fedora and other RPM-based distributions, you can download the `Kando-*.x86_64.rpm` package.
+    </TabItem>
+    <TabItem label="AppImage">
+      The `Kando-*-x86_64.AppImage` package is a universal package that should work on most distributions.
+    </TabItem>
+    <TabItem label="Zip Archive">
+      The `Kando-linux-x64-*.zip` package is a generic package that should work on most distributions.
+    </TabItem>
+   </Tabs>
+
+2. Install the package. The AppImage and Zip Archive packages are standalone and can be run directly. The other packages need to be installed.
+   <Tabs syncKey="download-type">
+    <TabItem label="Ubuntu">
+      ```bash
+      sudo dpkg -i Kando_*_amd64.deb
+      ```
+      After the installation, you can start Kando from your application launcher! Not much will happen, as Kando is a tray application and will run in the background.
+    </TabItem>
+    <TabItem label="Fedora">
+      ```bash
+      sudo rpm -i Kando-*.x86_64.rpm
+      ```
+      After the installation, you can start Kando from your application launcher! Not much will happen, as Kando is a tray application and will run in the background.
+    </TabItem>
+    <TabItem label="AppImage">
+      ```bash
+      chmod +x Kando-*-x86_64.AppImage
+      ./Kando-*-x86_64.AppImage
+      ```
+    </TabItem>
+    <TabItem label="Zip Archive">
+      ```bash
+      unzip Kando-linux-x64-*.zip
+      ./Kando-linux-x64/kando
+      ```
+    </TabItem>
+   </Tabs>
+
+3. On most X11 based distributions, you can now press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu!
+   <Aside type="note" title='This does not work?'>
+    On some desktop environments, especially those based on Wayland, you will have to perform some additional steps. Read more in the [Desktop Specifics](#desktop-specifics) section below for more information.
+   </Aside>
+  
+</Steps>
+
+## Desktop Specifics
+
+Implementing a menu like Kando on Wayland is not exactly easy.
+Things like getting the mouse position before opening a window, simulating key presses, or getting the name of the currently focused application window does not work out of the box.
+Therefore, Kando needs some additional setup on Wayland based desktop environments.
+There are also some X11 based desktop environments that need some additional setup.
+
+### <Icon name="simple-icons:gnome" class="inline-icon" /> GNOME on Wayland
+
+You will also need to install the [🐚 Kando Integration Extension](https://github.com/kando-menu/gnome-shell-integration).
+Via a D-Bus interface, it provides the name of the currently focused window, and the current mouse pointer position.
+Furthermore, it allows registering and simulating keyboard shortcuts.
+
+
+### <Icon name="simple-icons:kde" class="inline-icon" /> KDE Plasma on Wayland
+
+If you are using Plasma on Wayland, Kando cannot directly bind global shortcuts.
+Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination for this shortcut ID in your system settings.
+You can bind a shortcut to the shortcut ID under the KWin section in the global shortcuts settings.
+
+### <Icon name="simple-icons:hyprland" class="inline-icon" /> Hyprland
+
+You will need some window rules for Kando.
+Else, the menu will not float above other windows.
+
+```
+// ~/.config/hypr/hyprland.conf
+windowrule = noblur, kando
+windowrule = opaque, kando
+windowrule = size 100% 100%, kando
+windowrule = noborder, kando
+windowrule = noanim, kando
+windowrule = float, kando
+windowrule = pin, kando
+```
+
+Also, Kando cannot directly bind global shortcuts on Hyprland.
+Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination in `hyprland.conf`.
+Replace `example-menu` with the ID of your menu.
+
+```
+// ~/.config/hypr/hyprland.conf
+bind = CTRL, Space, global, kando:example-menu
+```
+
+### Dusk
+
+On Dusk, you will have to install and use a compositor like `picom` or `compton` to make the transparency work.
+Also, you will need some window rules for Kando:
+```cpp
+// dusk/config.def.h
+static const Rule clientrules[] = {
+  { .class = "kando", .flags = FullScreen }, //kando should be on top of DOCK clientrule
+  { .wintype = WTYPE "DESKTOP", .flags = Unmanaged|Lower },
+  { .wintype = WTYPE "DOCK", .flags = Unmanaged|Raise },
+};
+```
+
+### LXDE, i3, Openbox, and others
+
+On some minimal desktop environments, you will have to install and use a compositor like `picom` or `compton` to make the transparency work.
