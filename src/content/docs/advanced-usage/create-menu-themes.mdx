@@ -1,0 +1,521 @@
+---
+title: Creating Menu Themes
+description: A guide in my new Starlight docs site.
+---
+
+import { Tabs, TabItem, Aside, FileTree, Card } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import Intro from '../../../components/Intro.astro';
+
+![banner](../../../assets/banner07.png)
+
+<Intro>
+Kando allows you to create custom themes for the menus.
+A theme defines several layers which will be painted on top of each other for each menu item.
+Depending on the menu item's state (e.g. active, child, parent, hovered, etc.), the layers can be styled differently using [CSS](https://www.w3schools.com/css/).
+</Intro>
+
+<Aside type="tip" title="Need Help?">
+If you encounter a problem at any stage, feel free to ask for help in the **#support** or **#menu-themes** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+</Aside>
+
+## <Icon name="solar:folder-favourite-star-bold-duotone" class="inline-icon" /> Menu Theme Locations
+
+If you want to create a new menu theme, you should put **a new subdirectory** into the `menu-themes` directory.
+The location of this directory depends on your operating system:
+
+<Tabs>
+  <TabItem label="Windows" icon="seti:windows">
+    ```
+    %appdata%\kando\menu-themes\
+    ```
+  </TabItem>
+  <TabItem label="macOS" icon="apple">
+    ```
+    ~/Library/Application Support/kando/menu-themes/
+    ```
+  </TabItem>
+  <TabItem label="Linux" icon="linux">
+    ```
+    ~/.config/kando/menu-themes/
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="danger">
+Kando will also load menu themes from `resources/app/.webpack/renderer/assets/menu-themes/` in the installation directory. This is were the default themes are stored. You should not put your themes there, as they might be overwritten during an update.
+</Aside>
+
+If you are running Kando from the source code via `npm start`, it will also look for themes in the `assets/menu-themes/` directory.
+
+
+## <Icon name="solar:dna-bold-duotone" class="inline-icon" /> Anatomy of a Menu Theme
+
+A menu theme is a directory containing at least three files: `theme.json5`, `theme.css`, and `preview.jpg`.
+
+<FileTree>
+- kando
+  - menu-themes
+    - my-theme
+      - theme.json5
+      - theme.css
+      - preview.jpg
+      - assets/ You can put any fonts or images your theme uses into a subdirectory.
+</FileTree>
+
+`theme.json5` contains metadata about the theme and a list of layers which will be created for each menu item.
+Each layer gets a specific _class name_ which can be used in the CSS file to style the layer.
+
+`theme.css` can contain any CSS code you like. With _CSS selectors_, you can choose which layers to style in which way.
+The CSS file can reference assets like images or fonts. These can be placed in the same directory as the JSON and CSS files or in a subdirectory.
+
+`preview.jpg` is a square-shaped image which will be shown in the menu editor to preview the theme.
+
+
+## <Icon name="solar:layers-bold-duotone" class="inline-icon" /> Metadata and Layer Description
+
+Below you can have a look at the `theme.json5` file of the default theme.
+The keys are explained with inline comments.
+Most of it will be clear, but some keys might need a bit more explanation.
+We will have a look at the `colors` and `layers` keys in the following sections.
+
+<Aside type="tip">
+You can also name this file `theme.json`. But [JSON5](https://json5.org/) is a bit easier to read and allows for comments.
+</Aside>
+
+```json5 title="theme.json5"
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+{
+  name: 'Default',
+  author: 'Simon Schneegans',
+  license: 'CC0-1.0',
+  themeVersion: '1.0',
+
+  // This theme was created for Kando's theme engine version 1.
+  // Kando will use this to check if the theme is compatible with the
+  // current version of Kando.
+  engineVersion: 1,
+
+  // When a menu is opened too close to a screen's edge, it is moved
+  // away from the edge by this amount of pixels.
+  maxMenuRadius: 160,
+
+  // The width at which the center text is wrapped.
+  centerTextWrapWidth: 90,
+
+  // This theme draws child items below their parent items.
+  drawChildrenBelow: true,
+
+  // These colors can be configured by the user and are vailable in
+  // the CSS file as CSS variables. The default values are used if the
+  // user does not provide any values.
+  colors: {
+    'background-color': 'rgb(255, 255, 255)',
+    'text-color': 'rgb(60, 60, 60)',
+    'border-color': 'rgb(109, 109, 109)',
+    'hover-color': 'rgb(255, 200, 200)',
+  },
+
+  // This theme is very simple and only uses one layer for the menu items.
+  layers: [{ class: 'icon-layer', content: 'icon' }],
+}
+```
+
+### `colors: {}`
+
+The `colors` object lists colors which can be configured by the user in the menu editor.
+Each entry maps a CSS color to a given color name.
+In your CSS file, you can use the colors with `var(--<key>)`.
+In the menu editor, the user can change the value of these colors.
+
+### `layers: []`
+
+This is maybe the most important part of the metadata file.
+It describes the div elements which will be created for each menu item.
+The layer will be **drawn top-to-bottom** in the order they are defined in the JSON file.
+So the first layer will be the topmost layer, and the last layer will be the bottommost layer.
+
+Each layer has a `class` and a `content` key.
+The `class` key is used in the CSS file to style the corresponding div element.
+The value for the `content` key is a string.
+For now, these content strings are limited to the following values:
+
+Content&nbsp;Type | Description
+--- | ---
+`"none"` | The layer will not contain any additional content. This is for instance useful for simple background layers. You can also assign a background-image to the layer in the CSS file.
+`"icon"` | The layer will contain a nested `.icon-container` element for this menu item. For a simple theme, a single layer of this type is usually enough, as you can style the layer to have a background color, border, drop shadow, etc.
+`"name"` | The text content of the layer element will be the name of the menu item.
+
+<Aside type="tip">
+You can use the **same content type multiple times** in the `layers` array.
+For instance, it is perfectly fine to have multiple layers with `content: "icon"`.
+This could be useful if you want to add a glow effect to the icon: There's one layer with the icon and another layer below with a blurred version of the icon.
+</Aside>
+
+However, keep in mind that the menu rendering performance will generally be better if you use fewer layers.
+
+
+## <Icon name="solar:pallete-2-bold-duotone" class="inline-icon" /> Styling of the Layers
+
+The `theme.css` file is where you define how the layers are styled.
+Using CSS selectors, you can style the layers differently depending on the menu item's state.
+Each menu item has the class `.menu-node` and will have child elements for each layer you defined in the JSON file.
+
+So for instance the following will style the `.icon-layer` of the currently active menu item:
+
+```css title="theme.css"
+.menu-node.active>.icon-layer {
+  background-color: var(--background-color);
+  border: 2px solid black;
+}
+```
+
+### CSS Classes of the Menu Items
+
+Kando assigns a lot of CSS classes to each menu-item element based on the current state of the menu item (child, center, parent, hovered, etc).
+This allows you to style the menu items differently depending on their state.
+The overall tree structure of the menu may look like this:
+
+```
+#kando-menu
+├ .menu-node.level-0.top.type-submenu.parent                    <-- This is the root item of the menu.
+│  ├ .menu-node.level-1.top.type-submenu.grandchild                 It has three children, the third one
+│  │  ├ .menu-node.level-2.right.type-uri                           is a submenu which is currently open.
+│  │  └ .menu-node.level-2.left.type-command
+│  ├ .menu-node.level-1.right.type-submenu.grandchild
+│  │  ├ .menu-node.level-2.top.type-hotkey
+│  │  └ .menu-node.level-2.bottom.type-macro
+│  └ .menu-node.level-1.left.type-submenu.active                <-- This is the currently active menu item.
+│     ├ .menu-node.level-2.child.top.type-uri                       It has four children.
+│     ├ .menu-node.level-2.type-submenu.child.hovered.dragged   <-- The second child is a submenu which is
+│     │  ├ .menu-node.level-3.grandchild.top.type-command           currently dragged around in marking or
+│     │  └ .menu-node.level-3.grandchild.bottom.type-command        turbo mode.
+│     ├ .menu-node.level-2.child.left.type-submenu
+│     │  ├ .menu-node.level-3.grandchild.top.type-command
+│     │  └ .menu-node.level-3.grandchild.bottom.type-command
+│     └ .menu-node.level-2.child.right.type-macro
+└ .center-text                                                  <-- This is the text shown in the center
+                                                                    of the menu.
+```
+
+In this example, the menu container contains two elements: The center text and the root item of the menu.
+The center text shows the name of the currently selected item.
+It is automatically moved to the currently active menu item.
+In the above case, the root item contains three submenus.
+The third child is a submenu which is currently open (`.active`).
+Therefore the root item is a `.parent` and the other two children are drawn as `.grandchild`.
+The `.active` child has four children itself, two of which have grandchildren.
+The second child is currently `.dragged` in marking mode.
+It also is `.hovered` by the mouse cursor.
+
+In addition, each menu node has a **class for the current level** (`.level-0`, `.level-1`, `.level-2`, etc).
+This can be used to style the menu items differently depending on their depth in the menu tree.
+Only the root item has the class `.level-0`.
+
+Furthermore, the **menu node classes contain the type of the item** (`.type-submenu`, `.type-uri`, `.type-command`, etc).
+This can be used to style different item types differently.
+
+Last but not least, **each menu node has a class for its approximate direction** relative to the center of the menu (`.top`, `.right`, `.bottom`, `.left`). Escept for the root node, which is always in the center.
+
+Not depicted in the tree structure above are **the connector lines** between the menu items and the layers added by the theme.
+The connector lines are long divs which are appended to each submenu menu node.
+They have the class `.connector` and can be styled as well.
+
+<Aside type="note">
+In the "Development" tab of the sidebar, you can find a button to open the inspector. You can use them to explore the structure of the menu and find out how the layers are created.
+</Aside>
+
+### CSS Properties of the Menu Items
+
+In addition to the colors specified in the theme's JSON file, Kando sets some custom CSS properties on some `.menu-node` and layer div elements.
+
+#### Menu Node Properties
+
+The following properties are available on some `.menu-node` elements.
+See the details for each property to find out on which elements they are available.
+
+<details>
+<summary>`--dir-x` and `--dir-y`</summary>
+_Available on all elements with the `.menu-node` class except for the root node._
+
+The normalized x and y direction of the menu item relative to the parent menu item.
+If the item is on the right side, the x-direction will be `1`, if it's on the left, it will be `-1`.
+The same applies to the y-direction, but with the top being `-1` and the bottom being `1`.
+This is usually used to position the item correctly around the parent.
+</details>
+
+<details>
+<summary>`--angle`</summary>
+_Available on all elements with the `.menu-node` class except for the root node._
+
+The angle of the item in degrees, starting at the top with 0° and going clockwise.
+This is useful if you want to rotate a layer with respect to the item's position.
+</details>
+
+<details>
+<summary>`--siblings-count`</summary>
+_Available on all elements with the `.menu-node` class except for the root node._
+
+The number of child items the item's parent has. This can be used to increase the child item distance if there are many children.
+</details>
+
+<details>
+<summary>`--parent-angle`</summary>
+_Available on all elements with the `.menu-node` class except for the root node and the direct children of the root node._
+
+The angle of the parent item relative to its parent in degrees, starting at the top with 0° and going clockwise. This is useful for styling grandchildren as this will be the same as the `--angle` property of the child.
+</details>
+
+<details>
+<summary>`--angle-diff`</summary>
+_Available on all elements with the `.menu-node.child` classes. That is, all children of the currently active menu item._
+
+The angular difference between the item and the direction towards the mouse pointer.
+This is useful if you want to create some kind of fisheye effect when the mouse pointer is close to the item.
+</details>
+
+#### Center Layer Properties
+
+These properties are available on all your layer divs attached to the current center menu item.
+That is, all layers attached to the menu node with the `.menu-node.active` classes.
+
+<details>
+<summary>`--pointer-angle`</summary>
+The angle towards the mouse pointer in degrees, starting at the top with 0° and going clockwise.
+You can use this to rotate a layer towards the mouse pointer.
+</details>
+
+<details>
+<summary>`--hover-angle`</summary>
+The angle towards the currently hovered item in degrees, starting at the top with 0° and going clockwise.
+If the center is hovered, this will be the direction towards the parent item (if there is any).
+You can use this to rotate a layer towards the hovered item.
+</details>
+
+<details>
+<summary>`--hovered-child-angle`</summary>
+The same as `--hover-angle`, but if the center is hovered, this will not be updated.
+</details>
+
+
+
+
+### Styling the Layers
+
+You can now use [CSS selectors](https://www.w3schools.com/css/css_selectors.asp) to style each of these elements.
+Usually, you will want to apply a transformation to the `.menu-node` elements to position them correctly on their position around the center.
+Appearance properties like `background-color`, `border`, `box-shadow`, or `filter` are usually applied to the layer elements.
+Here's how the `theme.css` file of the default theme looks like:
+
+```css title="theme.css"
+/* SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de> */
+/* SPDX-License-Identifier: CC0-1.0 */
+
+.menu-node {
+  --child-distance: 100px;
+  --grandchild-distance: 25px;
+
+  --center-size: 100px;
+  --child-size: 50px;
+  --grandchild-size: 15px;
+  --connector-width: 10px;
+
+  --menu-transition: all 250ms cubic-bezier(0.775, 1.325, 0.535, 1);
+  --opacity-transition: opacity 250ms ease;
+
+  transition: var(--menu-transition);
+
+  /* Positioning ---------------------------------------------------------------------- */
+
+  /* Child items are positioned around the active node. */
+  &.child {
+    transform: translate(calc(max(var(--child-distance), 10px * var(--sibling-count)) * var(--dir-x)),
+        calc(max(var(--child-distance), 10px * var(--sibling-count)) * var(--dir-y)));
+  }
+
+  /* Grandchild items are positioned around the child items. */
+  &.grandchild {
+    transform: translate(calc(var(--grandchild-distance) * var(--dir-x)),
+        calc(var(--grandchild-distance) * var(--dir-y)));
+  }
+
+  /* If there is a hovered child node, we scale all children up a bit to create a cool
+     zoom effect. The hovered child itself is scaled up even more. */
+  &.active:has(.hovered)>.child {
+    transform: scale(calc(1.15 - pow(var(--angle-diff) / 180, 0.25) * 0.15)) translate(calc(max(var(--child-distance), 10px * var(--sibling-count)) * var(--dir-x)),
+        calc(max(var(--child-distance), 10px * var(--sibling-count)) * var(--dir-y)));
+
+    &.hovered {
+      transform: scale(1.15) translate(calc(max(var(--child-distance), 10px * var(--sibling-count)) * var(--dir-x)),
+          calc(max(var(--child-distance), 10px * var(--sibling-count)) * var(--dir-y)));
+    }
+  }
+
+
+  /* Theme Layers --------------------------------------------------------------------- */
+
+  /* This theme comes with only one layer. This contains the icon of the menu item. */
+
+  /* We hide all icons by default. They will be shown further down in this file for the
+       center item and the child items. */
+  .icon-container {
+    opacity: 0;
+    color: var(--text-color);
+    transition: var(--opacity-transition);
+    clip-path: circle(45% at 50% 50%);
+  }
+
+  /* All menu items have a border and are circles in this theme. */
+  .icon-layer {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    transition: var(--menu-transition);
+  }
+
+  /* The active menu item is the center of the menu. */
+  &.active>.icon-layer {
+    top: calc(-1 * var(--center-size) / 2);
+    left: calc(-1 * var(--center-size) / 2);
+    width: var(--center-size);
+    height: var(--center-size);
+    background-color: var(--background-color);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* If the center item has a hovered child node, we scale it up and hide its icon. */
+  &.active:has(>.hovered)>.icon-layer {
+    transform: scale(1.1);
+
+    &>.icon-container {
+      opacity: 0;
+    }
+  }
+
+  /* If the center node is hovered, we want to highlight it. */
+  &.active.hovered>.icon-layer {
+    background-color: var(--hover-color);
+  }
+
+  /* If the parent or a child node is clicked, we scale it down to normal size. */
+  &.parent.hovered.clicked>.icon-layer,
+  &.child.hovered.clicked>.icon-layer {
+    transform: scale(0.95);
+  }
+
+  /* If the center node is clicked, we scale it down a bit. */
+  &.active.hovered.clicked>.icon-layer {
+    transform: scale(0.95);
+  }
+
+  /* Show the icons of the center, parent and child items. */
+  &.parent>.icon-layer>.icon-container,
+  &.child>.icon-layer>.icon-container,
+  &.active>.icon-layer>.icon-container {
+    opacity: 1;
+  }
+
+  /* Child items are displayed around the active node. The parent node of the active
+       node is displayed in a similar style. */
+  &.parent>.icon-layer,
+  &.child>.icon-layer {
+    top: calc(-1 * var(--child-size) / 2);
+    left: calc(-1 * var(--child-size) / 2);
+    width: var(--child-size);
+    height: var(--child-size);
+    background-color: var(--background-color);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+
+  }
+
+  /* Hovered child or parent items are highlighted. */
+  &.parent.hovered>.icon-layer,
+  &.child.hovered>.icon-layer {
+    background-color: var(--hover-color);
+  }
+
+  /* Grandchild items are very small and drawn below the child items. */
+  &.grandchild>.icon-layer {
+    top: calc(-1 * var(--grandchild-size) / 2);
+    left: calc(-1 * var(--grandchild-size) / 2);
+    width: var(--grandchild-size);
+    height: var(--grandchild-size);
+    background-color: var(--border-color);
+  }
+
+  /* We disable any transition for dragged items. */
+  &.dragged {
+    transition: none;
+  }
+
+  /* Connectors ----------------------------------------------------------------------- */
+
+  .connector {
+    transition: var(--menu-transition);
+    height: var(--connector-width);
+    background-color: var(--border-color);
+    top: calc(-1 * var(--connector-width) / 2);
+  }
+
+  &:has(.dragged)>.connector,
+  &:has(.clicked)>.connector {
+    transition: none;
+  }
+
+  &.hovered>.connector {
+    background-color: color-mix(in srgb, var(--hover-color) 50%, var(--border-color));
+  }
+
+  &.active>.connector {
+    background-color: var(--hover-color);
+  }
+}
+
+/* Center Text ------------------------------------------------------------------------ */
+
+.center-text {
+  color: var(--text-color);
+  transition: var(--opacity-transition);
+  font-size: 16px;
+  line-height: 22px;
+}
+```
+
+You should have a look at this default theme to get an idea of how to style the menu.
+It is maybe a good idea to start with a copy of the default theme and modify it to your needs.
+You can also have a look at the [other included themes](https://github.com/kando-menu/kando/tree/main/assets/menu-themes) for inspiration, most of them use more than one layer.
+
+Another good theme to get started with is the very simple [Minecraft Theme](https://github.com/kando-menu/menu-themes/tree/main/minecraft) available in the Kando Menu Themes Repository.
+
+<Aside type="tip">
+In the "Development" tab of the sidebar, you can find a "Reload Menu Theme" button. You can use this button during theme development to reload the theme without restarting Kando. Changes you made to the CSS file will be applied immediately, for changes to the JSON file you need to re-open the menu. If you are running Kando from the source code via `npm start`, any changes made to the themes in the `assets/menu-themes/` directory will be applied immediately.
+</Aside>
+
+### Useful CSS Selectors
+
+Here are some CSS selectors which you may find useful.
+Feel free to add more selectors to this list if you find something useful!
+
+```css
+/* The center item if it has a hovered child. */
+.menu-node.active:has(>.hovered) {}
+
+/* A child of the center item if it or any of its siblings are hovered. */
+.menu-node.active:has(.hovered)>.child {}
+
+/* Menu nodes with a specific name. */
+.menu-node[data-name='Menu Item Name'] {}
+```
+
+## <Icon name="solar:file-smile-bold-duotone" class="inline-icon" /> A Preview for your Theme
+
+`preview.jpg` should be a **square** screenshot of a menu with the theme applied.
+You can use a custom background to suit your theme.
+The menu should be shown in the center of the image, the default themes use a resolution of **700x700 pixels**, but Kando will scale the image to fit the preview area in the menu editor.
+
+## <Icon name="solar:cloud-upload-bold-duotone" class="inline-icon" /> Distributing your Theme
+
+You are invited to show your themes in [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+You can also contribute your themes to the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes) by creating a pull request.

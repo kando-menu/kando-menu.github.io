@@ -29,7 +29,13 @@
    from somewhere. We add this class manually to make them inline again. */
 .inline-icon {
     display: inline-block !important;
-    transform: translateY(0.1em);
+    transform: translateY(0.15em);
+}
+
+/* We make long code blocks scrollable. */
+.expressive-code pre {
+    max-height: 500px !important;
+    overflow-y: auto !important;
 }
 
 /* Dark mode colors. */

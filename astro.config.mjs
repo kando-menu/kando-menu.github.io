@@ -31,6 +31,7 @@ export default defineConfig({
             'getting-started/installation-macos',
             'getting-started/installation-linux',
             'getting-started/usage',
+            'getting-started/customizing',
             {
               label: 'Available Item Types',
               items: [
