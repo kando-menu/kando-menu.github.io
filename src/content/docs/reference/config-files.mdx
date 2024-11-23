@@ -166,136 +166,16 @@ Each menu item is a JSON object with the following properties:
 `icon: ""` | The name of the icon from the given icon theme, an emoji like `"🚀"` (if the `iconTheme` is `"emoji"`), or a base64-encode image like `"data:image/gif;base64,..."` (if the icon theme is `"base64"`).
 `angle` | _auto_ | If given, this defines the angle of the menu item in degrees. If this is not given, the angle is calculated automatically. 0° means that the item is at the top of the menu, 90° means that the item is on the right side of the menu, and so on. All sibling items are evenly distributed around the items with given angles.
 `type: "submenu"` | The type of the menu item. There are several types available. See below for details.
-`data: {}` | Depending on the type of the item, this can contain additional data. See below for details.
+`data: {}` | Depending on the type of the item, this can or must contain additional data. See below for details.
 `children: []` | If the menu item is a submenu, this contains a list of child items. See below for details.
 
 ### Menu Item Types
 
-For now, the `type` property of a menu item can be one of the following values.
-New types will be added in the future.
-
-#### `"submenu"`
-This is the default type.
-It is used to create a submenu.
-The `children` property of the menu item must contain a list of child items.
-
-#### `"command"`
-This type is used to execute a shell command.
-The `data` property of the menu item must contain a `command` property which contains the shell command to execute.
-The optional `delayed` property will ensure that the command is executed _after_ the Kando window is closed.
-This can be useful if the command targets another window.
-For instance, this menu item will open Inkscape on Linux:
-```json
-{
-  "name": "Inkscape",
-  "icon": "inkscape",
-  "iconTheme": "simple-icons",
-  "type": "command",
-  "data": {
-    "command": "/usr/bin/inkscape",
-    "delayed": false
-  }
-}
-```
-
-#### `"uri"`
-This type is used to open any kind of URI.
-The `data` property of the menu item must contain a `uri` property which contains the URI to open.
-For instance, this menu item will open GitHub in the default browser:
-```json
-{
-  "name": "GitHub",
-  "icon": "github",
-  "iconTheme": "simple-icons",
-  "type": "uri",
-  "data": {
-    "uri": "https://github.com"
-  }
-}
-```
-
-#### `"hotkey"`
-This type is used to simulate simple keyboard events.
-The `data` property of the menu item must contain a `hotkey` property which contains the hotkey to simulate.
-See [Menu Shortcuts vs.
-Simulated Hotkeys](configuring.md#keyboard-menu-shortcuts-vs-simulated-hotkeys) for details on the format of the `hotkey` property.
-The optional `delayed` property will ensure that the hotkey is simulated _after_ the Kando window is closed.
-This can be used if the hotkey should be captured by another window.
-For instance, this menu item will paste the clipboard content:
-```json
-{
-  "name": "Paste",
-  "icon": "content_paste_go",
-  "iconTheme": "material-symbols-rounded",
-  "type": "hotkey",
-  "data": {
-    "hotkey": "ControlLeft+KeyV",
-    "delayed": true
-  }
-}
-```
-
-#### `"macro"`
-This type is used to simulate a more comples sequence of keyboard events.
-The `data` property of the menu item must contain a `macro` property which contains the sequence of key codes to simulate.
-See [Menu Shortcuts vs. Simulated Hotkeys](configuring.md#keyboard-menu-shortcuts-vs-simulated-hotkeys) for details on key code format.
-The optional `delayed` property will ensure that the macro is simulated _after_ the Kando window is closed.
-This can be used if the macro should be captured by another window.
-For instance, this menu item will type "Hi" on most keyboard layouts:
-```json
-{
-  "type": "macro",
-  "data": {
-    "macro": [
-      {
-        "type": "keyDown",
-        "key": "ShiftLeft",
-        "delay": 10
-      },
-      {
-        "type": "keyDown",
-        "key": "KeyH",
-        "delay": 10
-      },
-      {
-        "type": "keyUp",
-        "key": "KeyH",
-        "delay": 10
-      },
-      {
-        "type": "keyUp",
-        "key": "ShiftLeft",
-        "delay": 10
-      },
-      {
-        "type": "keyDown",
-        "key": "KeyI",
-        "delay": 10
-      },
-      {
-        "type": "keyUp",
-        "key": "KeyI",
-        "delay": 10
-      }
-    ],
-    "delayed": true
-  },
-  "name": "Hello World",
-  "icon": "keyboard_keys",
-  "iconTheme": "material-symbols-rounded"
-}
-```
-
-#### `"text"`
-This type is used to paste the given text into the active window.
-```json
-{
-  "name": "Paste Text",
-  "icon": "translate",
-  "iconTheme": "material-symbols-rounded",
-  "type": "text",
-  "data": {
-    "text": "Hello World!"
-  }
-}
-```
+For now, the `type` property of a menu item can be one of the following values:
+[`"submenu"`](/getting-started/item-type/submenu),
+[`"command"`](/getting-started/item-type/run-command),
+[`"uri"`](/getting-started/item-type/open-uri),
+[`"hotkey"`](/getting-started/item-type/simulate-hotkey),
+[`"macro"`](/getting-started/item-type/simulate-macro),
+[`"text"`](/getting-started/item-type/paste-text).
+Click on these links to learn more about the individual item types and which `data` properties they require.

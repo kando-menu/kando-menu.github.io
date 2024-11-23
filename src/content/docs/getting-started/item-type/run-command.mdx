@@ -1,7 +1,78 @@
 ---
-title: Run Commands
+title: Run Command
 description: An Kando item which executes a command.
 tableOfContents: false
-banner:
-  content: 🚧 This page is under construction! 🚧
 ---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+This item type is used to execute any command.
+You can use this to run applications, scripts, or any other command that you can run in a shell.
+
+## Getting the Command to Run an App
+
+Currently, Kando does not have a built-in way to list installed applications.
+You will need to know the command to run the application you want to launch.
+Depending on your operating system, this can be different.
+Usually searching online for "how to run application xyz from the command line" will give you the answer.
+Here are some tips to get you started:
+
+<Tabs>
+  <TabItem label="Windows" icon="seti:windows">
+    On Windows, you can usually find the executable of an application in your start menu.
+    <Steps>
+      1. Find the application launcher in your start menu.
+
+      2. Right-click on the application and select "Open file location".
+
+      3. Right-click on the application shortcut and select "Properties".
+
+      4. In the properties window, you will find the "Target" and "Start in" fields. The "Target" field contains the command you need to run the application. The "Start in" field contains the working directory of the application. Note both of these down.
+
+      5. For the command in Kando, use the following format and copy the "Start in" and "Target" fields into the command:
+          ```bash
+          start "" /D "Start in" "Target"
+          ```
+
+    </Steps>
+  </TabItem>
+  <TabItem label="macOS" icon="apple">
+    On macOS, you can usually run an application from the terminal by using the `open` command.
+    ```bash
+    open -a "Application Name"
+    ```
+  </TabItem>
+  <TabItem label="Linux" icon="linux">
+    On Linux, this is pretty straightforward. Just use the command you would use to run the app from a terminal.
+    If you do not now this, you can have a look at the desktop file of the app you want to run. This file is usually located in `/usr/share/applications/` or `~/.local/share/applications/`. The `Exec` line in this file contains the command you need to run.
+  </TabItem>
+</Tabs>
+
+## The Delayed Option
+
+The item has an optional **Delayed** property which can enable or disable.
+If enabled, the command will be executed _after_ the Kando window is closed.
+This can be useful if the command targets another window which needs to be focused.
+
+## Example Configuration
+
+If you happen to edit your `menus.json` file by hand, you can create a Command item with something like the following.
+You can read more about the structure of the `menus.json` file in its [documentation](/reference/config-files).
+
+The `data` property of the menu item must contain a `command` property which contains the shell command to execute.
+The optional `delayed` property will ensure that the command is executed _after_ the Kando window is closed.
+
+```json title="menus.json"
+// ...
+{
+  "name": "Inkscape",
+  "type": "command",
+  "icon": "inkscape",
+  "iconTheme": "simple-icons",
+  "data": {
+    "command": "/usr/bin/inkscape",
+    "delayed": false
+  }
+},
+// ...
+```

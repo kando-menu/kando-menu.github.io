@@ -1,7 +1,28 @@
 ---
-title: Submenus
+title: Submenu
 description: An Kando item which may contain other items.
 tableOfContents: false
-banner:
-  content: 🚧 This page is under construction! 🚧
 ---
+
+A submenu is one of the most basic item types in Kando. 
+It is simply a container for other items.
+You can only define the name and the icon of a submenu, it does not have any other properties.
+
+## Example Configuration
+
+If you happen to edit your `menus.json` file by hand, you can create a submenu with something like the following.
+You can read more about the structure of the `menus.json` file in its [documentation](/reference/config-files).
+
+```json title="menus.json"
+// ...
+{
+  "name": "Applications",
+  "type": "submenu",
+  "icon": "apps",
+  "iconTheme": "material-symbols-rounded",
+  "children": [
+    // ... put other items here
+  ]
+},
+// ...
+```

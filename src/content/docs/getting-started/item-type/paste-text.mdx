@@ -2,6 +2,35 @@
 title: Paste Text
 description: An Kando item which pastes text into the active application.
 tableOfContents: false
-banner:
-  content: 🚧 This page is under construction! 🚧
 ---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This item type can be used to paste the given text into the active window.
+It is useful if you notice that you are typing the same text over and over again.
+
+<Aside type="note">
+  The paste text item uses your clipboard to paste the text.
+  So after using the item, the clipboard will contain the text you pasted.
+</Aside>
+
+## Example Configuration
+
+If you happen to edit your `menus.json` file by hand, you can create a Paste-Text item with something like the following.
+You can read more about the structure of the `menus.json` file in its [documentation](/reference/config-files).
+
+The `data` property of the menu item must contain a `text` property which contains the text to paste.
+
+```json title="menus.json"
+// ...
+{
+  "name": "Paste Text",
+  "type": "text",
+  "icon": "translate",
+  "iconTheme": "material-symbols-rounded",
+  "data": {
+    "text": "Hello World!"
+  }
+},
+// ...
+```

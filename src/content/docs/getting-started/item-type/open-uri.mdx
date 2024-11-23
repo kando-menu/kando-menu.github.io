@@ -1,7 +1,37 @@
 ---
-title: Open URIs
+title: Open URI
 description: An Kando item which opens a URI.
 tableOfContents: false
-banner:
-  content: 🚧 This page is under construction! 🚧
 ---
+
+An URI item can not only be used to open a website but also to open any URI that your operating system can handle.
+This includes opening files, directories, or even other applications.
+
+## Example URIs
+
+**http://example.com** - Opens the website `example.com` in your default browser.
+
+**file:///path/to/file.txt** - Opens the file `file.txt` in your default text editor.
+
+**mailto:foo@bar.com** - Opens your default email client to send an email.
+
+## Example Configuration
+
+If you happen to edit your `menus.json` file by hand, you can create an Open-URI item with something like the following.
+You can read more about the structure of the `menus.json` file in its [documentation](/reference/config-files).
+
+The `data` property of the menu item must contain a `uri` property which contains the URI to open.
+
+```json title="menus.json"
+// ...
+{
+  "name": "GitHub",
+  "type": "uri",
+  "icon": "github",
+  "iconTheme": "simple-icons",
+  "data": {
+    "uri": "https://github.com"
+  }
+},
+// ...
+```
