@@ -31,16 +31,15 @@ export default defineConfig({
             'getting-started/installation-macos',
             'getting-started/installation-linux',
             'getting-started/usage',
-            'getting-started/customizing',
             {
               label: 'Available Item Types',
               items: [
-                'getting-started/item-types/open-uri',
-                'getting-started/item-types/paste-text',
-                'getting-started/item-types/run-command',
-                'getting-started/item-types/simulate-hotkey',
-                'getting-started/item-types/simulate-macro',
-                'getting-started/item-types/submenu',
+                'getting-started/item-type/open-uri',
+                'getting-started/item-type/paste-text',
+                'getting-started/item-type/run-command',
+                'getting-started/item-type/simulate-hotkey',
+                'getting-started/item-type/simulate-macro',
+                'getting-started/item-type/submenu',
               ],
             },
           ],
@@ -48,6 +47,7 @@ export default defineConfig({
         {
           label: 'Advanced Usage',
           items: [
+            'advanced-usage/customizing',
             'advanced-usage/opening-menus',
             'advanced-usage/launch-from-cli',
             'advanced-usage/create-menu-themes',

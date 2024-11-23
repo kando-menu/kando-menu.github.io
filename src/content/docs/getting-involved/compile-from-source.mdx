@@ -1,16 +1,153 @@
 ---
 title: Compile Kando from Source
 description: A guide in my new Starlight docs site.
-banner:
-  content: 🚧 This page is under construction! 🚧
 sidebar:
   order: 3
 ---
 
-macOS: If you run Kando from source, you will need to grant the permissions to the terminal you are using to start Kando.
-You will have to grant Kando Accessibility and Screen Recording permissions in the system settings. Accessibility permissions are required to simulate key presses and move the mouse cursor. Screen Recording permissions are required to get the name of the currently focused window.
+import { Steps, Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import Intro from '../../../components/Intro.astro';
 
-On some distributions, you may encounter the error `The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now`. This is related to [this issue](https://github.com/electron/electron/issues/17972) and can be fixed by running these commands:
+![banner](../../../assets/banner00.png)
+
+<Intro>
+If you want to test the latest development version of Kando, or want to contribute code, you will have to compile Kando from source.
+</Intro>
+
+
+
+## <Icon name="solar:link-square-bold-duotone" class="inline-icon" /> Intalling Dependencies
+
+
+
+<Tabs>
+  <TabItem label="Windows" icon="seti:windows">
+    You will need [Git](https://git-scm.com/), [NodeJS](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [CMake](https://cmake.org/), and a C++ toolchain. There are several ways to install these on Windows. Here is a common way to get them:
+    <Steps>
+
+      1. Install [Git](https://git-scm.com/). They have an easy-to-use installer.
+
+      2. Install [nvm-windows](https://github.com/coreybutler/nvm-windows). They have an easy-to-use installer. This will install the latest version of NodeJS alongside `npm`, the package manager for NodeJS. 
+
+      3. Install [CMake](https://cmake.org/download/). They have an installer for Windows as well.
+
+      4. To get the Microsoft MSVC toolchain, you can install either Visual Studio or run this:
+        
+         ```bash
+         npm install -g windows-build-tools
+         ```
+    </Steps>
+
+    
+
+  </TabItem>
+  <TabItem label="macOS" icon="apple">
+    On macOS, you will need [Git](https://git-scm.com/), the Xcode Commandline Tools and CMake.
+    To get `node` and `npm`, you can use [nvm](https://github.com/nvm-sh/nvm).
+    CMake and Git can easily be installed with [Homebrew](https://brew.sh/):
+
+    ```bash
+    brew install cmake git
+    ```
+    If you have Homebrew installed, you will also have the Xcode Commandline Tools installed.
+
+  </TabItem>
+  <TabItem label="Debian" icon="linux">
+    On Linux, `gcc` and `git` are usually already installed.
+    However, some additional packages may be required for the native backend modules.
+    You can install them with:
+    ```bash
+    sudo apt install nodejs cmake libx11-dev libxtst-dev libwayland-dev libxkbcommon-dev
+    ```
+  </TabItem>
+  <TabItem label="Arch" icon="linux">
+    On Linux, `gcc` and `git` are usually already installed.
+    However, some additional packages may be required for the native backend modules.
+    You can install them with:
+    ```bash
+    sudo pacman -S nodejs npm cmake libx11 libxtst wayland libxkbcommon
+    ```
+  </TabItem>
+  <TabItem label="Fedora" icon="linux">
+    On Linux, `gcc` and `git` are usually already installed.
+    However, some additional packages may be required for the native backend modules.
+    You can install them with:
+    ```bash
+    sudo dnf install nodejs cmake libX11-devel libXtst-devel wayland-devel libxkbcommon-devel
+    ```
+  </TabItem>
+</Tabs>
+
+
+
+## <Icon name="solar:download-bold-duotone" class="inline-icon" /> Cloning the Repository
+
+First, you will need to clone the Kando repository.
+Open a terminal and navigate to a directory where you want the sources of Kando and clone the repository:
+
+```bash
+cd "path/to/your/directory"
+git clone https://github.com/kando-menu/kando.git
+```
+
+## <Icon name="solar:download-bold-duotone" class="inline-icon" /> Downloading Required Node Modules
+
+Navigate into the cloned `kando` directory and run the following command.
+This only needs to be done once, or when the dependencies change.
+It will download all required dependencies into the `node_modules` directory.
+
+```bash
+cd kando
+npm install
+```
+
+## <Icon name="solar:rocket-bold-duotone" class="inline-icon" /> Running Kando
+
+Finally, you can start the application:
+
+```bash
+npm start
+```
+
+Once this is running, you can press <kbd>Ctrl</kbd>+<kbd>Space</kbd> to open the example menu.
+
+<Aside type="tip">
+On macOS, you will need to grant the the [required permissions](/getting-started/installation-macos#required-permissions) to the terminal you are using to start Kando.
+</Aside>
+
+If started this way, Kando will run in development mode.
+This means that any changes to the source code (at least to the renderer process) will be applied immediately.
+So you usually don't have to restart the application after changing the code.
+
+
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Creating a Release Executable
+
+To create an executable compiled in release mode, run the following command.
+This will create a directory in the `out/` directory containing the `kando` executable.
+
+```bash
+npm run package
+```
+
+
+## <Icon name="solar:box-bold-duotone" class="inline-icon" /> Creating a Distributable Package
+
+To create a distributable archive, just run this:
+
+```bash
+npm run make
+```
+
+This will create several packages in the `out/` directory.
+* On Windows, it will create a Squirrel installer and a portable zip archive.
+* On Linux, it will create Debian, an RPM and a portable zip archive.
+* On macOS, it will create a DMG file and a portable zip archive. If the environment variables `KANDO_OSX_SIGN` and `KANDO_OSX_NOTARIZE` are set to `true`, the build process will try to sign and notarize the application.
+
+
+## Known Issues
+
+On some Linux distributions, you may encounter the error `The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now`. This is related to [this issue](https://github.com/electron/electron/issues/17972) and can be fixed by running these commands:
 
 ```bash
 sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
