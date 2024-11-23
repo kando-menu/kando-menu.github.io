@@ -10,3 +10,24 @@ banner:
 Kando comes with a few themes pre-installed. You can find more themes in the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes)!
 
 ## Icon Themes
+
+To add your own icons to Kando, follow these steps:
+1. Create a new `icon-themes` directory in Kando's configuration directory if it does not yet exist. Depending on your OS, this will be the following locations:
+    * <img height="14" width="26" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Windows_logo_-_2021_%28Black%29.svg" /> Windows: `%appdata%\kando\icon-themes`
+    * <img height="14" width="26" src="https://cdn.simpleicons.org/apple" /> macOS: `~/Library/Application Support/kando/icon-themes`
+    * <img height="14" width="26" src="https://cdn.simpleicons.org/linux/black" /> Linux: `~/.config/kando/icon-themes`
+2. Create a new directory for your icon theme in the `icon-themes` directory. You can give it any name you like.
+3. Add your icons to the new directory. The icons can be in various formats, but we recommend using SVG files.
+4. **Restart Kando.** Icon themes are only loaded when Kando starts.
+5. Select your icon theme in the icon-theme dropdown in the icon picker in Kando's menu editor.
+
+> [!CAUTION]
+> Kando will also load icon themes from `resources/app/.webpack/renderer/assets/icon-themes/` in the installation directory. This can be interesting if you are packaging icon themes using a package manager. However, as an end user, you should not put your icon themes there, as they might be overwritten during an update.
+
+### Some Tips for Creating Icon Themes
+
+* You can organize your icons in subdirectories. Kando will load them recursively. The directory will be part of the icon's name and therefore you can use the search bar to filter by directory.
+* There are many great icon sets available on the internet. Here are some which you could try:
+  * [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle): Just use the files from the `Numix-Circle/48/apps` directory.
+  * [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme): Here you could use the content from the `Papirus/64x64` directory.
+  * [Tela](https://github.com/vinceliuice/Tela-icon-theme): Here you find the icons in the `src/scalable` directory.

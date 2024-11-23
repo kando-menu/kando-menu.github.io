@@ -1,6 +1,51 @@
 ---
 title: Create Your First Menu
 description: A guide in my new Starlight docs site.
-banner:
-  content: 🚧 This page is under construction! 🚧
+tableOfContents: false
 ---
+
+import { Aside } from '@astrojs/starlight/components';
+import Intro from '../../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+
+![banner](../../../assets/banner01.png)
+
+<Intro>
+Kando comes with an example menu which you can use to get started.
+However, you should soon adapt the menu to your needs and create your own menus.
+</Intro>
+
+
+Kando comes with a **graphical menu editor** which allows you to create and edit your own menus.
+There are three ways to open the menu editor:
+
+<img src="/src/assets/settings-button.jpg" align="right" width="150px"></img>
+
+1. **When a menu is shown:** Click the gear icon in the bottom right corner of the screen.
+2. **From the system tray:** Right-click the Kando icon and select "Show Settings".
+3. **From the command line:** Run `kando --settings`.
+
+In the editor, you can create new menus, and edit existing menus.
+Drag new items from the toolbar to the menu preview, reorder them, and change their properties on the right side of the screen.
+
+<Aside type="note">
+There are several advanced options which are not yet exposed in the editor UI. See the [Config-File Documentation](/reference/config-files) for all advanced options.
+</Aside>
+
+## Three Tips for Efficient Menu Layouts
+
+<Aside type="tip" title="Avoid too many items in a single menu!">
+Instead, create submenus. Eight items per menu is a good rule of thumb, and you should never have more than twelve items in a single menu.
+</Aside>
+
+<Aside type="tip" title="Deeply nested menus are not a problem!">
+Kando is designed to handle deeply nested menus. You can use the marking mode to quickly select items which are in subsubsubmenus.
+</Aside>
+
+<Aside type="tip" title="Use the fixed-angle locks to create a clean layout!">
+Even if you have an odd number of items, you can use fixed angles to lock items to the top, bottom, left, or right side of the menu.
+</Aside>
+
+<Intro>
+Read the next sections to learn more about the available menu-item types and how to configure them.
+</Intro>

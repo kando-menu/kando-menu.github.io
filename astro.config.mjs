@@ -31,6 +31,7 @@ export default defineConfig({
             'getting-started/installation-macos',
             'getting-started/installation-linux',
             'getting-started/usage',
+            'getting-started/creating-menus',
             {
               label: 'Available Item Types',
               items: [
@@ -65,7 +66,7 @@ export default defineConfig({
         {
           label: 'API References',
           collapsed: true,
-          items: ['reference/cli', 'reference/config-files'],
+          items: ['reference/cli', 'reference/config-files', 'reference/valid-keys'],
         },
         {
           label: 'Discord 🗗',
