@@ -15,7 +15,8 @@ While Kando does not have a cross-platform way to open menus with a mouse button
 
 With some creativity, you can open menus not only with mouse buttons but also with gestures, desktop widgets, or in many other ways.
 
-<Aside type="note" title="There are two ways an app can open a Kando menu.">
+## Open Menus from Third-Party Tools
+
 You can either make the third-party tool open the menu by simulation the shortcut for the menu, or it can directly call the Kando executable with the `--menu "menu name"` argument.
 
 Depending on your operating system, the command to open a Kando menu would look like this:
@@ -38,11 +39,15 @@ Depending on your operating system, the command to open a Kando menu would look 
   </TabItem>
 </Tabs>
 
-
+<Aside type="tip" title="Simulate the Shortcut if Possible!">
+If the third-party tool supports simulating keyboard shortcuts, it is recommended to use this method.
+Opening a menu by calling the Kando executable will usually be a bit slower than simulating the shortcut.
 </Aside>
 
+## Third-Party Tools
+
 Below are some applications which can help you to open menus in various ways.
-If you discovered a cool new way to open menus, please let us know! You can either open an issue, open a pull request, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!
+Most of them are free and open-source.
 
 <Tabs syncKey='os'>
   <TabItem label="Windows" icon="seti:windows">
@@ -63,6 +68,9 @@ If you discovered a cool new way to open menus, please let us know! You can eith
   </TabItem>
 </Tabs>
 
-<Aside type="tip" title="Have you discovered another cool tool?">
+<br/>
+<br/>
+
+<Aside type="note" title="Have you discovered another cool tool?">
 If you discovered a cool new way to open menus, please let us know! You can either open an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!
 </Aside>

@@ -1,33 +1,112 @@
 ---
 title: Customizing Kando
 description: Kando is highly customizable. Learn how to customize Kando to fit your needs.
-banner:
-  content: 🚧 This page is under construction! 🚧
 ---
+
+import { CardGrid, Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import CustomCard from '../../../components/CustomCard.astro';
+import Intro from '../../../components/Intro.astro';
+
+![banner](../../../assets/banner07.png)
+
+<Intro>
+You can customize Kando in many ways.
+This page will show you how to add your own icons to Kando and how to install new themes.
+</Intro>
 
 ## Menu Themes
 
+Kando supports theming the menu. 
+Themes use CSS to style the menu and can change the look of the menu drastically.
 Kando comes with a few themes pre-installed. You can find more themes in the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes)!
+Below are some examples of themes:
+
+<CardGrid stagger>
+  <CustomCard title="Clean Circle" icon="solar:palette-bold-duotone">
+    ![preview](https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/menu-themes/clean-circle/preview.jpg)
+    <br/>
+    One of Kando's default themes.
+  </CustomCard>
+  <CustomCard title="Neon Lights" icon="solar:palette-bold-duotone">
+    ![preview](https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/menu-themes/neon-lights/preview.jpg)
+    <br/>
+    One of Kando's default themes.
+  </CustomCard>
+  <CustomCard title="Minecraft" icon="solar:palette-bold-duotone">
+    ![preview](https://raw.githubusercontent.com/kando-menu/menu-themes/refs/heads/main/minecraft/preview.jpg)
+    <br/>
+    This is one of the community themes from the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes).
+  </CustomCard>
+  <CustomCard title="Rainbow Labels" icon="solar:palette-bold-duotone">
+    ![preview](https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/menu-themes/rainbow-labels/preview.jpg)
+    <br/>
+    One of Kando's default themes.
+  </CustomCard>
+</CardGrid>
+
+<Aside type="tip" title="Do you want to create your own themes?">
+There's a guide on  [how to create your own themes](create-menu-themes) available!
+</Aside>
 
 ## Icon Themes
 
+Kando also supports custom icon themes.
+An icon theme is a set of icons which can be used for the menu items.
+Kando comes with a few icon themes pre-installed and you can easily add your own.
 To add your own icons to Kando, follow these steps:
+
+<Steps>
+
 1. Create a new `icon-themes` directory in Kando's configuration directory if it does not yet exist. Depending on your OS, this will be the following locations:
-    * <img height="14" width="26" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Windows_logo_-_2021_%28Black%29.svg" /> Windows: `%appdata%\kando\icon-themes`
-    * <img height="14" width="26" src="https://cdn.simpleicons.org/apple" /> macOS: `~/Library/Application Support/kando/icon-themes`
-    * <img height="14" width="26" src="https://cdn.simpleicons.org/linux/black" /> Linux: `~/.config/kando/icon-themes`
-2. Create a new directory for your icon theme in the `icon-themes` directory. You can give it any name you like.
+
+    <Tabs>
+      <TabItem label="Windows" icon="seti:windows">
+        ```cmd
+        %appdata%\kando\icon-themes
+        ```
+      </TabItem>
+      <TabItem label="macOS" icon="apple">
+        ```bash
+        ~/Library/Application Support/kando/icon-themes
+        ```
+      </TabItem>
+      <TabItem label="Linux" icon="linux">
+        ```bash
+        ~/.config/kando/icon-themes
+        ```
+      </TabItem>
+    </Tabs>
+
+2. Create another directory for your icon theme inside the `icon-themes` directory. You can give it any name you like.
+
 3. Add your icons to the new directory. The icons can be in various formats, but we recommend using SVG files.
+
+    <Aside type="tip">
+      You can organize your icons in subdirectories. Kando will load them recursively.
+    </Aside>
+
+
 4. **Restart Kando.** Icon themes are only loaded when Kando starts.
+
 5. Select your icon theme in the icon-theme dropdown in the icon picker in Kando's menu editor.
 
-> [!CAUTION]
-> Kando will also load icon themes from `resources/app/.webpack/renderer/assets/icon-themes/` in the installation directory. This can be interesting if you are packaging icon themes using a package manager. However, as an end user, you should not put your icon themes there, as they might be overwritten during an update.
+</Steps>
 
-### Some Tips for Creating Icon Themes
+<Aside type="danger">
+Kando will also load icon themes from `resources/app/.webpack/renderer/assets/icon-themes/` in the installation directory. This can be interesting if you are packaging icon themes using a package manager. However, as an end user, you should not put your icon themes there, as they might be overwritten during an update.
+</Aside>
 
-* You can organize your icons in subdirectories. Kando will load them recursively. The directory will be part of the icon's name and therefore you can use the search bar to filter by directory.
-* There are many great icon sets available on the internet. Here are some which you could try:
-  * [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle): Just use the files from the `Numix-Circle/48/apps` directory.
-  * [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme): Here you could use the content from the `Papirus/64x64` directory.
-  * [Tela](https://github.com/vinceliuice/Tela-icon-theme): Here you find the icons in the `src/scalable` directory.
+### Suggestions for Icon Sets
+
+There are many great icon sets available on the internet. Here are some which you could try:
+* [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle): Just use the files from the `Numix-Circle/48/apps` directory.
+* [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme): Here you could use the content from the `Papirus/64x64` directory.
+* [Tela](https://github.com/vinceliuice/Tela-icon-theme): Here you find the icons in the `src/scalable` directory.
+* [Pixelitos](https://github.com/ItzSelenux/pixelitos-icon-theme): Here you find the icons in the `16` directory.
+
+<br/>
+<br/>
+
+<Aside type="note" title="Have you discovered another cool icon set?">
+Simply edit this page and add it to the list above!
+</Aside>

@@ -6,6 +6,7 @@ description: A guide in my new Starlight docs site.
 import { Tabs, TabItem, Aside, FileTree, Card } from '@astrojs/starlight/components';
 import { Icon } from 'astro-icon/components';
 import Intro from '../../../components/Intro.astro';
+import CustomAside from '../../../components/CustomAside.astro';
 
 ![banner](../../../assets/banner07.png)
 
@@ -51,8 +52,11 @@ If you are running Kando from the source code via `npm start`, it will also look
 
 ## <Icon name="solar:dna-bold-duotone" class="inline-icon" /> Anatomy of a Menu Theme
 
-A menu theme is a directory containing at least three files: `theme.json5`, `theme.css`, and `preview.jpg`.
-
+This section will give you an overview of the files you need to create a new menu theme.
+Thereafter we will have a look at the individual parts in more detail.
+<Aside type="note" title="Required Files">
+A menu theme directory must contain at least three files: `theme.json5`, `theme.css`, and `preview.jpg`.
+</Aside>
 <FileTree>
 - kando
   - menu-themes
@@ -60,6 +64,7 @@ A menu theme is a directory containing at least three files: `theme.json5`, `the
       - theme.json5
       - theme.css
       - preview.jpg
+      - REUSE.toml
       - assets/ You can put any fonts or images your theme uses into a subdirectory.
 </FileTree>
 
@@ -71,6 +76,7 @@ The CSS file can reference assets like images or fonts. These can be placed in t
 
 `preview.jpg` is a square-shaped image which will be shown in the menu editor to preview the theme.
 
+`REUSE.toml` is not strictly necessary, but it is recommended to include it in your theme directory. It contains information about the license of your theme.
 
 ## <Icon name="solar:layers-bold-duotone" class="inline-icon" /> Metadata and Layer Description
 
@@ -515,7 +521,71 @@ Feel free to add more selectors to this list if you find something useful!
 You can use a custom background to suit your theme.
 The menu should be shown in the center of the image, the default themes use a resolution of **700x700 pixels**, but Kando will scale the image to fit the preview area in the menu editor.
 
+## <Icon name="solar:copyright-bold-duotone" class="inline-icon" /> Adding Proper Credits
+
+A theme usually builds upon the work of others.
+Therefore, it is important to give proper credit to the original authors!
+All the assets you use in your theme may be subject to copyright and may be licensed under different terms.
+
+If you choose to submit your theme to the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes), you should make sure that your theme follows the [REUSE](https://reuse.software/) specification.
+As a theme author, it is your responsibility to make sure that there is proper license and copyright information for each file of your theme.
+You can follow the existing themes as examples.
+
+### Where should I put the license information?
+
+For text files like `.json` or `.css`, you can simply add an SPDX license header at the top of the file. This can look like this:
+
+```css
+/* SPDX-FileCopyrightText: Your Name <email@server.com> */
+/* SPDX-License-Identifier: CC0-1.0 */
+```
+
+For binary files like images or fonts, you should create a `REUSE.toml` file in your theme directory.
+You can have a look at [this file](https://github.com/kando-menu/menu-themes/blob/main/KnightForge/REUSE.toml) for an example.
+
+### What is a valid SPDX-FileCopyrightText?
+
+- For **files you copied from others**, you should use the original author's copyright text.
+- For **files you created yourself**, the copyright text should ideally be your name and email address.
+  If you do not want to share this publicly, you can also use a pseudonym.
+  It would be great if it was possible to contact you in case there are questions about your theme.
+  So maybe using a Discord handle or a GitHub username is a good idea in this case.
+- For **files you modified**, you should add your own copyright line above the original one. There can be multiple `SPDX-FileCopyrightText` in each file.
+
+<Aside type="tip">
+Some examples of SPDX-FileCopyrightText's are given in [the specification](https://reuse.software/spec-3.3/#format-of-copyright-notices).
+</Aside>
+
+### Which SPDX-License-Identifier should I choose?
+
+If you **copied a file from somewhere else**, you usually have to use the same license as the original file.
+There exceptions to this rule, but it is usually a good idea to stick to the original license.
+
+If you **created a file yourself**, you can use any license you like.
+For artwork like themes, the [Creative Commons](https://creativecommons.org/share-your-work/) licenses are often a good choice.
+Here are some examples:
+
+- If folks should be able to use your file however they like, you can use the `CC0-1.0` license.
+- If you want to be credited, you can use the `CC-BY-4.0` license.
+- If you want to force others to use the same license for their modifications, you can use the `CC-BY-SA-4.0` license.
+
+<Aside type="tip">
+A list of all valid SPDX-License-Identifier can be found [here](https://spdx.org/licenses/).
+</Aside>
+
+As a rule of thumb, we would recommend using the `CC0-1.0` license for simple configuration files like your `theme.json5` file and another Creative Commons license like `CC-BY-4.0` for your artwork.
+
+
+
 ## <Icon name="solar:cloud-upload-bold-duotone" class="inline-icon" /> Distributing your Theme
 
 You are invited to show your themes in [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
 You can also contribute your themes to the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes) by creating a pull request.
+
+<br />
+<br />
+
+<CustomAside type="thanks" title="Thank you!">
+You are awesome!
+Creating themes for Kando is a great way to contribute to the project and to make the menu even more fun to use for everyone.
+</CustomAside>
