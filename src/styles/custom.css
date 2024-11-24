@@ -25,7 +25,7 @@
 }
 
 .hero {
-    min-height: calc(100vh - 320px);
+    min-height: calc(100vh - 300px);
 }
 
 .hero h1,
