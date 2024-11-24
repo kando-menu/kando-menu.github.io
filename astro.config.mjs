@@ -90,7 +90,7 @@ export default defineConfig({
         },
       ],
       lastUpdated: true,
-      customCss: ['./src/styles/custom.css'],
+      customCss: ['./src/styles/custom.css', '@fontsource/neucha/400.css'],
       components: {
         Footer: './src/components/Footer.astro',
       },
