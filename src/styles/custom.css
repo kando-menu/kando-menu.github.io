@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de> */
+/* SPDX-License-Identifier: CC0-1.0 */
+
 :root {
     --sl-nav-gap: 1rem;
 }
@@ -31,6 +34,7 @@
 .hero h1,
 .hero .tagline {
     font-family: Neucha, serif;
+    font-weight: bold;
 }
 
 .hero h1 {
@@ -84,6 +88,19 @@
 .expressive-code pre {
     max-height: 500px !important;
     overflow-y: auto !important;
+}
+
+/* Style the Markdown heading links. */
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6)>a {
+    color: var(--sl-color-white);
+    text-decoration: none;
+
+    &:hover::after {
+        content: '#';
+        color: var(--sl-color-accent);
+        margin-left: 0.25em;
+        font-size: 0.8em;
+    }
 }
 
 /* Dark mode colors. */

@@ -1,6 +1,10 @@
-// @ts-check
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
 import starlight from '@astrojs/starlight';
 import icon from 'astro-icon';
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
@@ -97,4 +101,16 @@ export default defineConfig({
       },
     }),
   ],
+  markdown: {
+    rehypePlugins: [
+      rehypeHeadingIds,
+      [
+        rehypeAutolinkHeadings,
+        {
+          // Wrap the heading text in a link.
+          behavior: 'wrap',
+        },
+      ],
+    ],
+  },
 });
