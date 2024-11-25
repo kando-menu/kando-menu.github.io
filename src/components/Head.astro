@@ -1,9 +1,13 @@
 ---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+// This component extends the default starlight head with Open Graph image meta tags.
+// This was cerated following this guide: https://hideoo.dev/notes/starlight-og-images
+
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Head.astro';
 
-// Get the URL of the generated image for the current page using its
-// ID and replace the file extension with `.png`.
 const ogImageUrl = new URL(`/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`, Astro.site);
 ---
 

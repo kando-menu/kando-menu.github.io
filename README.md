@@ -1,3 +1,6 @@
+<!-- SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de> -->
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
 # The Homepage of [Kando](https://github.com/kando-menu/kando)
 
 > [!IMPORTANT]  
