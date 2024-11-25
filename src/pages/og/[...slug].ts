@@ -35,7 +35,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
       font: {
         title: {
           families: ['Neucha'],
-          size: 156,
+          size: 96,
           lineHeight: 1.2,
         },
         description: {
