@@ -2,56 +2,92 @@
 // SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 // SPDX-License-Identifier: MIT
 
-// This file extends the default starlight footer with some additional credits below.
-// The code for the original footer can be found here:
+// This file is somewhat based on the default starlight footer but adds some social share
+// links and some additional credits below. The code for the original footer can be found here:
 // https://github.com/withastro/starlight/blob/main/packages/starlight/components/Footer.astro
 
 import type { Props } from '@astrojs/starlight/props';
 import { Icon as AstroIcon } from 'astro-icon/components';
-import Default from '@astrojs/starlight/components/Footer.astro';
+import Pagination from '@astrojs/starlight/components/Pagination.astro';
+import EditLink from '@astrojs/starlight/components/EditLink.astro';
 import { Icon } from '@astrojs/starlight/components';
+import SocialShare from './SocialShare.astro';
 ---
 
-<Default {...Astro.props}><slot /></Default>
+<footer class="sl-flex">
+  <div class="meta sl-flex">
+    <EditLink {...Astro.props} />
+    <SocialShare {...Astro.props} />
+  </div>
 
-<div class="kudos">
-  <AstroIcon name="simple-icons:creativecommons" /> Content Licensed under CC-BY-4.0 by <a
-    href="mailto:code@simonschneegans.de">Simon Schneegans</a
-  > and all other Kando Documentation Contributors.
-  <br />
-  Build with <a href="https://docs.astro.build/en/getting-started/"
-    ><Icon name="astro" />
-    Astro</a
-  > using the <a href="https://starlight.astro.build/"
-    ><Icon name="starlight" />
-    Starlight</a
-  > theme and <a
-    href="https://www.figma.com/community/file/1166831539721848736/solar-icons-set"
-    ><Icon name="sun" />
-    Solar</a
-  > icons. Hosted on
-  <a href="https://github.com/kando-menu/kando-menu.github.io">
-    <AstroIcon name="simple-icons:github" /> GitHub Pages.
-  </a>
-</div>
+  <Pagination {...Astro.props} />
+
+  <div class="kudos">
+    <AstroIcon name="simple-icons:creativecommons" /> Content Licensed under CC-BY-4.0 by <a
+      href="mailto:code@simonschneegans.de">Simon Schneegans</a
+    > and all other Kando Documentation Contributors.
+    <br />
+    Build with <a href="https://docs.astro.build/en/getting-started/"
+      ><Icon name="astro" />
+      Astro</a
+    > using the <a href="https://starlight.astro.build/"
+      ><Icon name="starlight" />
+      Starlight</a
+    > theme and <a
+      href="https://www.figma.com/community/file/1166831539721848736/solar-icons-set"
+      ><Icon name="sun" />
+      Solar</a
+    > icons. Hosted on
+    <a href="https://github.com/kando-menu/kando-menu.github.io">
+      <AstroIcon name="simple-icons:github" /> GitHub Pages.
+    </a>
+  </div>
+</footer>
 
 <style>
+  footer {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .meta {
+    gap: 0.75rem 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .meta > :global(p:only-child) {
+    margin-inline-start: auto;
+  }
+
   .kudos {
     text-align: center;
     line-height: 1.8rem;
     font-size: var(--sl-text-xs);
     color: var(--sl-color-gray-3);
+
+    svg {
+      transform: translateY(0.12em);
+    }
+
+    a {
+      color: var(--sl-color-gray-3);
+
+      &:hover {
+        color: var(--sl-color-white);
+      }
+    }
   }
 
-  .kudos a {
+  a {
+    gap: 0.5rem;
+    align-items: center;
+    text-decoration: none;
     color: var(--sl-color-gray-3);
   }
 
-  .kudos a:hover {
+  a:hover {
     color: var(--sl-color-white);
-  }
-
-  svg {
-    transform: translateY(0.12em);
   }
 </style>
