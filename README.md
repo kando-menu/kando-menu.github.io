@@ -3,8 +3,7 @@
 
 # The Homepage of [Kando](https://github.com/kando-menu/kando)
 
-> [!IMPORTANT]  
-> This page is currently under construction! It will receive more content and major updates frequently.
+[![REUSE status](https://api.reuse.software/badge/github.com/kando-menu/kando-menu.github.io)](https://api.reuse.software/info/github.com/kando-menu/kando-menu.github.io)
 
 Welcome to the Kando documentation site! This site is available online at https://kando.menu.
 Feel free to improve the documentation by submitting a pull request to this repository.
