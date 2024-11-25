@@ -92,6 +92,7 @@ export default defineConfig({
       lastUpdated: true,
       customCss: ['./src/styles/custom.css', '@fontsource/neucha/400.css'],
       components: {
+        Head: './src/components/Head.astro',
         Footer: './src/components/Footer.astro',
       },
     }),
