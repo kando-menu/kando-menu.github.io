@@ -5,6 +5,16 @@
     --sl-nav-gap: 1rem;
 }
 
+.site-title {
+    font-family: Neucha, serif;
+    font-weight: bold;
+    font-size: var(--sl-text-h3);
+
+    span {
+        margin-top: 0.3rem;
+    }
+}
+
 [data-has-hero] body {
     background-image: url('../assets/bg-dark.webp');
     background-size: cover;
