@@ -56,6 +56,11 @@ export default defineConfig({
             'advanced-usage/opening-menus',
             'advanced-usage/launch-from-cli',
             'advanced-usage/create-menu-themes',
+            {
+              slug: 'advanced-usage/create-sound-themes',
+              badge: 'soon!',
+              variant: 'tip',
+            },
           ],
         },
         {

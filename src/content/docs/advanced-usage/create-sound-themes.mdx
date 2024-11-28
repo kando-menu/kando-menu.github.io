@@ -1,0 +1,171 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Creating Sound Themes
+description: A guide on how to create sound themes for Kando.
+banner:
+    content: 🚧 This feature will be available in the next version of Kando! 🚧
+---
+
+import { Tabs, TabItem, Aside, FileTree, Card } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import Intro from '../../../components/Intro.astro';
+import CustomAside from '../../../components/CustomAside.astro';
+
+![banner](../../../assets/banner09.png)
+
+<Intro>
+Kando allows you to create custom sound themes to make the menu even more fun to use.
+A sound theme is a collection of sound files which are played when certain events occur in the menu.
+</Intro>
+
+<Aside type="tip" title="Need Help?">
+If you encounter a problem at any stage, feel free to ask for help in the **#support** or **#menu-themes** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+</Aside>
+
+## <Icon name="solar:folder-favourite-star-bold-duotone" class="inline-icon" /> Sound Theme Locations
+
+If you want to create a new sound theme, you should put **a new subdirectory** into the `sound-themes` directory.
+The location of this directory depends on your operating system:
+
+<Tabs>
+  <TabItem label="Windows" icon="seti:windows">
+    ```
+    %appdata%\kando\sound-themes\
+    ```
+  </TabItem>
+  <TabItem label="macOS" icon="apple">
+    ```
+    ~/Library/Application Support/kando/sound-themes/
+    ```
+  </TabItem>
+  <TabItem label="Linux" icon="linux">
+    ```
+    ~/.config/kando/sound-themes/
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="danger">
+Kando will also load menu themes from `resources/app/.webpack/renderer/assets/sound-themes/` in the installation directory. You should not put your themes there, as they might be overwritten during an update.
+</Aside>
+
+If you are running Kando from the source code via `npm start`, it will also look for themes in the `assets/sound-themes/` directory.
+
+
+## <Icon name="solar:dna-bold-duotone" class="inline-icon" /> Anatomy of a Sound Theme
+
+This section will give you an overview of the files you need to create a new sound theme.
+A sound theme directory must contain a `theme.json5` file and can contain any number of sound files.
+
+<FileTree>
+- kando
+  - sound-themes
+    - my-theme
+      - theme.json5
+      - REUSE.toml
+      - foo.mp3 You can put any number of sound files in your theme directory and name them whatever you like.
+</FileTree>
+
+`theme.json5` contains metadata about the theme and assigns sound files to certain events.
+
+`REUSE.toml` is not strictly necessary, but it is recommended to include it in your theme directory. It contains information about the license of your theme.
+
+## <Icon name="solar:layers-bold-duotone" class="inline-icon" /> The `theme.json5` File
+
+Below you can have a look at a simple `theme.json5` file.
+Besides the metadata, it contains a list of sound files which are played when certain events occur in the menu.
+
+<Aside type="tip">
+You can also name this file `theme.json`. But [JSON5](https://json5.org/) is a bit easier to read and allows for comments.
+</Aside>
+
+```json5 title="theme.json5"
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+{
+  name: 'Default',
+  author: 'Simon Schneegans',
+  license: 'CC0-1.0',
+  themeVersion: '1.0',
+
+  // This theme was created for Kando's sound theme engine version 1.
+  // Kando will use this to check if the theme is compatible with the
+  // current version of Kando.
+  engineVersion: 1,
+
+  // This is a list of sound files which are played when certain events
+  // occur in the menu.
+  sounds: {
+    openMenu: {
+      file: "open.mp3",
+    },
+    closeMenu: {
+      file: "close.mp3",
+      volume: 0.5,
+    },
+    hoverItem: {
+      file: "hover.mp3",
+      minPitch: 0.9,
+      maxPitch: 1.1,
+    },
+  },
+}
+```
+
+### Available Sound Events
+
+The following events are available for sound themes.
+For each event, you can specify a sound file which is played when the event occurs.
+It is perfectly fine to reuse the same sound file for multiple events.
+
+<div style="width:120px">Event</div>  | Description
+--- | ---
+`openMenu` | This event is triggered when a menu is opened.
+`closeMenu` | This event is triggered when a menu is closed without selecting an item.
+`hoverItem` | This event is triggered when a leaf item is hovered with the mouse. That is an item which does not have any children and can be executed.
+`hoverParent` | This event is triggered when the parent of the current center item is hovered with the mouse.
+`hoverSubmenu` | This event is triggered when a submenu which could be opened is hovered with the mouse.
+`selectItem` | This event is triggered when an action is executed by selecting an item.
+`selectParent` | This event is triggered when the user navigates to the parent of the current center item.
+`selectSubmenu` | This event is triggered when a submenu is opened.
+
+### Advanced Configuration
+
+For each event, you can specify the volume of the sound file and the pitch of the sound file.
+This allows reusing the same sound file for multiple events while making them sound different.
+If you specify a `minPitch` and a `maxPitch`, Kando will play the sound file with a random pitch between these two values.
+You can set them to the same value to play the sound file with a fixed pitch.
+
+```json5 title="theme.json5" {4-6}
+// ...
+hoverItem: {
+  file: "hover.mp3",
+  volume: 0.5,
+  minPitch: 0.9,
+  maxPitch: 1.1,
+},
+// ...
+```
+
+## <Icon name="solar:copyright-bold-duotone" class="inline-icon" /> Adding Proper Credits
+
+A theme usually builds upon the work of others.
+Therefore, it is important to give proper credit to the original authors!
+
+To make sure that your theme is compliant with the licenses of the assets, it is highly recommended to follow the corresponding steps outlined in the [menu-theme creation guide](/advanced-usage/create-menu-themes#-adding-proper-credits).
+
+## <Icon name="solar:cloud-upload-bold-duotone" class="inline-icon" /> Distributing your Theme
+
+You are invited to show your themes in [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+You can also contribute your themes to the [Kando Sound Themes Repository](https://github.com/kando-menu/sound-themes) by creating a pull request.
+
+<br />
+<br />
+
+<CustomAside type="thanks" title="Thank you!">
+You are awesome!
+Creating sound themes for Kando is a great way to contribute to the project and to make the menu even more fun to use for everyone.
+</CustomAside>
