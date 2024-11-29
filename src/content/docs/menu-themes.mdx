@@ -17,14 +17,8 @@ import { Icon } from 'astro-icon/components';
 <Intro>
 Kando supports theming the menu. 
 Themes use CSS to style the menu and can change the look of the menu drastically.
+Below you can find some examples which show how different themes can look.
 </Intro>
-
-<Aside type="tip" title="Do you want to create your own themes?">
-There's a guide on  [how to create your own themes](/create-menu-themes) available!
-</Aside>
-
-Kando comes with a few themes pre-installed. You can find more themes in the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes)!
-Below are some examples of themes:
 
 <br/>
 
@@ -53,6 +47,10 @@ Below are some examples of themes:
 
 ### <Icon name="solar:cloud-download-bold-duotone" class="inline-icon" /> Installing Menu Themes
 
+<Aside type="tip" title="Get themes online!">
+Kando comes with a few themes pre-installed. You can find more themes in the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes)!
+</Aside>
+
 A menu theme is a directory containing a `theme.json` and a `theme.css` file.
 If you want to install such such a theme, you should put it into the `menu-themes` directory.
 The location of this directory depends on your operating system:
@@ -75,6 +73,11 @@ The location of this directory depends on your operating system:
   </TabItem>
 </Tabs>
 
+<Aside type="note" title="You may have to create this directory.">
+If the `menu-themes` directory does not exist, you can create it yourself.
+</Aside>
+
+
 Thereafter, you will need to restart Kando to see the new theme in the menu settings.
 
 ### <Icon name="solar:pallete-2-bold-duotone" class="inline-icon" /> Selecting a Menu Theme
@@ -84,3 +87,7 @@ To open the settings menu, click on the gear icon in the bottom right corner of 
 
 For each theme, you can also set some custom accent colors.
 Kando also supports dark mode: You can choose to use different themes and accent colors for light and dark mode.
+
+<Aside type="tip" title="Do you want to create your own themes?">
+There's a guide on  [how to create your own themes](/create-menu-themes) available!
+</Aside>
