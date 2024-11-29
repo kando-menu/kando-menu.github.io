@@ -14,14 +14,14 @@ tableOfContents:
 
 import { Tabs, TabItem, Aside, FileTree, Badge } from '@astrojs/starlight/components';
 
-![banner](../../../assets/banner03.png)
+![banner](../../assets/banner03.png)
 
 All settings of Kando are stored in **two configuration files** JSON files which you can edit with any text editor.
 `config.json` stores the general configuration of the application and `menus.json` stores the configuration of the individual menus.
 
 <Aside type="tip" title="Edit the config files while Kando is running!">
 Whenever you save a file, Kando will automatically 🔥 **hot-reload** the configuration.
-Kando will ✅ **validate** the configuration files. If you [launched Kando from a terminal](../../advanced-usage/launch-from-cli), it will print errors to the console if it finds any. In this case, the configuration will not be reloaded. If a configuration file is invalid at startup, Kando will refuse to start.
+Kando will ✅ **validate** the configuration files. If you [launched Kando from a terminal](../../launch-from-cli), it will print errors to the console if it finds any. In this case, the configuration will not be reloaded. If a configuration file is invalid at startup, Kando will refuse to start.
 </Aside>
 
 ## Location of the Configuration Files
@@ -140,7 +140,7 @@ They are JSON objects with the following properties:
 
 <div style="width:150px">Property</div> | Description
 -------- | -----------
-`shortcut: ""` | The shortcut which opens the menu. This is a string which can contain multiple keys separated by `+`. For example, `"Ctrl+Shift+K"` or `"Cmd+Shift+K"`. If empty, the menu will not have a shortcut. See [Menu Shortcuts vs. Simulated Hotkeys](configuring.md#keyboard-menu-shortcuts-vs-simulated-hotkeys) for details.
+`shortcut: ""` | The shortcut which opens the menu. This is a string which can contain multiple keys separated by `+`. For example, `"Ctrl+Shift+K"` or `"Cmd+Shift+K"`. If empty, the menu will not have a shortcut. See [Valid Key Names](valid-keynames) for details.
 `shortcutID: ""` | On some platforms, Kando can not bind shortcuts directly. In this case, you can use this property to assign an ID which can be used in the global shortcut configuration of your desktop environment. This should be lowercase and contain only ASCII characters and dashes. For example, `"main-trigger"`.
 `root` | _mandatory_ | The root menu item of the menu given as a Menu Item Description. See below for details.
 `centered: false` | Whether the menu should be centered on the screen. If this is `false`, the menu will be opened at the position of the mouse cursor.
@@ -177,10 +177,10 @@ Each menu item is a JSON object with the following properties:
 ### Menu Item Types
 
 For now, the `type` property of a menu item can be one of the following values:
-[`"submenu"`](/getting-started/item-type/submenu),
-[`"command"`](/getting-started/item-type/run-command),
-[`"uri"`](/getting-started/item-type/open-uri),
-[`"hotkey"`](/getting-started/item-type/simulate-hotkey),
-[`"macro"`](/getting-started/item-type/simulate-macro),
-[`"text"`](/getting-started/item-type/paste-text).
+[`"submenu"`](/item-submenu),
+[`"command"`](/item-run-command),
+[`"uri"`](/item-open-uri),
+[`"hotkey"`](/item-simulate-hotkey),
+[`"macro"`](/item-simulate-macro),
+[`"text"`](/item-paste-text).
 Click on these links to learn more about the individual item types and which `data` properties they require.

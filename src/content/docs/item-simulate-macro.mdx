@@ -12,7 +12,7 @@ You can use this to automate tasks that require multiple keyboard shortcuts or k
 You can specify a delay between each key press if there is a need for it.
 
 You can use the menu editor to record a complete macro and edit the recorded events if needed.
-See [Valid Key Names](/reference/valid-keys) for details on the format of the individual key names.
+See [Valid Key Names](/valid-keynames) for details on the format of the individual key names.
 
 ## The Delayed Option
 
@@ -23,7 +23,7 @@ This can be useful if the macro targets another window which needs to be focused
 ## Example Configuration
 
 If you happen to edit your `menus.json` file by hand, you can create a Macro item with something like the following.
-You can read more about the structure of the `menus.json` file in its [documentation](/reference/config-files).
+You can read more about the structure of the `menus.json` file in its [documentation](/config-files).
 
 The `data` property of the menu item must contain a `macro` property which contains a list of keyboard events to simulate.
 The optional `delayed` property will ensure that the hotkey is executed _after_ the Kando window is closed.
