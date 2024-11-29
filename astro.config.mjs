@@ -52,15 +52,12 @@ export default defineConfig({
         {
           label: 'Advanced Usage',
           items: [
-            'advanced-usage/customizing',
+            {
+              slug: 'advanced-usage/customizing',
+              badge: { text: 'updated!', variant: 'success' },
+            },
             'advanced-usage/opening-menus',
             'advanced-usage/launch-from-cli',
-            'advanced-usage/create-menu-themes',
-            {
-              slug: 'advanced-usage/create-sound-themes',
-              badge: 'soon!',
-              variant: 'tip',
-            },
           ],
         },
         {
@@ -68,6 +65,11 @@ export default defineConfig({
           items: [
             'getting-involved/donating',
             'getting-involved/translating',
+            'getting-involved/create-menu-themes',
+            {
+              slug: 'getting-involved/create-sound-themes',
+              badge: { text: 'soon!', variant: 'tip' },
+            },
             'getting-involved/compile-from-source',
             'getting-involved/contribution-guide',
           ],
