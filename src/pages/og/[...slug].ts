@@ -26,20 +26,22 @@ export const { getStaticPaths, GET } = OGImageRoute({
     return {
       title: page.data.title,
       description: page.data.description,
-      border: { color: [224, 190, 205], width: 20 },
       bgImage: {
-        path: 'src/assets/bg-dark.webp',
+        path: 'src/assets/social-bg.png',
         fit: 'cover',
       },
-      padding: 120,
+      padding: 100,
       font: {
         title: {
           families: ['Neucha'],
-          size: 96,
-          lineHeight: 1.2,
+          color: [0, 0, 0],
+          size: 112,
+          lineHeight: 1.3,
         },
         description: {
           families: ['Neucha'],
+          color: [0, 0, 0],
+          size: 58,
         },
       },
       fonts: ['https://api.fontsource.org/v1/fonts/neucha/latin-400-normal.ttf'],
