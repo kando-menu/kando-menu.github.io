@@ -52,11 +52,13 @@ export default defineConfig({
         {
           label: 'Advanced Usage',
           items: [
-            {
-              slug: 'advanced-usage/customizing',
-              badge: { text: 'updated!', variant: 'success' },
-            },
             'advanced-usage/opening-menus',
+            'advanced-usage/menu-themes',
+            // {
+            //   slug: 'advanced-usage/sound-themes',
+            //   badge: { text: 'soon!', variant: 'tip' },
+            // },
+            'advanced-usage/icon-themes',
             'advanced-usage/launch-from-cli',
           ],
         },
