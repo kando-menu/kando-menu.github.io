@@ -54,10 +54,10 @@ export default defineConfig({
           items: [
             'advanced-usage/opening-menus',
             'advanced-usage/menu-themes',
-            // {
-            //   slug: 'advanced-usage/sound-themes',
-            //   badge: { text: 'soon!', variant: 'tip' },
-            // },
+            {
+              slug: 'advanced-usage/sound-themes',
+              badge: { text: 'soon!', variant: 'tip' },
+            },
             'advanced-usage/icon-themes',
             'advanced-usage/launch-from-cli',
           ],
