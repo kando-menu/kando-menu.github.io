@@ -38,7 +38,7 @@
 }
 
 .hero {
-    min-height: calc(100vh - 300px);
+    min-height: calc(100vh - 150px);
 }
 
 .hero h1,
@@ -111,6 +111,16 @@
         margin-left: 0.25em;
         font-size: 0.8em;
     }
+}
+
+/* We do not want to limit the width of the YouTube embeds. */
+lite-youtube {
+    max-width: none !important;
+    border-radius: 5px;
+}
+
+[data-has-hero] lite-youtube {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Dark mode colors. */
