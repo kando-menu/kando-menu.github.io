@@ -65,6 +65,7 @@ This file contains the general configuration of Kando.
 
 <div style="width:220px">Property</div> | Description
 --------- | -----------
+`locale: "auto"` <Badge text="soon!" variant="tip" /> | The locale which should be used for the menu. If set to `"auto"`, Kando will use the system locale.
 `menuTheme: "default"` | The directory name of the menu theme to use. Kando will first look for a directory with this name in the `menu-themes` subdirectory of the config directory. If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/menu-themes` in Kando's installation directory.
 `darkMenuTheme: "default"` | The name of the theme which should be used if the system is in dark mode.
 `menuThemeColors: {}` | A map of accent color overrides for each theme. A color override for the "default" theme could look like this: `{ "default": {"background-color":  "#RRGGBB"}}`.
