@@ -20,6 +20,9 @@ import ScrollIndicator from './ScrollIndicator.astro';
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const heroComponent = document.querySelector('.hero');
+    if (!heroComponent) return;
+
     const observer = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
