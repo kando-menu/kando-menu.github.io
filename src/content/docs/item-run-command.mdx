@@ -7,17 +7,23 @@ description: A menu item which executes a command.
 tableOfContents: false
 ---
 
+import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
+![banner](../../assets/banner10.png)
+
+<Intro>
 This item type is used to execute any command.
 You can use this to run applications, scripts, or any other command that you can run in a shell.
+</Intro>
 
-## Getting the Command to Run an App
+## <Icon name="solar:menu-dots-circle-bold-duotone" class="inline-icon" /> Getting the Command to Run an App
 
 Currently, Kando does not have a built-in way to list installed applications.
 You will need to know the command to run the application you want to launch.
 Depending on your operating system, this can be different.
-Usually searching online for "how to run application xyz from the command line" will give you the answer.
+Usually searching online for _"how to run application xyz from the command line"_ will give you the answer.
 Here are some tips to get you started:
 
 <Tabs>
@@ -51,13 +57,24 @@ Here are some tips to get you started:
   </TabItem>
 </Tabs>
 
-## The Delayed Option
+## <Icon name="solar:sort-by-time-line-duotone" class="inline-icon" /> The Delayed Option
 
-The item has an optional **Delayed** property which can enable or disable.
+The item has an optional **Delayed** property which you can enable or disable.
 If enabled, the command will be executed _after_ the Kando window is closed.
 This can be useful if the command targets another window which needs to be focused.
 
-## Example Configuration
+## <Icon name="solar:code-line-duotone" class="inline-icon" /> Placeholders
+
+You can use placeholders in the command which will be replaced by some actual values when the command is executed.
+This allows for some very advanced use-cases!
+Below are the available placeholders:
+
+- `{{app_name}}`: The name of the application which was focused when the menu was opened.
+- `{{window_name}}`: The title of the window which was focused when the menu was opened.
+- `{{pointer_x}}`: The x-coordinate of the mouse pointer when the menu was opened.
+- `{{pointer_y}}`: The y-coordinate of the mouse pointer when the menu was opened.
+
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
 
 If you happen to edit your `menus.json` file by hand, you can create a Command item with something like the following.
 You can read more about the structure of the `menus.json` file in its [documentation](/config-files).

@@ -7,18 +7,36 @@ description: A menu item which opens a URI.
 tableOfContents: false
 ---
 
+import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+
+![banner](../../assets/banner10.png)
+
+<Intro>
 An URI item can not only be used to open a website but also to open any URI that your operating system can handle.
 This includes opening files, directories, or even other applications.
+</Intro>
 
-## Example URIs
+## <Icon name="solar:globus-bold-duotone" class="inline-icon" /> Example URIs
 
-**http://example.com** - Opens the website `example.com` in your default browser.
+Here are some examples of URIs that you can use with the Open-URI item:
 
-**file:///path/to/file.txt** - Opens the file `file.txt` in your default text editor.
+- **http://example.com** - Opens the website `example.com` in your default browser.
+- **file:///path/to/file.txt** - Opens the file `file.txt` in your default text editor.
+- **mailto:foo@bar.com** - Opens your default email client to send an email.
 
-**mailto:foo@bar.com** - Opens your default email client to send an email.
+## <Icon name="solar:code-line-duotone" class="inline-icon" /> Placeholders
 
-## Example Configuration
+You can use placeholders in the URI which will be replaced by some actual values when the URI is opened.
+This allows for some very advanced use-cases!
+Below are the available placeholders:
+
+- `{{app_name}}`: The name of the application which was focused when the menu was opened.
+- `{{window_name}}`: The title of the window which was focused when the menu was opened.
+- `{{pointer_x}}`: The x-coordinate of the mouse pointer when the menu was opened.
+- `{{pointer_y}}`: The y-coordinate of the mouse pointer when the menu was opened.
+
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
 
 If you happen to edit your `menus.json` file by hand, you can create an Open-URI item with something like the following.
 You can read more about the structure of the `menus.json` file in its [documentation](/config-files).

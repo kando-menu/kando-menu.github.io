@@ -7,20 +7,28 @@ description: A menu item which simulates a keyboard shortcut.
 tableOfContents: false
 ---
 
+import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+![banner](../../assets/banner10.png)
+
+<Intro>
 This type is used to simulate simple keyboard events.
 You can use this to trigger shortcuts in other applications to automate tasks.
+</Intro>
 
 You can use the menu editor to record a hotkey or directly type the hotkey into the corresponding field.
 The latter is useful if you want to use a hotkey that is either not available on your keyboard or is globally bound to another application.
 See [Valid Key Names](/valid-keynames) for details on the format of the hotkey.
 
-## The Delayed Option
+## <Icon name="solar:sort-by-time-line-duotone" class="inline-icon" /> The Delayed Option
 
-The item has an optional **Delayed** property which can enable or disable.
+The item has an optional **Delayed** property which you can enable or disable.
 If enabled, the hotkey will be executed _after_ the Kando window is closed.
 This can be useful if the shortcut targets another window which needs to be focused.
 
-## Example Configuration
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
 
 If you happen to edit your `menus.json` file by hand, you can create a Hotkey item with something like the following.
 You can read more about the structure of the `menus.json` file in its [documentation](/config-files).

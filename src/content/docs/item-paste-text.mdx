@@ -7,17 +7,23 @@ description: A menu item which pastes text into the active application.
 tableOfContents: false
 ---
 
+import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
 import { Aside } from '@astrojs/starlight/components';
 
+![banner](../../assets/banner10.png)
+
+<Intro>
 This item type can be used to paste the given text into the active window.
 It is useful if you notice that you are typing the same text over and over again.
+</Intro>
 
 <Aside type="note">
   The paste text item uses your clipboard to paste the text.
   So after using the item, the clipboard will contain the text you pasted.
 </Aside>
 
-## Example Configuration
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
 
 If you happen to edit your `menus.json` file by hand, you can create a Paste-Text item with something like the following.
 You can read more about the structure of the `menus.json` file in its [documentation](/config-files).

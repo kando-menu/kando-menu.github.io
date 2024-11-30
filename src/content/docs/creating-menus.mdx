@@ -5,9 +5,12 @@
 title: Create Your First Menu
 description: Learn how to create your first menu in Kando.
 tableOfContents: false
+next:
+  link: /opening-menus
+  label: Advanced Usage
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 
@@ -18,6 +21,7 @@ Kando comes with an example menu which you can use to get started.
 However, you should soon adapt the menu to your needs and create your own menus.
 </Intro>
 
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> The Menu Editor
 
 Kando comes with a **graphical menu editor** which allows you to create and edit your own menus.
 There are three ways to open the menu editor:
@@ -33,6 +37,7 @@ Drag new items from the toolbar to the menu preview, reorder them, and change th
 There are several advanced options which are not yet exposed in the editor UI. See the [Config-File Documentation](/config-files) for all advanced options.
 </Aside>
 
+
 ## Three Tips for Efficient Menu Layouts
 
 <Aside type="tip" title="Avoid too many items in a single menu!">
@@ -47,6 +52,15 @@ Kando is designed to handle deeply nested menus. You can use the marking mode to
 Even if you have an odd number of items, you can use fixed angles to lock items to the top, bottom, left, or right side of the menu.
 </Aside>
 
-<Intro>
-Read the next sections to learn more about the available menu-item types and how to configure them.
-</Intro>
+## Available Item Types
+
+You can compose your menus from a variety of item types.
+Below you can find a list of all currently available item types.
+Click on an item to learn more about it!
+
+<LinkCard title="Open URI" description='Can be used to open files, websites, and more.' href="/item-open-uri"/>
+<LinkCard title="Paste Text" description='Can be used to paste text into the current application.' href="/item-paste-text"/>
+<LinkCard title="Run Command" description='Can be used to open applications or run shell commands.' href="/item-run-command"/>
+<LinkCard title="Simulate Hotkey" description='Can be used to simulate keyboard shortcuts.' href="/item-simulate-hotkey"/>
+<LinkCard title="Simulate Macro" description='Can be used to simulate a complex sequence of keyboard shortcuts.' href="/item-simulate-macro"/>
+<LinkCard title="Submenu" description='Can be used to create nested menus.' href="/item-submenu"/>

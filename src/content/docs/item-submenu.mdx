@@ -7,11 +7,20 @@ description: A menu item which may contain other items.
 tableOfContents: false
 ---
 
+import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+![banner](../../assets/banner10.png)
+
+<Intro>
 A submenu is one of the most basic item types in Kando. 
 It is simply a container for other items.
 You can only define the name and the icon of a submenu, it does not have any other properties.
+</Intro>
 
-## Example Configuration
+
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
 
 If you happen to edit your `menus.json` file by hand, you can create a submenu with something like the following.
 You can read more about the structure of the `menus.json` file in its [documentation](/config-files).
