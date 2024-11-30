@@ -1,0 +1,43 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+// This component extends the default starlight hero component by adding a scroll indicator.
+// It also adds a fade-in effect to all child elements of the markdown content on the page.
+
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Hero.astro';
+
+import ScrollIndicator from './ScrollIndicator.astro';
+---
+
+<!-- Render the default <Head/> component. -->
+<Default {...Astro.props}><slot /></Default>
+
+<ScrollIndicator />
+
+<style></style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.sl-markdown-content > *');
+    console.log(elements);
+    elements.forEach((element) => {
+      element.classList.add('fade-in');
+      observer.observe(element);
+    });
+  });
+</script>

@@ -56,6 +56,17 @@
     font-size: clamp(1.5rem, calc(0.5rem + 2vw), 2rem);
 }
 
+.fade-in {
+    opacity: 0;
+    transition: all 0.5s ease;
+    transform: translateY(5rem) scale(0.95);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: none;
+}
+
 @media (min-width: 50rem) {
     .hero {
         grid-template-columns: 7fr 5fr;

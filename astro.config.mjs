@@ -106,6 +106,7 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css', '@fontsource/neucha/400.css'],
       components: {
         Head: './src/components/Head.astro',
+        Hero: './src/components/Hero.astro',
         Footer: './src/components/Footer.astro',
       },
     }),
