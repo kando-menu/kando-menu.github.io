@@ -1,0 +1,61 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+import { Icon } from 'astro-icon/components';
+---
+
+<div id="scroll-indicator" class="indicator">
+  <Icon name="solar:round-alt-arrow-down-line-duotone" class="inline-icon" />
+</div>
+
+<style>
+  .indicator {
+    font-size: 3rem;
+    text-align: center;
+
+    animation: scroll 1.5s infinite;
+    -webkit-animation: scroll 1.5s infinite;
+
+    transition: opacity 0.5s;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translateY(1rem);
+    }
+    40% {
+      transform: translate(0);
+    }
+  }
+
+  @-webkit-keyframes scroll {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translateY(1rem);
+    }
+    40% {
+      transform: translate(0);
+    }
+  }
+
+  .hidden {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const indicator = document.getElementById('scroll-indicator');
+    if (window.scrollY > 50) {
+      indicator?.classList.add('hidden');
+    } else {
+      indicator?.classList.remove('hidden');
+    }
+  });
+</script>
