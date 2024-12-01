@@ -5,12 +5,12 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<div id="scroll-indicator" class="indicator">
-  <Icon name="solar:round-alt-arrow-down-line-duotone" />
+<div id="scroll-indicator">
+  <Icon name="solar:round-alt-arrow-down-line-duotone" class="inline-icon" />
 </div>
 
 <style>
-  .indicator {
+  #scroll-indicator {
     font-size: 3rem;
     text-align: center;
 
@@ -25,7 +25,7 @@ import { Icon } from 'astro-icon/components';
       transform: translate(0);
     }
     20% {
-      transform: translateY(1rem);
+      transform: translateY(1rem) scaleY(0.9);
     }
     40% {
       transform: translate(0);

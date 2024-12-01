@@ -25,13 +25,62 @@ hero:
 ---
 
 import { Icon } from 'astro-icon/components';
+import { LinkButton } from '@astrojs/starlight/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
+import ScrollIndicator from '../../components/ScrollIndicator.astro';
+import ShowCase from '../../components/ShowCase.astro';
+import ShowCaseItem from '../../components/ShowCaseItem.astro';
 
+<ScrollIndicator />
 
-# <Icon name="solar:rocket-2-bold-duotone" class="inline-icon" /> Have a Look at the Latest Update!
+<ShowCase>
 
-Besides controller support, the latest version of Kando brings now many ["hidden" configuration options](config-files).
-For instance, you can now configure the fade-in and fade-out animation times, you can hide the sidebar and editor buttons, or you can disable marking mode and turbo mode altogether.
+<ShowCaseItem icon="solar:clock-circle-bold" title="Be Fast!" type="left">
+  <p slot="description">
+    Select your favorite tools and actions _within milliseconds_.
+    Kando's gesture recognition is lightning fast and allows you to select items in subsubsubmenus with ease!
+  </p>
+  <video slot="content" autoplay loop src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-4.mp4" />
+</ShowCaseItem>
 
-<YouTube id="XVu_ea9gpCY" />
+<ShowCaseItem icon="solar:target-bold" title="Be Precise!" type="right">
+  <p slot="description">
+    With Kando, your entire screen becomes a click target.
+    You do not have to aim at tiny buttons, _just throw your mouse in the right direction!_
+  </p>
+  <video slot="content" autoplay loop src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-1.mp4" />
+</ShowCaseItem>
 
+<ShowCaseItem icon="solar:gift-bold" title="Watch the Latest Update!" type="center">
+  <div slot="description">
+    <p>
+      Besides controller support, the latest version of Kando brings many ["hidden" configuration options](config-files).
+      For instance, you can now configure the fade-in and fade-out animation times, you can hide the sidebar and editor buttons, or you can disable marking mode and turbo mode altogether.
+    </p>
+    <YouTube slot="content" id="XVu_ea9gpCY" />
+  </div>
+</ShowCaseItem>
+
+<ShowCaseItem icon="solar:chat-square-like-bold" title="Join us on Discord!" type="left">
+  <p slot="description">
+    Do you have questions, ideas, or feedback?
+    Join our community on Discord and get in touch with the developers and other users!
+  </p>
+  <iframe slot="content" src="https://discord.com/widget?id=1124300911574003732&theme=dark" style="height: 300px;
+  width: 100%;" allowtransparency="true" frameborder="0"></iframe>
+</ShowCaseItem>
+
+<ShowCaseItem icon="solar:hearts-bold" title="Try Kando Now!" type="center">
+  <div slot="description">
+    <p>
+      Kando is open source, free, and avaliable for Windows, macOS, and Linux.
+      Installation is easy and you can start mastering Kando right away!
+    </p>
+    <LinkButton href="/intro" icon="right-arrow">Get started</LinkButton>
+    <LinkButton href="https://github.com/kando-menu/kando/releases" icon="external" variant="minimal">Download from GitHub</LinkButton>
+  </div>
+  <p slot="content">
+  </p>
+</ShowCaseItem>
+
+</ShowCase>

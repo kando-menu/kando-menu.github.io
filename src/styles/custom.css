@@ -17,13 +17,21 @@
 
 [data-has-hero] body {
     background-image: url('../assets/bg-dark.webp');
-    background-size: cover;
+    background-size: auto 100vh;
     background-position: top;
     background-repeat: no-repeat;
+    background-color: black;
+}
+
+@media (min-aspect-ratio: 4/3) {
+    [data-has-hero] body {
+        background-size: 100vw auto;
+    }
 }
 
 :root[data-theme='light'][data-has-hero] body {
     background-image: url('../assets/bg-light.webp');
+    background-color: white;
 }
 
 [data-has-hero] header {
@@ -56,17 +64,6 @@
     font-size: clamp(1.5rem, calc(0.5rem + 2vw), 2rem);
 }
 
-.fade-in {
-    opacity: 0;
-    transition: all 0.5s ease;
-    transform: translateY(5rem) scale(0.95);
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: none;
-}
-
 @media (min-width: 50rem) {
     .hero {
         grid-template-columns: 7fr 5fr;
@@ -80,6 +77,23 @@
     .hero>.hero-html {
         width: 100%;
     }
+}
+
+/* We do not want to limit the width of the YouTube embeds. */
+lite-youtube {
+    max-width: none !important;
+    border-radius: 5px;
+}
+
+video,
+lite-youtube,
+iframe {
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-has-hero] .hero-element.right {
+    transform: perspective(1000px) rotateY(-30deg);
 }
 
 .content-panel kbd {
@@ -124,15 +138,7 @@
     }
 }
 
-/* We do not want to limit the width of the YouTube embeds. */
-lite-youtube {
-    max-width: none !important;
-    border-radius: 5px;
-}
 
-[data-has-hero] lite-youtube {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
 
 /* Dark mode colors. */
 :root {

@@ -1,0 +1,64 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  icon: string;
+  title: string;
+  type: 'left' | 'right' | 'center';
+}
+
+const { icon, title, type } = Astro.props;
+---
+
+<div
+  class:list={[
+    'show-case-item',
+    { reverse: type === 'right' },
+    { center: type === 'center' },
+  ]}>
+  <div class="description">
+    <h1><Icon name={icon} class="inline-icon" /> {title}</h1>
+    <slot name="description" />
+  </div>
+  <div class="content">
+    <slot name="content" />
+  </div>
+</div>
+
+<style>
+  .show-case-item {
+    margin-top: 5rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .description,
+  .content {
+    flex: 1 1 0;
+  }
+
+  .center .description,
+  .center .content {
+    flex: 0 1 auto;
+  }
+
+  .description {
+    font-size: clamp(1rem, calc(0.5rem + 1vw), 1.5rem);
+  }
+
+  @media (min-width: 50rem) {
+    .show-case-item {
+      margin-top: 10rem !important;
+      gap: 5vw;
+      flex-direction: row;
+    }
+
+    .show-case-item.reverse {
+      flex-direction: row-reverse;
+    }
+  }
+</style>
