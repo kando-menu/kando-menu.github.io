@@ -31,7 +31,9 @@
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
           } else {
-            entry.target.classList.remove('visible');
+            if (entry.boundingClientRect.bottom > window.innerHeight) {
+              entry.target.classList.remove('visible');
+            }
           }
         });
       },
