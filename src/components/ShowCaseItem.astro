@@ -41,9 +41,12 @@ const { icon, title, type } = Astro.props;
     flex: 1 1 0;
   }
 
-  .center .description,
-  .center .content {
+  .center .description {
     flex: 0 1 auto;
+  }
+
+  .center .content {
+    display: none;
   }
 
   .description {
