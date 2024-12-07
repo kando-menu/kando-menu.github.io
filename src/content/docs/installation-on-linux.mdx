@@ -15,6 +15,7 @@ next:
 import { Steps, Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import { Icon } from 'astro-icon/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
+import CustomAside from '../../components/CustomAside.astro';
 import Intro from '../../components/Intro.astro';
 
 ![banner](../../assets/banner06.png)
@@ -22,6 +23,32 @@ import Intro from '../../components/Intro.astro';
 <Intro>
 On Linux, you can either install Kando from your package manager, or via any of the pre-packaged binaries from GitHub releases.
 </Intro>
+
+## <Icon name="solar:check-circle-bold-duotone" class="inline-icon" /> Supported Desktop Environments
+
+Implementing a menu like Kando for various desktop environments is not exactly easy.
+Things like getting the mouse position before opening a window, simulating key presses, or getting the name of the currently focused application window may have to be implemented differently.
+
+Environment | Status | Notes
+:-- | :---: | ---
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> GNOME / X11 | ✅ |
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> GNOME / Wayland | ✅ | Requires [adapter GNOME Shell extension](https://github.com/kando-menu/gnome-shell-integration) which provides a DBus interface for Kando to communicate with.
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> KDE / X11 | ✅ |
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> KDE / Wayland | ✅ | Works both on Plasma 5 and Plasma 6. See [below](#-kde-plasma-on-wayland) for how to bind global shortcuts.
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> Hyprland | ✅ | See [below](#-hyprland) for the required configs.
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> Cinnamon | ✅ |
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> XFCE | ✅ |
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> MATE | ✅ |
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> Budgie | ✅ |
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> LXQt | ✅ |
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> LXDE | ✅ | Requires a compositor for the transparency to work.
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> Openbox | ✅ | Requires a compositor for the transparency to work.
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> i3 | ✅ | Requires a compositor for the transparency to work.
+<img height="14" width="14" src="https://cdn.simpleicons.org/linux/black" /> dusk | ✅ | Requires a compositor for the transparency to work. See [below](#dusk) for the required config.
+
+<CustomAside type="thanks" title="Have you tested another environment?">
+If you have tested Kando on another desktop environment, please add it to the list above by editing this page on GitHub!
+</CustomAside>
 
 ## <Icon name="solar:box-bold-duotone" class="inline-icon" /> Installation via a Package Manager
 
