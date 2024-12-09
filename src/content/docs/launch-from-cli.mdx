@@ -15,13 +15,13 @@ If you installed Kando via a package manager or via one of the installers from G
 <Tabs>
   <TabItem label="Windows" icon="seti:windows">
     On Windows, the path to the executable depends on the current version number. Just copy `%localappdata%\Kando` into the address bar of the Windows Explorer and check the contained directories.
-    ```
+    ```cmd
     %localappdata%\Kando\app-<version number>\Kando.exe
     ```
   </TabItem>
   <TabItem label="macOS" icon="apple">
     On macOS, the executable is located in the following directory:
-    ```
+    ```bash
     /Applications/Kando.app/Contents/MacOS/Kando
     ```
     <Aside type="caution" title="Grant Permissions!">
@@ -31,13 +31,13 @@ If you installed Kando via a package manager or via one of the installers from G
   </TabItem>
   <TabItem label="Linux" icon="linux">
     On Linux, this depends on the installation method. The executable is usually located in one of the following directories:
-    ```
+    ```bash
     /usr/bin/kando
     /usr/local/bin/kando
     ```
   </TabItem>
   <TabItem label="Flatpak" icon="linux">
-    ```
+    ```bash
     flatpak run menu.kando.Kando
     ```
   </TabItem>
