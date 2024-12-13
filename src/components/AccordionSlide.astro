@@ -1,0 +1,17 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+// From here: https://schneegans.github.io/tutorials/2015/10/06/accordions
+
+const { background, title } = Astro.props;
+---
+
+<li style=`background-image: url(${background})`>
+  <div class="caption">
+    <h3>{title}</h3>
+    <p>
+      <slot />
+    </p>
+  </div>
+</li>

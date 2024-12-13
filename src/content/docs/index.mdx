@@ -24,43 +24,70 @@ hero:
 
 ---
 
-import { Icon } from 'astro-icon/components';
-import { LinkButton } from '@astrojs/starlight/components';
+import { LinkButton, Icon } from '@astrojs/starlight/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ScrollIndicator from '../../components/ScrollIndicator.astro';
 import ShowCase from '../../components/ShowCase.astro';
 import ShowCaseItem from '../../components/ShowCaseItem.astro';
+import Accordion from '../../components/Accordion.astro';
+import AccordionSlide from '../../components/AccordionSlide.astro';
+
+import slide1 from "../../assets/accordion-slide1.webp";
+import slide2 from "../../assets/accordion-slide2.webp";
+import slide3 from "../../assets/accordion-slide3.webp";
+import slide4 from "../../assets/accordion-slide4.webp";
 
 <ScrollIndicator />
 
 <ShowCase>
 
+<ShowCaseItem title="What is Kando?" type="intro">
+  <p slot="description">
+    Kando is an open-source pie menu.
+    You can use it to launch applications, execute keyboard macros, open files, and much more.
+    It is designed for 🖱️ mouse, 🖊️ stylus, 👆 touch, or 🎮 controller input.
+  </p>
+</ShowCaseItem>
+
 <ShowCaseItem icon="solar:clock-circle-bold" title="Be Fast!" type="left">
   <p slot="description">
-    Select your favorite tools and actions _within milliseconds_.
-    Kando's gesture recognition is lightning fast and allows you to select items in subsubsubmenus with ease!
+    With Kando, you can select your favorite tools and actions _within milliseconds_.
+    The gesture recognition allows you to select items in subsubsubmenus with ease!
   </p>
   <video slot="content" autoplay muted loop src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-4.mp4" />
 </ShowCaseItem>
 
 <ShowCaseItem icon="solar:target-bold" title="Be Precise!" type="right">
   <p slot="description">
-    With Kando, your entire screen becomes a click target.
-    You do not have to aim at tiny buttons, _just throw your mouse in the right direction!_
+    In Kando, your entire screen becomes a click target.
+    You do not have to aim at tiny buttons, _just throw your mouse approximately in the right direction!_
   </p>
   <video slot="content" autoplay muted loop src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-1.mp4" />
 </ShowCaseItem>
 
-<ShowCaseItem icon="solar:gift-bold" title="Watch the Latest Update!" type="center">
+<ShowCaseItem icon="solar:heart-shine-bold" title="Be Beautiful!" type="fill">
   <div slot="description">
     <p>
-      The latest release brings a bunch of features, fixes, and improvements. 
-      Most prominently, you can now use sound effects in your menus!
-      While this is not yet exposed in the settings UI, [it's pretty easy to set up](sound-themes).
+      You can customize Kando to your heart's content.
+      It supports custom menu, icon, and sound themes.
     </p>
-    <YouTube slot="content" id="NiijnliUe_Y" />
+    <Accordion>
+      <AccordionSlide title="Kando's Default Theme" background={slide1.src}>
+      The default theme of Kando is very simple. It is a good choice if you want to focus on your work and not be distracted by the menu.
+      </AccordionSlide>
+      <AccordionSlide title="Accent Colors!" background={slide2.src} >
+      You can adapt each theme to your personal taste.
+      </AccordionSlide>
+      <AccordionSlide title="Dark Mode Support!" background={slide3.src} >
+      With Kando, you can have a dark mode for your menu!
+      </AccordionSlide>
+      <AccordionSlide title="Be Creative!" background={slide4.src} >
+      You can create any theme you like. For instance, this theme is inspired by Minecraft!
+      </AccordionSlide>
+    </Accordion>
   </div>
 </ShowCaseItem>
+
 
 <ShowCaseItem icon="solar:chat-square-like-bold" title="Join us on Discord!" type="left">
   <p slot="description">
@@ -74,7 +101,7 @@ import ShowCaseItem from '../../components/ShowCaseItem.astro';
 <ShowCaseItem icon="solar:hearts-bold" title="Try Kando Now!" type="center">
   <div slot="description">
     <p>
-      Kando is open source, free, and avaliable for Windows, macOS, and Linux.
+      Kando is open source, free, and avaliable for <Icon name="seti:windows" class="inline-icon" /> Windows, <Icon name="apple" class="inline-icon" /> macOS, and <Icon name="linux" class="inline-icon" /> Linux.<br/>
       Installation is easy and you can start mastering Kando right away!
     </p>
     <LinkButton href="/intro" icon="right-arrow">Get started</LinkButton>

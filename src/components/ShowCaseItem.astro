@@ -5,9 +5,9 @@
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-  icon: string;
+  icon?: string;
   title: string;
-  type: 'left' | 'right' | 'center';
+  type: 'left' | 'right' | 'center' | 'fill' | 'intro';
 }
 
 const { icon, title, type } = Astro.props;
@@ -18,9 +18,14 @@ const { icon, title, type } = Astro.props;
     'show-case-item',
     { reverse: type === 'right' },
     { center: type === 'center' },
+    { fill: type === 'fill' },
+    { intro: type === 'intro' },
   ]}>
   <div class="description">
-    <h1><Icon name={icon} class="inline-icon" /> {title}</h1>
+    <h1>
+      {icon && <Icon name={icon} class="inline-icon" />}
+      {title}
+    </h1>
     <slot name="description" />
   </div>
   <div class="content">
@@ -41,12 +46,19 @@ const { icon, title, type } = Astro.props;
     flex: 1 1 0;
   }
 
-  .center .description {
-    flex: 0 1 auto;
+  .intro,
+  .center {
+    text-align: center;
   }
 
+  .fill .content,
+  .intro .content,
   .center .content {
     display: none;
+  }
+
+  .intro {
+    margin-bottom: 30vh;
   }
 
   .description {
