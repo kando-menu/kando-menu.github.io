@@ -9,7 +9,7 @@ tableOfContents: false
 
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps, Icon as AstroIcon } from '@astrojs/starlight/components';
 
 ![banner](../../assets/banner10.png)
 
@@ -26,9 +26,10 @@ Depending on your operating system, this can be different.
 Usually searching online for _"how to run application xyz from the command line"_ will give you the answer.
 Here are some tips to get you started:
 
+### <AstroIcon name="seti:windows" class="inline-icon" /> Windows
+On Windows, the steps for launching an application on Windows depends on where it is and what type of application it is.
 <Tabs>
-  <TabItem label="Windows" icon="seti:windows">
-    On Windows, you can usually find the executable of an application in your start menu.
+  <TabItem label="Start Menu Apps">
     <Steps>
       1. Find the application launcher in your start menu.
 
@@ -42,20 +43,57 @@ Here are some tips to get you started:
           ```bash
           start "" /D "Start in" "Target"
           ```
-
     </Steps>
   </TabItem>
-  <TabItem label="macOS" icon="apple">
-    On macOS, you can usually run an application from the terminal by using the `open` command.
-    ```bash
-    open -a "Application Name"
-    ```
+  <TabItem label="UWP Apps">
+    <Steps>
+      1. Press <kbd>Win</kbd> + <kbd>R</kbd>.
+
+      2. Type in ```shell:appsfolder``` and press OK or <kbd>Enter</kbd>.
+
+      3. Drag the icon for the UWP application you want to launch in a folder, preferably the Desktop for easy access. Optionally, you can right-click on the icon, click "Create shortcut", and click "Yes" on the prompt.
+
+      4. Right-click on the application shortcut and select "Properties".
+
+      5. In the properties window, you will find the “Target” and “Start in” fields. If they do not seem cut off, you can move on to step 7. If they do seem cut off, or the command did not find the application with what you typed, continue to the next step instead.
+
+      6. Use an application like [Easy Link File Viewer](https://github.com/ElektroStudios/Easy-Link-File-Viewer) or [LECmd](https://ericzimmerman.github.io) to view your shortcut file. You should see it in the "Target" field in Easy Link File Viewer and the "App User Model ID" field in LECmd.
+
+      7. For the command in Kando, use the following format and replace `Application` with the name of your UWP app:
+          ```bash
+          start "" "shell:appsfolder\Application"
+          ```
+
+         For example, the launch command for Notepad in Windows 11 would be:
+          ```bash
+          start "" "shell:appsfolder\Microsoft.WindowsNotepad_8wekyb3d8bbwe!App"
+          ```
+    </Steps>
   </TabItem>
-  <TabItem label="Linux" icon="linux">
-    On Linux, this is pretty straightforward. Just use the command you would use to run the app from a terminal.
-    If you do not now this, you can have a look at the desktop file of the app you want to run. This file is usually located in `/usr/share/applications/` or `~/.local/share/applications/`. The `Exec` line in this file contains the command you need to run.
+  <TabItem label="Other Apps">
+    <Steps>
+      1. Right-click on the application and select "Create shortcut".
+
+      2. Right-click on the application shortcut and select "Properties".
+
+      3. In the properties window, you will find the "Target" and "Start in" fields. The "Target" field contains the command you need to run the application. The "Start in" field contains the working directory of the application. Note both of these down.
+
+      4. For the command in Kando, use the following format and copy the "Start in" and "Target" fields into the command:
+          ```bash
+          start "" /D "Start in" "Target"
+          ```
+    </Steps>
   </TabItem>
 </Tabs>
+### <AstroIcon name="apple" class="inline-icon" /> macOS
+On macOS, you can usually run an application from the terminal by using the `open` command.
+```bash
+open -a "Application Name"
+```
+
+### <AstroIcon name="linux" class="inline-icon" /> Linux
+On Linux, this is pretty straightforward. Just use the command you would use to run the app from a terminal.
+If you do not now this, you can have a look at the desktop file of the app you want to run. This file is usually located in `/usr/share/applications/` or `~/.local/share/applications/`. The `Exec` line in this file contains the command you need to run.
 
 ## <Icon name="solar:sort-by-time-line-duotone" class="inline-icon" /> The Delayed Option
 
