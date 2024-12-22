@@ -79,6 +79,8 @@ This file contains the general configuration of Kando.
 `enableDarkModeForMenuThemes: false` | Whether Kando should use the dark menu theme if the system is in dark mode.
 `soundTheme: "none"` <Badge text="new!" variant="tip" /> | The directory name of the sound theme to use. Kando will first look for a directory with this name in the `sound-themes` subdirectory of the config directory. If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/sound-themes` in Kando's installation directory.
 `soundVolume: 0.5` <Badge text="new!" variant="tip" /> | The volume of the sound effects. This should be a value between 0 and 1.
+`ignoreWriteProtectedConfigFiles: false` <Badge text="soon!" variant="success" /> | If set to `true`, Kando will not show a warning if the configuration files are write-protected.
+`trayIconFlavor: 'color'` <Badge text="soon!" variant="success" /> | Can be one of `'color'`, `'light'`, `'dark'`, or `'none'`. The light, dark, and color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
 `sidebarVisible: true` | Whether the left sidebar is currently visible.
 `zoomFactor: 1.0` | The zoom factor of the menu. This can be used to scale the menu on high-resolution screens.
 `enableVersionCheck: true` | If set to `true`, Kando will check for new version regularly, and show a notification if a new version is available.
