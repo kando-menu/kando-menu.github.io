@@ -54,10 +54,7 @@ export default defineConfig({
           items: [
             'opening-menus',
             'menu-themes',
-            {
-              slug: 'sound-themes',
-              badge: { text: 'new!', variant: 'tip' },
-            },
+            'sound-themes',
             'icon-themes',
             'launch-from-cli',
           ],
@@ -68,10 +65,7 @@ export default defineConfig({
             'donating',
             'translating',
             'create-menu-themes',
-            {
-              slug: 'create-sound-themes',
-              badge: { text: 'new!', variant: 'tip' },
-            },
+            'create-sound-themes',
             'compile-from-source',
             'contribution-guide',
           ],
