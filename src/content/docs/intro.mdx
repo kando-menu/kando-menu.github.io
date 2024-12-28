@@ -10,9 +10,10 @@ next:
   label: How to Use the Menu
 ---
 
-import { Aside, LinkCard } from '@astrojs/starlight/components';
+import { LinkCard } from '@astrojs/starlight/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import Intro from '../../components/Intro.astro';
+import CustomAside from '../../components/CustomAside.astro';
 
 <YouTube id="vOE7EAlPUwE" />
 <center><sup>Beware, there's some cringy music inside 😅</sup></center>
@@ -20,35 +21,36 @@ import Intro from '../../components/Intro.astro';
 <Intro>
 Kando offers an unconventional, fast, highly efficient, and fun way of interacting with your computer!
 You can use it to launch applications, simulate keyboard shortcuts, open files, and much more.
-It runs on Windows, macOS, and Linux.
 </Intro>
 
-## The Idea Behind Kando
+## What makes Kando so efficient?
 
 ![kando animation](../../assets/kando.gif)
 
 Kando uses [Fitts's Law](https://en.wikipedia.org/wiki/Fitts%27s_law) to make menu navigation as fast as possible.
 You do not have to aim at the items you want to select, but you can click anywhere in the wedge of an item!
 
-<Aside type="note" title="Did you know?">
 Fitts's Law tells us that the time required to move to a target primarily depends on the distance to the target and the size of the target in direction of the movement. A pie menu minimizes the distance to the target and maximizes the size of the target!
-</Aside>
 
 In additions, Kando is a _marking menu_ (which were [described first about 30 years ago by Gordon Kurtenbach](https://www.research.autodesk.com/app/uploads/2023/03/the-design-and-evaluation.pdf_recHpUp1v9dc1n2CJ.pdf)).
 As such it allows you to select items by drawing zig-zag lines. This is extremely powerful!
 **You can select things in subsubsubmenus in well below a second without looking at your screen!**
 You can watch the video at the top to get an idea on how Kando works.
 
+<CustomAside type="thanks" title="Is it the right tool for you?">
+Kando is designed to be used with 🖱️ mouse, 🖊️ stylus, 👆 touch, or 🎮 controller input.
+If you have both hands at your keyboard most of the time, Kando is maybe not the right tool for you.
+</CustomAside>
+
 ## Installing Kando
 
 To get started with Kando, you need to install it on your computer.
 The installation process is different for Windows, macOS, and Linux, so please choose the guide that fits your operating system!
 
-
-<Aside type="tip" title="Need Help?">
-If you encounter a problem at any stage, feel free to ask for help in the **#support** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
-</Aside>
-
 <LinkCard title="Installing Kando on Windows" href="/installation-on-windows"/>
 <LinkCard title="Installing Kando on macOS" href="/installation-on-macos"/>
 <LinkCard title="Installing Kando on Linux" href="/installation-on-linux"/>
+
+<CustomAside type="tip" title="Need Help?">
+If you encounter a problem at any stage, feel free to ask for help in the **#support** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+</CustomAside>
