@@ -13,27 +13,35 @@ next:
   label: How to Use the Menu
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { Icon } from 'astro-icon/components';
+import { Steps, Icon } from '@astrojs/starlight/components';
+import { Icon as AstroIcon } from 'astro-icon/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import Intro from '../../components/Intro.astro';
 
 <YouTube id="T4iC99HM5bo" />
 
 <Intro>
-On Windows, you can either install Kando via an installer or by downloading a ZIP archive.
+On Windows, you can either install Kando via `winget`, via an installer, or by downloading a ZIP archive.
 You can follow the steps below or watch the video above to get started!
 </Intro>
 
 
-## <Icon name="solar:cloud-download-bold-duotone" class="inline-icon" /> Installation via the Installer
+## <Icon name="seti:windows" class="inline-icon" /> Installation via `winget`
 
+Using `winget` is maybe the easiest way to install Kando on Windows.
+It's not shown in the video above as it was released for `winget` after the video was created.
 
 <Steps>
 
-1. Just head over to the [releases page](https://github.com/kando-menu/kando/releases) and download the latest installer. It's the file which ends in `*.Setup.exe` file.
+1. Type <kbd>Win</kbd> + <kbd>R</kbd> to open the "Run" dialog. Type `cmd` and press <kbd>Enter</kbd> to open a command prompt.
 
-2. Double-click the downloaded file to start the installation process. **Windows will show a warning because the executable is not signed. Just click on "More info" and then on "Run anyway".** Not much will happen, as the installation process is very minimal and does not require any user interaction.
+2. Type the following command to install Kando:
+    ```bash
+    winget install kando
+    ```
+    :::note
+    Windows may show a warning because the executable is not signed. Just click on "More info" and then on "Run anyway".
+    :::
 
 3. After the installation, you will find Kando in your start menu. Just click on the Kando icon to start the application. Not much will happen, as Kando is a tray application and will run in the background.
 
@@ -41,16 +49,39 @@ You can follow the steps below or watch the video above to get started!
 
 </Steps>
 
-## <Icon name="solar:zip-file-bold-duotone" class="inline-icon" /> Installation via the ZIP Archive
+
+## <AstroIcon name="solar:cloud-download-bold-duotone" class="inline-icon" /> Installation via the Installer
+
+The installer will install Kando on your system and add it to your start menu.
+Just head over to the [releases page](https://github.com/kando-menu/kando/releases) and download the latest installer. It's the file which ends in `*.Setup.exe` file.
 
 <Steps>
 
-1. The zip archive is the standalone version of Kando. You can also download it from the [releases page](https://github.com/kando-menu/kando/releases). It's the file which starts with `Kando-win32-x64-*` and ends in `.zip`.
+1. Double-click the downloaded file to start the installation process. Not much will happen, as the installation process is very minimal and does not require any user interaction.
+    :::note
+    Windows may show a warning because the executable is not signed. Just click on "More info" and then on "Run anyway".
+    :::
 
-2. Extract the archive to any directory you like.
+2. After the installation, you will find Kando in your start menu. Just click on the Kando icon to start the application. Not much will happen, as Kando is a tray application and will run in the background.
 
-3. Run the `kando.exe` executable from the extracted directory. **Windows will show a warning because the executable is not signed. Just click on "More info" and then on "Run anyway".** Besides, not much will happen, as Kando is a tray application and will run in the background.
+3. You can now start using Kando! Just press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu!
 
-4. You can now start using Kando! Just press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu!
+</Steps>
+
+
+## <AstroIcon name="solar:zip-file-bold-duotone" class="inline-icon" /> Installation via the ZIP Archive
+
+The zip archive is the standalone version of Kando. You can also download it from the [releases page](https://github.com/kando-menu/kando/releases). It's the file which starts with `Kando-win32-x64-*` and ends in `.zip`.
+
+<Steps>
+
+1. Extract the archive to any directory you like.
+
+2. Run the `kando.exe` executable from the extracted directory. Not much will happen, as Kando is a tray application and will run in the background.
+    :::note
+    Windows may show a warning because the executable is not signed. Just click on "More info" and then on "Run anyway".
+    :::
+
+3. You can now start using Kando! Just press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu!
 
 </Steps>
