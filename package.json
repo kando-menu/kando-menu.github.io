@@ -14,17 +14,17 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/markdown-remark": "^6.0.1",
     "@astrojs/starlight": "^0.30.3",
-    "@fontsource/neucha": "^5.1.0",
-    "@iconify-json/simple-icons": "^1.2.16",
+    "@fontsource/neucha": "^5.1.1",
+    "@iconify-json/simple-icons": "^1.2.18",
     "@iconify-json/solar": "^1.2.2",
-    "astro": "^5.1.1",
-    "astro-icon": "^1.1.4",
+    "astro": "^5.1.2",
+    "astro-icon": "^1.1.5",
     "astro-og-canvas": "^0.5.5",
     "rehype-autolink-headings": "^7.1.0",
     "sharp": "^0.33.5",
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "sass-embedded": "^1.83.0"
+    "sass-embedded": "^1.83.1"
   }
 }
