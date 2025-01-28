@@ -189,6 +189,18 @@ Also, Kando cannot directly bind global shortcuts on Hyprland.
 Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination in `hyprland.conf`.
 Replace `example-menu` with the ID of your menu.
 
+Furthermore
+1. Toggling **Special Workspace** through kando-menu will be glitchy (i.e in some cases special-workspace will reopen instead of closing). See https://github.com/kando-menu/kando/issues/784
+2. After triggering kando-menu-item of type `Run command` whose target is `activewindow` will not work correctly as by default Hyprland restores focus_on_close to next candidate window. See https://github.com/kando-menu/kando/issues/812
+
+Both of above can be solved by using the following config
+```
+// ~/.config/hypr/hyprland.conf
+input {
+    special_fallthrough = true # having only floating windows in the special workspace will not block focusing windows in the regular workspace.
+    focus_on_close = 1 # focus will shift to the window under the cursor.
+}
+
 ```
 // ~/.config/hypr/hyprland.conf
 bind = CTRL, Space, global, kando:example-menu
