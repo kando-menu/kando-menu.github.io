@@ -194,6 +194,19 @@ Replace `example-menu` with the ID of your menu.
 bind = CTRL, Space, global, kando:example-menu
 ```
 
+Furthermore
+1. Toggling Special-Workspace through kando-menu will be glitchy (i.e in some cases special-workspace will reopen instead of closing). See https://github.com/kando-menu/kando/issues/784
+2. After triggering kando-menu-item of type `Run command` whose target is `activewindow` will not work correctly as by default Hyprland restores focus_on_close to next candidate window. See https://github.com/kando-menu/kando/issues/812
+
+Both of above can be solved by using the following config
+```
+// ~/.config/hypr/hyprland.conf
+input {
+    special_fallthrough = true # having only floating windows in the special workspace will not block focusing windows in the regular workspace.
+    focus_on_close = 1 # focus will shift to the window under the cursor.
+}
+```
+
 ### Dusk
 
 On Dusk, you will have to install and use a compositor like `picom` or `compton` to make the transparency work.
