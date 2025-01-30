@@ -206,6 +206,7 @@ input {
     focus_on_close = 1 # focus will shift to the window under the cursor.
 }
 ```
+3. Using the solution for 2nd step might not work in situations where the target window is small as you will travel out of target area while activating items from sub-menu. For that you can use `hyprctl dispatcher focusurgentorlast` or `hyprctl dispatcher focuscurrentorlast` instead. See https://wiki.hyprland.org/Configuring/Dispatchers/#list-of-dispatchers
 
 ### Dusk
 
