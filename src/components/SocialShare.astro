@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 // SPDX-License-Identifier: MIT
 
-import type { Props } from '@astrojs/starlight/props';
 import { Icon } from '@astrojs/starlight/components';
 ---
 
@@ -10,14 +9,14 @@ import { Icon } from '@astrojs/starlight/components';
   Share page:
 
   <a
-    href={`https://reddit.com/submit?url=${Astro.url.href}&title=Kando: ${Astro.props.entry.data.title}`}
+    href={`https://reddit.com/submit?url=${Astro.url.href}&title=Kando: ${Astro.locals.starlightRoute.entry.data.title}`}
     rel="noopener noreferrer"
     target="_blank">
     <Icon name="reddit" />
   </a>
 
   <a
-    href={`https://x.com/intent/tweet?url=${Astro.url.href}&text=Kando: ${Astro.props.entry.data.title}`}
+    href={`https://x.com/intent/tweet?url=${Astro.url.href}&text=Kando: ${Astro.locals.starlightRoute.entry.data.title}`}
     rel="noopener noreferrer"
     target="_blank">
     <Icon name="x.com" />
@@ -31,14 +30,14 @@ import { Icon } from '@astrojs/starlight/components';
   </a>
 
   <a
-    href={`https://www.linkedin.com/sharing/share-offsite/?url=${Astro.url.href}&summary=Kando: ${Astro.props.entry.data.title}`}
+    href={`https://www.linkedin.com/sharing/share-offsite/?url=${Astro.url.href}&summary=Kando: ${Astro.locals.starlightRoute.entry.data.title}`}
     rel="noopener noreferrer"
     target="_blank">
     <Icon name="linkedin" />
   </a>
 
   <a
-    href={`mailto:?subject=Kando: ${Astro.props.entry.data.title}&body=${Astro.url.href}`}
+    href={`mailto:?subject=Kando: ${Astro.locals.starlightRoute.entry.data.title}&body=${Astro.url.href}`}
     rel="noopener noreferrer"
     target="_blank">
     <Icon name="email" />
