@@ -9,9 +9,10 @@ prev:
   label: What is Kando?
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
 
 ![banner](../../assets/banner08.png)
 
@@ -22,42 +23,60 @@ It can happen that the shortcut is already used by another application.
 In this case, you can use the tray icon to open the settings and change the shortcut.
 </Intro>
 
+<YouTube id="elHUCarOiXQ" />
 
 ## The Navigation Modes
 
-Kando offers three different navigation modes: **Point and Click**, **Marking Mode**, and **Turbo Mode**.
+Kando offers four different navigation modes: **Point-and-Click Mode**, **Marking Mode**, **Turbo Mode**, and **Hover Mode**.
+
 At first, you will probably use the point-and-click method.
-Once you get more comfortable with Kando, you can try the marking mode, and even the turbo mode.
-Watch the video below or read on to learn more about these modes.
+Once you get more comfortable with Kando, you can try the marking mode, eventually the turbo mode, and finally the hover mode.
 
-<YouTube id="elHUCarOiXQ" />
+<Steps>
 
-### Point and Click
+1. ### <Icon name="solar:mouse-bold" class="inline-icon" /> Point and Click Mode
 
-The most basic approach for selecting items is by clicking at them. Although you do not have to click directly at the item, anywhere in the item's wedge will do! 
+    The most basic approach for selecting items is by clicking at them. Although you do not have to click directly at the item, anywhere in the item's wedge will do! This can make selections very fast as you **do not have to aim carefully**.
 
-<Aside type="tip">
-This can make selections very fast as you **do not have to aim carefully**.
-</Aside>
+    Once you know the position of an item, you can select it very quickly by moving the mouse to the right direction and clicking.
 
-
-### Marking Mode
-
-With Kando, you can select items by drawing gestures! To do so, simply press your left mouse button, and drag over an item. You will move the item around, until you stop the movement or make a sharp turn. Try to remember the path to an item and draw it without looking much at the menu! You will be surprised how quickly you can select items which are deeply nested in the menu.
-
-<Aside type="tip">
-For successful selections in Marking Mode, it is better to **draw expressive zig-zag lines** instead of shy and curvy lines.
-</Aside>
+    But you can become even faster with the marking mode!
 
 
-### Turbo Mode
+2. ### <Icon name="solar:pen-new-round-bold" class="inline-icon" /> Marking Mode
 
-If you opened the menu using a key combination, you can keep a key pressed. If you do so, the menu will behave as if the left mouse button is pressed, and you can easily browse through the menu without having to click anywhere. Once you release the key, the currently dragged item will be selected. **This allows you to make even faster selections!** 
- 
-<Aside type="tip">
-Turbo-Mode works best with <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, <kbd>Alt</kbd>, or <kbd>Meta</kbd>. For all other keys there will be a short delay until Turbo-Mode kicks in. If this delay is too long for your liking, you can hit the key quickly twice - this way Kando will get the key-down event faster and Turbo-Mode will work right out of the box!
-</Aside>
+    With Kando, you can select items by drawing gestures! To do so, simply press your left mouse button, and drag over an item. You will move the item around, **until you stop the movement or make a sharp turn**.
 
+    Try to remember the path to an item and draw it without looking much at the menu! You will be surprised how quickly you can select items which are deeply nested in the menu.
+
+    <Aside type="tip">
+    For successful selections in Marking Mode, it is better to **draw expressive zig-zag lines** instead of shy and curvy lines.
+    </Aside>
+
+
+3. ### <Icon name="solar:plain-3-bold" class="inline-icon" /> Turbo Mode
+
+    If you opened the menu using a key combination, you can keep a key pressed. If you do so, the menu will behave as if the left mouse button is pressed, and you can easily browse through the menu without having to click anywhere!
+
+    Once you release the key, the currently dragged item will be selected. **This allows you to make even faster selections!** 
+
+    <Aside type="tip">
+    Turbo-Mode works best with <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, <kbd>Alt</kbd>, or <kbd>Meta</kbd>. For all other keys there will be a short delay until Turbo-Mode kicks in. If this delay is too long for your liking, you can hit the key quickly twice - this way Kando will get the key-down event faster and Turbo-Mode will work right out of the box!
+    </Aside>
+
+
+4. ### <Icon name="solar:rocket-bold" class="inline-icon" /> Hover Mode <Badge text="soon!" variant="tip" />
+
+    Once you have mastered the other modes, you can try the Hover Mode.
+    This has to be enabled for each menu in the settings under "Menu Behavior".
+
+    **This is for power users only:** It's like turbo mode, but you don't have to press any keys. Just move the mouse to the item you want to select and wait a fraction of a second!
+    
+    This is by far the fastest way to navigate through your menus, but it can also lead to accidental selections as there is no way to visually confirm the selection before it happens. You can enable this in the settings under "Menu Behavior".
+    
+    Have fun blasting through your menus!
+
+</Steps>
 
 ## Alternative Navigation Modes
 

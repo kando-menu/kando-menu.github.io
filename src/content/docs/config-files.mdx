@@ -79,8 +79,8 @@ This file contains the general configuration of Kando.
 `enableDarkModeForMenuThemes: false` | Whether Kando should use the dark menu theme if the system is in dark mode.
 `soundTheme: "none"` | The directory name of the sound theme to use. Kando will first look for a directory with this name in the `sound-themes` subdirectory of the config directory. If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/sound-themes` in Kando's installation directory.
 `soundVolume: 0.5` | The volume of the sound effects. This should be a value between 0 and 1.
-`ignoreWriteProtectedConfigFiles: false` <Badge text="new!" variant="tip" /> | If set to `true`, Kando will not show a warning if the configuration files are write-protected.
-`trayIconFlavor: 'color'` <Badge text="new!" variant="tip" /> | Can be one of `'color'`, `'white'`, `'light'`, `'dark'`, `'black'`, or `'none'`. The color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
+`ignoreWriteProtectedConfigFiles: false` | If set to `true`, Kando will not show a warning if the configuration files are write-protected.
+`trayIconFlavor: 'color'` | Can be one of `'color'`, `'white'`, `'light'`, `'dark'`, `'black'`, or `'none'`. The color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
 `sidebarVisible: true` | Whether the left sidebar is currently visible.
 `zoomFactor: 1.0` | The zoom factor of the menu. This can be used to scale the menu on high-resolution screens.
 `enableVersionCheck: true` | If set to `true`, Kando will check for new version regularly, and show a notification if a new version is available.
@@ -98,6 +98,7 @@ This file contains the general configuration of Kando.
 `fadeOutDuration: 200` | The duration of the fade-out animation in milliseconds. Set to `0` to disable the animation. Some actions are only executed after the fade-out animation has finished, so reducing this value can make the menu much "snappier".
 `enableMarkingMode: true` | If enabled, items can be selected by dragging the mouse over them.
 `enableTurboMode: true` | If enabled, items can be selected by hovering over them while holding down a keyboard key.
+`hoverModeNeedsConfirmation: false` <Badge text="soon!" variant="tip" /> | If enabled, selecting final items in hover mode will require a confirmation click.
 `gestureMinStrokeLength: 150` | Shorter gesture strokes will not lead to selections (in pixels).
 `gestureMinStrokeAngle: 20` | Smaller turns will not lead to selections (in degrees).
 `gestureJitterThreshold: 10` | Smaller pointer movements will not be considered at all during gesture recognition (in pixels).
@@ -155,6 +156,7 @@ They are JSON objects with the following properties:
 `centered: false` | Whether the menu should be centered on the screen. If this is `false`, the menu will be opened at the position of the mouse cursor.
 `warpMouse: false` | Whether the mouse cursor should be moved to the center of the menu when the menu is opened in `centered` mode.
 `anchored: false` | Whether the submenus should be opened at the position where the menu was opened initially. If this is `false`, the submenus will be opened at the position of the mouse cursor.
+`hoverMode: false` <Badge text="soon!" variant="tip" /> | If enabled, menu items can be selected by hovering over them.
 `conditions: {}` | A dictionary of conditions which must be met for the menu to be shown. See below for details.
 
 ### Menu Conditions
