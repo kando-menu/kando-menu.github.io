@@ -22,10 +22,10 @@ const { icon, title, type } = Astro.props;
     { intro: type === 'intro' },
   ]}>
   <div class="description">
-    <h1>
+    <h2>
       {icon && <Icon name={icon} class="inline-icon" />}
       {title}
-    </h1>
+    </h2>
     <slot name="description" />
   </div>
   <div class="content">
