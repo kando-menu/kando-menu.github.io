@@ -1,0 +1,73 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Release Management
+description: A description of steps performed when releasing a new version of Kando.
+tableOfContents: false
+sidebar:
+  order: 1
+---
+
+import { Steps, Badge } from '@astrojs/starlight/components';
+
+Whenever a new version of Kando is released, several steps need to be performed.
+This document describes these steps in detail.
+This is mostly for the maintainers of Kando, so that we do not forget anything, but maybe it will be interesting for you as well.
+
+## Updating the Main Repository
+
+<Steps>
+1. Bump the version number in [`package.json`](https://github.com/kando-menu/kando/blob/main/package.json).
+2. Run `npm install` to update the lock file.
+3. Commit the changes to the two files with a message like `:tada: Bump version number` to the `main` branch.
+4. Set the release date and the version name in [`changelog.md`](https://github.com/kando-menu/kando/blob/main/docs/changelog.md).
+5. Add the new release also to the [`menu.kando.Kando.metainfo.xml`](https://github.com/kando-menu/kando/blob/main/appstream/menu.kando.Kando.metainfo.xml) file.
+6. Commit the changes to the changelog and the appstream file with a message like `:tada: Set release date`.
+7. Run the following:
+   ```bash
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
+   ```
+
+   Replace `vX.Y.Z` with the new version number.
+8. This will automatically release all the assets as a pre-release via GitHub actions. Make sure everything is good and then add some text to the new release and publish it!
+</Steps>
+
+## Updating the Website
+
+Not much needs to be done for the website. Maybe some <Badge text="soon!" variant="tip" /> badges can be replaced with <Badge text="new!" variant="tip" /> badges.
+Also, if there is a new video, it can be linked on the landing page.
+
+## Updating the Flatpak package
+
+Kando's flatpak manifest is maintained in [this repository](https://github.com/flathub/menu.kando.Kando).
+To update this to a new version, the following steps need to be performed:
+<Steps>
+1. Download the new AppImage and get its sha256:
+   ```bash
+    wget https://github.com/kando-menu/kando/releases/download/vX.Y.Z/Kando-X.Y.Z-x86_64.AppImage
+    sha256sum Kando-X.Y.Z-x86_64.AppImage
+    ```
+2. Edit [`menu.kando.Kando.yml`](https://github.com/flathub/menu.kando.Kando/blob/master/menu.kando.Kando.yml) to include the new link to the AppImage and the new sha256.
+3. `menu.kando.Kando.metainfo.xml` needs to be updated as well as it now contains the new release date and the new version number. Go [here](https://github.com/kando-menu/kando/blob/main/appstream/menu.kando.Kando.metainfo.xml) and press <kbd>y</kbd> to change the URL to the commit hash variant. Copy the hash.
+4. Run this:
+    ```bash
+    wget https://raw.githubusercontent.com/kando-menu/kando/<hash>/appstream/menu.kando.Kando.metainfo.xml
+    sha256sum menu.kando.Kando.metainfo.xml
+    ```
+5. Edit the `menu.kando.Kando.yml` file again and replace the commit hash and the sha256 for the `menu.kando.Kando.metainfo.xml` accordingly.
+4. If `menu.kando.Kando.svg` or `menu.kando.Kando.desktop` had been changed since the last release, you need to update them as well. You can do this in the same manner as above.
+5. Commit the changes to the `menu.kando.Kando.yml` file to a new branch and create a pull request.
+</Steps>
+
+
+## Updating the winget package
+
+Kando is also available on Windows via the [winget package manager](https://winstall.app/apps/KandoMenu.Kando).
+To publish a new version there, the following steps need to be performed:
+
+<Steps>
+1. Update our fork of the [winget-pkgs](https://github.com/kando-menu/winget-pkgs) repository.
+2. Manually dispatch the [deploy workflow](https://github.com/kando-menu/kando/actions/workflows/deploy_to_winget.yml).
+</Steps>
