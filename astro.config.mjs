@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 // SPDX-License-Identifier: CC0-1.0
 
-import {rehypeHeadingIds} from '@astrojs/markdown-remark';
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import starlight from '@astrojs/starlight';
 import icon from 'astro-icon';
-import {defineConfig} from 'astro/config';
+import { defineConfig } from 'astro/config';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 // https://astro.build/config
@@ -19,8 +19,7 @@ export default defineConfig({
         alt: 'Kando Logo',
       },
       editLink: {
-        baseUrl:
-            'https://github.com/kando-menu/kando-menu.github.io/edit/main/',
+        baseUrl: 'https://github.com/kando-menu/kando-menu.github.io/edit/main/',
       },
       social: {
         github: 'https://github.com/kando-menu/kando',
@@ -75,31 +74,31 @@ export default defineConfig({
           label: 'Reference',
           collapsed: true,
           items: [
-            'commandline-interface', 'config-files', 'valid-keynames',
-            'release-management'
+            'commandline-interface',
+            'config-files',
+            'valid-keynames',
+            'release-management',
           ],
         },
         {
-          label: 'Discord 🗗',
+          label: 'Discord ↗',
           link: 'https://discord.gg/hZwbVSDkhy',
-          attrs: {target: '_blank'},
+          attrs: { target: '_blank' },
         },
         {
-          label: 'Issue Tracker 🗗',
+          label: 'Issue Tracker ↗',
           link: 'https://github.com/kando-menu/kando/issues',
-          attrs: {target: '_blank'},
+          attrs: { target: '_blank' },
         },
         {
-          label: 'Changelog 🗗',
-          link:
-              'https://github.com/kando-menu/kando/blob/main/docs/changelog.md',
-          attrs: {target: '_blank'},
+          label: 'Changelog ↗',
+          link: 'https://github.com/kando-menu/kando/blob/main/docs/changelog.md',
+          attrs: { target: '_blank' },
         },
         {
-          label: 'Code of Conduct 🗗',
-          link:
-              'https://github.com/kando-menu/kando/blob/main/docs/code-of-conduct.md',
-          attrs: {target: '_blank'},
+          label: 'Code of Conduct ↗',
+          link: 'https://github.com/kando-menu/kando/blob/main/docs/code-of-conduct.md',
+          attrs: { target: '_blank' },
         },
       ],
       lastUpdated: true,
