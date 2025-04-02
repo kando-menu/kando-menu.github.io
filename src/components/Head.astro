@@ -5,10 +5,9 @@
 // This component extends the default starlight head with Open Graph image meta tags.
 // This was cerated following this guide: https://hideoo.dev/notes/starlight-og-images
 
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Head.astro';
 
-const ogImageUrl = new URL(`/og/${Astro.props.id || 'index'}.png`, Astro.site);
+const ogImageUrl = new URL(`/og${Astro.url.pathname || 'index'}.png`, Astro.site);
 ---
 
 <!-- Render the default <Head/> component. -->
