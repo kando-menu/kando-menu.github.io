@@ -7,7 +7,10 @@
 
 import Default from '@astrojs/starlight/components/Head.astro';
 
-const ogImageUrl = new URL(`/og${Astro.url.pathname || 'index'}.png`, Astro.site);
+const ogImageUrl = new URL(
+  `/og${Astro.url.pathname.replace(/\/$/, '') || '/index'}.png`,
+  Astro.site
+);
 ---
 
 <!-- Render the default <Head/> component. -->
