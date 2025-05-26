@@ -30,7 +30,7 @@ A sound theme is a directory containing a `theme.json` and some audio files.
 If you want to install such a theme, you should put it into the `sound-themes` directory.
 The location of this directory depends on your operating system:
 
-<Tabs>
+<Tabs syncKey="os" >
   <TabItem label="Windows" icon="seti:windows">
     ```
     %appdata%\kando\sound-themes\
@@ -65,7 +65,7 @@ This will come in a future release.
 However, you can easily change the sound theme by editing the `config.json` file.
 This file is located in the same directory as the sound themes directory:
 
-<Tabs>
+<Tabs syncKey="os">
   <TabItem label="Windows" icon="seti:windows">
     ```
     %appdata%\kando\config.json
@@ -79,6 +79,11 @@ This file is located in the same directory as the sound themes directory:
   <TabItem label="Linux" icon="linux">
     ```
     ~/.config/kando/config.json
+    ```
+  </TabItem>
+  <TabItem label="Flatpak" icon="linux">
+    ```
+    ~/.var/app/menu.kando.Kando/config/kando/config.json
     ```
   </TabItem>
 </Tabs>
