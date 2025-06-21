@@ -18,7 +18,7 @@ import { YouTube } from '@astro-community/astro-embed-youtube';
 import CustomAside from '../../components/CustomAside.astro';
 import Intro from '../../components/Intro.astro';
 
-![banner](../../assets/banner06.png)
+![banner](../../assets/banners/banner11.png)
 
 <Intro>
 On Linux, you can either install Kando from your package manager, or via any of the pre-packaged binaries from GitHub releases.
@@ -158,18 +158,28 @@ There are also some X11 based desktop environments that need some additional set
 
 ### <Icon name="simple-icons:gnome" class="inline-icon" /> GNOME on Wayland
 
-You will also need to install the [🐚 Kando Integration Extension](https://github.com/kando-menu/gnome-shell-integration).
+[![ego image](../../assets/img/ego.png)](https://extensions.gnome.org/extension/7068/kando-integration/)
+
+You will also need to install the [🐚 Kando Integration Extension](https://extensions.gnome.org/extension/7068/kando-integration/).
 Via a D-Bus interface, it provides the name of the currently focused window, and the current mouse pointer position.
 Furthermore, it allows registering and simulating keyboard shortcuts.
 
 
 ### <Icon name="simple-icons:kde" class="inline-icon" /> KDE Plasma on Wayland
 
+![kde image](../../assets/img/kde-shortcuts.png)
+
 If you are using Plasma on Wayland, Kando cannot directly bind global shortcuts.
-Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination for this shortcut ID in your system settings.
-You can bind a shortcut to the shortcut ID under the KWin section in the global shortcuts settings.
+Instead, it uses the Global-Shortcuts Desktop Portal.
+This means, you specify a shortcut ID for each menu in Kando's menu editor.
+Once you inserted an ID, the KDE's system settings will pop up automatically and you can assign a shortcut to the ID.
+
+It is perfectly fine to use the same shortcut ID for multiple menus.
+Use this in combination with the app-dependent menu feature to open different menus depending on the currently focused application!
 
 ### <Icon name="simple-icons:hyprland" class="inline-icon" /> Hyprland
+
+![kde image](../../assets/img/hyprland-shortcuts.png)
 
 You will need some window rules for Kando.
 Else, the menu will not float above other windows.
@@ -187,25 +197,26 @@ windowrule = pin, class:kando
 
 Also, Kando cannot directly bind global shortcuts on Hyprland.
 Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination in `hyprland.conf`.
-Replace `example-menu` with the ID of your menu.
+To get the exact shortcut ID, you can use `hyperctl globalshortcuts` to list all currently registered global shortcuts.
+If you run the flatpak version of Kando and chose `example-menu` as the shortcut ID, you can would bind it like this:
 
 ```
 // ~/.config/hypr/hyprland.conf
-bind = CTRL, Space, global, kando:example-menu
+bind = CTRL, Space, global, menu.kando.Kando:example-menu
 ```
 
-Furthermore
+#### Furthermore
 1. Toggling Special-Workspace through kando-menu will be glitchy (i.e in some cases special-workspace will reopen instead of closing). See https://github.com/kando-menu/kando/issues/784
 2. After triggering kando-menu-item of type `Run command` whose target is `activewindow` will not work correctly as by default Hyprland restores focus_on_close to next candidate window. See https://github.com/kando-menu/kando/issues/812
 
-Both of above can be solved by using the following config
-```
-// ~/.config/hypr/hyprland.conf
-input {
-    special_fallthrough = true # having only floating windows in the special workspace will not block focusing windows in the regular workspace.
-    focus_on_close = 1 # focus will shift to the window under the cursor.
-}
-```
+   Both of above can be solved by using the following config
+   ```
+   // ~/.config/hypr/hyprland.conf
+   input {
+       special_fallthrough = true # having only floating windows in the special workspace will not block focusing windows in the regular workspace.
+       focus_on_close = 1 # focus will shift to the window under the cursor.
+   }
+   ```
 3. Using the solution for 2nd step might not work in situations where the target window is small as you will travel out of target area while activating items from sub-menu. For that you can use `hyprctl dispatcher focusurgentorlast` or `hyprctl dispatcher focuscurrentorlast` instead. See https://wiki.hyprland.org/Configuring/Dispatchers/#list-of-dispatchers
 
 ### Dusk

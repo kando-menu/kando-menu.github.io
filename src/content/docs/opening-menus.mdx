@@ -4,7 +4,6 @@
 
 title: Opening Menus with the Mouse
 description: How to open Kando menus with mouse buttons.
-tableOfContents: false
 prev:
   link: /creating-menus
   label: Create Your First Menu
@@ -13,7 +12,7 @@ prev:
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import Intro from '../../components/Intro.astro';
 
-![banner](../../assets/banner08.png)
+![banner](../../assets/banners/banner12.png)
 
 <Intro>
 While Kando does not have a cross-platform way to open menus with a mouse button, there are many platform-dependent third-party tools which can help you with this.
@@ -21,9 +20,9 @@ While Kando does not have a cross-platform way to open menus with a mouse button
 
 With some creativity, you can open menus not only with mouse buttons but also with gestures, desktop widgets, or in many other ways.
 
-## Open Menus from Third-Party Tools
+## Opening Menus Externally
 
-You can either make the third-party tool open the menu by simulation the shortcut for the menu, or it can directly call the Kando executable with the `--menu "menu name"` argument.
+**You can either make the third-party tool open the menu by simulation the shortcut for the menu, or it can directly call the Kando executable with the `--menu "menu name"` argument.**
 
 Depending on your operating system, the command to open a Kando menu would look like this:
 
@@ -55,14 +54,22 @@ If the third-party tool supports simulating keyboard shortcuts, it is recommende
 Opening a menu by calling the Kando executable will usually be a bit slower than simulating the shortcut.
 </Aside>
 
-## Third-Party Tools
+## Rebinding Mouse Buttons
+
+Many mice come with special drivers which allow you to rebind mouse buttons to keyboard shortcuts.
+If your mouse supports this, you can rebind a mouse button to a keyboard shortcut (e.g., <kbd>Ctrl</kbd> + <kbd>F13</kbd>) and then use this shortcut to open a Kando menu.
+
+This is a very easy way to open menus with a mouse button.
+If you do not have such a driver, you can use third-party tools to remap mouse buttons to keyboard shortcuts.
+
+## Third-Party Tools for Opening Menus
 
 Below are some applications which can help you to open menus in various ways.
 Most of them are free and open-source.
 
 <Tabs syncKey='os'>
   <TabItem label="Windows" icon="seti:windows">
-   * [AutoHotkey](https://www.autohotkey.com/) is a powerful scripting language for Windows. You can use it to run the kando command when you press a mouse button or to remap a mouse button to a keyboard shortcut which opens a Kando menu.
+   * [AutoHotkey](https://www.autohotkey.com/) is a powerful scripting language for Windows. You can use it to run the kando command when you press a mouse button or to remap a mouse button to a keyboard shortcut which opens a Kando menu. You can follow [this guide](https://github.com/orgs/kando-menu/discussions/853) for a complete example.
    * [GestureSign](https://www.microsoft.com/store/productId/9N45WQVK2QQW?ocid=pdpshare) allows opening a Kando menu with multi-touch taps and gestures on both touchpad and touchscreen.
   </TabItem>
   <TabItem label="macOS" icon="apple">

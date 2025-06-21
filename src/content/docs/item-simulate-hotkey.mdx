@@ -9,9 +9,9 @@ tableOfContents: true
 
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps, Aside } from '@astrojs/starlight/components';
 
-![banner](../../assets/banner10.png)
+![banner](../../assets/img/type-hotkey.png)
 
 <Intro>
 This type is used to simulate simple keyboard events.
@@ -20,11 +20,17 @@ You can use this to trigger shortcuts in other applications to automate tasks.
 
 You can use the menu editor to record a hotkey or directly type the hotkey into the corresponding field.
 The latter is useful if you want to use a hotkey that is either not available on your keyboard or is globally bound to another application.
+
+You can also type the keys one after another: If you want to simulate <kbd>Alt</kbd> + <kbd>F4</kbd>, you can press <kbd>Alt</kbd> first, release it, then press <kbd>F4</kbd>.
+Else this would close the Kando window!
+
+<Aside type="tip">
 See [Valid Key Names](/valid-keynames) for details on the format of the hotkey.
+</Aside>
 
-## <Icon name="solar:sort-by-time-line-duotone" class="inline-icon" /> The Delayed Option
+## <Icon name="solar:check-circle-bold-duotone" class="inline-icon" /> Options
 
-The item has an optional **Delayed** property which you can enable or disable.
+The item has an optional **Wait for fade-out animation** property which you can enable or disable.
 If enabled, the hotkey will be executed _after_ the Kando window is closed.
 This can be useful if the shortcut targets another window which needs to be focused.
 

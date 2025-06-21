@@ -4,15 +4,14 @@
 
 title: Sound Themes
 description: Learn how to install and select sound themes.
-tableOfContents: false
 ---
 
-import { CardGrid, Aside, Tabs, TabItem, Steps, Badge } from '@astrojs/starlight/components';
+import { CardGrid, Aside, Tabs, TabItem, Steps, Badge, FileTree } from '@astrojs/starlight/components';
 import CustomCard from '../../components/CustomCard.astro';
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 
-![banner](../../assets/banner09.png)
+![banner](../../assets/banners/banner09.png)
 
 <Intro>
 Kando can play sound effects when you open the menu or select an item.
@@ -24,7 +23,7 @@ For now, Kando comes with no sound themes pre-installed.
 HoweverYou can find sound themes in the [Kando Sound Themes Repository](https://github.com/kando-menu/sound-themes)!
 </Aside>
 
-### <Icon name="solar:cloud-download-bold-duotone" class="inline-icon" /> Installing Sound Themes
+## <Icon name="solar:cloud-download-bold-duotone" class="inline-icon" /> Installing Sound Themes
 
 A sound theme is a directory containing a `theme.json` and some audio files.
 If you want to install such a theme, you should put it into the `sound-themes` directory.
@@ -33,72 +32,52 @@ The location of this directory depends on your operating system:
 <Tabs syncKey="os" >
   <TabItem label="Windows" icon="seti:windows">
     ```
-    %appdata%\kando\sound-themes\
+    %appdata%\kando\
     ```
   </TabItem>
   <TabItem label="macOS" icon="apple">
     ```
-    ~/Library/Application Support/kando/sound-themes/
+    ~/Library/Application Support/kando/
     ```
   </TabItem>
   <TabItem label="Linux" icon="linux">
     ```
-    ~/.config/kando/sound-themes/
+    ~/.config/kando/
     ```
   </TabItem>
   <TabItem label="Flatpak" icon="linux">
     ```
-    ~/.var/app/menu.kando.Kando/config/kando/sound-themes/
+    ~/.var/app/menu.kando.Kando/config/kando/
     ```
   </TabItem>
 </Tabs>
 
-<Aside type="note" title="You may have to create this directory.">
-If the `sound-themes` directory does not exist, you can create it yourself.
-</Aside>
+<FileTree>
+- kando
+  - icon-themes/
+  - menu-themes/ 
+  - sound-themes/ Put your theme folder in here.
+    - some-sound-theme/ The directory name can be anything you like.
+      - theme.json
+      - sound1.wav
+      - sound2.wav
+      - ...
+  - config.json
+  - menus.json
+</FileTree>
 
 
-### <Icon name="solar:headphones-square-sound-bold-duotone" class="inline-icon" /> Selecting a Sound Theme
+## <Icon name="solar:headphones-square-sound-bold-duotone" class="inline-icon" /> Selecting a Sound Theme
 
-For now, there is no graphical user interface to select a sound theme.
-This will come in a future release.
-However, you can easily change the sound theme by editing the `config.json` file.
-This file is located in the same directory as the sound themes directory:
+To open the settings menu, click on the gear icon in the bottom right corner of the menu.
+Then click on the tiny gear icon in the toolbar at the top of the menu editor.
 
-<Tabs syncKey="os">
-  <TabItem label="Windows" icon="seti:windows">
-    ```
-    %appdata%\kando\config.json
-    ```
-  </TabItem>
-  <TabItem label="macOS" icon="apple">
-    ```
-    ~/Library/Application Support/kando/config.json
-    ```
-  </TabItem>
-  <TabItem label="Linux" icon="linux">
-    ```
-    ~/.config/kando/config.json
-    ```
-  </TabItem>
-  <TabItem label="Flatpak" icon="linux">
-    ```
-    ~/.var/app/menu.kando.Kando/config/kando/config.json
-    ```
-  </TabItem>
-</Tabs>
+![sound-themes](../../assets/img/sound-themes.png) 
+<center><sup>You can select a sound theme in the settings menu.</sup></center>
 
-Simply open this file with a text editor and change the `soundTheme` property to the name of the sound theme you want to use.
-For example, if the directory of the sound theme you want to use is `my-sound-theme`, you use the following configuration:
-
-```json5 title="config.json" {3-4}
-{
-  // ...
-  "soundTheme": "my-sound-theme", // The name of the sound theme's directory
-  "soundVolume": 0.5,
-  // ...
-}
-```
+This will open the general settings menu.
+Scroll down to the "Menu Sounds" section.
+Here you can select a sound theme from the dropdown menu and adjust the volume of the sounds.
 
 <Aside type="tip" title="Do you want to create your own sound themes?">
 There's a guide on [how to create your own themes](/create-sound-themes) available!

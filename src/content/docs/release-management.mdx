@@ -4,12 +4,13 @@
 
 title: Release Management
 description: A description of steps performed when releasing a new version of Kando.
-tableOfContents: false
 sidebar:
   order: 1
 ---
 
 import { Steps, Badge } from '@astrojs/starlight/components';
+
+![banner](../../assets/banners/banner03.png)
 
 Whenever a new version of Kando is released, several steps need to be performed.
 This document describes these steps in detail.
@@ -45,12 +46,14 @@ Also, if there is a new video, it can be linked on the landing page.
 Kando's flatpak manifest is maintained in [this repository](https://github.com/flathub/menu.kando.Kando).
 To update this to a new version, the following steps need to be performed:
 <Steps>
-1. Download the new AppImage and get its sha256:
+1. Download the new AppImages and get their sha256s:
    ```bash
     wget https://github.com/kando-menu/kando/releases/download/vX.Y.Z/Kando-X.Y.Z-x86_64.AppImage
+    wget https://github.com/kando-menu/kando/releases/download/vX.Y.Z/Kando-X.Y.Z-aarch64.AppImage
     sha256sum Kando-X.Y.Z-x86_64.AppImage
+    sha256sum Kando-X.Y.Z-aarch64.AppImage
     ```
-2. Edit [`menu.kando.Kando.yml`](https://github.com/flathub/menu.kando.Kando/blob/master/menu.kando.Kando.yml) to include the new link to the AppImage and the new sha256.
+2. Edit [`menu.kando.Kando.yml`](https://github.com/flathub/menu.kando.Kando/blob/master/menu.kando.Kando.yml) to include the new links to the AppImages and the new sha256s.
 3. `menu.kando.Kando.metainfo.xml` needs to be updated as well as it now contains the new release date and the new version number. Go [here](https://github.com/kando-menu/kando/blob/main/appstream/menu.kando.Kando.metainfo.xml) and press <kbd>y</kbd> to change the URL to the commit hash variant. Copy the hash.
 4. Run this:
     ```bash

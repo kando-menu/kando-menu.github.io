@@ -14,7 +14,7 @@ tableOfContents:
 
 import { Tabs, TabItem, Aside, FileTree, Badge } from '@astrojs/starlight/components';
 
-![banner](../../assets/banner03.png)
+![banner](../../assets/banners/banner03.png)
 
 All settings of Kando are stored in **two configuration files** JSON files which you can edit with any text editor.
 `config.json` stores the general configuration of the application and `menus.json` stores the configuration of the individual menus.
@@ -189,10 +189,13 @@ Each menu item is a JSON object with the following properties:
 ### Menu Item Types
 
 For now, the `type` property of a menu item can be one of the following values:
-[`"submenu"`](/item-submenu),
 [`"command"`](/item-run-command),
-[`"uri"`](/item-open-uri),
+[`"file"`](/item-file),
 [`"hotkey"`](/item-simulate-hotkey),
 [`"macro"`](/item-simulate-macro),
-[`"text"`](/item-paste-text).
+[`"redirect"`](/item-redirect),
+[`"settings"`](/item-settings),
+[`"submenu"`](/item-submenu),
+[`"text"`](/item-paste-text),
+[`"uri"`](/item-open-uri).
 Click on these links to learn more about the individual item types and which `data` properties they require.

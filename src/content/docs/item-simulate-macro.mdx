@@ -9,9 +9,9 @@ tableOfContents: true
 
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
-import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps, Aside } from '@astrojs/starlight/components';
 
-![banner](../../assets/banner10.png)
+![banner](../../assets/img/type-macro.png)
 
 <Intro>
 This type is used to simulate complex keyboard macros.
@@ -20,11 +20,14 @@ You can use this to automate tasks that require multiple keyboard shortcuts or k
 
 You can use the menu editor to record a complete macro and edit the recorded events if needed.
 You can specify a delay between each key press if there is a need for it.
-See [Valid Key Names](/valid-keynames) for details on the format of the individual key names.
 
-## <Icon name="solar:sort-by-time-line-duotone" class="inline-icon" /> The Delayed Option
+<Aside type="tip">
+See [Valid Key Names](/valid-keynames) for details on the format of the hotkey.
+</Aside>
 
-The item has an optional **Delayed** property which you can enable or disable.
+## <Icon name="solar:check-circle-bold-duotone" class="inline-icon" /> Options
+
+The item has an optional **Wait for fade-out animation** property which you can enable or disable.
 If enabled, the macro will be executed _after_ the Kando window is closed.
 This can be useful if the macro targets another window which needs to be focused.
 

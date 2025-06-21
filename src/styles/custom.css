@@ -15,6 +15,7 @@
     }
 }
 
+
 [data-has-hero] body {
     background-image: url('../assets/bg-dark.webp');
     background-size: auto 100vh;
@@ -103,14 +104,36 @@
 /* We do not want to limit the width of the YouTube embeds. */
 lite-youtube {
     max-width: none !important;
-    border-radius: 5px;
 }
 
 video,
 lite-youtube,
 iframe {
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    mask-image: url("../assets/image-mask.jpg");
+    mask-mode: luminance;
+    mask-size: 100% 100%;
+}
+
+.splash {
+    background-image: url("../assets/video-bg.png");
+    background-size: 100% 100%;
+    margin: -5% -19%;
+    padding: 5% 19%;
+}
+
+img {
+    mask-image: url("../assets/image-mask.jpg");
+    mask-mode: luminance;
+    mask-size: 100% 100%;
+
+    &.shadow {
+        mask-image: none;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    &.no-mask {
+        mask-image: none;
+    }
 }
 
 [data-has-hero] .hero-element.right {

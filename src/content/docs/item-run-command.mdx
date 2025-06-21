@@ -11,7 +11,7 @@ import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 import { Tabs, TabItem, Steps, Icon as AstroIcon } from '@astrojs/starlight/components';
 
-![banner](../../assets/banner10.png)
+![banner](../../assets/img/type-command.png)
 
 <Intro>
 This item type is used to execute any command.
@@ -95,11 +95,13 @@ open -a "Application Name"
 On Linux, this is pretty straightforward. Just use the command you would use to run the app from a terminal.
 If you do not now this, you can have a look at the desktop file of the app you want to run. This file is usually located in `/usr/share/applications/` or `~/.local/share/applications/`. The `Exec` line in this file contains the command you need to run.
 
-## <Icon name="solar:sort-by-time-line-duotone" class="inline-icon" /> The Delayed Option
+## <Icon name="solar:check-circle-bold-duotone" class="inline-icon" /> Options
 
-The item has an optional **Delayed** property which you can enable or disable.
-If enabled, the command will be executed _after_ the Kando window is closed.
-This can be useful if the command targets another window which needs to be focused.
+There are a few other options you can set for the command item:
+
+* **Run isolated:** This is only available on Linux with `systemd-run` installed. This will run the command in a clean environment, meaning that it will not inherit any environment variables from Kando. This can help with commands that do not start properly.
+* **Run detached:** This will disconnect the command from Kando, so it will continue to run even if Kando is closed. Disabling this may resolve issues with commands that do not start properly.
+* **Wait for fade-out animation:** If enabled, the command will be executed _after_ the Kando window is closed. This can be useful if the command targets another window which needs to be focused.
 
 ## <Icon name="solar:code-line-duotone" class="inline-icon" /> Placeholders
 

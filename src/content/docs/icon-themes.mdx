@@ -4,83 +4,88 @@
 
 title: Icon Themes
 description: Learn how to add your own icons to Kando.
-tableOfContents: false
 ---
 
-import { CardGrid, Aside, Tabs, TabItem, Steps, Badge } from '@astrojs/starlight/components';
+import { CardGrid, Aside, Tabs, TabItem, Steps, Badge, FileTree } from '@astrojs/starlight/components';
 import CustomCard from '../../components/CustomCard.astro';
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 
-![banner](../../assets/banner10.png)
+![banner](../../assets/banners/banner10.png)
 
 <Intro>
 An icon theme is a set of icons which can be used for the menu items.
 Kando comes with a few icon themes pre-installed and you can easily add your own.
 </Intro>
 
-## Built-in Icon Themes
+## <Icon name="solar:backpack-bold-duotone" class="inline-icon" /> Built-in Icon Themes
 
 Kando comes with a few icon themes pre-installed. You can select them in the icon picker in the menu editor.
 
-1. [Simple Icons](https://simpleicons.org) (Plain & Colored)
-    - Simple Icons is a set of icons for popular brands.
-2. [Material Symbols Rounded](https://marella.github.io/material-symbols/demo/#rounded)
-    - Material Symbols Rounded is a icons set for common actions and objects.
-3. Emojis
+1. [Simple Icons](https://simpleicons.org) (Plain & Colored): A set of icons for popular brands.
+2. [Material Symbols Rounded](https://fonts.google.com/icons): An icon set for common actions and objects.
+3. Emojis: This allows you to use any emoji as an icon.
+4. Kando's own icons: Kando comes with a few icons which are used per default for new menu items.
 
-## <Icon name="solar:gallery-minimalistic-bold-duotone" class="inline-icon" /> Creating an Icon Theme
+## <Icon name="solar:gallery-minimalistic-bold-duotone" class="inline-icon" /> Adding Your Own Icon Theme
 
-Kando comes with a few icon themes pre-installed.
 To add your own icons to Kando, follow these steps:
 
 <Steps>
 
-1. Create a new `icon-themes` directory in Kando's configuration directory if it does not yet exist. Depending on your OS, this will be the following locations:
+1. Create a directory for your icon theme inside the `icon-themes` directory. You can give it any name you like. Where this directory is located depends on your operating system:
 
     <Tabs syncKey="os">
       <TabItem label="Windows" icon="seti:windows">
         ```cmd
-        %appdata%\kando\icon-themes
+        %appdata%\kando\
         ```
       </TabItem>
       <TabItem label="macOS" icon="apple">
         ```bash
-        ~/Library/Application Support/kando/icon-themes
+        ~/Library/Application Support/kando/
         ```
       </TabItem>
       <TabItem label="Linux" icon="linux">
         ```bash
-        ~/.config/kando/icon-themes
+        ~/.config/kando/
         ```
       </TabItem>
       <TabItem label="Flatpak" icon="linux">
         ```
-        ~/.var/app/menu.kando.Kando/config/kando/icon-themes/
+        ~/.var/app/menu.kando.Kando/config/kando/
         ```
       </TabItem>
     </Tabs>
 
-2. Create another directory for your icon theme inside the `icon-themes` directory. You can give it any name you like.
+    <FileTree>
+    - kando
+      - icon-themes/ Put your theme folder in here.
+        - some-icon-theme/ The name will be shown in the icon picker.
+          - icon1.svg
+          - icon2.svg
+          - ...
+      - menu-themes/ 
+      - sound-themes/ 
+      - config.json
+      - menus.json
+    </FileTree>
 
-3. Add your icons to the new directory. The icons can be in various formats, but we recommend using SVG files.
+2. Add your icons to the new directory. The icons can be in various formats, but we recommend using SVG files.
 
     <Aside type="tip">
       You can organize your icons in subdirectories. Kando will load them recursively.
     </Aside>
 
+3. **Restart Kando.** Icon themes are only loaded when Kando starts.
 
-4. **Restart Kando.** Icon themes are only loaded when Kando starts.
+4. Select your icon theme in the icon-theme dropdown in the icon picker in Kando's menu editor.
 
-5. Select your icon theme in the icon-theme dropdown in the icon picker in Kando's menu editor.
+    ![icon-themes](../../assets/img/icon-themes.png) 
 
 </Steps>
 
-<Aside type="danger">
-Kando will also load icon themes from `resources/app/.webpack/renderer/assets/icon-themes/` in the installation directory. This can be interesting if you are packaging icon themes using a package manager. However, as an end user, you should not put your icon themes there, as they might be overwritten during an update.
-</Aside>
-
-### Suggestions for Icon Sets
+## <Icon name="solar:lightbulb-minimalistic-bold-duotone" class="inline-icon" /> Suggestions for Icon Sets
 
 There are many great icon sets available on the internet. Here are some which you could try:
 * [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle): Just use the files from the `Numix-Circle/48/apps` directory.

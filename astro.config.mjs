@@ -1,11 +1,9 @@
 // SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 // SPDX-License-Identifier: CC0-1.0
 
-import {rehypeHeadingIds} from '@astrojs/markdown-remark';
 import starlight from '@astrojs/starlight';
 import icon from 'astro-icon';
 import {defineConfig} from 'astro/config';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 // https://astro.build/config
 export default defineConfig({
@@ -52,12 +50,15 @@ export default defineConfig({
             {
               label: 'Available Item Types',
               items: [
-                'item-open-uri',
-                'item-paste-text',
+                'item-submenu',
                 'item-run-command',
+                'item-file',
                 'item-simulate-hotkey',
                 'item-simulate-macro',
-                'item-submenu',
+                'item-paste-text',
+                'item-open-uri',
+                'item-redirect',
+                'item-settings',
               ],
             },
           ],
@@ -87,7 +88,6 @@ export default defineConfig({
           label: 'Reference',
           collapsed: true,
           items: [
-            'commandline-interface',
             'config-files',
             'valid-keynames',
             'release-management',
@@ -124,16 +124,4 @@ export default defineConfig({
       },
     }),
   ],
-  markdown: {
-    rehypePlugins: [
-      rehypeHeadingIds,
-      [
-        rehypeAutolinkHeadings,
-        {
-          // Wrap the heading text in a link.
-          behavior: 'wrap',
-        },
-      ],
-    ],
-  },
 });

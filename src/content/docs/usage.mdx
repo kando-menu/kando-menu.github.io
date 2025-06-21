@@ -14,7 +14,11 @@ import { YouTube } from '@astro-community/astro-embed-youtube';
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 
-![banner](../../assets/banner08.png)
+import pointAndClickMode from '../../assets/videos/point-and-click-mode.mp4';
+import markingMode from '../../assets/videos/marking-mode.mp4';
+import turboMode from '../../assets/videos/turbo-mode.mp4';
+
+![banner](../../assets/banners/banner08.png)
 
 <Intro>
 When you launch Kando, you will only see a small icon in the system tray.
@@ -36,6 +40,8 @@ Once you get more comfortable with Kando, you can try the marking mode, eventual
 
 1. ### <Icon name="solar:mouse-bold" class="inline-icon" /> Point and Click Mode
 
+    <video controls muted src={pointAndClickMode} />
+
     The most basic approach for selecting items is by clicking at them. Although you do not have to click directly at the item, anywhere in the item's wedge will do! This can make selections very fast as you **do not have to aim carefully**.
 
     Once you know the position of an item, you can select it very quickly by moving the mouse to the right direction and clicking.
@@ -45,24 +51,29 @@ Once you get more comfortable with Kando, you can try the marking mode, eventual
 
 2. ### <Icon name="solar:pen-new-round-bold" class="inline-icon" /> Marking Mode
 
-    With Kando, you can select items by drawing gestures! To do so, simply press your left mouse button, and drag over an item. You will move the item around, **until you stop the movement or make a sharp turn**.
+    <video controls muted src={markingMode} />
 
-    Try to remember the path to an item and draw it without looking much at the menu! You will be surprised how quickly you can select items which are deeply nested in the menu.
+    With Kando, you can select items by drawing gestures! To do so, simply press your left mouse button, and drag over an item. You will move the item around, **until you stop the movement or make a sharp turn**.
 
     <Aside type="tip">
     For successful selections in Marking Mode, it is better to **draw expressive zig-zag lines** instead of shy and curvy lines.
     </Aside>
 
+    Try to remember the path to an item and draw it without looking much at the menu! You will be surprised how quickly you can select items which are deeply nested in the menu.
+
+    <Aside type="note">
+    The menu reacts to your movements. **Not the other way araound!** A submenu will pop up when you stop moving the mouse. You do not need to look at the menu!
+    </Aside>
+
 
 3. ### <Icon name="solar:plain-3-bold" class="inline-icon" /> Turbo Mode
 
-    If you opened the menu using a key combination, you can keep a key pressed. If you do so, the menu will behave as if the left mouse button is pressed, and you can easily browse through the menu without having to click anywhere!
+    <video controls muted src={turboMode} />
+
+    If you opened the menu using a key combination, you can keep <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, <kbd>Alt</kbd>, or <kbd>Meta</kbd> pressed. If you do so, the menu will behave as if the left mouse button is pressed, and you can easily browse through the menu without having to click anywhere!
 
     Once you release the key, the currently dragged item will be selected. **This allows you to make even faster selections!** 
 
-    <Aside type="tip">
-    Turbo-Mode works best with <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, <kbd>Alt</kbd>, or <kbd>Meta</kbd>. For all other keys there will be a short delay until Turbo-Mode kicks in. If this delay is too long for your liking, you can hit the key quickly twice - this way Kando will get the key-down event faster and Turbo-Mode will work right out of the box!
-    </Aside>
 
 
 4. ### <Icon name="solar:rocket-bold" class="inline-icon" /> Hover Mode <Badge text="new!" variant="tip" />
@@ -71,8 +82,7 @@ Once you get more comfortable with Kando, you can try the marking mode, eventual
     This has to be enabled for each menu in the settings under "Menu Behavior".
 
     **This is for power users only:** It's like turbo mode, but you don't have to press any keys. Just move the mouse to the item you want to select and wait a fraction of a second!
-    
-    This is by far the fastest way to navigate through your menus, but it can also lead to accidental selections as there is no way to visually confirm the selection before it happens. You can enable this in the settings under "Menu Behavior".
+    This is by far the fastest way to navigate through your menus, but it can also lead to accidental selections as there is no way to visually confirm the selection before it happens.
     
     Have fun blasting through your menus!
 

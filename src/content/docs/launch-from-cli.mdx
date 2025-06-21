@@ -4,10 +4,12 @@
 
 title: Launching Kando from a Terminal
 description: How to run Kando from the command line.
-tableOfContents: false
 ---
 
 import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+
+![banner](../../assets/banners/banner08.png)
 
 Sometimes it is useful to run Kando from the command line in order to see the output of the application.
 If you installed Kando via a package manager or via one of the installers from GitHub, Kando's executable will be located in one of the following directories:
@@ -42,3 +44,44 @@ If you installed Kando via a package manager or via one of the installers from G
     ```
   </TabItem>
 </Tabs>
+
+## <Icon name="solar:sidebar-code-bold-duotone" class="inline-icon" /> Command Line Interface
+
+Kando comes with a command line interface (CLI) that allows you to interact with Kando from the terminal.
+For now, these commands are available:
+
+<details>
+<summary>`--help`</summary>
+Prints the help message for the CLI.
+</details>
+
+<details>
+<summary>`--version` or `-v`</summary>
+Prints the version of Kando.
+</details>
+
+<details>
+<summary>`--menu "Menu Name"` or `-m "Menu Name"`</summary>
+Opens the menu with the given name.
+This also works if Kando is already running.
+In this case, the menu will be opened in the running instance.
+</details>
+
+<details>
+<summary>`--settings` or `-s`</summary>
+Opens the settings window.
+This also works if Kando is already running.
+In this case, the settings window will be opened in the running instance.
+</details>
+
+<details>
+<summary>`--reload-menu-theme`</summary>
+Reloads the menu theme.
+This can be useful if you are developing a theme and want to see the changes without restarting Kando.
+</details>
+
+<details>
+<summary>`--reload-sound-theme`</summary>
+Reloads the sound theme.
+This can be useful if you are developing a theme and want to hear the changes without restarting Kando.
+</details>

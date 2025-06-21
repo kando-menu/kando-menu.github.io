@@ -1,0 +1,36 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Open Settings
+description: A menu item which opens the settings dialog.
+tableOfContents: true
+---
+
+import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+![banner](../../assets/img/type-settings.png)
+
+<Intro>
+This is a very simple menu item which opens the settings dialog of Kando.
+It does not have any additional options or configuration.
+</Intro>
+
+
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
+
+If you happen to edit your `menus.json` file by hand, you can create a settings item with something like the following.
+You can read more about the structure of the `menus.json` file in its [documentation](/config-files).
+
+```json title="menus.json"
+// ...
+{
+  "name": "Open Settings",
+  "type": "settings",
+  "icon": "settings-item.svg",
+  "iconTheme": "kando",
+},
+// ...
+```

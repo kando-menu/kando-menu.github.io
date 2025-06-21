@@ -4,15 +4,17 @@
 
 title: Menu Themes
 description: Learn how to style the menu to fit your needs.
-tableOfContents: false
 ---
 
-import { CardGrid, Aside, Tabs, TabItem, Steps, Badge } from '@astrojs/starlight/components';
+import { CardGrid, Aside, Tabs, TabItem, Steps, Badge, FileTree } from '@astrojs/starlight/components';
 import CustomCard from '../../components/CustomCard.astro';
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
+import {Image} from 'astro:assets';
 
-![banner](../../assets/banner07.png)
+import editor from '../../assets/img/menu-themes.png';
+
+![banner](../../assets/banners/banner07.png)
 
 <Intro>
 Kando supports theming the menu. 
@@ -45,7 +47,7 @@ Below you can find some examples which show how different themes can look.
   </CustomCard>
 </CardGrid>
 
-### <Icon name="solar:cloud-download-bold-duotone" class="inline-icon" /> Installing Menu Themes
+## <Icon name="solar:cloud-download-bold-duotone" class="inline-icon" /> Installing Menu Themes
 
 <Aside type="tip" title="Get themes online!">
 Kando comes with a few themes pre-installed. You can find more themes in the [Kando Menu Themes Repository](https://github.com/kando-menu/menu-themes)!
@@ -58,37 +60,48 @@ The location of this directory depends on your operating system:
 <Tabs syncKey="os">
   <TabItem label="Windows" icon="seti:windows">
     ```
-    %appdata%\kando\menu-themes\
+    %appdata%\kando\
     ```
   </TabItem>
   <TabItem label="macOS" icon="apple">
     ```
-    ~/Library/Application Support/kando/menu-themes/
+    ~/Library/Application Support/kando/
     ```
   </TabItem>
   <TabItem label="Linux" icon="linux">
     ```
-    ~/.config/kando/menu-themes/
+    ~/.config/kando/
     ```
   </TabItem>
   <TabItem label="Flatpak" icon="linux">
     ```
-    ~/.var/app/menu.kando.Kando/config/kando/menu-themes/
+    ~/.var/app/menu.kando.Kando/config/kando/
     ```
   </TabItem>
 </Tabs>
 
-<Aside type="note" title="You may have to create this directory.">
-If the `menu-themes` directory does not exist, you can create it yourself.
-</Aside>
-
+<FileTree>
+- kando
+  - icon-themes/
+  - menu-themes/ Put your theme folder in here.
+    - some-menu-theme/ The directory name can be anything you like.
+      - theme.json
+      - theme.css
+      - preview.jpg
+  - sound-themes/
+  - config.json
+  - menus.json
+</FileTree>
 
 Thereafter, you will need to restart Kando to see the new theme in the menu settings.
 
-### <Icon name="solar:pallete-2-bold-duotone" class="inline-icon" /> Selecting a Menu Theme
+## <Icon name="solar:pallete-2-bold-duotone" class="inline-icon" /> Selecting a Menu Theme
 
-You can select a theme in the settings menu. 
 To open the settings menu, click on the gear icon in the bottom right corner of the menu.
+Then click on the tiny palette icon in the toolbar at the top of the menu editor.
+
+<Image src={editor} alt="menu theme selection" class="shadow"/>
+<center><sup>You can select a menu theme in the settings menu.</sup></center>
 
 For each theme, you can also set some custom accent colors.
 Kando also supports dark mode: You can choose to use different themes and accent colors for light and dark mode.
