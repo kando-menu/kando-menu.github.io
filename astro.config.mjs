@@ -64,12 +64,17 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Advanced Usage',
+          label: 'Customizing Kando',
           items: [
-            'opening-menus',
             'menu-themes',
             'sound-themes',
             'icon-themes',
+          ],
+        },
+        {
+          label: 'Advanced Usage',
+          items: [
+            'opening-menus',
             'launch-from-cli',
           ],
         },
