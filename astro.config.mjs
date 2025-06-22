@@ -54,7 +54,7 @@ export default defineConfig({
                 'item-run-command',
                 'item-file',
                 'item-simulate-hotkey',
-                'item-simulate-macro',
+                'item-execute-macro',
                 'item-paste-text',
                 'item-open-uri',
                 'item-redirect',
