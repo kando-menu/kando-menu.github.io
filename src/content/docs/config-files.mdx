@@ -9,7 +9,10 @@ sidebar:
   order: 2
 tableOfContents:
   minHeadingLevel: 2
-  maxHeadingLevel: 4
+  maxHeadingLevel: 6
+banner:
+  content: |
+    ⚠️ This page already describes the configuration file format of Kando 2.0.0 which will be released soon. ⚠️
 ---
 
 import { Tabs, TabItem, Aside, FileTree, Badge } from '@astrojs/starlight/components';
@@ -17,7 +20,7 @@ import { Tabs, TabItem, Aside, FileTree, Badge } from '@astrojs/starlight/compon
 ![banner](../../assets/banners/banner03.png)
 
 All settings of Kando are stored in **two configuration files** JSON files which you can edit with any text editor.
-`config.json` stores the general configuration of the application and `menus.json` stores the configuration of the individual menus.
+[`config.json`](#general-configuration-configjson) stores the general configuration of the application and [`menus.json`](#menu-configuration-menusjson) stores the configuration of the individual menus.
 
 <Aside type="tip" title="Edit the config files while Kando is running!">
 Whenever you save a file, Kando will automatically 🔥 **hot-reload** the configuration.
@@ -68,97 +71,323 @@ Use you file manager or terminal to navigate to the following directories.
 ## General Configuration: `config.json`
 
 This file contains the general configuration of Kando.
+Here you can configure the menu theme, sound theme, and various other settings.
+Below are the default values of the configuration file.
 
-<div style="width:220px">Property</div> | Description
---------- | -----------
-`locale: "auto"` | The locale which should be used for the menu. If set to `"auto"`, Kando will use the system locale.
-`menuTheme: "default"` | The directory name of the menu theme to use. Kando will first look for a directory with this name in the `menu-themes` subdirectory of the config directory. If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/menu-themes` in Kando's installation directory.
-`darkMenuTheme: "default"` | The name of the theme which should be used if the system is in dark mode.
-`menuThemeColors: {}` | A map of accent color overrides for each theme. A color override for the "default" theme could look like this: `{ "default": {"background-color":  "#RRGGBB"}}`.
-`darkMenuThemeColors: {}` | Same as above, however this one will be used if the system is in dark mode.
-`enableDarkModeForMenuThemes: false` | Whether Kando should use the dark menu theme if the system is in dark mode.
-`soundTheme: "none"` | The directory name of the sound theme to use. Kando will first look for a directory with this name in the `sound-themes` subdirectory of the config directory. If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/sound-themes` in Kando's installation directory.
-`soundVolume: 0.5` | The volume of the sound effects. This should be a value between 0 and 1.
-`ignoreWriteProtectedConfigFiles: false` | If set to `true`, Kando will not show a warning if the configuration files are write-protected.
-`trayIconFlavor: 'color'` | Can be one of `'color'`, `'white'`, `'light'`, `'dark'`, `'black'`, or `'none'`. The color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
-`sidebarVisible: true` | Whether the left sidebar is currently visible.
-`zoomFactor: 1.0` | The zoom factor of the menu. This can be used to scale the menu on high-resolution screens.
-`enableVersionCheck: true` | If set to `true`, Kando will check for new version regularly, and show a notification if a new version is available.
-`menuOptions: <see below>` | The parameters configure the general behavior of the menus.
-`editorOptions: <see below>` | The parameters configure the behavior of the menu editor.
+```json5 title="config.json"
+{
+  "locale": "auto",
+  "showIntroductionDialog": true,
+  "menuTheme": "default",
+  "darkMenuTheme": "default",
+  "menuThemeColors": {},
+  "darkMenuThemeColors": {},
+  "enableDarkModeForMenuThemes": false,
+  "soundTheme": "none",
+  "soundVolume": 0.5,
+  "ignoreWriteProtectedConfigFiles": false,
+  "settingsWindowColorScheme": "system",
+  "settingsWindowFlavor": "sakura-system",
+  "trayIconFlavor": "color",
+  "lazyInitialization": false,
+  "enableVersionCheck": true,
+  "zoomFactor": 1,
+  "centerDeadZone": 50,
+  "minParentDistance": 150,
+  "dragThreshold": 15,
+  "fadeInDuration": 150,
+  "fadeOutDuration": 200,
+  "keepInputFocus": false,
+  "enableMarkingMode": true,
+  "enableTurboMode": true,
+  "warpMouse": true,
+  "hoverModeNeedsConfirmation": false,
+  "gestureMinStrokeLength": 150,
+  "gestureMinStrokeAngle": 20,
+  "gestureJitterThreshold": 10,
+  "gesturePauseTimeout": 100,
+  "fixedStrokeLength": 0,
+  "rmbSelectsParent": false,
+  "enableGamepad": true,
+  "gamepadBackButton": 1,
+  "gamepadCloseButton": 2,
+  "sameShortcutBehavior": "nothing",
+  "useDefaultOsShowSettingsHotkey": true,
+  "hideSettingsButton": false,
+  "settingsButtonPosition": "bottom-right"
+}
+```
 
-### The `menuOptions` Property
+#### locale
+<small>Default value: `"locale": "auto"` </small>
 
-<div style="width:220px">Property</div> | Description
--------- | -----------
-`centerDeadZone: 50` | Clicking inside this radius (in pixels) will select the parent element or close the menu.
-`minParentDistance: 150` | The distance in pixels at which the parent menu item is placed if a submenu is selected close to the parent.
-`dragThreshold: 15` | This is the threshold in pixels which is used to differentiate between a click and a drag. If the mouse is moved more than this threshold before the mouse button is released, an item is dragged.
-`fadeInDuration: 150` | The duration of the fade-in animation in milliseconds. Set to `0` to disable the animation.
-`fadeOutDuration: 200` | The duration of the fade-out animation in milliseconds. Set to `0` to disable the animation. Some actions are only executed after the fade-out animation has finished, so reducing this value can make the menu much "snappier".
-`enableMarkingMode: true` | If enabled, items can be selected by dragging the mouse over them.
-`enableTurboMode: true` | If enabled, items can be selected by hovering over them while holding down a keyboard key.
-`hoverModeNeedsConfirmation: false` <Badge text="new!" variant="tip" /> | If enabled, selecting final items in hover mode will require a confirmation click.
-`gestureMinStrokeLength: 150` | Shorter gesture strokes will not lead to selections (in pixels).
-`gestureMinStrokeAngle: 20` | Smaller turns will not lead to selections (in degrees).
-`gestureJitterThreshold: 10` | Smaller pointer movements will not be considered at all during gesture recognition (in pixels).
-`gesturePauseTimeout: 100` | If the pointer is stationary for this many milliseconds, the current item will be selected during gesture recognition.
-`fixedStrokeLength: 0` | If set to a value greater than 0, items will be instantly selected if the mouse travelled more than `centerDeadZone` + `fixedStrokeLength` pixels in marking or turbo mode. Any other gesture detection based on angles or motion speed will be disabled in this case.
-`rmbSelectsParent: false` | If enabled, the parent of a selected item will be selected on a right mouse button click. Else the menu will be closed directly.
-`enableGamepad: true` <Badge text="soon!" variant="tip" /> | If enabled, you can use a connected gamepad to control the menu.
-`gamepadBackButton: 1` | This button will select the parent item when using a gamepad. Set to -1 to disable. See https://w3c.github.io/gamepad/#remapping for the mapping of numbers to buttons.
-`gamepadCloseButton: 2` | This button will close the menu when using a gamepad. Set to -1 to disable. See https://w3c.github.io/gamepad/#remapping for the mapping of numbers to buttons.
+The locale which should be used for the menu. If set to `"auto"`, Kando will use the system locale.
 
-### The `editorOptions` Property
+#### showIntroductionDialog <Badge text="soon!" variant="tip" />
+<small>Default value: `"showIntroductionDialog": true`</small>
 
-<div style="width:250px">Property</div> | Description
------------ | -----------
-`showSidebarButtonVisible: true` | Set this to `false` to hide the show-sidebar button. It will still be clickable, though.
-`showEditorButtonVisible: true` | Set this to `false` to hide the show-editor button. It will still be clickable, though.
+If true, the introduction dialog will be shown when the settings window is opened.
+
+#### menuTheme
+<small>Default value: `"menuTheme": "default"`</small>
+
+The directory name of the menu theme to use.
+Kando will first look for a directory with this name in the `menu-themes` subdirectory of the config directory.
+If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/menu-themes` in Kando's installation directory.
+
+#### darkMenuTheme
+<small>Default value: `"darkMenuTheme": "default"`</small>
+
+The name of the theme which should be used if the system is in dark mode.
+This is only used if `enableDarkModeForMenuThemes` is set to `true`.
+
+#### menuThemeColors
+<small>Default value: `"menuThemeColors": {}`</small>
+
+A map of accent color overrides for each theme. A color override for the "default" theme and the "neon-lights" theme could look like this:
+
+```json5 title="config.json" {3-9}
+//..
+"menuThemeColors": {
+  "default": {
+    "background-color": "rgb(200 200 200)",
+    "text-color": "rgb(150 100 100)"
+  },
+  "neon-lights": {
+    "glow-color": "rgb(140 255 140)"
+  }
+},
+//..
+```
+
+#### darkMenuThemeColors
+<small>Default value: `"darkMenuThemeColors": {}`</small>
+
+Same as above, however this one will be used if the system is in dark mode.
+This is only used if `enableDarkModeForMenuThemes` is set to `true`.
+
+#### enableDarkModeForMenuThemes
+<small>Default value: `"enableDarkModeForMenuThemes": false`</small>
+
+Whether Kando should use the dark menu theme if the system is in dark mode.
+If enabled, Kando will use the `darkMenuTheme` and `darkMenuThemeColors` properties to configure the menu theme if  the system is in dark mode.
+
+#### soundTheme
+<small>Default value: `"soundTheme": "none"`</small>
+
+The directory name of the sound theme to use. Kando will first look for a directory with this name in the `sound-themes` subdirectory of the config directory. If it does not find one, it will look for a directory with this name in `.webpack/renderer/assets/sound-themes` in Kando's installation directory.
+
+#### soundVolume
+<small>Default value: `"soundVolume": 0.5`</small>
+
+The volume of the sound effects. This should be a value between 0 and 1.
+
+#### ignoreWriteProtectedConfigFiles
+<small>Default value: `"ignoreWriteProtectedConfigFiles": false`</small>
+
+If set to `true`, Kando will not show a warning if the configuration files are write-protected.
+
+#### settingsWindowColorScheme <Badge text="soon!" variant="tip" />
+<small>Default value: `"settingsWindowColorScheme": "system"` </small>
+
+The color scheme of the settings window. Can be one of `'system'`, `'light'`, or `'dark'`.
+This determines the look of the settings window itself, not the menu editor part.
+If set to `'system'`, Kando will adapt to the system colors.
+
+#### settingsWindowFlavor <Badge text="soon!" variant="tip" />
+<small>Default value: `"settingsWindowFlavor": "sakura-system"`</small>
+
+This determines the look of the menu-editor part of the settings window.
+It can be one of `'sakura-system'`, `'sakura-light'`, `'sakura-dark'`, `'transparent-system'`, `'transparent-light'`, or `'transparent-dark'`.
+The system flavors will adapt to the system colors, while the light and dark flavors will use a fixed color scheme.
+The transparent flavors will try to use a translucent background, but this might not work on all systems.
+
+#### trayIconFlavor
+<small>Default value: `"trayIconFlavor": 'color'`</small>
+
+Can be one of `'color'`, `'white'`, `'light'`, `'dark'`, `'black'`, or `'none'`. The color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
+
+#### enableVersionCheck
+<small>Default value: `"enableVersionCheck": true`</small>
+
+If set to `true`, Kando will check for new version regularly, and show a notification if a new version is available.
+
+#### zoomFactor
+<small>Default value: `"zoomFactor": 1.0`</small>
+
+The zoom factor of the menu. This can be used to scale the menu on high-resolution screens.
+
+#### centerDeadZone
+<small>Default value: `"centerDeadZone": 50`</small>
+
+Clicking inside this radius (in pixels) will select the parent element or close the menu.
+
+#### minParentDistance
+<small>Default value: `"minParentDistance": 150`</small>
+
+The distance in pixels at which the parent menu item is placed if a submenu is selected close to the parent.
+
+#### dragThreshold
+<small>Default value: `"dragThreshold": 15`</small>
+
+This is the threshold in pixels which is used to differentiate between a click and a drag. If the mouse is moved more than this threshold before the mouse button is released, an item is dragged.
+
+#### fadeInDuration
+<small>Default value: `"fadeInDuration": 150`</small>
+
+The duration of the fade-in animation in milliseconds. Set to `0` to disable the animation.
+
+#### fadeOutDuration
+<small>Default value: `"fadeOutDuration": 200`</small>
+
+The duration of the fade-out animation in milliseconds. Set to `0` to disable the animation. Some actions are only executed after the fade-out animation has finished, so reducing this value can make the menu much "snappier".
+
+#### keepInputFocus <Badge text="soon!" variant="tip" />
+<small>Default value: `"keepInputFocus": false`</small>
+
+If enabled, the menu will not receive keyboard input focus when opened.
+This disables Turbo Mode, but it may be useful if you require that other applications remain focused while the menu is open.
+
+#### enableMarkingMode
+<small>Default value: `"enableMarkingMode": true`</small>
+
+If enabled, items can be selected by dragging the mouse over them.
+
+#### enableTurboMode
+<small>Default value: `"enableTurboMode": true`</small>
+
+If enabled, items can be selected by hovering over them while holding down a keyboard key.
+
+#### warpMouse <Badge text="soon!" variant="tip" />
+<small>Default value: `"warpMouse": true`</small>
+
+If true, the mouse pointer will be warped to the center of the menu when necessary.
+
+#### hoverModeNeedsConfirmation
+<small>Default value: `"hoverModeNeedsConfirmation": false`</small>
+
+If enabled, selecting final items in hover mode will require a confirmation click.
+
+#### gestureMinStrokeLength
+<small>Default value: `"gestureMinStrokeLength": 150`</small>
+
+Shorter gesture strokes will not lead to selections (in pixels).
+
+#### gestureMinStrokeAngle
+<small>Default value: `"gestureMinStrokeAngle": 20`</small>
+
+Smaller turns will not lead to selections (in degrees).
+
+#### gestureJitterThreshold
+<small>Default value: `"gestureJitterThreshold": 10`</small>
+
+Smaller pointer movements will not be considered at all during gesture recognition (in pixels).
+
+#### gesturePauseTimeout
+<small>Default value: `"gesturePauseTimeout": 100`</small>
+
+If the pointer is stationary for this many milliseconds, the current item will be selected during gesture recognition.
+
+#### fixedStrokeLength
+<small>Default value: `"fixedStrokeLength": 0`</small>
+
+If set to a value greater than 0, items will be instantly selected if the mouse travelled more than `centerDeadZone` + `fixedStrokeLength` pixels in marking or turbo mode. Any other gesture detection based on angles or motion speed will be disabled in this case.
+
+#### rmbSelectsParent
+<small>Default value: `"rmbSelectsParent": false`</small>
+
+If enabled, the parent of a selected item will be selected on a right mouse button click. Else the menu will be closed directly.
+
+#### enableGamepad
+<small>Default value: `"enableGamepad": true`</small>
+
+If enabled, you can use a connected gamepad to control the menu.
+
+#### gamepadBackButton
+<small>Default value: `"gamepadBackButton": 1`</small>
+
+This button will select the parent item when using a gamepad. Set to -1 to disable. See https://w3c.github.io/gamepad/#remapping for the mapping of numbers to buttons.
+
+#### gamepadCloseButton
+<small>Default value: `"gamepadCloseButton": 2`</small>
+
+This button will close the menu when using a gamepad. Set to -1 to disable. See https://w3c.github.io/gamepad/#remapping for the mapping of numbers to buttons.
+
+#### sameShortcutBehavior <Badge text="soon!" variant="tip" />
+<small>Default value: `"sameShortcutBehavior": "nothing"`</small>
+
+Determines the behavior of pressing the trigger shortcut once the menu is open.
+Can be one of the following:
+* `'cycle-from-first'`: The currently open menu will be replaced with the next menu matching the trigger shortcut and any other conditions. Kando will not remember which menu was opened last, so when the trigger shortcut is pressed later again, the first menu matching the trigger shortcut will be opened.
+* `'cycle-from-recent'`: The same as above, but Kando will remember the last menu which was opened. If the shortcut is pressed later again, this most recent menu will be opened.
+* `'close'`: The menu will be closed when the trigger shortcut is pressed while the menu is open.
+* `'nothing'`: Nothing will happen when the trigger shortcut is pressed while the menu is open.
+
+#### useDefaultOsShowSettingsHotkey <Badge text="soon!" variant="tip" />
+<small>Default value: `"useDefaultOsShowSettingsHotkey": true`</small>
+
+If enabled, pressing <kbd>Command</kbd>+<kbd>,</kbd> on macOS or <kbd>Ctrl</kbd>+<kbd>,</kbd> on Linux or Windows will open the settings window. If disabled, the default hotkey will be ignored.
+
+#### hideSettingsButton <Badge text="soon!" variant="tip" />
+<small>Default value: `"hideSettingsButton": false`</small>
+
+If true, the settings button will be hidden if not hovered.
+
+#### settingsButtonPosition <Badge text="soon!" variant="tip" />
+<small>Default value: `"settingsButtonPosition": "bottom-right"`</small>
+
+The position of the settings button.
+Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
 
 ## Menu Configuration: `menus.json`
 
 This file contains the configuration of the individual menus.
-There are two top-level JSON objects: `menus` contains a list of _Menu Descriptions_ and `templates` contains a list of _Menu Descriptions_ or _Menu Item Descriptions_.
+There are two top-level JSON objects: `menus` contains a list of _Menu Descriptions_ and `collections` contains a list of _Menu Collection_.
+The latter is used in the settings dialog to group menus together.
 
 ```json5 title=menus.json
 {
   "menus": [
     {
       // First Menu Description.
-      // ...
     },
     {
       // Second Menu Description.
-      // ...
     },
     // ...
   ],
-  "templates": [
-    // Can contain Menu Descriptions and Menu Item Descriptions.
+  "collections": [
+    {
+      // First Menu Collection.
+    },
+    {
+      // Second Menu Collection.
+    },
+    // ...
   ]
 }
 ```
-
-<Aside type="note">
-You can have a look at a the example menu configurations [here](https://github.com/kando-menu/kando/tree/main/src/main/example-menus)!
-</Aside>
 
 ### Menu Descriptions
 
 The items in the `menus` list are called menu descriptions.
 They are JSON objects with the following properties:
 
+<Aside type="note">
+You can have a look at a the example menu configurations [here](https://github.com/kando-menu/kando/tree/main/src/main/example-menus)!
+</Aside>
+
+
 <div style="width:150px">Property</div> | Description
 -------- | -----------
-`root` (_mandatory_) | The root menu item of the menu given as a Menu Item Description. See below for details.
+`root` (_mandatory_) | The root menu item of the menu given as a Menu Item Description. [See below for details](#menu-item-descriptions).
 `shortcut: ""` | The shortcut which opens the menu. This is a string which can contain multiple keys separated by `+`. For example, `"Ctrl+Shift+K"` or `"Cmd+Shift+K"`. If empty, the menu will not have a shortcut. See [Valid Key Names](/valid-keynames) for details.
 `shortcutID: ""` | On some platforms, Kando can not bind shortcuts directly. In this case, you can use this property to assign an ID which can be used in the global shortcut configuration of your desktop environment. This should be lowercase and contain only ASCII characters and dashes. For example, `"main-trigger"`.
 `centered: false` | Whether the menu should be centered on the screen. If this is `false`, the menu will be opened at the position of the mouse cursor.
-`warpMouse: false` | Whether the mouse cursor should be moved to the center of the menu when the menu is opened in `centered` mode.
 `anchored: false` | Whether the submenus should be opened at the position where the menu was opened initially. If this is `false`, the submenus will be opened at the position of the mouse cursor.
 `hoverMode: false` | If enabled, menu items can be selected by hovering over them.
-`conditions: {}` | A dictionary of conditions which must be met for the menu to be shown. See below for details.
+`conditions: {}` | A dictionary of conditions which must be met for the menu to be shown. [See below for details](#menu-conditions).
+`tags: []` | A list of tags which can be used to filter the menu in the settings dialog. If a menu has no tags, it will only be shown in the all-menus list or if a collection has no tags at all.
 
 ### Menu Conditions
 
@@ -179,23 +408,36 @@ Each menu item is a JSON object with the following properties:
 <div style="width:150px">Property</div> | Description
 -------- | -----------
 `name: "undefined"` | The name of the menu item. This is shown in the center of the menu when the item is hovered. The name of the root item defines the name of the menu.
-`iconTheme: ""` | This can either be one of the built-in icon themes (`"material-symbols-rounded"`, `"simple-icons"`, `"simple-icons-colored"`, `"base64"`, or `"emoji"`) or a subdirectory of the `icon-themes` subdirectory in Kando's config directory. The built-in icon themes use icons from [Google's Material Symbols](https://fonts.google.com/icons) or [Simple Icons](https://simpleicons.org/) respectively.
-`icon: ""` | The name of the icon from the given icon theme, an emoji like `"🚀"` (if the `iconTheme` is `"emoji"`), or a base64-encode image like `"data:image/gif;base64,..."` (if the icon theme is `"base64"`).
+`iconTheme: ""` | This can either be one of the built-in icon themes (`"material-symbols-rounded"`, `"simple-icons"`, `"simple-icons-colored"`, `"base64"`, or `"emoji"`) or a subdirectory of the `icon-themes` subdirectory in Kando's config directory. [Click here for details](/icon-themes).
+`icon: ""` | The name of the icon from the given icon theme, an emoji like `"🚀"` (if the `iconTheme` is `"emoji"`), or a base64-encode image like `"data:image/gif;base64,..."` (if the icon theme is `"base64"`). [Click here for details](/icon-themes).
 `angle: number` (_optional_) | If given, this defines the angle of the menu item in degrees. If this is not given, the angle is calculated automatically. 0° means that the item is at the top of the menu, 90° means that the item is on the right side of the menu, and so on.<br/>Among sibling items, the angle properties must be monotonically increasing, i.e. the first given angle must be smaller than the second, which must be smaller than the third, and so on. The first given angle must be greater or equal to 0° and all other angles must be smaller than the first given angle plus 360°. Any given angle which does not satisfy these conditions will be ignored.
-`type: "submenu"` | The type of the menu item. There are several types available. See below for details.
-`data: {}` | Depending on the type of the item, this can or must contain additional data. See below for details.
-`children: []` | If the menu item is a submenu, this contains a list of child items. See below for details.
+`type: "submenu"` | The type of the menu item. There are several types available. [See below for details](#menu-item-types).
+`data: {}` | Depending on the type of the item, this can or must contain additional data. [See below for details](#menu-item-types).
+`children: []` | If the menu item is a submenu, this contains a list of child items. Each object in this list is a menu item description as well.
+
+### Menu Collections
+
+The `collections` property of the `menus.json` file contains a list of menu collections.
+A menu collection is a JSON object with the following properties:
+
+<div style="width:150px">Property</div> | Description
+-------- | -----------
+`name: "undefined"` | The name of the menu collection. This is shown in the settings dialog if the collection is selected.
+`icon: ""` | The name of the icon from the given icon theme. The icon is shown in the left sidebar of the settings dialog. The behavior is the same as for the `icon` property of a menu item description.
+`iconTheme: ""` | The icon theme to use for the icon. The behavior is the same as for the `iconTheme` property of a menu item description.
+`tags: []` | A list of strings which determine which menus belong to this collection. The tags are used to filter the menus in the settings dialog. If a menu has all tags of a collection, it will be shown in the collection. If a menu has no tags, it will only be shown in the all-menus list or if a collection has no tags at all.
 
 ### Menu Item Types
 
 For now, the `type` property of a menu item can be one of the following values:
-[`"command"`](/item-run-command),
-[`"file"`](/item-file),
-[`"hotkey"`](/item-simulate-hotkey),
-[`"macro"`](/item-simulate-macro),
-[`"redirect"`](/item-redirect),
-[`"settings"`](/item-settings),
-[`"submenu"`](/item-submenu),
-[`"text"`](/item-paste-text),
-[`"uri"`](/item-open-uri).
+* [`"command"`](/item-run-command)
+* [`"file"`](/item-file)
+* [`"hotkey"`](/item-simulate-hotkey)
+* [`"macro"`](/item-simulate-macro)
+* [`"redirect"`](/item-redirect)
+* [`"settings"`](/item-settings)
+* [`"submenu"`](/item-submenu)
+* [`"text"`](/item-paste-text)
+* [`"uri"`](/item-open-uri)
+
 Click on these links to learn more about the individual item types and which `data` properties they require.
