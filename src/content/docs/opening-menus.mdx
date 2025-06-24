@@ -2,8 +2,8 @@
 # SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 # SPDX-License-Identifier: CC-BY-4.0
 
-title: Opening Menus with the Mouse
-description: How to open Kando menus with mouse buttons.
+title: Opening Menus with Mouse Buttons
+description: How to open Kando menus with mouse buttons or touch gestures.
 prev:
   link: /creating-menus
   label: Create Your First Menu
@@ -15,15 +15,30 @@ import Intro from '../../components/Intro.astro';
 ![banner](../../assets/banners/banner12.png)
 
 <Intro>
-While Kando does not have a cross-platform way to open menus with a mouse button, there are many platform-dependent third-party tools which can help you with this.
+While Kando does not have a builtin way to open menus with mouse buttons or touch gestures, there are many platform-dependent third-party tools which can help you with this.
 </Intro>
 
-With some creativity, you can open menus not only with mouse buttons but also with gestures, desktop widgets, or in many other ways.
+## How to Open Menus From Other Tools
 
-## Opening Menus Externally
+You can either make the third-party tool open the menu by simulation the shortcut for the menu, or it can directly call the Kando executable with the `--menu "menu name"` argument.
 
-**You can either make the third-party tool open the menu by simulation the shortcut for the menu, or it can directly call the Kando executable with the `--menu "menu name"` argument.**
+### Option 1: Simulate the Shortcut
 
+If the third-party tool supports simulating keyboard shortcuts, it is recommended to use this method.
+In most cases, this will be a bit faster then option 2.
+
+You can choose any shortcut you like!
+Using one which does not interfere with you workflow is a good idea.
+For instance <kbd>Ctrl</kbd>+<kbd>F13</kbd> is usually not used by any application, so it is a good choice.
+
+<Aside type="tip" title="Use a modifier key!">
+Kando menus can be called with single-key shortcuts, but this is not recommended.
+Turbo mode will only work properly if the shortcut includes a modifier like <kbd>Ctrl</kbd>, <kbd>Alt</kbd>, or <kbd>Shift</kbd>.
+</Aside>
+
+### Option 2: Use the `--menu` Argument
+
+With  the `--menu` argument, you can open a Kando menu by calling the Kando executable with the name of the menu you want to open.
 Depending on your operating system, the command to open a Kando menu would look like this:
 
 <Tabs syncKey='os'>
@@ -49,22 +64,12 @@ Depending on your operating system, the command to open a Kando menu would look 
   </TabItem>
 </Tabs>
 
-<Aside type="tip" title="Simulate the shortcut if possible!">
-If the third-party tool supports simulating keyboard shortcuts, it is recommended to use this method.
-Opening a menu by calling the Kando executable will usually be a bit slower than simulating the shortcut.
-</Aside>
-
-## Rebinding Mouse Buttons
-
-Many mice come with special drivers which allow you to rebind mouse buttons to keyboard shortcuts.
-If your mouse supports this, you can rebind a mouse button to a keyboard shortcut (e.g., <kbd>Ctrl</kbd> + <kbd>F13</kbd>) and then use this shortcut to open a Kando menu.
-
-This is a very easy way to open menus with a mouse button.
-If you do not have such a driver, you can use third-party tools to remap mouse buttons to keyboard shortcuts.
-
 ## Third-Party Tools for Opening Menus
 
-Below are some applications which can help you to open menus in various ways.
+Many mice come with special drivers which allow you to rebind mouse buttons to keyboard shortcuts or to run arbitrary commands.
+If your mouse supports this, this is an easy way to
+
+If you do not have such a driver, you can use any of the third-party tools listed below.
 Most of them are free and open-source.
 
 <Tabs syncKey='os'>
@@ -89,7 +94,6 @@ Most of them are free and open-source.
   </TabItem>
 </Tabs>
 
-<br/>
 <br/>
 
 <Aside type="note" title="Have you discovered another cool tool?">
