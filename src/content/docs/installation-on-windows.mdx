@@ -16,6 +16,9 @@ import { Steps, Icon } from '@astrojs/starlight/components';
 import { Icon as AstroIcon } from 'astro-icon/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import Intro from '../../components/Intro.astro';
+import {Image} from 'astro:assets';
+
+import errorDialog from '../../assets/img/windows-error.png';
 
 <YouTube id="T4iC99HM5bo" />
 
@@ -84,3 +87,12 @@ The zip archive is the standalone version of Kando. You can also download it fro
 3. You can now start using Kando! Just press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the example menu!
 
 </Steps>
+
+## <AstroIcon name="solar:bug-bold-duotone" class="inline-icon" /> Known Issues
+
+Sometimes, Kando may not start correctly on Windows.
+If you see the following error dialog telling **"Error: The specified module could not be found"** and that `NativeWin32.node` is missing, you can fix this by installing the latest version of the [Visual C++ Redistributable from Microsoft](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist).
+
+<center>
+<Image src={errorDialog} alt="error dialog" class="shadow"/>
+</center>
