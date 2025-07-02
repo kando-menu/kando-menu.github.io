@@ -87,16 +87,65 @@ Whenever you add a new feature or fix a bug, please add an entry to the top of t
 When a new version is released, this section will be marked as released and a tag is created on the `main` branch.
 </CustomAside>
 
-## 3. Finally: Create a Pull Request
+## 3. Make Sure All Tests Pass
+
+The CI jobs on GitHub will run several tests and checks.
+Kando uses [Github Actions](https://github.com/kando-menu/kando/actions) for continuous integration.
+You can also run some of tests locally before pushing your changes.
+
+### Unit Tests
+
+Kando does not yet have a lot of unit tests, but we are working on it.
+You can run the unit tests by executing the following command:
+
+```bash
+npm run test
+```
+
+### Code Formatting
+
+Kando uses [Prettier](https://prettier.io/) for code formatting.
+You can test if your code is formatted correctly by running the following command:
+
+```bash
+npm run prettier
+```
+
+You can also automatically format your code by running:
+
+```bash
+npm run format
+```
+
+### Linting
+
+Kando uses [ESLint](https://eslint.org/) for linting the code.
+You can run the linter by executing the following command:
+
+```bash
+npm run lint
+```
+
+### REUSE Compliance
+
+Kando is compliant with the [REUSE](https://reuse.software/) standard.
+This means that all source files must have a license header and all files must be properly attributed.
+
+If you just added a small piece of code, you usually do not need to change any license headers.
+However, if you contributed a significant piece of code, you should add yourself to the file header with a new `SPDX-FileCopyrightText` line.
+You can read more about this in the [documentation for creating menu themes](../create-menu-themes/#-adding-proper-credits).
+
+You can use the [**REUSE Tool**](https://github.com/fsfe/reuse-tool) to check if your code is compliant with the REUSE standard.
+There are several ways to do this, but the easiest one is to use `pipx`:
+
+```bash
+pipx run reuse lint
+```
+
+## 4. Finally: Create a Pull Request
 
 Finally, when you are finished with your changes, push them to your fork and create a pull request to the `main` branch of Kando's repository.
 
-Several checks will be performed automatically.
-Kando uses [Github Actions](https://github.com/kando-menu/kando/actions) for continuous integration.
-
-- For **each commit**, several checks are performed. These include code formatting, linting, [REUSE](https://reuse.software/) compliance and unit tests.
-- For **pull requests**, it is checked in addition that the application can be packaged for Linux, Windows, and macOS.
-
-<CustomAside type="thanks" title="Time to Celebrate!">
+<CustomAside type="thanks" title="And now: Time to Celebrate!">
 Thank you very much for your contribution! You are awesome! 💞
 </CustomAside>
