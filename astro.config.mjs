@@ -87,6 +87,7 @@ export default defineConfig({
             'create-sound-themes',
             'compile-from-source',
             'contribution-guide',
+            'debugging',
           ],
         },
         {

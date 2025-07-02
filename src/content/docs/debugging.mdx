@@ -1,0 +1,83 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Debugging
+description: How to debug Kando.
+sidebar:
+  order: 4
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+import Intro from '../../components/Intro.astro';
+import CustomAside from '../../components/CustomAside.astro';
+import {Image} from 'astro:assets';
+
+import vscodeDebugging from '../../assets/img/debugging.png';
+
+![banner](../../assets/banners/banner13.png)
+
+<Intro>
+If you want to 💡 **understand Kando's code base** or fix an especially 🐛 **nasty bug**, using a debugger is a great idea.
+</Intro>
+
+However, debugging an Electron application is not exactly straightforward.
+This is because Electron applications consist of two parts: the main process and the renderer processes.
+
+The main process is responsible for managing the application lifecycle and has access to the operating system.
+The renderer processes are responsible for rendering the user interface and are more or less isolated from the operating system.
+Kando has one main process and two renderer processes: one for the menu and one for the settings dialog.
+
+## Debugging in VSCode
+
+If you are using [Visual Studio Code](https://code.visualstudio.com/), you can set up debugging by creating a `.vscode/launch.json` file in your project directory.
+Put the following content into that file:
+
+```json5 title=".vscode/launch.json"
+{
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Kando: Main Process",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/tsx",
+      "runtimeArgs": [
+        "node_modules/@electron-forge/cli/src/electron-forge-start",
+        "--",
+        "--remote-debugging-port=9223"
+      ],
+      "autoAttachChildProcesses": true,
+      "internalConsoleOptions": "openOnFirstSessionStart",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Kando: Renderer Processes",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9223,
+      "webRoot": "${workspaceFolder}",
+      "timeout": 30000
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Kando: All",
+      "configurations": ["Kando: Main Process", "Kando: Renderer Processes"]
+    }
+  ]
+}
+```
+
+Once this is in place, you can start debugging Kando by selecting the "Kando: All" configuration in the debug panel and clicking the green play button.
+This will start the main process and attach the debugger to both the main process and the renderer processes.
+You can then set breakpoints in your code and inspect variables!
+
+<center>
+<Image src={vscodeDebugging} alt="debugging in VSCode" class="shadow"/>
+</center>
+
+## Other IDEs
+
+Have you successfully set up debugging in another IDE?
+Let us know by editing this page!
+You can also join our [Discord server](https://discord.gg/hZwbVSDkhy) and discuss it there.
