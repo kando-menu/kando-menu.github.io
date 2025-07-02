@@ -2,33 +2,34 @@
 # SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 # SPDX-License-Identifier: CC-BY-4.0
 
-title: Debugging
-description: How to debug Kando.
-sidebar:
-  order: 4
+title: Debugging & Profiling
+description: Learn how to debug or profile Kando.
 ---
 
-import { LinkButton } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 import Intro from '../../components/Intro.astro';
-import CustomAside from '../../components/CustomAside.astro';
 import {Image} from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 
 import vscodeDebugging from '../../assets/img/debugging.png';
+import performanceProfile from '../../assets/img/performance-profile.png';
 
 ![banner](../../assets/banners/banner13.png)
 
 <Intro>
-If you want to 💡 **understand Kando's code base** or fix an especially 🐛 **nasty bug**, using a debugger is a great idea.
+At some point, `console.log(...)` statements are not enough anymore. At some point, you will want to use a 🐛 debugger, 💡 inspect Kando's UI, or 🚀 profile its performance.
 </Intro>
 
-However, debugging an Electron application is not exactly straightforward.
-This is because Electron applications consist of two parts: the main process and the renderer processes.
+## <Icon name="solar:bug-bold-duotone" class="inline-icon" /> Using a Debugger
 
-The main process is responsible for managing the application lifecycle and has access to the operating system.
-The renderer processes are responsible for rendering the user interface and are more or less isolated from the operating system.
+Debugging an Electron application is not exactly straightforward.
+This is because Electron applications consist of **two parts: the main process and the renderer processes**.
+
+The **main process** is responsible for managing the application lifecycle and has access to the operating system.
+The **renderer processes** are responsible for rendering the user interface and are more or less isolated from the operating system.
 Kando has one main process and two renderer processes: one for the menu and one for the settings dialog.
 
-## Debugging in VSCode
+### Debugging in VSCode
 
 If you are using [Visual Studio Code](https://code.visualstudio.com/), you can set up debugging by creating a `.vscode/launch.json` file in your project directory.
 Put the following content into that file:
@@ -75,9 +76,58 @@ You can then set breakpoints in your code and inspect variables!
 <center>
 <Image src={vscodeDebugging} alt="debugging in VSCode" class="shadow"/>
 </center>
+<center>
+<sup>Render process debugging in VSCode!</sup>
+</center>
 
-## Other IDEs
+### Other IDEs
 
 Have you successfully set up debugging in another IDE?
 Let us know by editing this page!
 You can also join our [Discord server](https://discord.gg/hZwbVSDkhy) and discuss it there.
+
+## <Icon name="solar:rocket-bold-duotone" class="inline-icon" /> Using the DevTools
+
+Kando comes with built-in development tools that you can use to inspect the user interface and debug your code.
+You can open the DevTools from the General Settings dialog.
+Here, you can choose between inspecting the menu itself or the settings dialog.
+
+![open-inspector](../../assets/img/open-inspector.png)
+
+### Inspecting the Settings and the Menu
+
+The DevTools for the settings dialog will open in a separate window.
+You can use this to inspect the HTML and CSS of the settings dialog, and to test temporary changes.
+Especially for understanding the layout of the components, this is very useful.
+
+![inspecting-settings](../../assets/img/inspecting-settings.jpg)
+
+The DevTools for the menu will open embedded in the menu window.
+This is useful, as otherwise the menu window would obscure the DevTools.
+
+To open the DevTools, click the "Inspect Menu" button in the General Settings dialog and then open a menu.
+The menu window will not be transparent anymore, due to a quirk in Electron.
+
+![inspecting-menu](../../assets/img/inspecting-menu.png)
+
+### Profiling the Rendering Performance
+
+A good rendering performance is important for the settings dialog but it is crucial for the menu.
+Hence, when implementing new features, we should always keep an eye on the performance.
+
+The development tools allow you to capture a performance profile of the menu or the settings dialog.
+To do this, open the DevTools and switch to the "Performance" tab.
+Then, click the "Record" button and interact with the menu or the settings dialog.
+Once you are done, click the "Stop" button to stop the recording.
+
+Now you explore the recorded profile frame by frame.
+You can see how long each frame took to render and which functions were called during that frame.
+This is extremely useful to identify performance bottlenecks in your code.
+
+<center>
+<Image src={performanceProfile} alt="profiling in the dev tools" class="shadow"/>
+</center>
+
+<Aside type="tip" title="Need Help?">
+If you encounter a problem at any stage, feel free to ask for help in the **#support** or **#dev-chat** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+</Aside>
