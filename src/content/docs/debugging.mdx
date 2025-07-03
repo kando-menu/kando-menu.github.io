@@ -70,8 +70,9 @@ Put the following content into that file:
 ```
 
 <Aside type="note" title="Not Working?">
-If the port `9223` is already in use or not working for some reason, you can change it to another port like `12345`.
-Just make sure to change it in both configurations.
+If breakpoints in the renderer process do not work, it can be that port `9223` is already in use or not working for some other reason.
+You can try changing it to another port like `12345`.
+Make sure to change it in both places in the `launch.json` file above.
 </Aside>
 
 Once this is in place, you can start debugging Kando by selecting the "Kando: All" configuration in the debug panel and clicking the green play button.
