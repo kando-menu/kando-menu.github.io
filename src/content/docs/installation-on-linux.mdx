@@ -47,7 +47,7 @@ Openbox | ✅ | Requires a compositor for the transparency to work.
 i3 | ✅ | Requires a compositor for the transparency to work.
 dusk | ✅ | Requires a compositor for the transparency to work. See [below](#dusk) for the required config.
 Qtile | ➖ | It works with some flaws. Contributions are welcome! Read the [corresponding bug report](https://github.com/kando-menu/kando/issues/621).
-Niri | ❌ | Contributions are welcome! Read the [corresponding feature request](https://github.com/kando-menu/kando/issues/733).
+Niri | ✅ | See [below](#-niri) for the required configs.
 
 <CustomAside type="thanks" title="Have you tested another environment?">
 If you have tested Kando on another desktop environment, please add it to the list above by editing this page on GitHub!
@@ -178,8 +178,7 @@ It is perfectly fine to use the same shortcut ID for multiple menus.
 Use this in combination with the app-dependent menu feature to open different menus depending on the currently focused application!
 
 ### <Icon name="simple-icons:hyprland" class="inline-icon" /> Hyprland
-
-![kde image](../../assets/img/hyprland-shortcuts.png)
+![hyprland image](../../assets/img/hyprland-shortcuts.png)
 
 You will need some window rules for Kando.
 Else, the menu will not float above other windows.
@@ -218,6 +217,26 @@ bind = CTRL, Space, global, menu.kando.Kando:example-menu
    }
    ```
 3. Using the solution for 2nd step might not work in situations where the target window is small as you will travel out of target area while activating items from sub-menu. For that you can use `hyprctl dispatcher focusurgentorlast` or `hyprctl dispatcher focuscurrentorlast` instead. See https://wiki.hyprland.org/Configuring/Dispatchers/#list-of-dispatchers
+
+### <Icon name="simple-icons:wayland" class="inline-icon" /> Niri
+
+You will need some window rules for Kando.
+Else, the menu will not float above other windows.
+
+```
+// ~/.config/niri/config.kdl
+window-rule {
+    match title="Kando Menu"
+    open-floating true
+    border { off; }
+    shadow { off; }
+}
+```
+
+#### Furthermore
+1. Using hotkey press simulation through Kando will not work for triggering keybinds registered in your Niri configuration. In that case, have Kando run a command ```niri msg action <action>``` where the action is the one configured in the your configuration along with its arguments (for example `niri msg action focus-workspace-up` or `niri msg action focus-workspace 1`)
+
+2. Niri does not yet support global shortcuts. But you can open menus using 'kando --menu \"Menu Name\"' from the command line or from your niri config.
 
 ### Dusk
 
