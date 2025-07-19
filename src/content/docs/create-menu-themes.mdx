@@ -114,13 +114,22 @@ You can also name this file `theme.json`. But [JSON5](https://json5.org/) is a b
 
   // When a menu is opened too close to a screen's edge, it is moved
   // away from the edge by this amount of pixels.
-  maxMenuRadius: 160,
+  maxMenuRadius: 150,
 
   // The width at which the center text is wrapped.
   centerTextWrapWidth: 90,
 
   // This theme draws child items below their parent items.
   drawChildrenBelow: true,
+
+  // This themes uses a center text element.
+  drawCenterText: true,
+
+  // This theme does not highlight the hovered wedge (new in Kando 2.1.0).
+  drawSelectionWedges: false,
+
+  // This theme does not draw separator lines between the wedges  (new in Kando 2.1.0).
+  drawWedgeSeparators: false,
 
   // These colors can be configured by the user and are vailable in
   // the CSS file as CSS variables. The default values are used if the
