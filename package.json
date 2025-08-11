@@ -12,18 +12,18 @@
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.6",
     "@astrojs/check": "^0.9.4",
-    "@astrojs/markdown-remark": "^6.3.2",
-    "@astrojs/starlight": "^0.34.4",
+    "@astrojs/markdown-remark": "^6.3.5",
+    "@astrojs/starlight": "^0.35.2",
     "@fontsource/neucha": "^5.2.6",
-    "@iconify-json/simple-icons": "^1.2.42",
-    "@iconify-json/solar": "^1.2.2",
-    "astro": "^5.11.0",
+    "@iconify-json/simple-icons": "^1.2.47",
+    "@iconify-json/solar": "^1.2.4",
+    "astro": "^5.12.9",
     "astro-icon": "^1.1.5",
     "astro-og-canvas": "^0.7.0",
-    "sharp": "^0.34.2",
-    "typescript": "^5.8.3"
+    "sharp": "^0.34.3",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
-    "sass-embedded": "^1.89.2"
+    "sass-embedded": "^1.90.0"
   }
 }
