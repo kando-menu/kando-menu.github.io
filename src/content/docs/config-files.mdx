@@ -83,13 +83,16 @@ Below are the default values of the configuration file.
   "enableDarkModeForMenuThemes": false,
   "soundTheme": "none",
   "soundVolume": 0.5,
+  "enableVersionCheck": true,
   "ignoreWriteProtectedConfigFiles": false,
   "settingsWindowColorScheme": "system",
-  "settingsWindowFlavor": "sakura-system",
+  "settingsWindowFlavor": "auto",
   "trayIconFlavor": "color",
+  "hardwareAcceleration": true,
   "lazyInitialization": false,
-  "enableVersionCheck": true,
   "zoomFactor": 1,
+  "hideSettingsButton": false,
+  "settingsButtonPosition": "bottom-right",
   "centerDeadZone": 50,
   "minParentDistance": 150,
   "dragThreshold": 15,
@@ -110,9 +113,7 @@ Below are the default values of the configuration file.
   "gamepadBackButton": 1,
   "gamepadCloseButton": 2,
   "sameShortcutBehavior": "nothing",
-  "useDefaultOsShowSettingsHotkey": true,
-  "hideSettingsButton": false,
-  "settingsButtonPosition": "bottom-right"
+  "useDefaultOsShowSettingsHotkey": true
 }
 ```
 
@@ -200,17 +201,23 @@ This determines the look of the settings window itself, not the menu editor part
 If set to `'system'`, Kando will adapt to the system colors.
 
 #### settingsWindowFlavor <Badge text="new!" variant="tip" />
-<small>Default value: `"settingsWindowFlavor": "sakura-system"`</small>
+<small>Default value: `"settingsWindowFlavor": "auto"`</small>
 
 This determines the look of the menu-editor part of the settings window.
 It can be one of `'sakura-system'`, `'sakura-light'`, `'sakura-dark'`, `'transparent-system'`, `'transparent-light'`, or `'transparent-dark'`.
 The system flavors will adapt to the system colors, while the light and dark flavors will use a fixed color scheme.
 The transparent flavors will try to use a translucent background, but this might not work on all systems.
+If the special value `'auto'` is used, Kando will choose a transparent flavor if the system supports it, otherwise it will use the sakura flavors.
 
 #### trayIconFlavor
 <small>Default value: `"trayIconFlavor": 'color'`</small>
 
 Can be one of `'color'`, `'white'`, `'light'`, `'dark'`, `'black'`, or `'none'`. The color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
+
+#### hardwareAcceleration
+<small>Default value: `"hardwareAcceleration": true`</small>
+
+If set to `true`, Kando will use hardware acceleration for rendering the menu. This can improve performance, but may cause issues on some systems. If you experience rendering issues with the menu, try setting this to `false`.
 
 #### enableVersionCheck
 <small>Default value: `"enableVersionCheck": true`</small>
