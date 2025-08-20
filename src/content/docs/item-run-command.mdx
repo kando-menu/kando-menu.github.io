@@ -9,7 +9,7 @@ tableOfContents: true
 
 import Intro from '../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
-import { Tabs, TabItem, Steps, Icon as AstroIcon } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps, Badge, Icon as AstroIcon } from '@astrojs/starlight/components';
 
 ![banner](../../assets/img/type-command.png)
 
@@ -20,14 +20,19 @@ You can use this to run applications, scripts, or any other command that you can
 
 ## <Icon name="solar:menu-dots-circle-bold-duotone" class="inline-icon" /> Getting the Command to Run an App
 
-Currently, Kando does not have a built-in way to list installed applications.
-You will need to know the command to run the application you want to launch.
-Depending on your operating system, this can be different.
-Usually searching online for _"how to run application xyz from the command line"_ will give you the answer.
-Here are some tips to get you started:
+Starting with version 2.1.0, Kando comes with an **app picker** which allows you to select one of your installed applications.
+If the app picker does not show the app you want to run, you can use tips further below to find the command to run the app.
+
+### Use the App Picker (recommended) <Badge text="soon!" variant="tip" />
+
+If you select an application from the app picker, Kando will automatically fill in the command, name, and icon for you.
+
+![banner](../../assets/img/app-picker.png)
+<center><sup>The app picker allows you to select one of your installed of apps.</sup></center>
 
 ### <AstroIcon name="seti:windows" class="inline-icon" /> Windows
-On Windows, the steps for launching an application on Windows depends on where it is and what type of application it is.
+If the app picker does not work for you, you can find the command to run an application in a few different ways.
+The steps for launching an application on Windows depends on where it is and what type of application it is.
 <Tabs>
   <TabItem label="Start Menu Apps">
     <Steps>
