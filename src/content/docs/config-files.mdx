@@ -73,6 +73,7 @@ Below are the default values of the configuration file.
 
 ```json5 title="config.json"
 {
+  "version": "2.1.0",
   "locale": "auto",
   "showIntroductionDialog": true,
   "menuTheme": "default",
@@ -114,6 +115,13 @@ Below are the default values of the configuration file.
   "settingsButtonPosition": "bottom-right"
 }
 ```
+
+#### version <Badge text="soon!" variant="tip" />
+<small>Default value: `"version": "2.0.0"`</small>
+
+This is the last Kando version which was used to write this configuration file.
+Kando will use this to determine whether the configuration file is up-to-date or needs a migration.
+Also, whenever Kando is started, it will create a backup of the configuration file if the version is not the same as the current version.
 
 #### locale
 <small>Default value: `"locale": "auto"` </small>
@@ -339,11 +347,12 @@ Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
 ## Menu Configuration: `menus.json`
 
 This file contains the configuration of the individual menus.
-There are two top-level JSON objects: `menus` contains a list of _Menu Descriptions_ and `collections` contains a list of _Menu Collection_.
+Besides the `version` property, there are two top-level JSON objects: `menus` contains a list of _Menu Descriptions_ and `collections` contains a list of _Menu Collection_.
 The latter is used in the settings dialog to group menus together.
 
 ```json5 title=menus.json
 {
+  "version": "2.1.0",
   "menus": [
     {
       // First Menu Description.
@@ -365,15 +374,24 @@ The latter is used in the settings dialog to group menus together.
 }
 ```
 
-### Menu Descriptions
+#### version <Badge text="soon!" variant="tip" />
+<small>Default value: `"version": "2.0.0"`</small>
 
-The items in the `menus` list are called menu descriptions.
-They are JSON objects with the following properties:
+This is the last Kando version which was used to write this configuration file.
+Kando will use this to determine whether the configuration file is up-to-date or needs a migration.
+Also, whenever Kando is started, it will create a backup of the configuration file if the version is not the same as the current version.
+
+#### menus
+<small>Default value: `"menus": []`</small>
+
+If the `menus` property is not present or empty at startup, Kando will create an example menu for you.
 
 <Aside type="note">
 You can have a look at a the example menu configurations [here](https://github.com/kando-menu/kando/tree/main/src/main/example-menus)!
 </Aside>
 
+The items in the `menus` list are called menu descriptions.
+They are JSON objects with the following properties:
 
 <div style="width:150px">Property</div> | Description
 -------- | -----------
@@ -386,7 +404,7 @@ You can have a look at a the example menu configurations [here](https://github.c
 `conditions: {}` | A dictionary of conditions which must be met for the menu to be shown. [See below for details](#menu-conditions).
 `tags: []` | A list of tags which can be used to filter the menu in the settings dialog. If a menu has no tags, it will only be shown in the all-menus list or if a collection has no tags at all.
 
-### Menu Conditions
+##### Menu Conditions
 
 The `conditions` property of a menu description can contain a dictionary of conditions.
 Only if all conditions are met, the menu will be shown.
@@ -397,7 +415,7 @@ Only if all conditions are met, the menu will be shown.
 `windowName: ""` | The name of the window which must be focused for the menu to be shown. It is interpreted in the same way as `appName`.
 `screenArea: {}` | A dictionary with the optional properties `xMin`, `xMax`, `yMin`, and `yMax`. The menu will only be shown if the mouse cursor is within the given screen area. The values are given in pixels and are relative to the top-left corner of the screen. If a value is not given, the area is unbounded in this direction.
 
-### Menu Item Descriptions
+##### Menu Item Descriptions
 
 The layout of the menu is described by a tree of menu items.
 Each menu item is a JSON object with the following properties:
@@ -412,19 +430,7 @@ Each menu item is a JSON object with the following properties:
 `data: {}` | Depending on the type of the item, this can or must contain additional data. [See below for details](#menu-item-types).
 `children: []` | If the menu item is a submenu, this contains a list of child items. Each object in this list is a menu item description as well.
 
-### Menu Collections
-
-The `collections` property of the `menus.json` file contains a list of menu collections.
-A menu collection is a JSON object with the following properties:
-
-<div style="width:150px">Property</div> | Description
--------- | -----------
-`name: "undefined"` | The name of the menu collection. This is shown in the settings dialog if the collection is selected.
-`icon: ""` | The name of the icon from the given icon theme. The icon is shown in the left sidebar of the settings dialog. The behavior is the same as for the `icon` property of a menu item description.
-`iconTheme: ""` | The icon theme to use for the icon. The behavior is the same as for the `iconTheme` property of a menu item description.
-`tags: []` | A list of strings which determine which menus belong to this collection. The tags are used to filter the menus in the settings dialog. If a menu has all tags of a collection, it will be shown in the collection. If a menu has no tags, it will only be shown in the all-menus list or if a collection has no tags at all.
-
-### Menu Item Types
+##### Menu Item Types
 
 For now, the `type` property of a menu item can be one of the following values:
 * [`"command"`](/item-run-command)
@@ -438,3 +444,28 @@ For now, the `type` property of a menu item can be one of the following values:
 * [`"uri"`](/item-open-uri)
 
 Click on these links to learn more about the individual item types and which `data` properties they require.
+
+#### collections 
+<small>Default value:</small>
+```json
+"collections": [{
+  "name": "Favorites",
+  "icon": "favorite",
+  "iconTheme": "material-symbols-rounded",
+  "tags": [
+    "favs"
+  ]
+ }]
+```
+
+The `collections` property of the `menus.json` file contains a list of menu collections.
+A menu collection is a JSON object with the following properties:
+
+<div style="width:150px">Property</div> | Description
+-------- | -----------
+`name: "undefined"` | The name of the menu collection. This is shown in the settings dialog if the collection is selected.
+`icon: ""` | The name of the icon from the given icon theme. The icon is shown in the left sidebar of the settings dialog. The behavior is the same as for the `icon` property of a menu item description.
+`iconTheme: ""` | The icon theme to use for the icon. The behavior is the same as for the `iconTheme` property of a menu item description.
+`tags: []` | A list of strings which determine which menus belong to this collection. The tags are used to filter the menus in the settings dialog. If a menu has all tags of a collection, it will be shown in the collection. If a menu has no tags, it will only be shown in the all-menus list or if a collection has no tags at all.
+
+
