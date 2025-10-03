@@ -15,15 +15,15 @@
     "@astrojs/markdown-remark": "^6.3.7",
     "@astrojs/starlight": "^0.36.0",
     "@fontsource/neucha": "^5.2.8",
-    "@iconify-json/simple-icons": "^1.2.52",
+    "@iconify-json/simple-icons": "^1.2.53",
     "@iconify-json/solar": "^1.2.4",
-    "astro": "^5.13.10",
+    "astro": "^5.14.1",
     "astro-icon": "^1.1.5",
     "astro-og-canvas": "^0.7.0",
     "sharp": "^0.34.4",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "sass-embedded": "^1.93.0"
+    "sass-embedded": "^1.93.2"
   }
 }
