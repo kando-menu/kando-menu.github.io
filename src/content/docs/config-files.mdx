@@ -117,7 +117,7 @@ Below are the default values of the configuration file.
 }
 ```
 
-#### version <Badge text="soon!" variant="tip" />
+#### version <Badge text="new!" variant="tip" />
 <small>Default value: `"version": "2.0.0"`</small>
 
 This is the last Kando version which was used to write this configuration file.
@@ -129,7 +129,7 @@ Also, whenever Kando is started, it will create a backup of the configuration fi
 
 The locale which should be used for the menu. If set to `"auto"`, Kando will use the system locale.
 
-#### showIntroductionDialog <Badge text="new!" variant="tip" />
+#### showIntroductionDialog
 <small>Default value: `"showIntroductionDialog": true`</small>
 
 If true, the introduction dialog will be shown when the settings window is opened.
@@ -193,14 +193,14 @@ The volume of the sound effects. This should be a value between 0 and 1.
 
 If set to `true`, Kando will not show a warning if the configuration files are write-protected.
 
-#### settingsWindowColorScheme <Badge text="new!" variant="tip" />
+#### settingsWindowColorScheme
 <small>Default value: `"settingsWindowColorScheme": "system"` </small>
 
 The color scheme of the settings window. Can be one of `'system'`, `'light'`, or `'dark'`.
 This determines the look of the settings window itself, not the menu editor part.
 If set to `'system'`, Kando will adapt to the system colors.
 
-#### settingsWindowFlavor <Badge text="new!" variant="tip" />
+#### settingsWindowFlavor
 <small>Default value: `"settingsWindowFlavor": "auto"`</small>
 
 This determines the look of the menu-editor part of the settings window.
@@ -214,7 +214,7 @@ If the special value `'auto'` is used, Kando will choose a transparent flavor if
 
 Can be one of `'color'`, `'white'`, `'light'`, `'dark'`, `'black'`, or `'none'`. The color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
 
-#### hardwareAcceleration <Badge text="soon!" variant="tip" />
+#### hardwareAcceleration <Badge text="new!" variant="tip" />
 <small>Default value: `"hardwareAcceleration": true`</small>
 
 If set to `true`, Kando will use hardware acceleration for rendering the menu. This can improve performance, but may cause issues on some systems. If you experience rendering issues with the menu, try setting this to `false`.
@@ -254,7 +254,7 @@ The duration of the fade-in animation in milliseconds. Set to `0` to disable the
 
 The duration of the fade-out animation in milliseconds. Set to `0` to disable the animation. Some actions are only executed after the fade-out animation has finished, so reducing this value can make the menu much "snappier".
 
-#### keepInputFocus <Badge text="new!" variant="tip" />
+#### keepInputFocus
 <small>Default value: `"keepInputFocus": false`</small>
 
 If enabled, the menu will not receive keyboard input focus when opened.
@@ -270,7 +270,7 @@ If enabled, items can be selected by dragging the mouse over them.
 
 If enabled, items can be selected by hovering over them while holding down a keyboard key.
 
-#### warpMouse <Badge text="new!" variant="tip" />
+#### warpMouse
 <small>Default value: `"warpMouse": true`</small>
 
 If true, the mouse pointer will be warped to the center of the menu when necessary.
@@ -325,7 +325,7 @@ This button will select the parent item when using a gamepad. Set to -1 to disab
 
 This button will close the menu when using a gamepad. Set to -1 to disable. See https://w3c.github.io/gamepad/#remapping for the mapping of numbers to buttons.
 
-#### sameShortcutBehavior <Badge text="new!" variant="tip" />
+#### sameShortcutBehavior
 <small>Default value: `"sameShortcutBehavior": "nothing"`</small>
 
 Determines the behavior of pressing the trigger shortcut once the menu is open.
@@ -335,17 +335,17 @@ Can be one of the following:
 * `'close'`: The menu will be closed when the trigger shortcut is pressed while the menu is open.
 * `'nothing'`: Nothing will happen when the trigger shortcut is pressed while the menu is open.
 
-#### useDefaultOsShowSettingsHotkey <Badge text="new!" variant="tip" />
+#### useDefaultOsShowSettingsHotkey
 <small>Default value: `"useDefaultOsShowSettingsHotkey": true`</small>
 
 If enabled, pressing <kbd>Command</kbd>+<kbd>,</kbd> on macOS or <kbd>Ctrl</kbd>+<kbd>,</kbd> on Linux or Windows will open the settings window. If disabled, the default hotkey will be ignored.
 
-#### hideSettingsButton <Badge text="new!" variant="tip" />
+#### hideSettingsButton
 <small>Default value: `"hideSettingsButton": false`</small>
 
 If true, the settings button will be hidden if not hovered.
 
-#### settingsButtonPosition <Badge text="new!" variant="tip" />
+#### settingsButtonPosition
 <small>Default value: `"settingsButtonPosition": "bottom-right"`</small>
 
 The position of the settings button.
@@ -381,7 +381,7 @@ The latter is used in the settings dialog to group menus together.
 }
 ```
 
-#### version <Badge text="soon!" variant="tip" />
+#### version <Badge text="new!" variant="tip" />
 <small>Default value: `"version": "2.0.0"`</small>
 
 This is the last Kando version which was used to write this configuration file.
