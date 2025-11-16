@@ -203,13 +203,34 @@ windowrule = pin, class:kando
 
 Also, Kando cannot directly bind global shortcuts on Hyprland.
 Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination in `hyprland.conf`.
-To get the exact shortcut ID, you can use `hyprctl globalshortcuts` to list all currently registered global shortcuts.
-If you run the flatpak version of Kando and chose `example-menu` as the shortcut ID, you would bind it like this:
+For this, do the following:
 
-```
-// ~/.config/hypr/hyprland.conf
-bind = CTRL, Space, global, menu.kando.Kando:example-menu
-```
+<Steps>
+
+1. Run Kando and set a shortcut ID for your menu in the menu editor.
+2. Open a terminal and run `hyprctl globalshortcuts` to list all currently registered global shortcuts.
+3. Find the line that corresponds to your shortcut ID and add a line like `bind = CTRL, Space, global, <shortcut ID>` to your `hyprland.conf`.
+
+</Steps>
+
+The shortcut ID will look different depending on how you installed Kando.
+Here are some examples:
+
+<Tabs>
+  <TabItem label="Flathub">
+    ```
+    // ~/.config/hypr/hyprland.conf
+    bind = CTRL, Space, global, menu.kando.Kando:example-menu
+    ```
+  </TabItem>
+  <TabItem label="Most other installations">
+    ```
+    // ~/.config/hypr/hyprland.conf
+    bind = CTRL, Space, global, :example-menu
+    ```
+  </TabItem>
+</Tabs>
+
 
 #### Use Wayland instead of XWayland
 
