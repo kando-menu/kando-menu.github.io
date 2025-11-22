@@ -55,27 +55,30 @@ If you want to test the latest development version of Kando, or want to contribu
 
   </TabItem>
   <TabItem label="Debian" icon="linux">
-    On Linux, `gcc` and `git` are usually already installed.
-    However, some additional packages may be required for the native backend modules.
-    You can install them with:
+    First, you will need NodeJS. There are multiple ways to install this on Linux.
+    The easiest way is maybe to use [`nvm`](https://github.com/nvm-sh/nvm?tab=readme-ov-file).
+    
+    Once the commands `node` and `npm` are working, you can proceed to install some additional packages required to compile Kando:
     ```bash
-    sudo apt install nodejs cmake libx11-dev libxtst-dev libwayland-dev libxkbcommon-dev
+    sudo apt install git g++ cmake libx11-dev libxtst-dev libwayland-dev libxkbcommon-dev
     ```
   </TabItem>
   <TabItem label="Arch" icon="linux">
-    On Linux, `gcc` and `git` are usually already installed.
-    However, some additional packages may be required for the native backend modules.
-    You can install them with:
+    First, you will need NodeJS. There are multiple ways to install this on Linux.
+    The easiest way is maybe to use [`nvm`](https://github.com/nvm-sh/nvm?tab=readme-ov-file).
+    
+    Once the commands `node` and `npm` are working, you can proceed to install some additional packages required to compile Kando:
     ```bash
-    sudo pacman -S nodejs npm cmake libx11 libxtst wayland libxkbcommon
+    sudo pacman -S git gcc npm cmake libx11 libxtst wayland libxkbcommon
     ```
   </TabItem>
   <TabItem label="Fedora" icon="linux">
-    On Linux, `gcc` and `git` are usually already installed.
-    However, some additional packages may be required for the native backend modules.
-    You can install them with:
+    First, you will need NodeJS. There are multiple ways to install this on Linux.
+    The easiest way is maybe to use [`nvm`](https://github.com/nvm-sh/nvm?tab=readme-ov-file).
+    
+    Once the commands `node` and `npm` are working, you can proceed to install some additional packages required to compile Kando:
     ```bash
-    sudo dnf install nodejs cmake libX11-devel libXtst-devel wayland-devel libxkbcommon-devel
+    sudo dnf install git gcc-c++ cmake libX11-devel libXtst-devel wayland-devel libxkbcommon-devel
     ```
   </TabItem>
 </Tabs>
