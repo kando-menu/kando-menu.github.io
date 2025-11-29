@@ -1,0 +1,44 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Portable Mode
+description: Learn how to use Kando in portable mode.
+sidebar:
+  badge:
+    text: soon!
+    variant: tip
+---
+
+import { CardGrid, Aside, Tabs, TabItem, Steps, Badge, FileTree } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
+import Intro from '../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+
+![banner](../../assets/banners/banner14.png)
+
+<Intro>
+Kando can be configured to load and save all its [configuration files](/config-files) in its installation directory.
+In fact, you can set any directory as Kando's configuration directory.
+</Intro>
+
+<Aside type="danger" title="Not available yet!">
+Portable mode will be available in an upcoming release of Kando. Stay tuned!
+</Aside>
+
+## <Icon name="solar:planet-3-bold-duotone" class="inline-icon" /> Enabling Portable Mode <Badge text="soon!" variant="tip" />
+
+To enable portable mode, you need to create a `portableMode.json` next to the Kando executable.
+So for instance if you downloaded the Kando zip archive from GitHub and extracted it, you would create the file in the extracted folder.
+
+```json title=portableMode.json
+{
+  // The path to the configuration directory.
+  // This can be an absolute path or a path relative to this file.
+  "configDirectory": "config"
+}
+```
+
+The above example would make Kando load and save its configuration files in a subfolder named `config` next to the executable.
+If you specified an absolute path instead, Kando would use that path.
+This way, you can also use portable mode to load and save the configuration files in any other directory on your system.

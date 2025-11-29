@@ -75,6 +75,7 @@ export default defineConfig({
           label: 'Advanced Usage',
           items: [
             'opening-menus',
+            'portable-mode',
             'launch-from-cli',
           ],
         },
