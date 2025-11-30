@@ -49,6 +49,7 @@ export default defineConfig({
             'creating-menus',
             {
               label: 'Available Item Types',
+              collapsed: true,
               items: [
                 'item-submenu',
                 'item-run-command',
@@ -74,6 +75,7 @@ export default defineConfig({
         {
           label: 'Advanced Usage',
           items: [
+            'autostart',
             'opening-menus',
             'portable-mode',
             'launch-from-cli',

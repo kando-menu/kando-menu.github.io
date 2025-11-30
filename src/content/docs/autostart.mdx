@@ -1,0 +1,91 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Start Kando on Login
+description: Start Kando automatically when you log in to your system.
+---
+
+import { CardGrid, Icon, Tabs, TabItem, Steps, Badge, FileTree } from '@astrojs/starlight/components';
+import CustomCard from '../../components/CustomCard.astro';
+import Intro from '../../components/Intro.astro';
+
+![banner](../../assets/banners/banner15.png)
+
+<Intro>
+Kando does not come with an automatic startup feature by default. However, you can easily configure your OS to start Kando automatically when you log in.
+</Intro>
+
+
+## <Icon name="seti:windows" class="inline-icon" /> Windows
+
+To have Kando start automatically on Windows, you can add a shortcut to Kando in the "Startup" folder.
+To do this, follow these steps:
+
+<Steps>
+
+1. Press <kbd>Windows</kbd> + <kbd>R</kbd> to open the "Run" dialog.
+
+2. Type `shell:startup` and press <kbd>Enter</kbd>. This will open the "Startup" folder.
+
+3. Drag and drop a shortcut to Kando into this folder. You can create a shortcut by right-clicking on the Kando executable and selecting "Create shortcut".
+
+</Steps>
+
+## <Icon name="apple" class="inline-icon" /> macOS
+
+On macOS, you can add Kando to your login items to have it start automatically when you log in.
+To do this, follow these steps:
+
+<Steps>
+
+1. Open "System Settings" from the Apple menu.
+
+2. Go to "Users & Groups".
+
+3. Select your user account and click on "Login Items".
+
+4. Click the "+" button and add Kando to the list.
+
+</Steps>
+
+## <Icon name="linux" class="inline-icon" /> Linux
+
+Most desktop environments on Linux come with a GUI to manage applications that should start on login.
+However, most of the time it is also possible to add startup applications manually by placing a `.desktop` file into `~/.config/autostart/`.
+
+So first, create this directory if it does not exist yet:
+
+```bash
+mkdir ~/.config/autostart
+```
+Then create a file named `kando.desktop` in this directory with the following content.
+The exec command depends on how you installed Kando.
+Here are three common options:
+
+<Tabs syncKey="os">
+  <TabItem label="Local Installation">
+    ```ini title=~/.config/autostart/kando.desktop
+    [Desktop Entry]
+    Type=Application
+    Name=Kando
+    Exec=/full/path/to/kando
+    ```
+  </TabItem>
+  <TabItem label="System-wide Installation">
+    ```ini title=~/.config/autostart/kando.desktop
+    [Desktop Entry]
+    Type=Application
+    Name=Kando
+    Exec=kando
+    ```
+  </TabItem>
+  <TabItem label="Flatpak Installation">
+    ```ini title=~/.config/autostart/kando.desktop
+    [Desktop Entry]
+    Type=Application
+    Name=Kando
+    Exec=flatpak run menu.kando.Kando
+    ```
+  </TabItem>
+</Tabs>
