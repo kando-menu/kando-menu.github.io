@@ -19,13 +19,12 @@ This is mostly for the maintainers of Kando, so that we do not forget anything, 
 ## Updating the Main Repository
 
 <Steps>
-0. Check for any pending translation updates [on Weblate](https://hosted.weblate.org/projects/kando/core/#repository) and merge them if necessary.
-1. Bump the version number in [`package.json`](https://github.com/kando-menu/kando/blob/main/package.json).
-2. Run `npm install` to update the lock file.
-3. Commit the changes to the two files with a message like `:tada: Bump version number` to the `main` branch.
+1. Check for any pending translation updates [on Weblate](https://hosted.weblate.org/projects/kando/core/#repository) and merge them if necessary.
+2. Bump the version number in [`package.json`](https://github.com/kando-menu/kando/blob/main/package.json).
+3. Run `npm install` to update the lock file.
 4. Set the release date and the version name in [`changelog.md`](https://github.com/kando-menu/kando/blob/main/docs/changelog.md).
 5. Add the new release also to the [`menu.kando.Kando.metainfo.xml`](https://github.com/kando-menu/kando/blob/main/appstream/menu.kando.Kando.metainfo.xml) file.
-6. Commit the changes to the changelog and the appstream file with a message like `:tada: Set release date`.
+6. Commit the changes with a message like `:tada: Bump version number` to the `main` branch.
 7. Run the following:
    ```bash
    git tag vX.Y.Z
@@ -33,7 +32,21 @@ This is mostly for the maintainers of Kando, so that we do not forget anything, 
    ```
 
    Replace `vX.Y.Z` with the new version number.
-8. This will automatically release all the assets as a pre-release via GitHub actions. Make sure everything is good and then add some text to the new release and publish it!
+8. This will automatically release all the assets as a pre-release via GitHub actions.
+</Steps>
+
+## Code Signing
+
+During the build process, the Windows installers and the macOS DMGs are code-signed.
+For the Windows installers, we use [SignPath.io](https://signpath.io) to manage the code signing process.
+Most of this happens automatically during the build, however, an authorized **approver** (see our [Code Signing Policy](/code-signing)) needs to approve the signing requests manually.
+So after pushing the new tag, do the following:
+
+<Steps>
+1. Log in to [SignPath.io](https://login.signpath.io).
+2. Go to the **Requests** tab.
+3. There should be two pending requests for code signing Kando installers.
+4. Approve both requests.
 </Steps>
 
 ## Updating the Website

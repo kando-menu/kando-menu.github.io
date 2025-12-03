@@ -95,11 +95,11 @@ export default defineConfig({
         },
         {
           label: 'Reference',
-          collapsed: true,
           items: [
             'config-files',
             'valid-keynames',
             'release-management',
+            'code-signing',
           ],
         },
         {

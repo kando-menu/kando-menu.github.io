@@ -1,0 +1,36 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Code Signing Policy
+description: Start Kando automatically when you log in to your system.
+sidebar:
+  badge:
+    text: soon!
+    variant: tip
+---
+
+import CustomAside from '../../components/CustomAside.astro';
+import Intro from '../../components/Intro.astro';
+
+![banner](../../assets/banners/banner16.png)
+
+<Intro>
+Since version 2.2.0, Windows and macOS installers of Kando are code-signed to ensure their authenticity and integrity.
+</Intro>
+
+<CustomAside type="thanks" title="Thank you!">
+A huge thanks to [SignPath.io](https://signpath.io/) for providing the code signing infrastructure and to the [SignPath Foundation](https://signpath.org/) for providing a free code signing certificate for the Windows installers!
+</CustomAside>
+
+## Code Signing Process
+
+Every code contribution to Kando is verified via GitHub's code review and branch protection mechanisms.
+Only members of the [Kando's Code Review Team](https://github.com/orgs/kando-menu/teams/code-reviewers) are allowed to approve pull requests and merge them into the `main` branch.
+
+When a new version of Kando is released, two code signing requests are automatically created on SignPath.io: One for the x64 Windows installer and one for the ARM64 Windows installer.
+Currently, only [@Schneegans](https://github.com/orgs/kando-menu/people/Schneegans) is authorized to approve code signing requests for Kando.
+
+## Privacy Policy
+
+Kando will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it
