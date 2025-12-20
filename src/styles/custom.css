@@ -24,6 +24,7 @@
     background-repeat: no-repeat;
     background-color: #000;
     position: relative;
+    overflow-x: hidden;
 }
 
 @media (min-aspect-ratio: 4/3) {
@@ -123,8 +124,8 @@
         }
     }
 
-    &.swiper-cards .swiper-slide {
-        overflow: visible;
+    &.swiper-coverflow {
+        perspective-origin: 50% 70%;
     }
 
     .swiper-slide {
