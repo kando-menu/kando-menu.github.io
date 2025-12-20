@@ -14,115 +14,232 @@ hero:
     light: ../../assets/menu-light.webp
     dark: ../../assets/menu-dark.webp
   actions:
-    - text: Get started
+    - text: Read the Docs
       link: /intro/
       icon: right-arrow
     - text: Download from GitHub
       link: https://github.com/kando-menu/kando/releases
       icon: external
       variant: minimal
-
 ---
 
-import { LinkButton, Icon } from '@astrojs/starlight/components';
+import { LinkButton, Icon as AstroIcon, Badge } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import { Swiper, SwiperWrapper, SwiperSlide, SwiperPagination } from 'astro-swiper';
 import { YouTube } from '@astro-community/astro-embed-youtube';
+import { Image } from 'astro:assets';
 
 import ScrollIndicator from '../../components/ScrollIndicator.astro';
 import ShowCase from '../../components/ShowCase.astro';
 import ShowCaseItem from '../../components/ShowCaseItem.astro';
-import Accordion from '../../components/Accordion.astro';
-import AccordionSlide from '../../components/AccordionSlide.astro';
 
-import slide1 from "../../assets/accordion-slide1.webp";
-import slide2 from "../../assets/accordion-slide2.webp";
-import slide3 from "../../assets/accordion-slide3.webp";
-import slide4 from "../../assets/accordion-slide4.webp";
+import slide1 from '../../assets/accordion-slide1.webp';
+import slide2 from '../../assets/accordion-slide2.webp';
+import slide3 from '../../assets/accordion-slide3.webp';
+import slide4 from '../../assets/accordion-slide4.webp';
+import slide5 from '../../assets/accordion-slide5.webp';
+import slide6 from '../../assets/accordion-slide6.webp';
+
+import editor from '../../assets/editor-screen.png';
+import achievements from '../../assets/achievement-screen.png';
 
 <ScrollIndicator />
 
 <ShowCase>
 
-<ShowCaseItem title="What is Kando?" type="intro">
-  <p slot="description">
-    Kando is a free and open-source pie menu. With Kando, you can launch applications, execute keyboard macros, open files, and much more.
-    It is designed to be used with 🖱️&nbsp;mouse, 🖊️&nbsp;stylus, 👆&nbsp;touch, or 🎮&nbsp;controller input.
-  </p>
-</ShowCaseItem>
-
-<ShowCaseItem icon="solar:clock-circle-bold" title="Be Fast!" type="left">
-  <p slot="description">
-    With Kando, you can select your favorite tools and actions _within milliseconds_.
-    The gesture recognition allows you to select items in subsubsubmenus with ease!
-  </p>
-  <div slot="content" class="splash" >
-    <video autoplay muted loop src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-4.mp4" />
+<ShowCaseItem title="What is Kando?" type="centered">
+  <div slot="description" style="margin: 0 10% 10vh 10%">
+    Kando is a free and open-source pie menu. With Kando, you can launch applications,
+    execute keyboard macros, open files, and much more. It is designed to be used with
+    🖱️&nbsp;mouse, 🖊️&nbsp;stylus, 👆&nbsp;touch, or 🎮&nbsp;controller input.
   </div>
 </ShowCaseItem>
 
-<ShowCaseItem icon="solar:target-bold" title="Be Precise!" type="right">
+<ShowCaseItem icon="solar:clock-circle-bold" title="Kando is fast." type="left">
   <p slot="description">
-    In Kando, your entire screen becomes a click target.
-    You do not have to aim at tiny buttons, _just throw your mouse approximately in the right direction!_
+    With Kando, you can select your favorite tools and actions _within milliseconds_. The
+    gesture recognition allows you to select items in subsubsubmenus with ease!
+
+    [Learn More →](/intro)
+
   </p>
-  <div slot="content" class="splash" >
-    <video autoplay muted loop src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-1.mp4" />
+  <div slot="content" class="splash">
+    <video
+      autoplay
+      muted
+      loop
+      src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-4.mp4"
+    />
   </div>
 </ShowCaseItem>
 
-{/* <ShowCaseItem icon="solar:heart-shine-bold" title="Be Beautiful!" type="fill">
+<ShowCaseItem icon="solar:target-bold" title="Kando is precise." type="right">
+  <p slot="description">
+    In Kando, your entire screen becomes a click target. You do not have to aim at tiny
+    buttons, _just throw your mouse approximately in the right direction!_
+
+    [Learn More →](/usage)
+
+  </p>
+  <div slot="content" class="splash">
+    <video
+      autoplay
+      muted
+      loop
+      src="https://raw.githubusercontent.com/kando-menu/kando/refs/heads/main/assets/videos/introduction-1.mp4"
+    />
+  </div>
+</ShowCaseItem>
+
+<ShowCaseItem icon="solar:heart-shine-bold" title="Kando is beautiful." type="centered">
   <div slot="description">
     <p>
-      You can customize Kando to your heart's content.
-      It supports custom menu, icon, and sound themes.
-    </p>
-    <Accordion>
-      <AccordionSlide title="Kando's Default Theme" background={slide1.src}>
-      The default theme of Kando is very simple. It is a good choice if you want to focus on your work and not be distracted by the menu.
-      </AccordionSlide>
-      <AccordionSlide title="Accent Colors!" background={slide2.src} >
-      You can adapt each theme to your personal taste.
-      </AccordionSlide>
-      <AccordionSlide title="Dark Mode Support!" background={slide3.src} >
-      With Kando, you can have a dark mode for your menu!
-      </AccordionSlide>
-      <AccordionSlide title="Be Creative!" background={slide4.src} >
-      You can create any theme you like. For instance, this theme is inspired by Minecraft!
-      </AccordionSlide>
-    </Accordion>
-  </div>
-</ShowCaseItem> */}
+      You can customize Kando to your heart's content.<br />
+      It supports custom menu themes, icon sets, and even sound themes!
 
-<ShowCaseItem icon="solar:gift-bold" title="Watch the Latest Update!" type="fill">
-  <div slot="description">
-    <p>
-      The latest update of Kando brings an application picker, system icons, wedges visualizations and many more features and fixes!
+      [Learn More →](/menu-themes)
     </p>
-    <YouTube slot="content" id="wNNS7vrur3M" />
+
+    <Swiper
+        class="cards-swiper"
+        options={{
+          effect: "cards",
+          cardsEffect: {
+            slideShadows: false,
+          },
+          grabCursor: true,
+          pagination: {
+            el: ".swiper-pagination1",
+            clickable: true,
+          },
+        }}
+      >
+      <SwiperWrapper>
+        <SwiperSlide><img src={slide1.src} /></SwiperSlide>
+        <SwiperSlide><img src={slide2.src} /></SwiperSlide>
+        <SwiperSlide><img src={slide3.src} /></SwiperSlide>
+        <SwiperSlide><img src={slide4.src} /></SwiperSlide>
+        <SwiperSlide><img src={slide5.src} /></SwiperSlide>
+        <SwiperSlide><img src={slide6.src} /></SwiperSlide>
+      </SwiperWrapper>
+
+      <SwiperPagination class="swiper-pagination1" />
+    </Swiper>
+
   </div>
 </ShowCaseItem>
 
-<ShowCaseItem icon="solar:chat-square-like-bold" title="Join us on Discord!" type="left">
+<ShowCaseItem type="fullwidth">
+  <Swiper
+    slot="description"
+    class="fullwidth-swiper"
+    options={{
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slideToClickedSlide: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 30,
+        stretch: 0,
+        depth: 1500,
+        slideShadows: false,
+      },
+      pagination: {
+        el: ".swiper-pagination2",
+        clickable: true,
+      },
+    }}
+  >
+    <SwiperWrapper>
+      <SwiperSlide>
+        <h2><Icon name="solar:branching-paths-up-bold" class="inline-icon" /> Kando is versatile.</h2>
+        <p>
+          Kando supports opening different menus, depending on the current application or window.
+          This allows you to have a dedicated menu for each of your favorite applications!
+        </p>
+        <Image src={editor} alt="menu editor" class="shadow" />
+      </SwiperSlide>
+      <SwiperSlide>
+        <h2><Icon name="solar:emoji-funny-circle-bold" class="inline-icon" /> Kando is fun.</h2>
+        <p>
+          With Kando, you can gradually transition from a beginner to an expert user while your muscles learn
+          the gestures.
+          Unlock achievements along the way for an extra dose of motivation! <Badge text="soon!" variant="tip" />
+        </p>
+        <Image src={achievements} alt="achievements screen" class="shadow" />
+      </SwiperSlide>
+      <SwiperSlide>
+        <h2><Icon name="solar:heart-pulse-bold" class="inline-icon" /> Kando is actively developed.</h2>
+        <p>
+          The latest update of Kando brings an application picker, system icons, wedges
+          visualizations and many more features and fixes! Watch the video to see the latest
+          changes in action.
+        </p>
+        <YouTube id="wNNS7vrur3M" />
+      </SwiperSlide>
+    </SwiperWrapper>
+
+    <SwiperPagination class="swiper-pagination2" />
+
+  </Swiper>
+</ShowCaseItem>
+
+<ShowCaseItem title="Kando is free." icon="solar:gift-bold" type="centered">
+  <div slot="description" style="margin: 0 10% 5vh 10%">
+    I have a [long history](https://github.com/Schneegans/Gnome-Pie) of [creating pie menus](https://github.com/Schneegans/Fly-Pie).
+    I strongly believe that they can bring joy and efficiency to many users!
+    Thus, **I am creating Kando out of sheer passion** and want to make it available to everyone!
+
+    Kando is developed in my spare time.
+    While code contributions are the most awesome way to support the development, donations will encourage me to invest my spare time for developing free and open-source software.
+
+    [💖 Support the development →](https://ko-fi.com/schneegans)
+
+  </div>
+</ShowCaseItem>
+
+<ShowCaseItem
+  icon="solar:chat-square-like-bold"
+  title="And finally: Kando has an awesome community."
+  type="left">
   <p slot="description">
-    Do you have questions, ideas, or feedback?
-    Join our community on Discord and get in touch with the developers and other users!
+    Do you have questions, ideas, or feedback? Join us on Discord and get in touch with
+    developers and other users!
+
+    [Join the Server →](https://discord.gg/hZwbVSDkhy)
+
   </p>
-  <div slot="content" class="splash" >
-    <iframe src="https://discord.com/widget?id=1124300911574003732&theme=dark" style="height: 300px;
-  width: 100%;" allowtransparency="true" frameborder="0"></iframe>
+  <div slot="content" class="splash">
+    <iframe
+      src="https://discord.com/widget?id=1124300911574003732&theme=dark"
+      style="height: 300px;
+  width: 100%;"
+      allowtransparency="true"
+      frameborder="0"></iframe>
   </div>
 </ShowCaseItem>
 
-<ShowCaseItem icon="solar:hearts-bold" title="Try Kando Now!" type="center">
+<ShowCaseItem title="Try Kando Now!" type="centered">
   <div slot="description">
     <p>
-      Kando is open source, free, and available for <Icon name="seti:windows" class="inline-icon" /> Windows, <Icon name="apple" class="inline-icon" /> macOS, and <Icon name="linux" class="inline-icon" /> Linux.<br/>
-      Installation is easy and you can start mastering Kando right away!
+      Kando is open source, free, and available for{' '}
+      <AstroIcon name="seti:windows" class="inline-icon" /> Windows,{' '}
+      <AstroIcon name="apple" class="inline-icon" /> macOS, and{' '}
+      <AstroIcon name="linux" class="inline-icon" /> Linux. Installation is easy and you
+      can start mastering Kando right away!
     </p>
-    <LinkButton href="/intro" icon="right-arrow">Get started</LinkButton>
-    <LinkButton href="https://github.com/kando-menu/kando/releases" icon="external" variant="minimal">Download from GitHub</LinkButton>
+    <LinkButton href="/intro" icon="right-arrow">
+      Read the Docs
+    </LinkButton>
+    <LinkButton
+      href="https://github.com/kando-menu/kando/releases"
+      icon="external"
+      variant="minimal">
+      Download from GitHub
+    </LinkButton>
   </div>
-  <p slot="content">
-  </p>
+  <p slot="content"></p>
 </ShowCaseItem>
 
 </ShowCase>

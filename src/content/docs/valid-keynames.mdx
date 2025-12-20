@@ -4,7 +4,6 @@
 
 title: Valid Key Names
 description: A list of all supported key names and key codes in Kando.
-next: false
 ---
 
 import Intro from '../../components/Intro.astro';
@@ -12,15 +11,16 @@ import Intro from '../../components/Intro.astro';
 ![banner](../../assets/banners/banner03.png)
 
 <Intro>
-With Kando, you can bind a menu to a keyboard shortcut and use menu items to simulate keyboard hotkeys or macros.
-This is a bit confusing as all are configured similarly, but use different formats.
+  With Kando, you can bind a menu to a keyboard shortcut and use menu items to simulate
+  keyboard hotkeys or macros. This is a bit confusing as all are configured similarly, but
+  use different formats.
 </Intro>
 
 Below is the configuration of a menu bound to <kbd>Ctrl</kbd>+<kbd>V</kbd> and a menu item simulating <kbd>Ctrl</kbd>+<kbd>V</kbd>.
 As you can see, the format for the key combination is different.
 
-| Menu-Shortcut Configuration                    | Hotkey-Item Configuration                      |
-| ---------------------------------------------- | ---------------------------------------------- |
+| Menu-Shortcut Configuration                          | Hotkey-Item Configuration                        |
+| ---------------------------------------------------- | ------------------------------------------------ |
 | ![shortcut](../../assets/img/key-names-shortcut.png) | ![hotkey](../../assets/img/key-names-hotkey.png) |
 
 The reason for this is complex: Depending on the platform, Kando uses different mechanisms to bind menus to shortcuts.
@@ -37,6 +37,7 @@ Hence, each shortcut may contain any number of modifiers and must end with a key
 All names are case-insensitive and must be separated by `+`.
 
 **Available Modifier Names:**
+
 <kbd>Command</kbd>
 <kbd>Cmd</kbd>
 <kbd>Control</kbd>
@@ -51,6 +52,7 @@ All names are case-insensitive and must be separated by `+`.
 <kbd>Meta</kbd>
 
 **Available Key Names:** <kbd>0</kbd>-<kbd>9</kbd>
+
 <kbd>A</kbd>-<kbd>Z</kbd>
 <kbd>F1</kbd>-<kbd>F24</kbd>
 <kbd>)</kbd>
@@ -128,6 +130,7 @@ Below is a list of all available key codes.
 Note that not all key codes are guaranteed to be available on all platforms.
 
 **Available Modifier Key Codes:**
+
 <kbd>AltLeft</kbd>
 <kbd>AltRight</kbd>
 <kbd>ControlLeft</kbd>
@@ -138,6 +141,7 @@ Note that not all key codes are guaranteed to be available on all platforms.
 <kbd>ShiftRight</kbd>
 
 **Available Non-Modifier Key Codes:**
+
 <kbd>Again</kbd>
 <kbd>ArrowDown</kbd>
 <kbd>ArrowLeft</kbd>

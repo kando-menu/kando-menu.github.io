@@ -3,6 +3,7 @@
 
 :root {
     --sl-nav-gap: 0.5rem;
+    --swiper-pagination-bullet-size: 14px;
 }
 
 .site-title {
@@ -12,16 +13,17 @@
 
     span {
         margin-top: 0.3rem;
+        overflow: visible;
     }
 }
 
-
 [data-has-hero] body {
-    background-image: url('../assets/bg-dark.webp');
+    background-image: url('../assets/bg-dark.webp'), url('../assets/bg-dark-bottom.webp');
     background-size: auto 100vh;
-    background-position: top;
+    background-position: top, bottom;
     background-repeat: no-repeat;
-    background-color: black;
+    background-color: #000;
+    position: relative;
 }
 
 @media (min-aspect-ratio: 4/3) {
@@ -31,7 +33,7 @@
 }
 
 :root[data-theme='light'][data-has-hero] body {
-    background-image: url('../assets/bg-light.webp');
+    background-image: url('../assets/bg-light.webp'), url('../assets/bg-light-bottom.webp');
     background-color: white;
 }
 
@@ -101,6 +103,39 @@
     }
 }
 
+/* Swiper tweaks */
+
+.swiper {
+    &.fullwidth-swiper {
+        max-width: 100vw;
+
+        .swiper-slide {
+            max-width: var(--sl-content-width);
+            padding: 0 var(--sl-content-pad-x);
+        }
+    }
+
+    &.cards-swiper {
+        max-width: calc(min(900px, 100vw - var(--sl-content-pad-x)));
+
+        .swiper-slide {
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+        }
+    }
+
+    &.swiper-cards .swiper-slide {
+        overflow: visible;
+    }
+
+    .swiper-slide {
+        margin-bottom: 3rem;
+    }
+}
+
+img {
+    width: 100%;
+}
+
 /* We do not want to limit the width of the YouTube embeds. */
 lite-youtube {
     max-width: none !important;
@@ -135,10 +170,6 @@ img {
     &.no-mask {
         mask-image: none;
     }
-}
-
-[data-has-hero] .hero-element.right {
-    transform: perspective(1000px) rotateY(-30deg);
 }
 
 .content-panel kbd {
@@ -198,6 +229,9 @@ img {
     --sl-color-gray-5: #353841;
     --sl-color-gray-6: #24272f;
     --sl-color-black: #17181c;
+
+    --swiper-pagination-color: var(--sl-color-accent);
+    --swiper-pagination-bullet-inactive-color: var(--sl-color-white);
 }
 
 /* Light mode colors. */
@@ -214,4 +248,7 @@ img {
     --sl-color-gray-6: #eceef2;
     --sl-color-gray-7: #f5f6f8;
     --sl-color-black: #ffffff;
+
+    --swiper-pagination-color: var(--sl-color-accent);
+    --swiper-pagination-bullet-inactive-color: var(--sl-color-white);
 }

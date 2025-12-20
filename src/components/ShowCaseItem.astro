@@ -7,7 +7,7 @@ import { Icon } from 'astro-icon/components';
 interface Props {
   icon?: string;
   title: string;
-  type: 'left' | 'right' | 'center' | 'fill' | 'intro';
+  type: 'left' | 'right' | 'centered' | 'fill' | 'fullwidth';
 }
 
 const { icon, title, type } = Astro.props;
@@ -17,9 +17,9 @@ const { icon, title, type } = Astro.props;
   class:list={[
     'show-case-item',
     { reverse: type === 'right' },
-    { center: type === 'center' },
+    { centered: type === 'centered' },
     { fill: type === 'fill' },
-    { intro: type === 'intro' },
+    { fullwidth: type === 'fullwidth' },
   ]}>
   <div class="description">
     <h2>
@@ -46,19 +46,22 @@ const { icon, title, type } = Astro.props;
     flex: 1 1 0;
   }
 
-  .intro,
-  .center {
+  .centered {
     text-align: center;
   }
 
-  .fill .content,
-  .intro .content,
-  .center .content {
-    display: none;
+  .fullwidth {
+    width: 100vw;
+    position: relative;
+    margin-left: -50vw;
+    margin-top: 100px;
+    left: 50%;
   }
 
-  .intro {
-    margin-bottom: 30vh;
+  .fill .content,
+  .fullwidth .content,
+  .centered .content {
+    display: none;
   }
 
   .description {
@@ -72,8 +75,16 @@ const { icon, title, type } = Astro.props;
       flex-direction: row;
     }
 
+    .content {
+      transform: perspective(1500px) rotateY(-10deg) scale(1.05);
+    }
+
     .show-case-item.reverse {
       flex-direction: row-reverse;
+
+      .content {
+        transform: perspective(1500px) rotateY(10deg) scale(1.05);
+      }
     }
   }
 </style>
