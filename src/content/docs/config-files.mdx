@@ -69,51 +69,51 @@ This file contains the general configuration of Kando.
 Here you can configure the menu theme, sound theme, and various other settings.
 Below are the default values of the configuration file.
 
-```json5 title="config.json"
+```json title="config.json"
 {
-  version: '2.1.0',
-  locale: 'auto',
-  showIntroductionDialog: true,
-  menuTheme: 'default',
-  darkMenuTheme: 'default',
-  menuThemeColors: {},
-  darkMenuThemeColors: {},
-  enableDarkModeForMenuThemes: false,
-  enableSelectionWedges: false,
-  soundTheme: 'none',
-  soundVolume: 0.5,
-  enableVersionCheck: true,
-  ignoreWriteProtectedConfigFiles: false,
-  settingsWindowColorScheme: 'system',
-  settingsWindowFlavor: 'auto',
-  trayIconFlavor: 'color',
-  hardwareAcceleration: true,
-  lazyInitialization: false,
-  zoomFactor: 1,
-  hideSettingsButton: false,
-  settingsButtonPosition: 'bottom-right',
-  centerDeadZone: 50,
-  minParentDistance: 150,
-  dragThreshold: 15,
-  fadeInDuration: 150,
-  fadeOutDuration: 200,
-  keepInputFocus: false,
-  enableMarkingMode: true,
-  enableTurboMode: true,
-  warpMouse: true,
-  hoverModeNeedsConfirmation: false,
-  gestureMinStrokeLength: 150,
-  gestureMinStrokeAngle: 20,
-  gestureJitterThreshold: 10,
-  gesturePauseTimeout: 100,
-  fixedStrokeLength: 0,
-  rmbSelectsParent: false,
-  enableGamepad: true,
-  gamepadBackButton: 1,
-  gamepadCloseButton: 2,
-  sameShortcutBehavior: 'nothing',
-  useDefaultOsShowSettingsHotkey: true,
-  enableAchievements: true,
+  "version": "2.1.0",
+  "locale": "auto",
+  "showIntroductionDialog": true,
+  "menuTheme": "default",
+  "darkMenuTheme": "default",
+  "menuThemeColors": {},
+  "darkMenuThemeColors": {},
+  "enableDarkModeForMenuThemes": false,
+  "enableSelectionWedges": false,
+  "soundTheme": "none",
+  "soundVolume": 0.5,
+  "enableVersionCheck": true,
+  "ignoreWriteProtectedConfigFiles": false,
+  "settingsWindowColorScheme": "system",
+  "settingsWindowFlavor": "auto",
+  "trayIconFlavor": "color",
+  "hardwareAcceleration": true,
+  "lazyInitialization": false,
+  "zoomFactor": 1,
+  "hideSettingsButton": false,
+  "settingsButtonPosition": "bottom-right",
+  "centerDeadZone": 50,
+  "minParentDistance": 150,
+  "dragThreshold": 15,
+  "fadeInDuration": 150,
+  "fadeOutDuration": 200,
+  "keepInputFocus": false,
+  "enableMarkingMode": true,
+  "enableTurboMode": true,
+  "warpMouse": true,
+  "hoverModeNeedsConfirmation": false,
+  "gestureMinStrokeLength": 150,
+  "gestureMinStrokeAngle": 20,
+  "gestureJitterThreshold": 10,
+  "gesturePauseTimeout": 100,
+  "fixedStrokeLength": 0,
+  "rmbSelectsParent": false,
+  "enableGamepad": true,
+  "gamepadBackButton": 1,
+  "gamepadCloseButton": 2,
+  "sameShortcutBehavior": "nothing",
+  "useDefaultOsShowSettingsHotkey": true,
+  "enableAchievements": true
 }
 ```
 
@@ -411,27 +411,27 @@ This file contains the configuration of the individual menus.
 Besides the `version` property, there are two top-level JSON objects: `menus` contains a list of _Menu Descriptions_ and `collections` contains a list of _Menu Collection_.
 The latter is used in the settings dialog to group menus together.
 
-```json5 title=menus.json
+```json title=menus.json
 {
-  version: '2.1.0',
-  menus: [
+  "version": "2.1.0",
+  "menus": [
     {
       // First Menu Description.
     },
     {
       // Second Menu Description.
-    },
+    }
     // ...
   ],
-  collections: [
+  "collections": [
     {
       // First Menu Collection.
     },
     {
       // Second Menu Collection.
-    },
+    }
     // ...
-  ],
+  ]
 }
 ```
 
@@ -459,7 +459,7 @@ They are JSON objects with the following properties:
 
 | Property             | Description                                                                                                                                                                                                                                                                          |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `root` (*mandatory*) | The root menu item of the menu, given as a **Menu Item Description**. [See below for details](#menu-item-descriptions).                                                                                                                                                              |
+| `root` (_mandatory_) | The root menu item of the menu, given as a **Menu Item Description**. [See below for details](#menu-item-descriptions).                                                                                                                                                              |
 | `shortcut`           | The shortcut that opens the menu. This is a string which can contain multiple keys separated by `+`, for example `"Ctrl+Shift+K"` or `"Cmd+Shift+K"`. If empty, the menu will not have a shortcut. See [Valid Key Names](/valid-keynames) for details.                               |
 | `shortcutID`         | On some platforms, Kando cannot bind shortcuts directly. In this case, you can assign an ID which can be used in the global shortcut configuration of your desktop environment. This should be lowercase and contain only ASCII characters and dashes, for example `"main-trigger"`. |
 | `centered`           | Whether the menu should be centered on the screen. If `false`, the menu will be opened at the position of the mouse cursor.                                                                                                                                                          |
@@ -481,7 +481,6 @@ The following properties can be used as **menu conditions**:
 | `windowName` | The name of the window which must be focused for the menu to be shown. It is interpreted in the same way as `appName`.                                                                                                                                                                                                 |
 | `screenArea` | A dictionary with the optional properties `xMin`, `xMax`, `yMin`, and `yMax`. The menu will only be shown if the mouse cursor is within the given screen area. Values are given in pixels and are relative to the top-left corner of the screen. If a value is not specified, the area is unbounded in that direction. |
 
-
 ##### Menu Item Descriptions
 
 The layout of the menu is described by a tree of menu items.
@@ -492,11 +491,10 @@ Each menu item is a JSON object with the following properties:
 | `name`               | The name of the menu item. This is shown in the center of the menu when the item is hovered. The name of the root item defines the name of the menu.                                                                                                                                                                                                                            |
 | `iconTheme`          | Either one of the built-in icon themes (`material-symbols-rounded`, `simple-icons`, `simple-icons-colored`, `base64`, or `emoji`) or a subdirectory of the `icon-themes` directory in Kando’s config directory. [See details](/icon-themes).                                                                                                                                    |
 | `icon`               | The name of the icon from the selected icon theme, an emoji like `🚀` (when `iconTheme` is `emoji`), or a base64-encoded image such as `data:image/gif;base64,...` (when the icon theme is `base64`). [See details](/icon-themes).                                                                                                                                              |
-| `angle` (*optional*) | Defines the angle of the menu item in degrees. If omitted, the angle is calculated automatically. `0°` places the item at the top of the menu, `90°` on the right, and so on. Among sibling items, angles must be monotonically increasing. The first angle must be ≥ `0°`, and all following angles must be smaller than the first angle + `360°`. Invalid angles are ignored. |
+| `angle` (_optional_) | Defines the angle of the menu item in degrees. If omitted, the angle is calculated automatically. `0°` places the item at the top of the menu, `90°` on the right, and so on. Among sibling items, angles must be monotonically increasing. The first angle must be ≥ `0°`, and all following angles must be smaller than the first angle + `360°`. Invalid angles are ignored. |
 | `type`               | The type of the menu item. Several types are available. [See details](#menu-item-types).                                                                                                                                                                                                                                                                                        |
 | `data`               | Depending on the item type, this may contain additional data or be required. [See details](#menu-item-types).                                                                                                                                                                                                                                                                   |
 | `children`           | If the menu item is a submenu, this contains a list of child menu items. Each entry is itself a menu item description.                                                                                                                                                                                                                                                          |
-
 
 ##### Menu Item Types
 
@@ -531,13 +529,9 @@ Click on these links to learn more about the individual item types and which `da
 The `collections` property of the `menus.json` file contains a list of menu collections.
 A menu collection is a JSON object with the following properties:
 
-<div style="width:150px">Property</div> | Description -------- | ----------- `name:
-"undefined"` | The name of the menu collection. This is shown in the settings dialog if
-the collection is selected. `icon: ""` | The name of the icon from the given icon theme.
-The icon is shown in the left sidebar of the settings dialog. The behavior is the same as
-for the `icon` property of a menu item description. `iconTheme: ""` | The icon theme to
-use for the icon. The behavior is the same as for the `iconTheme` property of a menu item
-description. `tags: []` | A list of strings which determine which menus belong to this
-collection. The tags are used to filter the menus in the settings dialog. If a menu has
-all tags of a collection, it will be shown in the collection. If a menu has no tags, it
-will only be shown in the all-menus list or if a collection has no tags at all.
+| <div style="width:150px">Property</div> | Description                                                                                                                                                                                                                                                                                                                  |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name: "undefined"`                     | The name of the menu collection. This is shown in the settings dialog if the collection is selected.                                                                                                                                                                                                                         |
+| `icon: ""`                              | The name of the icon from the given icon theme. The icon is shown in the left sidebar of the settings dialog. The behavior is the same as for the `icon` property of a menu item description.                                                                                                                                |
+| `iconTheme: ""`                         | The icon theme to use for the icon. The behavior is the same as for the `iconTheme` property of a menu item description.                                                                                                                                                                                                     |
+| `tags: []`                              | A list of strings which determine which menus belong to this collection. The tags are used to filter the menus in the settings dialog. If a menu has all tags of a collection, it will be shown in the collection. If a menu has no tags, it will only be shown in the all-menus list or if a collection has no tags at all. |
