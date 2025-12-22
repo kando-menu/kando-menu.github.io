@@ -79,6 +79,7 @@ Below are the default values of the configuration file.
   menuThemeColors: {},
   darkMenuThemeColors: {},
   enableDarkModeForMenuThemes: false,
+  enableSelectionWedges: false,
   soundTheme: 'none',
   soundVolume: 0.5,
   enableVersionCheck: true,
@@ -112,6 +113,7 @@ Below are the default values of the configuration file.
   gamepadCloseButton: 2,
   sameShortcutBehavior: 'nothing',
   useDefaultOsShowSettingsHotkey: true,
+  enableAchievements: true,
 }
 ```
 
@@ -184,6 +186,13 @@ This is only used if `enableDarkModeForMenuThemes` is set to `true`.
 Whether Kando should use the dark menu theme if the system is in dark mode.
 If enabled, Kando will use the `darkMenuTheme` and `darkMenuThemeColors` properties to configure the menu theme if the system is in dark mode.
 
+#### enableSelectionWedges <Badge text="soon!" variant="tip" />
+
+<small>Default value: `"enableSelectionWedges": false`</small>
+
+If enabled, the clickable area of each menu item will be highlighted with a wedge when the item is hovered.
+This has to be supported by the menu theme.
+
 #### soundTheme
 
 <small>Default value: `"soundTheme": "none"`</small>
@@ -243,6 +252,19 @@ If set to `true`, Kando will check for new version regularly, and show a notific
 <small>Default value: `"zoomFactor": 1.0`</small>
 
 The zoom factor of the menu. This can be used to scale the menu on high-resolution screens.
+
+#### hideSettingsButton
+
+<small>Default value: `"hideSettingsButton": false`</small>
+
+If true, the settings button will be hidden if not hovered.
+
+#### settingsButtonPosition
+
+<small>Default value: `"settingsButtonPosition": "bottom-right"`</small>
+
+The position of the settings button.
+Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
 
 #### centerDeadZone
 
@@ -377,18 +399,11 @@ Can be one of the following:
 
 If enabled, pressing <kbd>Command</kbd>+<kbd>,</kbd> on macOS or <kbd>Ctrl</kbd>+<kbd>,</kbd> on Linux or Windows will open the settings window. If disabled, the default hotkey will be ignored.
 
-#### hideSettingsButton
+#### enableAchievements <Badge text="soon!" variant="tip" />
 
-<small>Default value: `"hideSettingsButton": false`</small>
+<small>Default value: `"enableAchievements": true`</small>
 
-If true, the settings button will be hidden if not hovered.
-
-#### settingsButtonPosition
-
-<small>Default value: `"settingsButtonPosition": "bottom-right"`</small>
-
-The position of the settings button.
-Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
+If enabled, the user will earn achievements for completing certain tasks within the menu.
 
 ## Menu Configuration: `menus.json`
 
