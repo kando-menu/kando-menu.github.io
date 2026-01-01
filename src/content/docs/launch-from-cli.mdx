@@ -6,7 +6,7 @@ title: Launching Kando from a Terminal
 description: How to run Kando from the command line.
 ---
 
-import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Aside, Badge } from '@astrojs/starlight/components';
 import { Icon } from 'astro-icon/components';
 
 ![banner](../../assets/banners/banner08.png)
@@ -51,37 +51,43 @@ Kando comes with a command line interface (CLI) that allows you to interact with
 For now, these commands are available:
 
 <details>
-<summary>`--help`</summary>
-Prints the help message for the CLI.
+  <summary>`--help`</summary>
+  Prints the help message for the CLI.
 </details>
 
 <details>
-<summary>`--version` or `-v`</summary>
-Prints the version of Kando.
+  <summary>`--version` or `-v`</summary>
+  Prints the version of Kando.
 </details>
 
 <details>
-<summary>`--menu "Menu Name"` or `-m "Menu Name"`</summary>
-Opens the menu with the given name.
-This also works if Kando is already running.
-In this case, the menu will be opened in the running instance.
+  <summary>`--menu "Menu Name"` or `-m "Menu Name"`</summary>
+  Opens the menu with the given name. This also works if Kando is already running. In this
+  case, the menu will be opened in the running instance.
 </details>
 
 <details>
-<summary>`--settings` or `-s`</summary>
-Opens the settings window.
-This also works if Kando is already running.
-In this case, the settings window will be opened in the running instance.
+  <summary>
+    `--close-menu` <Badge text="soon!" variant="tip" />
+  </summary>
+  Closes the currently opened menu. This will do nothing if no menu is shown or Kando is
+  not running.
 </details>
 
 <details>
-<summary>`--reload-menu-theme`</summary>
-Reloads the menu theme.
-This can be useful if you are developing a theme and want to see the changes without restarting Kando.
+  <summary>`--settings` or `-s`</summary>
+  Opens the settings window. This also works if Kando is already running. In this case,
+  the settings window will be opened in the running instance.
 </details>
 
 <details>
-<summary>`--reload-sound-theme`</summary>
-Reloads the sound theme.
-This can be useful if you are developing a theme and want to hear the changes without restarting Kando.
+  <summary>`--reload-menu-theme`</summary>
+  Reloads the menu theme. This can be useful if you are developing a theme and want to see
+  the changes without restarting Kando.
+</details>
+
+<details>
+  <summary>`--reload-sound-theme`</summary>
+  Reloads the sound theme. This can be useful if you are developing a theme and want to
+  hear the changes without restarting Kando.
 </details>
