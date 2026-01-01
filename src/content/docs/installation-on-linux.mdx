@@ -281,7 +281,11 @@ Hotkey simulation through Kando will not work for triggering keybinds registered
 In that case, have Kando run a command `niri msg action <action>` where the action is the one configured in the your configuration along with its arguments (for example `niri msg action focus-workspace-up` or `niri msg action focus-workspace 1`).
 
 Niri does not yet support global shortcuts.
-But you can open menus using `kando --menu "Menu Name"` from the command line or from your Niri config.
+But you can open menus using `kando --menu "Menu Name"` or `kando --trigger <shortcut>` from the command line or from your Niri config.
+
+<Aside type="danger" title="--trigger is not available yet!">
+  The `--trigger` argument will be available in Kando 2.2.0.
+</Aside>
 
 ### Dusk
 

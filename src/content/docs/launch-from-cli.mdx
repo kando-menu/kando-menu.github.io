@@ -62,8 +62,28 @@ For now, these commands are available:
 
 <details>
   <summary>`--menu "Menu Name"` or `-m "Menu Name"`</summary>
-  Opens the menu with the given name. This also works if Kando is already running. In this
-  case, the menu will be opened in the running instance.
+Opens the menu with the given name. This also works if Kando is already running. In this
+case, the menu will be opened in the running instance.
+
+This behaves as if the menu's shortcut had been pressed, so all context conditions are checked.
+Also, if multiple menus have the same name, the one with the most specific conditions will
+be opened. Furthermore, if a menu is already open, calling this command will be like
+pressing the shortcut again - so it will either close the menu or cycle through the
+matching menus depending on your settings.
+
+</details>
+
+<details>
+  <summary>`--trigger <shortcut>` or `-t <shortcut>` <Badge text="soon!" variant="tip" /></summary>
+Opens the menu which is assigned to the given shortcut or shortcut ID. This also works
+if Kando is already running. In this case, the menu will be opened in the running instance.
+
+This behaves as if the shortcut had been pressed, so all context conditions are checked.
+Also, if multiple menus are bound to the same shortcut, the one with the most specific conditions will
+be opened. Furthermore, if a menu is already open, calling this command will be like
+pressing the shortcut again - so it will either close the menu or cycle through the
+matching menus depending on your settings.
+
 </details>
 
 <details>

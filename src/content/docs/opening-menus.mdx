@@ -12,12 +12,14 @@ import Intro from '../../components/Intro.astro';
 ![banner](../../assets/banners/banner12.png)
 
 <Intro>
-While Kando does not have a builtin way to open menus with mouse buttons or touch gestures, there are many platform-dependent third-party tools which can help you with this.
+  While Kando does not have a builtin way to open menus with mouse buttons or touch
+  gestures, there are many platform-dependent third-party tools which can help you with
+  this.
 </Intro>
 
-## How to Open Menus From Other Tools
+## Open Menus From Other Tools
 
-You can either make the third-party tool open the menu by simulation the shortcut for the menu, or it can directly call the Kando executable with the `--menu "menu name"` argument.
+You can either make the third-party tool open the menu by simulating the shortcut for the menu, or it can directly call the Kando executable with the [`--menu "menu name"`](/launch-from-cli) or [`--trigger <shortcut>`](/launch-from-cli) argument.
 
 ### Option 1: Simulate the Shortcut
 
@@ -29,34 +31,43 @@ Using one which does not interfere with you workflow is a good idea.
 For instance <kbd>Ctrl</kbd>+<kbd>F13</kbd> is usually not used by any application, so it is a good choice.
 
 <Aside type="tip" title="Use a modifier key!">
-Kando menus can be called with single-key shortcuts, but this is not recommended.
-Turbo mode will only work properly if the shortcut includes a modifier like <kbd>Ctrl</kbd>, <kbd>Alt</kbd>, or <kbd>Shift</kbd>.
+  Kando menus can be called with single-key shortcuts, but this is not recommended. Turbo
+  mode will only work properly if the shortcut includes a modifier like <kbd>Ctrl</kbd>,{' '}
+  <kbd>Alt</kbd>, or <kbd>Shift</kbd>.
 </Aside>
 
-### Option 2: Use the `--menu` Argument
+### Option 2: Use `--menu` or `--trigger`
 
-With  the `--menu` argument, you can open a Kando menu by calling the Kando executable with the name of the menu you want to open.
+<Aside type="danger" title="--trigger is not available yet!">
+  The `--trigger` argument will be available in Kando 2.2.0.
+</Aside>
+
+With the `--menu` and `--trigger` arguments, you can open a Kando menu by calling the Kando executable with the name or shortcut of the menu you want to open.
 Depending on your operating system, the command to open a Kando menu would look like this:
 
 <Tabs syncKey='os'>
   <TabItem label="Windows" icon="seti:windows">
     ```cmd
-    %localappdata%\Kando\app-<version number>\Kando.exe --menu "Menu Name"
+    %localappdata%\Kando\app-<version number>\Kando.exe --menu "Example Menu"
+    %localappdata%\Kando\app-<version number>\Kando.exe --trigger Control+Space
     ```
   </TabItem>
   <TabItem label="macOS" icon="apple">
     ```bash
-    /Applications/Kando.app/Contents/MacOS/Kando --menu "Menu Name"
+    /Applications/Kando.app/Contents/MacOS/Kando --menu "Example Menu"
+    /Applications/Kando.app/Contents/MacOS/Kando --trigger Control+Space
     ```
   </TabItem>
   <TabItem label="Linux" icon="linux">
     ```bash
-    /usr/bin/kando --menu "Menu Name"
+    /usr/bin/kando --menu "Example Menu"
+    /usr/bin/kando --trigger Control+Space
     ```
   </TabItem>
   <TabItem label="Flatpak" icon="linux">
     ```bash
-    flatpak run menu.kando.Kando --menu "Menu Name"
+    flatpak run menu.kando.Kando --menu "Example Menu"
+    flatpak run menu.kando.Kando --trigger Control+Space
     ```
   </TabItem>
 </Tabs>
@@ -69,30 +80,57 @@ If your mouse supports this, this is an easy way to
 If you do not have such a driver, you can use any of the third-party tools listed below.
 Most of them are free and open-source.
 
-<Tabs syncKey='os'>
+<Tabs syncKey="os">
   <TabItem label="Windows" icon="seti:windows">
-   * [AutoHotkey](https://www.autohotkey.com/) is a powerful scripting language for Windows. You can use it to run the kando command when you press a mouse button or to remap a mouse button to a keyboard shortcut which opens a Kando menu. You can follow [this guide](https://github.com/orgs/kando-menu/discussions/853) for a complete example.
-   * [GestureSign](https://www.microsoft.com/store/productId/9N45WQVK2QQW?ocid=pdpshare) allows opening a Kando menu with multi-touch taps and gestures on both touchpad and touchscreen.
+    * [AutoHotkey](https://www.autohotkey.com/) is a powerful scripting language for
+    Windows. You can use it to run the kando command when you press a mouse button or to
+    remap a mouse button to a keyboard shortcut which opens a Kando menu. You can follow
+    [this guide](https://github.com/orgs/kando-menu/discussions/853) for a complete
+    example. *
+    [GestureSign](https://www.microsoft.com/store/productId/9N45WQVK2QQW?ocid=pdpshare)
+    allows opening a Kando menu with multi-touch taps and gestures on both touchpad and
+    touchscreen.
   </TabItem>
   <TabItem label="macOS" icon="apple">
-   * [Karabiner-Elements](https://karabiner-elements.pqrs.org/) can be used to remap mouse buttons to keyboard shortcuts.
-   * [BetterTouchTool](https://folivora.ai/) allows opening a Kando menu via touchpad gestures.
-   * [Multitouch](https://multitouch.app) allows to add keyboard shortcut as a gesture for trackpad or Apple Magic Mouse.
-   * [BetterMouse](https://better-mouse.com/) is a tool which allows you to remap mouse buttons to keyboard shortcuts.
+    * [Karabiner-Elements](https://karabiner-elements.pqrs.org/) can be used to remap
+    mouse buttons to keyboard shortcuts. * [BetterTouchTool](https://folivora.ai/) allows
+    opening a Kando menu via touchpad gestures. * [Multitouch](https://multitouch.app)
+    allows to add keyboard shortcut as a gesture for trackpad or Apple Magic Mouse. *
+    [BetterMouse](https://better-mouse.com/) is a tool which allows you to remap mouse
+    buttons to keyboard shortcuts.
   </TabItem>
   <TabItem label="Linux" icon="linux">
-   * [fusuma](https://github.com/iberianpig/fusuma) together with it's [sendkey plugin](https://github.com/iberianpig/fusuma-plugin-sendkey?tab=readme-ov-file) can be used to open a Kando menu with touchpad or touchscreen gestures. It works on **X11** and **Wayland**.
-   * [Input Remapper](https://github.com/sezanzeb/input-remapper) is a tool which allows you to remap mouse buttons to keyboard shortcuts. It works both on **X11 and Wayland**. While you can use it directly to bind menus to mouse buttons via keyboard shortcuts, it also allows for more advanced setups like showing menus when pressing two mouse buttons at the same time. [Here is a guide!](https://github.com/orgs/kando-menu/discussions/1183)
-   * [Touchegg](https://github.com/JoseExposito/touchegg#readme) is a multitouch gesture recognizer for Linux. You can use it to open a Kando menu with touchpad gestures. It only works on **X11**.
-   * **KDE Plasma** comes with built-in support for remapping mouse buttons to keyboard shortcuts. You can find [this feature](https://www.phoronix.com/news/KDE-Rebind-Extra-Mouse-Buttons) in the system settings under "System Settings" / "Mouse & Touchpad" / "Add Binding".
-   * There's a [Configurable Button](https://store.kde.org/p/1297839/) widget for **KDE Plasma** which allows running `kando --menu "menu name"` when clicked.
-   * On **GNOME Shell**, you can use the [CHC-E (Custom Hot Corners - Extended)](https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/) extension to run arbitrary commands when you move your mouse to a corner of the screen.
-   * On **GNOME Shell**, you can also use the [Floating Dock](https://extensions.gnome.org/extension/2542/floating-dock/). It requires a bit of tinkering as you need to create custom desktop files for each menu you want to open. However, it allows you to open menus by clicking on a floating dock icon.
+    * [fusuma](https://github.com/iberianpig/fusuma) together with it's [sendkey
+    plugin](https://github.com/iberianpig/fusuma-plugin-sendkey?tab=readme-ov-file) can be
+    used to open a Kando menu with touchpad or touchscreen gestures. It works on **X11**
+    and **Wayland**. * [Input Remapper](https://github.com/sezanzeb/input-remapper) is a
+    tool which allows you to remap mouse buttons to keyboard shortcuts. It works both on
+    **X11 and Wayland**. While you can use it directly to bind menus to mouse buttons via
+    keyboard shortcuts, it also allows for more advanced setups like showing menus when
+    pressing two mouse buttons at the same time. [Here is a
+    guide!](https://github.com/orgs/kando-menu/discussions/1183) *
+    [Touchegg](https://github.com/JoseExposito/touchegg#readme) is a multitouch gesture
+    recognizer for Linux. You can use it to open a Kando menu with touchpad gestures. It
+    only works on **X11**. * **KDE Plasma** comes with built-in support for remapping
+    mouse buttons to keyboard shortcuts. You can find [this
+    feature](https://www.phoronix.com/news/KDE-Rebind-Extra-Mouse-Buttons) in the system
+    settings under "System Settings" / "Mouse & Touchpad" / "Add Binding". * There's a
+    [Configurable Button](https://store.kde.org/p/1297839/) widget for **KDE Plasma**
+    which allows running `kando --menu "menu name"` when clicked. * On **GNOME Shell**,
+    you can use the [CHC-E (Custom Hot Corners -
+    Extended)](https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/)
+    extension to run arbitrary commands when you move your mouse to a corner of the
+    screen. * On **GNOME Shell**, you can also use the [Floating
+    Dock](https://extensions.gnome.org/extension/2542/floating-dock/). It requires a bit
+    of tinkering as you need to create custom desktop files for each menu you want to
+    open. However, it allows you to open menus by clicking on a floating dock icon.
   </TabItem>
 </Tabs>
 
-<br/>
+<br />
 
 <Aside type="note" title="Have you discovered another cool tool?">
-If you discovered a cool new way to open menus, please let us know! You can either open an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!
+  If you discovered a cool new way to open menus, please let us know! You can either open
+  an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to
+  discuss your idea!
 </Aside>
