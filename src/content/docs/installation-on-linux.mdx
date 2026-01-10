@@ -189,16 +189,36 @@ Kando works quite well on Hyprland, but you will need to do some additional setu
 You will need some window rules for Kando.
 Else, the menu will not float above other windows.
 
-```
-// ~/.config/hypr/hyprland.conf
-windowrule = noblur, class:kando
-windowrule = opaque, class:kando
-windowrule = size 100% 100%, class:kando
-windowrule = noborder, class:kando
-windowrule = noanim, class:kando
-windowrule = float, class:kando
-windowrule = pin, class:kando
-```
+<Tabs>
+  <TabItem label="Hyprland 0.53+">
+    ```
+    // ~/.config/hypr/hyprland.conf
+    windowrule {
+      name = kando
+      match:class = ^(kando)$
+      no_blur = on
+      opaque = on
+      size = 100% 100%
+      border_size = 0
+      no_anim = on
+      float = on
+      pin = on
+    }
+    ```
+  </TabItem>
+  <TabItem label="Old Syntax">
+    ```
+    // ~/.config/hypr/hyprland.conf
+    windowrule = noblur, class:kando
+    windowrule = opaque, class:kando
+    windowrule = size 100% 100%, class:kando
+    windowrule = noborder, class:kando
+    windowrule = noanim, class:kando
+    windowrule = float, class:kando
+    windowrule = pin, class:kando
+    ```
+  </TabItem>
+</Tabs>
 
 #### Shortcuts
 
