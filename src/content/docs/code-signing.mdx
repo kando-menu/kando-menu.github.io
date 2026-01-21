@@ -37,4 +37,7 @@ Currently, only [@Schneegans](https://github.com/orgs/kando-menu/people/Schneega
 
 ## Privacy Policy
 
-Kando will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
+Kando will not transfer any information to other networked systems except for the following cases:
+
+* On startup, Kando will check for updates by sending a request to `api.github.com`. This can be disabled in the settings.
+* On the first start after installation, Kando will download some spell checking dictionaries from `redirector.gvt1.com`. This is a "feature" of the underlying Electron framework and cannot easily be disabled. See [this discussion](https://github.com/orgs/kando-menu/discussions/1264) for more details.
