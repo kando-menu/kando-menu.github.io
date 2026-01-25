@@ -17,7 +17,7 @@ hero:
     - text: Read the Docs
       link: /intro/
       icon: right-arrow
-    - text: Download from GitHub
+    - text: Download on GitHub
       link: https://github.com/kando-menu/kando/releases
       icon: external
       variant: minimal
@@ -51,14 +51,9 @@ import achievements from '../../assets/achievement-screen.png';
 
 <ShowCase>
 
-<ShowCaseItem  type="centered">
-  <div slot="description">
-    <img style="width: 160px; margin: 0 auto;" src={icon.src} />
-  </div>
-</ShowCaseItem>
-
 <ShowCaseItem type="centered">
-  <div slot="title" style="text-align: center; margin-top: -7rem;">
+  <div slot="title" style="text-align: center">
+    <img style="width: 3em; margin: 0 auto 1em auto" src={icon.src} />
     Master your workflow with <span class="sakura-font">Kando</span>.
   </div>
   <div slot="description" style="margin: 0 10% 10% 10%">
@@ -124,7 +119,7 @@ import achievements from '../../assets/achievement-screen.png';
 </ShowCaseItem>
 
 <ShowCaseItem type="fullwidth">
-  <div slot="description" style="margin: -7rem auto 0 auto; max-width: 2000px">
+  <div slot="description" style="margin: -3em auto 0 auto; max-width: 2000px">
     <ShowCaseGrid>
       <ShowCaseGridItem type="feature">
         <Icon slot="icon" name="solar:rocket-bold-duotone" />
@@ -216,10 +211,12 @@ import achievements from '../../assets/achievement-screen.png';
       centeredSlides: true,
       slideToClickedSlide: true,
       slidesPerView: "auto",
+      initialSlide: 1,
       coverflowEffect: {
         rotate: 0,
-        stretch: 300,
-        depth: 1000,
+        stretch: 0,
+        depth: 800,
+        modifier:2,
         slideShadows: false,
       },
       pagination: {

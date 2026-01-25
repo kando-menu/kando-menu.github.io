@@ -31,15 +31,10 @@ const { type, href } = Astro.props;
     padding: 2rem 2rem;
     margin-top: 0;
     position: relative;
-    text-decoration: none !important;
     color: var(--sl-white);
     transition:
       color 0.3s ease,
       transform 0.3s ease;
-
-    mask-image: url('../assets/image-mask.jpg');
-    mask-mode: luminance;
-    mask-size: 100% 100%;
 
     &:hover {
       transform: scale(1.03);
@@ -48,7 +43,8 @@ const { type, href } = Astro.props;
     &.feature {
       align-items: center;
       text-align: center;
-      width: calc(200px + 10vw);
+      width: calc(300px + 5vw);
+      text-decoration: none;
 
       .icon {
         font-size: 2rem;
@@ -90,21 +86,6 @@ const { type, href } = Astro.props;
       text-align: center;
       width: calc(100px + 10vw);
 
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-
-        background-color: var(--sl-color-accent-low);
-        border-radius: 3rem;
-
-        opacity: 0.4;
-      }
-
       &:hover {
         color: var(--sl-color-accent-high);
       }
@@ -123,6 +104,12 @@ const { type, href } = Astro.props;
         opacity: 0.6;
         font-size: 0.8rem;
       }
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .grid-item {
+      width: 90vw !important;
     }
   }
 </style>
