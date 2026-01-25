@@ -1,0 +1,99 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+interface Petal {
+  id: number;
+  left: number;
+  delay: number;
+  duration: number;
+  size: number;
+  opacity: number;
+}
+
+const petals: Petal[] = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  left: Math.random() * 100,
+  delay: Math.random() * 15,
+  duration: 20 + Math.random() * 20,
+  size: 8 + Math.random() * 12,
+  opacity: 0.3 + Math.random() * 0.4,
+}));
+---
+
+<div class="blossoms">
+  {
+    petals.map((petal) => (
+      <div
+        class="absolute petal-fall"
+        style={`left: ${petal.left}%; animation-delay: ${petal.delay}s; animation-duration: ${petal.duration}s;`}>
+        <svg
+          width={petal.size}
+          height={petal.size}
+          viewBox="0 0 24 24"
+          fill="none"
+          class="petal-sway"
+          style={`opacity: ${petal.opacity}; animation-delay: ${petal.delay * 0.5}s;`}>
+          <path
+            d="M12 2C12 2 8 6 8 10C8 14 12 18 12 18C12 18 16 14 16 10C16 6 12 2 12 2Z"
+            fill="hsl(350 80% 72%)"
+          />
+          <path
+            d="M12 6C12 6 9 8 9 11C9 14 12 16 12 16C12 16 15 14 15 11C15 8 12 6 12 6Z"
+            fill="hsl(350 70% 85%)"
+            fill-opacity="0.6"
+          />
+        </svg>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .blossoms {
+    position: absolute;
+    margin: 0;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 200vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+    transform: translateY(calc(0.5 * var(--parallax-offset-top, 0px)));
+  }
+
+  .absolute {
+    position: absolute;
+  }
+
+  .petal-fall {
+    animation: petal-fall linear infinite;
+    will-change: transform;
+  }
+
+  .petal-sway {
+    animation: petal-sway 3s ease-in-out infinite;
+  }
+
+  @keyframes petal-fall {
+    0% {
+      transform: translateY(-10vh) translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) translateX(100px) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes petal-sway {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(30px);
+    }
+  }
+</style>

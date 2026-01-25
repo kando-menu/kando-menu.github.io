@@ -3,13 +3,13 @@
 # SPDX-License-Identifier: CC-BY-4.0
 
 title: Kando
-description: Kando is an open-source cross-platform pie menu. You can use it to launch applications, execute keyboard macros, open files, and much more!
+description: Kando is an open source cross-platform pie menu. You can use it to launch applications, execute keyboard macros, open files, and much more!
 template: splash
 head:
   - tag: title
-    content: Kando - Do things with utmost efficiency!
+    content: Kando - Do things with utmost efficiency.
 hero:
-  tagline: Do things with utmost efficiency.
+  tagline: The ultimate pie menu for power users. Launch apps, execute macros, open files, and more — with the precision of a ninja.
   image:
     light: ../../assets/menu-light.webp
     dark: ../../assets/menu-dark.webp
@@ -32,6 +32,10 @@ import { Image } from 'astro:assets';
 import ScrollIndicator from '../../components/ScrollIndicator.astro';
 import ShowCase from '../../components/ShowCase.astro';
 import ShowCaseItem from '../../components/ShowCaseItem.astro';
+import ShowCaseGrid from '../../components/ShowCaseGrid.astro';
+import ShowCaseGridItem from '../../components/ShowCaseGridItem.astro';
+
+import icon from '../../assets/kando.svg';
 
 import slide1 from '../../assets/accordion-slide1.webp';
 import slide2 from '../../assets/accordion-slide2.webp';
@@ -47,24 +51,36 @@ import achievements from '../../assets/achievement-screen.png';
 
 <ShowCase>
 
-<ShowCaseItem title="What is Kando?" type="centered">
-  <div slot="description" style="margin: 0 10% 10vh 10%">
+<ShowCaseItem  type="centered">
+  <div slot="description">
+    <img style="width: 160px; margin: 0 auto;" src={icon.src} />
+  </div>
+</ShowCaseItem>
+
+<ShowCaseItem type="centered">
+  <div slot="title" style="text-align: center; margin-top: -7rem;">
+    Master your Workflow with <span class="sakura-font">Kando</span>.
+  </div>
+  <div slot="description" style="margin: 0 10% 10% 10%">
     <p>
-      Kando is a free and open-source pie menu. With Kando, you can launch applications,
-      execute keyboard macros, open files, and much more. It is designed to be used with
+      Kando transforms the way you interact with your PC. It is designed to be used with
       🖱️&nbsp;mouse, 🖊️&nbsp;stylus, 👆&nbsp;touch, or 🎮&nbsp;controller input.
     </p>
   </div>
 </ShowCaseItem>
 
-<ShowCaseItem icon="solar:clock-circle-bold" title="Kando is fast." type="left">
+
+<ShowCaseItem  type="left">
+  <div slot="title">
+    <Icon name="solar:clock-circle-bold" class="inline-icon" /> Kando is <span class="sakura-font">fast</span>.
+  </div>
   <p slot="description">
     With Kando, you can select your favorite tools and actions _within milliseconds_. The
     gesture recognition allows you to select items in subsubsubmenus with ease!
 
     [Learn More →](/intro)
-
   </p>
+
   <div slot="content" class="splash">
     <video
       autoplay
@@ -75,12 +91,15 @@ import achievements from '../../assets/achievement-screen.png';
   </div>
 </ShowCaseItem>
 
-<ShowCaseItem icon="solar:target-bold" title="Kando is precise." type="right">
+<ShowCaseItem type="right">
+  <div slot="title">
+    <Icon name="solar:target-bold" class="inline-icon" /> Kando is <span class="sakura-font">precise</span>.
+  </div>
   <p slot="description">
     In Kando, your entire screen becomes a click target. You do not have to aim at tiny
     buttons, _just throw your mouse approximately in the right direction!_
 
-    [Learn More →](/usage)
+    [Usage Guide →](/usage)
 
   </p>
   <div slot="content" class="splash">
@@ -93,13 +112,69 @@ import achievements from '../../assets/achievement-screen.png';
   </div>
 </ShowCaseItem>
 
-<ShowCaseItem icon="solar:heart-shine-bold" title="Kando is beautiful." type="centered">
+<ShowCaseItem type="centered">
+  <div slot="title" style="text-align: center">
+    Powerful Features, <span class="sakura-font">Designed for Efficiency</span>.
+  </div>
+  <div slot="description" style="margin: 0 10% 0 10%">
+    <p>
+      Using scientific principles, Kando is designed to minimize the distance between your thoughts and actions.
+    </p>
+  </div>
+</ShowCaseItem>
+
+<ShowCaseItem type="fullwidth">
+  <div slot="description" style="margin: -7rem auto 0 auto; max-width: 2000px">
+    <ShowCaseGrid>
+      <ShowCaseGridItem type="feature">
+        <Icon slot="icon" name="solar:rocket-bold-duotone" />
+        <div slot="title">Launch Apps Instantly</div>
+        <p slot="description">Open your favorite applications with a single gesture. No more hunting through menus.</p>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="feature">
+        <Icon slot="icon" name="solar:keyboard-bold" />
+        <div slot="title">Execute Macros</div>
+        <p slot="description">Execute keyboard shortcuts with a single gesture. No need to remember complex key combinations.</p>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="feature">
+        <Icon slot="icon" name="solar:file-bold" />
+        <div slot="title">Access Files Quickly</div>
+        <p slot="description">Navigate to frequently used files and folders in milliseconds.</p>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="feature">
+        <Icon slot="icon" name="solar:hand-shake-bold" />
+        <div slot="title">Intuitive Gestures</div>
+        <p slot="description">You will be surprised by how fast you can select items using only muscle memory!</p>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="feature">
+        <Icon slot="icon" name="solar:pallete-2-bold" />
+        <div slot="title">Fully Customizable</div>
+        <p slot="description">Create nested menus, assign icons, and configure every aspect to match your workflow.</p>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="feature">
+        <Icon slot="icon" name="solar:monitor-bold" />
+        <div slot="title">Cross-Platform</div>
+        <p slot="description">Available for Windows, macOS, and Linux. One menu to rule them all.</p>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="feature">
+        <Icon slot="icon" name="solar:lock-bold" />
+        <div slot="title">Privacy First</div>
+        <p slot="description">No telemetry, no tracking, no cloud. Your data stays on your machine.</p>
+      </ShowCaseGridItem>
+    </ShowCaseGrid>
+  </div>
+</ShowCaseItem>
+
+<ShowCaseItem  type="centered">
+  <div slot="title">
+    <Icon name="solar:heart-shine-bold" class="inline-icon" /> Kando is <span class="sakura-font">beautiful</span>.
+  </div>
   <div slot="description">
     <p>
       You can customize Kando to your heart's content.<br />
       It supports custom menu themes, icon sets, and even sound themes!
 
-      [Learn More →](/menu-themes)
+     [Learn More →](/menu-themes)
     </p>
 
     <Swiper
@@ -142,9 +217,9 @@ import achievements from '../../assets/achievement-screen.png';
       slideToClickedSlide: true,
       slidesPerView: "auto",
       coverflowEffect: {
-        rotate: 30,
-        stretch: 0,
-        depth: 1500,
+        rotate: 0,
+        stretch: 300,
+        depth: 1000,
         slideShadows: false,
       },
       pagination: {
@@ -155,7 +230,7 @@ import achievements from '../../assets/achievement-screen.png';
   >
     <SwiperWrapper>
       <SwiperSlide>
-        <h2><Icon name="solar:branching-paths-up-bold" class="inline-icon" /> Kando is versatile.</h2>
+        <h2><Icon name="solar:branching-paths-up-bold" class="inline-icon" /> Kando is <span class="sakura-font">versatile</span>.</h2>
         <p>
           Kando supports opening different menus, depending on the current application or window.
           This allows you to have a dedicated menu for each of your favorite applications!
@@ -163,7 +238,7 @@ import achievements from '../../assets/achievement-screen.png';
         <Image src={editor} alt="menu editor" class="shadow" />
       </SwiperSlide>
       <SwiperSlide>
-        <h2><Icon name="solar:emoji-funny-circle-bold" class="inline-icon" /> Kando is fun.</h2>
+        <h2><Icon name="solar:emoji-funny-circle-bold" class="inline-icon" /> Kando is <span class="sakura-font">fun</span>.</h2>
         <p>
           With Kando, you can gradually transition from a beginner to an expert user while your muscles learn
           the gestures.
@@ -172,7 +247,7 @@ import achievements from '../../assets/achievement-screen.png';
         <Image src={achievements} alt="achievements screen" class="shadow" />
       </SwiperSlide>
       <SwiperSlide>
-        <h2><Icon name="solar:heart-pulse-bold" class="inline-icon" /> Kando is updated regularly.</h2>
+        <h2><Icon name="solar:heart-pulse-bold" class="inline-icon" /> Kando is <span class="sakura-font">updated regularly</span>.</h2>
         <p>
           The latest update of Kando brings several new features and improvements. Most remarkably: Achievements!
         </p>
@@ -185,26 +260,29 @@ import achievements from '../../assets/achievement-screen.png';
   </Swiper>
 </ShowCaseItem>
 
-<ShowCaseItem title="Kando is free." icon="solar:gift-bold" type="centered">
+<ShowCaseItem type="centered">
+  <div slot="title">
+    <Icon name="solar:gift-bold" class="inline-icon" /> Kando is <span class="sakura-font">free</span>.
+  </div>
   <div slot="description" style="margin: 0 10% 5vh 10%">
   <p>
-    I have a [long history](https://github.com/Schneegans/Gnome-Pie) of [creating pie menus](https://github.com/Schneegans/Fly-Pie).
-    I strongly believe that they can bring joy and efficiency to many users!
-    Thus, **I am creating Kando out of sheer passion** and want to make it available to everyone!
+    Kando is and always will be **completely free and open source**. It's a passion project built with ❤️ for the community.
 
-    I am working on this project in my spare time.
-    While code contributions are the most awesome way to support the development, donations will encourage me to keep working on Kando and help me cover costs for hosting and code signing.
+    If you find Kando useful and want to support its continued development, you can buy me a coffee! Every contribution helps keep the project alive and motivates me to add new features.
+  </p>
 
-    [💖 Support the development →](https://ko-fi.com/schneegans)
+  <LinkButton href="https://ko-fi.com/schneegans" iconPlacement="start" icon="heart" variant='primary'>
+    Support the Development
+  </LinkButton>
 
-</p>
   </div>
 </ShowCaseItem>
 
 <ShowCaseItem
-  icon="solar:chat-square-like-bold"
-  title="And finally: Kando has an awesome community."
   type="left">
+   <div slot="title">
+    <Icon name="solar:chat-square-like-bold" class="inline-icon" /> Kando has an <span class="sakura-font">awesome community</span>.
+  </div>
   <p slot="description">
     Do you have questions, ideas, or feedback? Join us on Discord and get in touch with
     developers and other users!
@@ -222,24 +300,34 @@ import achievements from '../../assets/achievement-screen.png';
   </div>
 </ShowCaseItem>
 
-<ShowCaseItem title="Try Kando Now!" type="centered">
+<ShowCaseItem type="centered">
+  <div slot="title">
+    Ready to master <span class="sakura-font">Your Workflow</span> with Kando?
+  </div>
   <div slot="description">
     <p>
-      Kando is open source, free, and available for{' '}
-      <AstroIcon name="seti:windows" class="inline-icon" /> Windows,{' '}
-      <AstroIcon name="apple" class="inline-icon" /> macOS, and{' '}
-      <AstroIcon name="linux" class="inline-icon" /> Linux. Installation is easy and you
-      can start mastering Kando right away!
+      Download Kando for your platform and transform the way you interact with your computer.
+      To get started, follow the installation guides below.
     </p>
-    <LinkButton href="/intro" icon="right-arrow">
-      Read the Docs
-    </LinkButton>
-    <LinkButton
-      href="https://github.com/kando-menu/kando/releases"
-      icon="external"
-      variant="minimal">
-      Download from GitHub
-    </LinkButton>
+
+    <ShowCaseGrid>
+      <ShowCaseGridItem type="button" href="/installation-on-windows">
+        <AstroIcon slot="icon" name="seti:windows" />
+        <div slot="title">Windows Guide</div>
+        <div slot="description">Windows 10/11</div>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="button" href="/installation-on-macos">
+        <AstroIcon slot="icon" name="apple" />
+        <div slot="title">macOS Guide</div>
+        <div slot="description">macOS 11+</div>
+      </ShowCaseGridItem>
+      <ShowCaseGridItem type="button" href="/installation-on-linux">
+        <AstroIcon slot="icon" name="linux" />
+        <div slot="title">Linux Guide</div>
+        <div slot="description">AppImage, DEB, RPM, and more</div>
+      </ShowCaseGridItem>
+    </ShowCaseGrid>
+
   </div>
   <p slot="content"></p>
 </ShowCaseItem>

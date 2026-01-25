@@ -1,0 +1,125 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+import Default from '@astrojs/starlight/components/Hero.astro';
+
+import CherryBlossoms from './CherryBlossoms.astro';
+---
+
+<!-- Render the default <Hero/> component. -->
+<Default {...Astro.props}><slot /></Default>
+
+<CherryBlossoms />
+
+<style is:global>
+  /* Add background images to landing page. */
+  [data-has-hero] body {
+    background-image: url('../assets/bg-dark.webp'), url('../assets/bg-dark-bottom.webp');
+    background-size: auto 100vh;
+    background-position:
+      left 0px top calc(0.5 * var(--parallax-offset-top, 0px)),
+      left 0px bottom calc(0.5 * var(--parallax-offset-bottom, 0px));
+    background-repeat: no-repeat;
+    background-color: #000;
+    position: relative;
+    overflow-x: hidden;
+    will-change: background-position;
+  }
+
+  @media (min-aspect-ratio: 4/3) {
+    [data-has-hero] body {
+      background-size: 100vw auto;
+    }
+  }
+
+  :root[data-theme='light'][data-has-hero] body {
+    background-image:
+      url('../assets/bg-light.webp'), url('../assets/bg-light-bottom.webp');
+    background-color: white;
+  }
+
+  /* Make header transparent on the landing page. */
+  [data-has-hero] header {
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  [data-has-hero] .main-frame {
+    padding-top: 0;
+  }
+
+  .hero {
+    min-height: calc(100vh - 150px);
+  }
+
+  .hero h1 {
+    font-family: Neucha, serif;
+  }
+
+  .hero h1 {
+    font-size: clamp(5rem, calc(3rem + 10vw), 10rem);
+    font-weight: normal;
+    line-height: 5rem;
+  }
+
+  .hero h1::after {
+    content: '';
+    display: inline-block;
+    width: 0.35em;
+    height: 0.35em;
+    vertical-align: super;
+    background-image: url(../assets/kando-logo-postfix-dark.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: translate(-0.025em, -0.2em);
+  }
+
+  :root[data-theme='light'] .hero h1::after {
+    background-image: url(../assets/kando-logo-postfix-light.svg);
+  }
+
+  .tagline {
+  }
+
+  @media (min-width: 50rem) {
+    .hero {
+      grid-template-columns: 7fr 5fr;
+    }
+
+    .hero h1 {
+      margin-top: 4rem;
+      line-height: 6rem;
+    }
+
+    .hero > img,
+    .hero > .hero-html {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const updateParallax = () => {
+      const offsetTop = window.scrollY;
+      const offsetBottom =
+        document.body.scrollHeight - window.innerHeight - window.scrollY;
+
+      console.log('offsetTop:', offsetTop, 'offsetBottom:', offsetBottom);
+
+      document.documentElement.style.setProperty(
+        '--parallax-offset-top',
+        `${offsetTop}px`
+      );
+      document.documentElement.style.setProperty(
+        '--parallax-offset-bottom',
+        `${offsetBottom}px`
+      );
+    };
+    window.addEventListener('scroll', updateParallax);
+    updateParallax();
+  }
+</script>

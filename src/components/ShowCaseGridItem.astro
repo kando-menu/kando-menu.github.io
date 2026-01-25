@@ -1,0 +1,128 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+interface Props {
+  type: 'feature' | 'button';
+  href?: string;
+}
+
+const { type, href } = Astro.props;
+---
+
+<a class:list={['grid-item', type]} href={href}>
+  <div class="icon">
+    <slot name="icon" />
+  </div>
+  <div class="body">
+    <div class="title">
+      <slot name="title" />
+    </div>
+    <div class="description">
+      <slot name="description" />
+    </div>
+  </div>
+</a>
+
+<style>
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem;
+    margin-top: 0;
+    position: relative;
+    text-decoration: none !important;
+    color: var(--sl-white);
+    transition:
+      color 0.3s ease,
+      transform 0.3s ease;
+
+    mask-image: url('../assets/image-mask.jpg');
+    mask-mode: luminance;
+    mask-size: 100% 100%;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    &.feature {
+      align-items: center;
+      text-align: center;
+      width: calc(200px + 10vw);
+
+      .icon {
+        font-size: 2rem;
+
+        width: 3.5rem;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: #f0cece;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          background: linear-gradient(135deg, #a53d6b 0%, #652945 100%);
+          border-radius: 50%;
+        }
+      }
+
+      .title {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .description {
+        margin-top: 0.3rem;
+        font-size: 1rem;
+      }
+    }
+
+    &.button {
+      align-items: center;
+      text-align: center;
+      width: calc(100px + 10vw);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        background-color: var(--sl-color-accent-low);
+        border-radius: 3rem;
+
+        opacity: 0.4;
+      }
+
+      &:hover {
+        color: var(--sl-color-accent-high);
+      }
+
+      .icon {
+        font-size: 4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .title {
+        font-weight: bold;
+      }
+
+      .description {
+        margin-top: 0;
+        opacity: 0.6;
+        font-size: 0.8rem;
+      }
+    }
+  }
+</style>
