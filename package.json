@@ -15,7 +15,7 @@
     "@astrojs/markdown-remark": "^6.3.10",
     "@astrojs/starlight": "^0.37.3",
     "@fontsource/neucha": "^5.2.8",
-    "@iconify-json/simple-icons": "^1.2.67",
+    "@iconify-json/simple-icons": "^1.2.68",
     "@iconify-json/solar": "^1.2.5",
     "astro": "^5.16.11",
     "astro-icon": "^1.1.5",
