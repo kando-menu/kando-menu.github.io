@@ -28,14 +28,12 @@ So for instance if you downloaded the Kando zip archive from GitHub and extracte
 
 ```json title=portableMode.json
 {
-  // The path to the configuration directory.
-  // This can be an absolute path or a path relative to this file.
   "configDirectory": "config"
 }
 ```
 
 The above example would make Kando load and save its configuration files in a subfolder named `config` next to the executable.
-If you specified an absolute path instead, Kando would use that path.
+If you specified an absolute path (like `C:\path\to\something`) instead, Kando would use that path.
 This way, you can also use portable mode to load and save the configuration files in any other directory on your system.
 
 <Aside type="note" title="Cache Files">
