@@ -92,6 +92,7 @@ Below are the default values of the configuration file.
   "zoomFactor": 1,
   "hideSettingsButton": false,
   "settingsButtonPosition": "bottom-right",
+  "windowsInkWorkaround": true,
   "centerDeadZone": 50,
   "minParentDistance": 150,
   "dragThreshold": 15,
@@ -113,7 +114,8 @@ Below are the default values of the configuration file.
   "gamepadCloseButton": 2,
   "sameShortcutBehavior": "nothing",
   "useDefaultOsShowSettingsHotkey": true,
-  "enableAchievements": true
+  "enableAchievements": true,
+  "enableAchievementNotifications": true
 }
 ```
 
@@ -266,6 +268,12 @@ If true, the settings button will be hidden if not hovered.
 The position of the settings button.
 Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
 
+#### windowsInkWorkaround <Badge text="soon!" variant="tip" />
+
+<small>Default value: `"windowsInkWorkaround": true`</small>
+
+If true, the menu will introduce a delay of 100ms before opening on Windows to work around the issue where getting the stylus position is otherwise not possible.
+
 #### centerDeadZone
 
 <small>Default value: `"centerDeadZone": 50`</small>
@@ -404,6 +412,12 @@ If enabled, pressing <kbd>Command</kbd>+<kbd>,</kbd> on macOS or <kbd>Ctrl</kbd>
 <small>Default value: `"enableAchievements": true`</small>
 
 If enabled, the user will earn achievements for completing certain tasks within the menu.
+
+#### enableAchievementNotifications <Badge text="soon!" variant="tip" />
+
+<small>Default value: `"enableAchievementNotifications": true`</small>
+
+If enabled, notifications are shown when achievements are unlocked.
 
 ## Menu Configuration: `menus.json`
 
