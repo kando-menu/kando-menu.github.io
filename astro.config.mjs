@@ -97,6 +97,7 @@ export default defineConfig({
           label: 'Reference',
           items: [
             'config-files',
+            'ipc-interface',
             'valid-keynames',
             'release-management',
             'code-signing',

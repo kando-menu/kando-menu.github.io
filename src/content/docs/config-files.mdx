@@ -33,16 +33,24 @@ Use you file manager or terminal to navigate to the following directories.
 
 <Tabs syncKey="os">
   <TabItem label="Windows" icon="seti:windows">
-    ``` %appdata%\kando\ ```
+    ``` 
+    %appdata%\kando\ 
+    ```
   </TabItem>
   <TabItem label="macOS" icon="apple">
-    ``` ~/Library/Application Support/kando/ ```
+    ```
+    ~/Library/Application Support/kando/
+    ```
   </TabItem>
   <TabItem label="Linux" icon="linux">
-    ``` ~/.config/kando/ ```
+    ```
+    ~/.config/kando/
+    ```
   </TabItem>
   <TabItem label="Flatpak" icon="linux">
-    ``` ~/.var/app/menu.kando.Kando/config/kando/ ```
+    ```
+    ~/.var/app/menu.kando.Kando/config/kando/
+    ```
   </TabItem>
 </Tabs>
 
@@ -525,6 +533,8 @@ For now, the `type` property of a menu item can be one of the following values:
 - [`"uri"`](/item-open-uri)
 
 Click on these links to learn more about the individual item types and which `data` properties they require.
+
+Starting with Kando 2.3.0, there is also the `"simple-button"` item type, which is meant to be used with the [IPC Interface](/ipc-interface) and does not require a `data` property. 
 
 #### collections
 

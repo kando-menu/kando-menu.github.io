@@ -1,0 +1,250 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Websocket Interface
+description: How to control Kando via Websockets
+sidebar:
+  badge:
+    text: soon!
+    variant: tip
+---
+
+import Intro from '../../components/Intro.astro';
+import { Tabs, TabItem, Aside, Badge } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+
+![banner](../../assets/banners/banner08.png)
+
+<Intro>
+Kando offers a powerful Inter-Process Communication (IPC) API via WebSockets, enabling seamless integration with third-party applications and plugins. 
+</Intro>
+
+<Aside type="danger" title="IPC API is not available yet!">
+  The IPC API described in this document will be available in Kando 2.3.0. 
+</Aside>
+
+  This API allows you to both open custom menus in Kando and observe user interactions in any menu. 
+
+- **Opening Custom Menus:** Trigger Kando to display a menu you define, and receive the user's selection. This is ideal for integrating Kando with other applications or workflows.
+- **Listening to Menu Interactions:** Observe when users open, hover, or select items in any Kando menu. This is useful for plugins that provide feedback (e.g., haptic feedback) or analytics.
+
+All communication happens over a local WebSocket connection. To connect, you need to know the port and API version, which are provided by Kando in a special file.
+
+
+## The `ipc-info.json` File
+
+Kando writes a file named `ipc-info.json` containing the WebSocket port and API version.
+Your client must read this file to connect to the IPC server.
+The location of this file depends on the operating system and installation method:
+
+<Tabs syncKey="os">
+  <TabItem label="Windows" icon="seti:windows">
+    ```
+    %appdata%\kando\ipc-info.json
+    ```
+  </TabItem>
+  <TabItem label="macOS" icon="apple">
+    ```
+    ~/Library/Application Support/kando/ipc-info.json
+    ```
+  </TabItem>
+  <TabItem label="Linux" icon="linux">
+    ```
+    ~/.config/kando/ipc-info.json
+    ```
+  </TabItem>
+  <TabItem label="Flatpak" icon="linux">
+    ```
+    ~/.var/app/menu.kando.Kando/config/kando/ipc-info.json
+    ```
+  </TabItem>
+</Tabs>
+
+```json
+{
+  "port": 12345,
+  "apiVersion": 1
+}
+```
+
+Your client should always check this file before connecting, as the port may change between Kando sessions.
+
+### Example code to find `ipc-info.json`
+
+You can use a code snippet like the following to find the `ipc-info.json` file in a cross-platform way.
+
+```python title="find_ipc_info.py"
+import os
+import platform
+
+def find_ipc_info_path():
+    system = platform.system()
+    home = os.path.expanduser("~")
+    if system == "Windows":
+        appdata = os.environ.get("APPDATA", os.path.join(home, "AppData", "Roaming"))
+        return os.path.join(appdata, "kando", "ipc-info.json")
+    elif system == "Darwin":
+        return os.path.join(home, "Library", "Application Support", "kando", "ipc-info.json")
+    else:
+        flatpak_path = os.path.join(home, ".var", "app", "menu.kando.Kando", "config", "kando", "ipc-info.json")
+        if os.path.exists(flatpak_path):
+            return flatpak_path
+        return os.path.join(home, ".config", "kando", "ipc-info.json")
+```
+
+<Aside type="note" title="Use any language you want!">
+  The IPC API is language-agnostic—while the examples on this page use Python, you can use any language that supports WebSockets and JSON.
+</Aside>
+
+
+## Opening Custom Menus
+
+Once you have the connection info, you can connect to the WebSocket server and send messages to control Kando.
+To open a custom menu in Kando and receive the user's selection, connect to the WebSocket server and send a `show-menu` message.
+Kando will display your menu and send back events as the user interacts.
+
+### Available Messages
+
+| Message&nbsp;Name    | Sender | Description                                      |
+|-----------------|-----------|--------------------------------------------------|
+| `show-menu`       | Client | Request to show a custom menu. Pass the menu structure via the `menu` parameter as JSON. **The format of the menu is the same as the one used in the `menus.json` file.** See [Menu Configuration](/config-files/#menu-item-descriptions) for more details. |
+| `select-item`     | Server | The selected item is passed via the `path` and `target` parameters. These describe its position in the menu tree and the type of item which was selected. See below for an example. |
+| `hover-item`      | Server | Use this to get notified when the user hovers over a menu item. The same parameters are used as in `select-item`. |
+| `cancel-menu`     | Server | Triggered when user closed the menu without a selection.               |
+| `error`           | Server | An error occurred. Inspect the `reason` and `description` properties for more details.  |
+
+#### Message Arguments: `path` and `target`
+
+Some messages (such as `select-item` and `hover-item`) include the arguments `path` and `target`:
+
+**`path`** is an array of zero-based integers representing the position of the item in the menu tree. For example, `[2, 1]` means the third child of the root, then the second child of that submenu.
+
+**`target`** indicates what kind of menu element was interacted with. Possible values are:
+  - `item`: A regular final menu item (button). Selection of this item usually triggers an action and closes the menu.
+  - `submenu`: A submenu which contains other items. Selection of this item opens the submenu and does not close the menu.
+  - `parent`: The parent menu of the currently opened submenu. If this is selected, the current submenu will be closed and the parent menu will be shown.
+
+**Example**
+
+This means the user selected the third item in the first submenu.
+
+```json
+{
+  "type": "select-item",
+  "target": "item",
+  "path": [0, 2]
+}
+```
+
+
+### Example code to open a custom menu
+
+The code snippet below demonstrates how to open a custom menu in Kando using Python. 
+It reads the connection info from `ipc-info.json`, connects to the WebSocket server, and sends a `show-menu` message with a simple menu structure.
+It then listens for user interactions and prints the selected item or cancellation.
+
+```python title="open_menu.py"
+import asyncio
+import json
+import websockets
+
+async def main():
+    # Read ipc-info.json (see previous section for locating the file)
+    with open("/path/to/ipc-info.json") as f:
+        info = json.load(f)
+    uri = f"ws://127.0.0.1:{info['port']}"
+
+    menu = {
+        "type": "submenu",
+        "name": "Example Menu",
+        "icon": "🌸",
+        "iconTheme": "emoji",
+        "children": [
+            {"type": "simple-button", "name": "Item 1", "icon": "🚀", "iconTheme": "emoji"},
+            {"type": "simple-button", "name": "Item 2", "icon": "💖", "iconTheme": "emoji"},
+        ]
+    }
+
+    async with websockets.connect(uri) as ws:
+        await ws.send(json.dumps({"type": "show-menu", "menu": menu}))
+        print("Menu sent. Waiting for user interaction...")
+
+        async for message in ws:
+            msg = json.loads(message)
+            if msg.get("type") == "select-item":
+                print(f"Selected: {msg.get('path')}")
+                break
+            elif msg.get("type") == "cancel-menu":
+                print("Menu canceled by user.")
+                break
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+```
+
+## Listening to Menu Interactions
+
+To observe all menu interactions (open, hover, select, cancel), of any opened menu, connect to the WebSocket server and send a `start-observing` message.
+Kando will then send you events as they happen.
+If you want to stop receiving events, send a `stop-observing` message.
+
+### Available Messages
+
+| Message&nbsp;Name      | Sender | Description                                         |
+|-------------------|-----------|-----------------------------------------------------|
+| `start-observing`   | Client | Send this to start receiving menu interactions. events.         |
+| `stop-observing`    | Client | Send this to stop receiving menu interaction events.          |
+| `open-menu`         | Server | This will be sent by Kando when a menu is opened.                              |
+| `hover-item`        | Server | _Same as above_                        |
+| `select-item`       | Server | _Same as above_                       |
+| `cancel-menu`       | Server | _Same as above_                        |
+| `error`             | Server | _Same as above_      |
+
+### Example code to observe menu interactions
+
+The code snippet below demonstrates how to observe menu interactions in Kando using Python.
+It connects to the WebSocket server, sends a `start-observing` message, and prints events as they happen (menu opened, item hovered, item selected, menu canceled).
+
+```python title="observe_interaction.py"
+import asyncio
+import json
+import websockets
+
+async def main():
+    # Read ipc-info.json (see previous section for locating the file)
+    with open("/path/to/ipc-info.json") as f:
+        info = json.load(f)
+    uri = f"ws://127.0.0.1:{info['port']}"
+
+    async with websockets.connect(uri) as ws:
+        await ws.send(json.dumps({"type": "start-observing"}))
+        print("Started observing menu events...")
+
+        async for message in ws:
+            msg = json.loads(message)
+            if msg.get("type") == "open-menu":
+                print("Menu opened")
+            elif msg.get("type") == "hover-item":
+                print(f"Item hovered: {msg.get('path')} target={msg.get('target')}")
+            elif msg.get("type") == "select-item":
+                print(f"Item selected: {msg.get('path')} target={msg.get('target')}")
+            elif msg.get("type") == "cancel-menu":
+                print("Menu canceled")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+```
+
+## Final Notes
+
+Have you created something cool with the IPC API?
+Share it with the community in the **#show-and-tell** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+We can also link to your project from here to inspire others and show what's possible with Kando's IPC interface.
+
+<Aside type="tip" title="Need Help?">
+If you encounter a problem at any stage, feel free to ask for help in the **#support** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
+</Aside>
+
