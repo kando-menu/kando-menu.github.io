@@ -73,7 +73,7 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Advanced Usage',
+          label: 'Tutorials',
           items: [
             'autostart',
             'opening-menus',
