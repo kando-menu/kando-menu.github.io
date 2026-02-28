@@ -2,39 +2,72 @@
 # SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 # SPDX-License-Identifier: CC-BY-4.0
 
-title: Opening Menus with Mouse Buttons
+title: Alternative Ways to Open Menus
 description: How to open Kando menus with mouse buttons or touch gestures.
 ---
 
-import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem, LinkCard } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
 import Intro from '../../components/Intro.astro';
 
 ![banner](../../assets/banners/banner12.png)
 
 <Intro>
-  While Kando does not have a builtin way to open menus with mouse buttons or touch
+  While Kando does not have a builtin way to open menus with 🖱️ mouse buttons or 👆 touch
   gestures, there are many platform-dependent third-party tools which can help you with
-  this.
+  this!
 </Intro>
 
-## Open Menus From Other Tools
+## <Icon name="solar:lightbulb-bolt-line-duotone" class="inline-icon" /> Tutorials and Guides for Specific Tools
 
-You can either make the third-party tool open the menu by simulating the shortcut for the menu, or it can directly call the Kando executable with the [`--menu "menu name"`](/launch-from-cli) or [`--trigger <shortcut>`](/launch-from-cli) argument.
+Below are some tutorials and guides for specific tools which show you how to open Kando menus with these tools.
+If you want to share your own guide, please let us know!
+You can either open an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!
+
+<LinkCard title="AutoHotkey (Windows only)" description='AHK is a powerful scripting language for Windows. You can use it to run the kando command when you press a mouse button or to remap a mouse button to a keyboard shortcut which opens a Kando menu.' href="/ahk-tutorial" />
+<LinkCard title="Input Remapper (Linux only)" description='Input Remapper is a tool which allows you to remap mouse buttons to keyboard shortcuts. While you can use it directly to bind menus to mouse buttons via keyboard shortcuts, it also allows for more advanced setups like showing menus when pressing two mouse buttons at the same time.' href="/input-remapper-tutorial" />
+
+## More Third-Party Tools
+
+We do not have specific guides for these tools yet, but they should work with Kando as well.
+Feel free to experiment with them and share your findings with us!
+
+<Tabs syncKey='os'>
+  <TabItem label="Windows" icon="seti:windows">
+   * [GestureSign](https://www.microsoft.com/store/productId/9N45WQVK2QQW?ocid=pdpshare) allows opening a Kando menu with multi-touch taps and gestures on both touchpad and touchscreen.
+  </TabItem>
+  <TabItem label="macOS" icon="apple">
+   * [Karabiner-Elements](https://karabiner-elements.pqrs.org/) can be used to remap mouse buttons to keyboard shortcuts.
+   * [BetterTouchTool](https://folivora.ai/) allows opening a Kando menu via touchpad gestures.
+   * [Multitouch](https://multitouch.app) allows to add keyboard shortcut as a gesture for trackpad or Apple Magic Mouse.
+   * [BetterMouse](https://better-mouse.com/) is a tool which allows you to remap mouse buttons to keyboard shortcuts.
+  </TabItem>
+  <TabItem label="Linux" icon="linux">
+   * [fusuma](https://github.com/iberianpig/fusuma) together with it's [sendkey plugin](https://github.com/iberianpig/fusuma-plugin-sendkey?tab=readme-ov-file) can be used to open a Kando menu with touchpad or touchscreen gestures. It works on **X11** and **Wayland**.
+   * [Touchegg](https://github.com/JoseExposito/touchegg#readme) is a multitouch gesture recognizer for Linux. You can use it to open a Kando menu with touchpad gestures. It only works on **X11**.
+   * **KDE Plasma** comes with built-in support for remapping mouse buttons to keyboard shortcuts. You can find [this feature](https://www.phoronix.com/news/KDE-Rebind-Extra-Mouse-Buttons) in the system settings under "System Settings" / "Mouse & Touchpad" / "Add Binding".
+   * There's a [Configurable Button](https://store.kde.org/p/1297839/) widget for **KDE Plasma** which allows running `kando --menu "menu name"` when clicked.
+   * On **GNOME Shell**, you can use the [CHC-E (Custom Hot Corners - Extended)](https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/) extension to run arbitrary commands when you move your mouse to a corner of the screen.
+   * On **GNOME Shell**, you can also use the [Floating Dock](https://extensions.gnome.org/extension/2542/floating-dock/). It requires a bit of tinkering as you need to create custom desktop files for each menu you want to open. However, it allows you to open menus by clicking on a floating dock icon.
+  </TabItem>
+</Tabs>
+
+<br/>
+
+Fundamentally, there are two main ways to open Kando menus from these tools.
+You can either open a menu by simulating the shortcut for the menu (if this is supported by the tool), or you can make the tool call the Kando executable with the [`--menu "menu name"`](/launch-from-cli) or [`--trigger <shortcut>`](/launch-from-cli) argument.
 
 ### Option 1: Simulate the Shortcut
 
 If the third-party tool supports simulating keyboard shortcuts, it is recommended to use this method.
 In most cases, this will be a bit faster then option 2.
 
+Many mice even come with special drivers which allow you to rebind mouse buttons to keyboard shortcuts or to run arbitrary commands.
+If your mouse supports this, this is an easy way to open Kando menus with mouse buttons.
+
 You can choose any shortcut you like!
 Using one which does not interfere with you workflow is a good idea.
 For instance <kbd>Ctrl</kbd>+<kbd>F13</kbd> is usually not used by any application, so it is a good choice.
-
-<Aside type="tip" title="Use a modifier key!">
-  Kando menus can be called with single-key shortcuts, but this is not recommended. Turbo
-  mode will only work properly if the shortcut includes a modifier like <kbd>Ctrl</kbd>,{' '}
-  <kbd>Alt</kbd>, or <kbd>Shift</kbd>.
-</Aside>
 
 ### Option 2: Use `--menu` or `--trigger`
 
@@ -67,38 +100,6 @@ Depending on your operating system, the command to open a Kando menu would look 
     ```
   </TabItem>
 </Tabs>
-
-## Third-Party Tools for Opening Menus
-
-Many mice come with special drivers which allow you to rebind mouse buttons to keyboard shortcuts or to run arbitrary commands.
-If your mouse supports this, this is an easy way to
-
-If you do not have such a driver, you can use any of the third-party tools listed below.
-Most of them are free and open-source.
-
-<Tabs syncKey='os'>
-  <TabItem label="Windows" icon="seti:windows">
-   * [AutoHotkey](https://www.autohotkey.com/) is a powerful scripting language for Windows. You can use it to run the kando command when you press a mouse button or to remap a mouse button to a keyboard shortcut which opens a Kando menu. You can follow [this guide](https://github.com/orgs/kando-menu/discussions/853) for a complete example.
-   * [GestureSign](https://www.microsoft.com/store/productId/9N45WQVK2QQW?ocid=pdpshare) allows opening a Kando menu with multi-touch taps and gestures on both touchpad and touchscreen.
-  </TabItem>
-  <TabItem label="macOS" icon="apple">
-   * [Karabiner-Elements](https://karabiner-elements.pqrs.org/) can be used to remap mouse buttons to keyboard shortcuts.
-   * [BetterTouchTool](https://folivora.ai/) allows opening a Kando menu via touchpad gestures.
-   * [Multitouch](https://multitouch.app) allows to add keyboard shortcut as a gesture for trackpad or Apple Magic Mouse.
-   * [BetterMouse](https://better-mouse.com/) is a tool which allows you to remap mouse buttons to keyboard shortcuts.
-  </TabItem>
-  <TabItem label="Linux" icon="linux">
-   * [fusuma](https://github.com/iberianpig/fusuma) together with it's [sendkey plugin](https://github.com/iberianpig/fusuma-plugin-sendkey?tab=readme-ov-file) can be used to open a Kando menu with touchpad or touchscreen gestures. It works on **X11** and **Wayland**.
-   * [Input Remapper](https://github.com/sezanzeb/input-remapper) is a tool which allows you to remap mouse buttons to keyboard shortcuts. It works both on **X11 and Wayland**. While you can use it directly to bind menus to mouse buttons via keyboard shortcuts, it also allows for more advanced setups like showing menus when pressing two mouse buttons at the same time. [Here is a guide!](https://github.com/orgs/kando-menu/discussions/1183)
-   * [Touchegg](https://github.com/JoseExposito/touchegg#readme) is a multitouch gesture recognizer for Linux. You can use it to open a Kando menu with touchpad gestures. It only works on **X11**.
-   * **KDE Plasma** comes with built-in support for remapping mouse buttons to keyboard shortcuts. You can find [this feature](https://www.phoronix.com/news/KDE-Rebind-Extra-Mouse-Buttons) in the system settings under "System Settings" / "Mouse & Touchpad" / "Add Binding".
-   * There's a [Configurable Button](https://store.kde.org/p/1297839/) widget for **KDE Plasma** which allows running `kando --menu "menu name"` when clicked.
-   * On **GNOME Shell**, you can use the [CHC-E (Custom Hot Corners - Extended)](https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/) extension to run arbitrary commands when you move your mouse to a corner of the screen.
-   * On **GNOME Shell**, you can also use the [Floating Dock](https://extensions.gnome.org/extension/2542/floating-dock/). It requires a bit of tinkering as you need to create custom desktop files for each menu you want to open. However, it allows you to open menus by clicking on a floating dock icon.
-  </TabItem>
-</Tabs>
-
-<br/>
 
 <Aside type="note" title="Have you discovered another cool tool?">
 If you discovered a cool new way to open menus, please let us know! You can either open an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!

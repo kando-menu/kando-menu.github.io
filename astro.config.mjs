@@ -76,8 +76,18 @@ export default defineConfig({
           label: 'Tutorials',
           items: [
             'autostart',
-            'opening-menus',
+            {
+              label: 'Mouse Buttons & More',
+              collapsed: false,
+              items: [
+                'opening-menus',
+                'ahk-tutorial',
+                'input-remapper-tutorial',
+              ],
+            },
             'portable-mode',
+            'create-menu-themes',
+            'create-sound-themes',
             'launch-from-cli',
           ],
         },
@@ -86,8 +96,6 @@ export default defineConfig({
           items: [
             'donating',
             'translating',
-            'create-menu-themes',
-            'create-sound-themes',
             'compile-from-source',
             'contribution-guide',
             'debugging',
