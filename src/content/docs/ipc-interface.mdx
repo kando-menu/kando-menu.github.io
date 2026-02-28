@@ -238,6 +238,162 @@ if __name__ == "__main__":
 
 ```
 
+## Complete Code Examples
+
+Below, you find two complete code examples for both opening a custom menu and observing menu interactions.
+
+<Tabs>
+  <TabItem label="Open a Custom Menu">
+    ```python title="open_menu.py"
+    import asyncio
+    import json
+    import os
+    import platform
+    import websockets
+
+    def find_ipc_info_path():
+        system = platform.system()
+        home = os.path.expanduser("~")
+        if system == "Windows":
+            appdata = os.environ.get("APPDATA", os.path.join(home, "AppData", "Roaming"))
+            return os.path.join(appdata, "kando", "ipc-info.json")
+        elif system == "Darwin":
+            return os.path.join(home, "Library", "Application Support", "kando", "ipc-info.json")
+        else:
+            flatpak_path = os.path.join(home, ".var", "app", "menu.kando.Kando", "config", "kando", "ipc-info.json")
+            if os.path.exists(flatpak_path):
+                return flatpak_path
+            return os.path.join(home, ".config", "kando", "ipc-info.json")
+
+    async def main():
+        info_path = find_ipc_info_path()
+        if not os.path.exists(info_path):
+            print(f"ipc-info.json not found at {info_path}")
+            return
+
+        with open(info_path, 'r') as f:
+            info = json.load(f)
+        port = info['port']
+        api_version = info['apiVersion']
+
+        client_api_version = 1
+        if api_version != client_api_version:
+            print(f"API version mismatch: server={api_version}, client={client_api_version}")
+            return
+
+        uri = f"ws://127.0.0.1:{port}"
+        menu = {
+            "type": "submenu",
+            "name": "Example Menu",
+            "icon": "🌸",
+            "iconTheme": "emoji",
+            "children": [
+                {"type": "simple-button", "name": "Item 1", "icon": "🚀", "iconTheme": "emoji"},
+                {"type": "simple-button", "name": "Item 2", "icon": "💖", "iconTheme": "emoji"},
+                {"type": "simple-button", "name": "Item 3", "icon": "🎇", "iconTheme": "emoji"},
+                {"type": "simple-button", "name": "Item 4", "icon": "🎉", "iconTheme": "emoji"},
+            ]
+        }
+
+        try:
+            async with websockets.connect(uri) as ws:
+                await ws.send(json.dumps({"type": "show-menu", "menu": menu}))
+                print("Menu sent. Waiting for user interaction...")
+
+                async for message in ws:
+                    msg = json.loads(message)
+                    msg_type = msg.get("type")
+                    if msg_type == "select-item":
+                        path = msg.get("path", [])
+                        if path and isinstance(path[0], int) and 0 <= path[0] < 4:
+                            print(f"Selected: {menu['children'][path[0]]['icon']}")
+                        else:
+                            print(f"Selected: Unknown item (path={path})")
+                        break
+                    elif msg_type == "cancel-menu":
+                        print("Menu canceled by user.")
+                        break
+                    elif msg_type == "error":
+                        print(f"Error: {msg.get('reason')} - {msg.get('description')}")
+                        break
+        except (ConnectionRefusedError, OSError) as e:
+            print(f"Could not connect to Kando IPC server at {uri}: Is Kando running?")
+
+    if __name__ == "__main__":
+        asyncio.run(main())
+
+    ```
+  </TabItem>
+  <TabItem label="Observe Menu Interactions">
+    ```python title="observe_interaction.py"
+    import asyncio
+    import json
+    import os
+    import platform
+    import websockets
+
+    def find_ipc_info_path():
+        system = platform.system()
+        home = os.path.expanduser("~")
+        if system == "Windows":
+            appdata = os.environ.get("APPDATA", os.path.join(home, "AppData", "Roaming"))
+            return os.path.join(appdata, "kando", "ipc-info.json")
+        elif system == "Darwin":
+            return os.path.join(home, "Library", "Application Support", "kando", "ipc-info.json")
+        else:
+            flatpak_path = os.path.join(home, ".var", "app", "menu.kando.Kando", "config", "kando", "ipc-info.json")
+            if os.path.exists(flatpak_path):
+                return flatpak_path
+            return os.path.join(home, ".config", "kando", "ipc-info.json")
+
+    async def main():
+        info_path = find_ipc_info_path()
+        if not os.path.exists(info_path):
+            print(f"ipc-info.json not found at {info_path}")
+            return
+
+        with open(info_path, 'r') as f:
+            info = json.load(f)
+        port = info['port']
+        api_version = info['apiVersion']
+
+        client_api_version = 1
+        if api_version != client_api_version:
+            print(f"API version mismatch: server={api_version}, client={client_api_version}")
+            return
+
+        uri = f"ws://127.0.0.1:{port}"
+        try:
+            async with websockets.connect(uri) as ws:
+                await ws.send(json.dumps({"type": "start-observing"}))
+                print("Started observing menu events...")
+
+                try:
+                    async for message in ws:
+                        msg = json.loads(message)
+                        msg_type = msg.get("type")
+                        if msg_type == "open-menu":
+                            print("Menu opened")
+                        elif msg_type == "cancel-menu":
+                            print("Menu canceled")
+                        elif msg_type == "select-item":
+                            print(f"Item selected: path={msg.get('path')} target={msg.get('target')}")
+                        elif msg_type == "hover-item":
+                            print(f"Item hovered: path={msg.get('path')} target={msg.get('target')}")
+                        elif msg_type == "error":
+                            print(f"Error: {msg.get('reason')} - {msg.get('description')}")
+                except websockets.ConnectionClosed:
+                    print("Connection closed.")
+        except (ConnectionRefusedError, OSError) as e:
+            print(f"Could not connect to Kando IPC server at {uri}: Is Kando running?")
+
+    if __name__ == "__main__":
+        asyncio.run(main())
+
+    ```
+  </TabItem>
+</Tabs>
+
 ## Final Notes
 
 Have you created something cool with the IPC API?
