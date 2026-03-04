@@ -127,6 +127,10 @@ img {
     background-color: #f7f7f7;
 }
 
+.content-panel ul {
+    padding-left: 1.2em;
+}
+
 :root[data-theme='dark'] .content-panel kbd {
     border: 1px solid #555;
     border-top-color: #666;
