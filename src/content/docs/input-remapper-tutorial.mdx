@@ -16,6 +16,9 @@ import Intro from '../../components/Intro.astro';
   On Linux, you can use a tool called [Input Remapper](https://github.com/sezanzeb/input-remapper) to remap mouse buttons or controller buttons to keyboard shortcuts and open Kando menus this way!
 </Intro>
 
+<Aside type="note">
+This guide was originally written by [@ClixTW](https://github.com/ClixTW) on [GitHub](https://github.com/orgs/kando-menu/discussions/1183). If you have any questions, feel free to add a comment over there!
+</Aside>
 
 # Introduction
 
@@ -37,7 +40,7 @@ First, we will look at the simplest method of directly mapping a mouse button to
 Then, we will explore how to trigger a menu with a long press of a mouse button while keeping the original function on tap.
 Finally, we will see how to trigger a menu by holding one mouse button and tapping another.
 
-<Aside type="note" title="Note">
+<Aside type="note">
 To demonstrate the most complex scenarios, the examples below use `Ctrl+Shift+F1` as the trigger. You can modify this to your preferred shortcut.
 </Aside>
 
@@ -69,7 +72,7 @@ Then, in the output pane on the right, set the **type to "Key or Macro"** and th
 if_tap( key( BTN_RIGHT ), modify( KEY_LEFTCTRL, modify( KEY_LEFTSHIFT, key (KEY_F1 ))).wait( 100 ).hold( KEY_LEFTCTRL ), 150 )
 ```
 
-<Aside type="tip" title="Tip">
+<Aside type="tip">
 The number `150` at the end represents the duration required for a long press in milliseconds. You can adjust this value, but setting it too short may lead to accidental triggers.
 </Aside>
 
@@ -78,17 +81,21 @@ The number `150` at the end represents the duration required for a long press in
 
 ## Option 3: Combining Two Mouse Buttons
 
-Triggered by holding one mouse button and tapping another. The following example uses **Hold Right Click + Tap Left Click**:
+Triggered by holding the right mouse button and tapping the left.
+Keep the right mouse button held and drag after the menu opens to engage in Marking Mode.
+If you click left again while the menu is open, it will cycle through the different menus you have bound to `Ctrl+Shift+F1`.
+
+Bind the following to the right mouse button with target type "keyboard + mouse":
 
 ```yaml
-# Mouse Button RIGHT
-# Target: keyboard + mouse
 if_tap( key( BTN_RIGHT ), hold( KEY_LEFTCTRL ))
+```
 
-# Mouse Button LEFT
-# Target: keyboard
+Then, bind the following to the **left mouse button and the right mouse button** (press both simultaneously when recording) with target type "keyboard":
+
+```yaml
 KEY_LEFTCTRL + KEY_LEFTSHIFT + KEY_F1
 ```
 
-- **Pros**: Allows you to hold Right Click and tap Left Click multiple times to quickly toggle between menus assigned to the same shortcut.
+- **Pros**: Allows you to hold right click and tap left click multiple times to quickly toggle between menus assigned to the same shortcut.
 - **Cons**: You lose the button's original hold function; holding and dragging will now interact with the Kando menu instead.
