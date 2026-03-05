@@ -1,0 +1,77 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: BetterTouchTool (macOS)
+description: A guide on how to use BetterTouchTool to open Kando menus with mouse buttons.
+---
+
+import { Aside, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import Intro from '../../components/Intro.astro';
+import {Image} from 'astro:assets';
+import btt_config from '../../assets/img/btt_configuration.png';
+
+![banner](../../assets/banners/banner12.png)
+
+<Intro>
+  On macOS, you can use a tool called [BetterTouchTool](https://folivora.ai/) to open Kando menus with mouse buttons or trackpad gestures.
+</Intro>
+
+## Overview
+Not every third-party tool supports all functionality, below you can find a short overview about BetterTouchTool:
+* Open Kando Menu ✅
+* Use Turbo Mode ✅
+
+##  Karabiner-Elements tutorial
+* In BetterTouchTool navigate to the 'Normal Mouse' section (1)
+* Create a Trigger with the mouse button you want to use (in the example it's mouse button 7)
+* Under 'Actions Executed On Press' (2) create a action that 'Send Key Down Only' (3)
+* Under 'Actions Executed On Click RELEASE' create a action that 'Send Key Up Only'
+* Or Copy & Paste the example code below, to send the keyboard shortcut 'CTRL + F13' when pressing the mouse button 7
+* Adjust the example code to your own needs (if necessary)
+
+
+<Image src={btt_config} alt="" class="shadow"/>
+
+```
+[
+  {
+    "BTTLastUpdatedAt" : 1772350987.4586649,
+    "BTTTriggerType" : 1007,
+    "BTTTriggerTypeDescriptionReadOnly" : "Button 7",
+    "BTTTriggerParentUUID" : "1345F060-135B-4341-B6F0-E7480914A160",
+    "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
+    "BTTUUID" : "95B2EC52-89A1-4B3D-A12F-783D55A1DF10",
+    "BTTOrder" : 8,
+    "BTTActionsToExecute" : [
+      {
+        "BTTLastUpdatedAt" : 1772351016.1467381,
+        "BTTTriggerParentUUID" : "95B2EC52-89A1-4B3D-A12F-783D55A1DF10",
+        "BTTIsPureAction" : true,
+        "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
+        "BTTUUID" : "0F38CC89-29A3-45F3-A993-E5C59B206009",
+        "BTTLayoutIndependentActionChar" : "F13",
+        "BTTGenericActionConfig2" : "onlyDown",
+        "BTTShortcutToSend" : "59,105",
+        "BTTShortcutUpDown" : "onlyDown",
+        "BTTOrder" : 0
+      },
+      {
+        "BTTActionCategory" : 31,
+        "BTTLastUpdatedAt" : 1772351022.5314541,
+        "BTTTriggerParentUUID" : "95B2EC52-89A1-4B3D-A12F-783D55A1DF10",
+        "BTTIsPureAction" : true,
+        "BTTTriggerClass" : "BTTTriggerTypeNormalMouse",
+        "BTTUUID" : "97337D1F-B44B-4F00-B47F-35959C8723D8",
+        "BTTLayoutIndependentActionChar" : "F13",
+        "BTTGenericActionConfig2" : "onlyUp",
+        "BTTShortcutToSend" : "59,105",
+        "BTTShortcutUpDown" : "onlyUp",
+        "BTTOrder" : 2
+      }
+    ]
+  }
+]
+```
+For additional information, follow the [BetterTouchTool community discussion about how to trigger Kando](https://community.folivora.ai/t/hold-keyboard-shortcut-while-mousebutton-is-pressed/46351/2)

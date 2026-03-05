@@ -82,7 +82,10 @@ export default defineConfig({
               items: [
                 'opening-menus',
                 'ahk-tutorial',
-                'input-remapper-tutorial',
+                'input-remapper-tutorial',                
+                'bm-tutorial',
+                'btt-tutorial',
+                'ke-tutorial',
               ],
             },
             'portable-mode',

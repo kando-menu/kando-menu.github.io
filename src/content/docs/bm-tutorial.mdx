@@ -1,0 +1,31 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: BetterMouse (macOS)
+description: A guide on how to use BetterMouse to open Kando menus with mouse buttons.
+---
+
+import { Aside, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import Intro from '../../components/Intro.astro';
+import {Image} from 'astro:assets';
+import bm_config from '../../assets/img/bm_config.png';
+
+![banner](../../assets/banners/banner12.png)
+
+<Intro>
+  On macOS, you can use a tool called [BetterMouse](https://better-mouse.com/) to open Kando menus with mouse buttons!
+</Intro>
+## Overview
+Not every third-party tool supports all functionality, below you can find a short overview about BetterMouse:
+* Open Kando Menu ✅
+* Use Turbo Mode ❌
+
+##  BetterMouse tutorial
+* In BetterMouse navigate to the 'Buttons' section (1)
+* Create a Trigger with the mouse button you want to use (2)
+* Add the keyboard shortcut you want to send with this mouse button
+* The example sends the keyboard shortcut 'CTRL + F13' when pressing the mouse button 6
+* Adjust the example to your own needs (if necessary)
+<Image src={bm_config} alt="" class="shadow"/>

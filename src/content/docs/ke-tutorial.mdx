@@ -1,0 +1,57 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Karabiner-Elements (macOS)
+description: A guide on how to use Karabiner-Elements to open Kando menus with mouse buttons.
+---
+
+import { Aside, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
+import { Icon } from 'astro-icon/components';
+import Intro from '../../components/Intro.astro';
+import {Image} from 'astro:assets';
+import karabiner_elements_add_rule from '../../assets/img/karabiner_elements_add_rule.png';
+import karabiner_elements_devices from '../../assets/img/karabiner_elements_devices.png';
+
+![banner](../../assets/banners/banner12.png)
+
+<Intro>
+  On macOS, you can use a free tool called [Karabiner-Elements](https://karabiner-elements.pqrs.org/) to open Kando menus with mouse buttons!
+</Intro>
+
+## Overview
+Not every third-party tool supports all functionality, below you can find a short overview about Karabiner-Elements:
+* Open Kando Menu ✅
+* Use Turbo Mode ✅
+
+##  Karabiner-Elements tutorial
+* In Karabiner-Elements you need to navigate on the left sidebar to 'Devices' (1) activate 'Modify events' (2) for the mouse that you want to use
+<Image src={karabiner_elements_devices} alt="Activate 'Modify events' under 'Devices'" class="shadow"/>
+
+* To setup a keyboard shortcut with your mouse, you need to create a 'Complex Modification' in Karabiner-Elements.
+* On the left sidebar of Karabiner-Elements click on 'Complex Modifications' (1) and then on 'Add your own rule' (2)
+<Image src={karabiner_elements_add_rule} alt="'Add your own rule' under 'Complex Modifications'" class="shadow"/>
+
+
+* Copy & Paste the example code below, to send the keyboard shortcut 'CTRL + F13' when pressing the middle mouse button
+* Adjust the example code to your own needs (if necessary)
+
+
+
+```
+{
+    "description": "Middle Mouse Button sends CTRL + F13",
+    "manipulators": [
+        {
+            "from": { "pointing_button": "button3" },
+            "to": [
+                {
+                    "key_code": "f13",
+                    "modifiers": ["control"]
+                }
+            ],
+            "type": "basic"
+        }
+    ]
+}
+```
