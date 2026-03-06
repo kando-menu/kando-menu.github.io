@@ -6,8 +6,8 @@ title: Alternative Ways to Open Menus
 description: How to open Kando menus with mouse buttons or touch gestures.
 ---
 
-import { Aside, Tabs, TabItem, LinkCard } from '@astrojs/starlight/components';
-import { Icon } from 'astro-icon/components';
+import { Aside, Icon, Tabs, TabItem, LinkCard } from '@astrojs/starlight/components';
+import { Icon as AstroIcon } from 'astro-icon/components';
 import Intro from '../../components/Intro.astro';
 
 ![banner](../../assets/banners/banner12.png)
@@ -18,34 +18,42 @@ import Intro from '../../components/Intro.astro';
   this!
 </Intro>
 
-## <Icon name="solar:lightbulb-bolt-line-duotone" class="inline-icon" /> Tutorials and Guides for Specific Tools
+## <AstroIcon name="solar:lightbulb-bolt-line-duotone" class="inline-icon" /> Tutorials and Guides for Specific Tools
 
 Below are some tutorials and guides for specific tools which show you how to open Kando menus with these tools.
 If you want to share your own guide, please let us know!
 You can either open an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!
 
-<LinkCard title="AutoHotkey (Windows only)" description='AHK is a powerful scripting language for Windows. You can use it to run the kando command when you press a mouse button or to remap a mouse button to a keyboard shortcut which opens a Kando menu.' href="/ahk-tutorial" />
-<LinkCard title="Input Remapper (Linux only)" description='Input Remapper is a tool which allows you to remap mouse buttons to keyboard shortcuts. While you can use it directly to bind menus to mouse buttons via keyboard shortcuts, it also allows for more advanced setups like showing menus when pressing two mouse buttons at the same time.' href="/input-remapper-tutorial" />
-<LinkCard title="BetterMouse (macOS only)" description='BetterMouse is a macOS utility app that gives you smooth mouse scrolling, cursor speed control, and powerful mouse/keyboard bindings. You can use it to 
-open a Kando menu via a mouse button.' href="/bm-tutorial" />
-<LinkCard title="BetterTouchTool (macOS only)" description='BetterTouchTool is a great, feature packed app that allows you to customize various input devices on your Mac. You can use it to 
-open a Kando menu via touchpad gestures or a mouse button.' href="/btt-tutorial" />
-<LinkCard title="Karabiner-Elements (macOS only)" description='Karabiner-Elements is a powerful and stable keyboard customizer for macOS that also can be used to send keyboard shortcuts with your mouse.' href="/ke-tutorial" />
+
+Tool  | OS | Free | Features | Kando Tutorial
+:-- | :---: | :---: | :---: | :---:
+**AutoHotkey** ([Homepage](https://www.autohotkey.com/)) | <Icon name="seti:windows" class="inline-icon" />         | ✅ | 🖱️ + ✍️ + 🎮 | **[→ Tutorial](/ahk-tutorial)**
+**Input Remapper** ([Homepage](https://github.com/sezanzeb/input-remapper)) | <Icon name="linux" class="inline-icon" />            | ✅ | 🖱️ + ✍️ + 🎮 | **[→ Tutorial](/input-remapper-tutorial)**
+**Karabiner-Elements** ([Homepage](https://karabiner-elements.pqrs.org/)) | <Icon name="apple" class="inline-icon" />         | ✅ | 🖱️ + ✍️ | **[→ Tutorial](/ke-tutorial)**
+**BetterMouse** ([Homepage](https://better-mouse.com/))  |  <Icon name="apple" class="inline-icon" />              | ❌ | 🖱️ | **[→ Tutorial](/bm-tutorial)**
+**BetterTouchTool** ([Homepage](https://folivora.ai/))  | <Icon name="apple" class="inline-icon" />           | ❌ | 🖱️ + ✍️ + 👆 | **[→ Tutorial](/btt-tutorial)**
+**Kanata** ([Homepage](https://github.com/jtroo/kanata))  | <Icon name="seti:windows" class="inline-icon" /> + <Icon name="linux" class="inline-icon" /> +<Icon name="apple" class="inline-icon" />           | ✅ | ⌨️ | **[→ Tutorial](/kanata-tutorial)**
+
+### Features Legend
+
+* 🖱️ Allows you to bind menus to mouse buttons.
+* ✍️ Start Marking Mode by holding down a mouse button.
+* 🎮 With this, you can bind menus to controller buttons.
+* 👆 Allows you to bind menus to gestures.
+* ⌨️ Open menus with complex key chords.
 
 ## More Third-Party Tools
 
 We do not have specific guides for these tools yet, but they should work with Kando as well.
 Feel free to experiment with them and share your findings with us!
+You can even write a tutorial for one of these tools if you want to share your knowledge with the community!
 
 <Tabs syncKey='os'>
   <TabItem label="Windows" icon="seti:windows">
    * [GestureSign](https://www.microsoft.com/store/productId/9N45WQVK2QQW?ocid=pdpshare) allows opening a Kando menu with multi-touch taps and gestures on both touchpad and touchscreen.
   </TabItem>
   <TabItem label="macOS" icon="apple">
-   * [Karabiner-Elements](https://karabiner-elements.pqrs.org/) can be used to remap mouse buttons to keyboard shortcuts.
-   * [BetterTouchTool](https://folivora.ai/) allows opening a Kando menu via touchpad gestures.
    * [Multitouch](https://multitouch.app) allows to add keyboard shortcut as a gesture for trackpad or Apple Magic Mouse.
-   * [BetterMouse](https://better-mouse.com/) is a tool which allows you to remap mouse buttons to keyboard shortcuts.
   </TabItem>
   <TabItem label="Linux" icon="linux">
    * [fusuma](https://github.com/iberianpig/fusuma) together with it's [sendkey plugin](https://github.com/iberianpig/fusuma-plugin-sendkey?tab=readme-ov-file) can be used to open a Kando menu with touchpad or touchscreen gestures. It works on **X11** and **Wayland**.
@@ -57,7 +65,12 @@ Feel free to experiment with them and share your findings with us!
   </TabItem>
 </Tabs>
 
-<br/>
+
+<Aside type="note" title="Have you discovered another cool tool?">
+If you discovered a cool new way to open menus, please let us know! You can either open an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!
+</Aside>
+
+## How Can I Open Menus with These Tools?
 
 Fundamentally, there are two main ways to open Kando menus from these tools.
 You can either open a menu by simulating the shortcut for the menu (if this is supported by the tool), or you can make the tool call the Kando executable with the [`--menu "menu name"`](/launch-from-cli) or [`--trigger <shortcut>`](/launch-from-cli) argument.
@@ -105,7 +118,3 @@ Depending on your operating system, the command to open a Kando menu would look 
     ```
   </TabItem>
 </Tabs>
-
-<Aside type="note" title="Have you discovered another cool tool?">
-If you discovered a cool new way to open menus, please let us know! You can either open an issue, edit this file, or join the [Discord server](https://discord.gg/hZwbVSDkhy) to discuss your idea!
-</Aside>

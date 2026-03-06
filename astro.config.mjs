@@ -76,16 +76,17 @@ export default defineConfig({
           label: 'Tutorials',
           items: [
             'autostart',
+            'opening-menus',
             {
-              label: 'Mouse Buttons & More',
-              collapsed: false,
+              label: 'App Guides',
+              collapsed: true,
               items: [
-                'opening-menus',
                 'ahk-tutorial',
-                'input-remapper-tutorial',                
+                'input-remapper-tutorial',
+                'ke-tutorial',
                 'bm-tutorial',
                 'btt-tutorial',
-                'ke-tutorial',
+                'kanata-tutorial',
               ],
             },
             'portable-mode',
