@@ -6,35 +6,34 @@ title: BetterTouchTool (macOS)
 description: A guide on how to use BetterTouchTool to open Kando menus with mouse buttons.
 ---
 
-import { Aside, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
-import { Icon } from 'astro-icon/components';
+import { Steps, Aside } from '@astrojs/starlight/components';
 import Intro from '../../components/Intro.astro';
 import {Image} from 'astro:assets';
+
 import btt_config from '../../assets/img/btt_configuration.png';
 
 ![banner](../../assets/banners/banner12.png)
 
 <Intro>
-  On macOS, you can use a tool called [BetterTouchTool](https://folivora.ai/) to open Kando menus with mouse buttons or trackpad gestures.
+  [BetterTouchTool](https://folivora.ai/) is a great, feature packed app that allows you to customize various input devices on your Mac. You can use it to open a Kando menu via touchpad gestures or a mouse button.
 </Intro>
 
-## Overview
-Not every third-party tool supports all functionality, below you can find a short overview about BetterTouchTool:
-* Open Kando Menu ✅
-* Use Turbo Mode ✅
+## GUI Configuration
 
-##  Karabiner-Elements tutorial
-* In BetterTouchTool navigate to the 'Normal Mouse' section (1)
-* Create a Trigger with the mouse button you want to use (in the example it's mouse button 7)
-* Under 'Actions Executed On Press' (2) create a action that 'Send Key Down Only' (3)
-* Under 'Actions Executed On Click RELEASE' create a action that 'Send Key Up Only'
-* Or Copy & Paste the example code below, to send the keyboard shortcut 'CTRL + F13' when pressing the mouse button 7
-* Adjust the example code to your own needs (if necessary)
-
+<Steps>
+1. In BetterTouchTool navigate to the 'Normal Mouse' section. There, create a Trigger with the mouse button you want to use (in the example it's mouse button 7).
+2. Create an action under 'Actions Executed On Press'.
+3. Select 'Send Key Down Only'.
+4. Similarily, under 'Actions Executed On Click RELEASE' create a action that 'Send Key Up Only'.
+</Steps>
 
 <Image src={btt_config} alt="" class="shadow"/>
 
-```
+## JSON Configuration
+
+Alternatively, you can also Copy & Paste the example code below, to send the keyboard shortcut 'CTRL + F13' when pressing the mouse button 7
+
+```json
 [
   {
     "BTTLastUpdatedAt" : 1772350987.4586649,
@@ -74,4 +73,7 @@ Not every third-party tool supports all functionality, below you can find a shor
   }
 ]
 ```
+
+<Aside type="note">
 For additional information, follow the [BetterTouchTool community discussion about how to trigger Kando](https://community.folivora.ai/t/hold-keyboard-shortcut-while-mousebutton-is-pressed/46351/2)
+</Aside>
