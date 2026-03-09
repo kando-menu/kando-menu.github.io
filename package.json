@@ -13,7 +13,7 @@
     "@astro-community/astro-embed-youtube": "^0.5.10",
     "@astrojs/check": "^0.9.6",
     "@astrojs/markdown-remark": "^6.3.10",
-    "@astrojs/starlight": "^0.37.6",
+    "@astrojs/starlight": "^0.37.7",
     "@fontsource/neucha": "^5.2.8",
     "@iconify-json/simple-icons": "^1.2.72",
     "@iconify-json/solar": "^1.2.5",
