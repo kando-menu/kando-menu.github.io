@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
-    "@astrojs/check": "^0.9.6",
+    "@astrojs/check": "^0.9.7",
     "@astrojs/markdown-remark": "^6.3.10",
-    "@astrojs/starlight": "^0.37.6",
+    "@astrojs/starlight": "^0.38.1",
     "@fontsource/neucha": "^5.2.8",
-    "@iconify-json/simple-icons": "^1.2.72",
+    "@iconify-json/simple-icons": "^1.2.74",
     "@iconify-json/solar": "^1.2.5",
     "astro": "^5.18.0",
     "astro-icon": "^1.1.5",
@@ -25,6 +25,6 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "sass-embedded": "^1.97.1"
+    "sass-embedded": "^1.98.0"
   }
 }
