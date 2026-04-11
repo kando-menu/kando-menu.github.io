@@ -13,6 +13,7 @@ import { LinkCard } from '@astrojs/starlight/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import Intro from '../../components/Intro.astro';
 import CustomAside from '../../components/CustomAside.astro';
+import RotatedHeaderTable from '../../components/RotatedHeaderTable.astro';
 
 ![gif](../../assets/kando.gif)
 
@@ -45,8 +46,61 @@ You can watch the video below to get an idea on how Kando works.
   <sup>Beware, there's some cringy music inside 😅</sup>
 </center>
 
+## Which input devices can I use with Kando?
+
 Kando is designed to be used with 🖱️ mouse, 🖊️ stylus, 👆 touch, or 🎮 controller input.
 If you have both hands at your keyboard most of the time, Kando is maybe not the right tool for you.
+
+<CustomAside type="thanks" title="Now with Keyboard Support!">
+Since version 2.3.0, Kando also brings decent keyboard support!
+Now, you can assign letters to each item.
+This way, you can quickly select items in submenus without having to move your hand to the mouse!
+</CustomAside>
+
+## How does Kando compare to similar tools?
+
+Kando is not the only pie menu out there, but it is the only one that is platform-independent, open-source, and highly customizable.
+Below is a quick comparison of Kando with some other popular pie menus.
+
+<RotatedHeaderTable>
+
+| | Kando | [AutoHotPie](https://github.com/dumbeau/AutoHotPie) | [Pieoneer](https://apps.apple.com/us/app/pieoneer/id6739781207?mt=12) | [Launchy](https://apps.apple.com/us/app/launchy-app-launcher-switcher/id6739782043?mt=12) | [Radial](https://radial.appverge.net/) | [Pie Menu](https://apps.apple.com/us/app/pie-menu/id1631568126?mt=12) | [OrbitRing](https://orbitring.akring.com/) |
+| :-- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+Windows Support                                    | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+macOS Support                                      | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+Linux Support                                      | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+Bind Menus to Shortcuts                            | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+Bind Menus to Mouse Buttons                        | ➖¹| ✅ | ➖¹| ➖¹| ✅ | ➖¹| ➖¹|
+Launch Applications                                | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+Trigger Shortcuts                                  | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+Open Files, Directories, and Websites              | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+Insert Text Snippets                               | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+Execute Custom Scripts                             | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+Switch Applications                                | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ |
+Multi-Step Workflows                               | ❌ | ➖²| ❌ | ❌ | ✅ | ❌ | ❌ |
+Context-Aware Menus                                | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+Submenus                                           | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+Select Items with Gestures                         | ✅ | ➖³| ❌ | ❌ | ❌ | ❌ | ❌ |
+Complex Styling via CSS Themes                     | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+Achievement System                                 | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+[IPC interface](/ipc-interface) for opening menus  | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+Native App                                         | ❌ | ➖⁴| ✅ | ✅ | ✅ | ✅ | ✅ |
+Builtin Cloud Sync                                 | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
+Open Source                                        | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+Pricing | **Free** | **Free** | $14.99 | $6.99 for Pro | $14.99 | $39.99 | $5.99 |
+
+</RotatedHeaderTable>
+
+¹ Only via [Third-Party Tools](/opening-menus). <br />
+² Via AutoHotkey scripts, but not out of the box. <br />
+³ Limited to one level depth. <br />
+⁴ The menu itself is a native app, the settings window is not. <br />
+
+---
+
+<CustomAside type="note" title="Did we miss something?">
+If you think the table is missing an important feature or a competitor, please let us know on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy) or open an issue on [GitHub](https://github.com/kando-menu/kando-menu.github.io/issues)! 
+</CustomAside>
 
 ## How can I get Kando?
 

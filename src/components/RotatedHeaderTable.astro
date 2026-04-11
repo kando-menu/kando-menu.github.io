@@ -1,0 +1,38 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC-BY-4.0
+
+interface Props {
+  firstColumnMinWidth?: string;
+  headerHeight?: string;
+}
+---
+
+<div class="rotated-header-table">
+  <slot />
+</div>
+
+<style>
+  .rotated-header-table {
+    overflow-x: auto;
+  }
+
+  .rotated-header-table :global(table) {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .rotated-header-table :global(thead th) {
+    vertical-align: middle;
+  }
+
+  .rotated-header-table :global(thead th:first-child),
+  .rotated-header-table :global(tbody td:first-child) {
+    text-align: left;
+  }
+
+  .rotated-header-table :global(thead th:not(:first-child)) {
+    writing-mode: vertical-rl;
+    text-align: right;
+  }
+</style>
