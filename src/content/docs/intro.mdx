@@ -11,6 +11,7 @@ next:
 
 import { LinkCard } from '@astrojs/starlight/components';
 import { YouTube } from '@astro-community/astro-embed-youtube';
+import { Icon } from 'astro-icon/components';
 import Intro from '../../components/Intro.astro';
 import CustomAside from '../../components/CustomAside.astro';
 import RotatedHeaderTable from '../../components/RotatedHeaderTable.astro';
@@ -46,22 +47,11 @@ You can watch the video below to get an idea on how Kando works.
   <sup>Beware, there's some cringy music inside 😅</sup>
 </center>
 
-## Which input devices can I use with Kando?
-
-Kando is designed to be used with 🖱️ mouse, 🖊️ stylus, 👆 touch, or 🎮 controller input.
-If you have both hands at your keyboard most of the time, Kando is maybe not the right tool for you.
-
-<CustomAside type="thanks" title="Now with Keyboard Support!">
-Since version 2.3.0, Kando also brings decent keyboard support!
-Now, you can assign letters to each item.
-This way, you can quickly select items in submenus without having to move your hand to the mouse!
-</CustomAside>
-
 ## How does Kando compare to similar tools?
 
 Kando is not the only pie menu out there.
 Depending on your needs, there might be other tools that are better suited for you.
-Below is a quick comparison of Kando with some other popular pie menus.
+Below is a comparison of Kando with some other popular pie menus.
 
 <RotatedHeaderTable>
 
@@ -88,22 +78,39 @@ Achievement System                                 | ✅ | ❌ | ❌ | ❌ | ❌
 Native App                                         | ❌ | ➖⁴| ✅ | ✅ | ✅ | ✅ | ✅ |
 Builtin Cloud Sync                                 | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ |
 Open Source                                        | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-Pricing | **Free** | **Free** | $14.99 | $6.99 for Pro | $14.99 | $39.99 | $5.99 |
+Pricing | **Free** | **Free** | $14.99 | $6.99 | $14.99 | $39.99 | $5.99 |
 
 </RotatedHeaderTable>
 
+<small><br />
 ¹ Only via [Third-Party Tools](/opening-menus). <br />
 ² Via AutoHotkey scripts, but not out of the box. <br />
 ³ Limited to one submenu level. <br />
 ⁴ The menu itself is a native app, the settings window is not. <br />
+</small>
 
 ---
 
-<CustomAside type="note" title="Did we miss something?">
+The following tools are not included in the table, but are potentially worth checking out as well:
+[Radial menu for AHK v1](https://www.autohotkey.com/boards/viewtopic.php?f=6&t=12078),
+[Radify for AHK v2](https://www.autohotkey.com/boards/viewtopic.php?f=83&t=138484),
+[Radial Menu for Windows](http://www.jacobiedema.nl/RadialMenu/),
+and the vendor-specific pie menus of [3Dconnexion](https://www.youtube.com/watch?v=ujf3XAWTzEs) and [Logitech](https://www.youtube.com/watch?v=jk2RWliJv9k).
+
 If you think the table contains an error or is missing an important feature or competitor, please let us know on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy) or open an issue on [GitHub](https://github.com/kando-menu/kando-menu.github.io/issues)! 
+
+## Which input devices can I use with Kando?
+
+Kando is designed to be used with 🖱️ mouse, 🖊️ stylus, 👆 touch, or 🎮 controller input.
+If you have both hands at your keyboard most of the time, Kando is maybe not the right tool for you.
+
+<CustomAside type="note" title="Now with Keyboard Support!">
+Since version 2.3.0, Kando also brings decent keyboard support!
+Now, you can assign letters to each item.
+This way, you can quickly select items in submenus without having to move your hand to the mouse!
 </CustomAside>
 
-## How can I get Kando?
+## <Icon name="solar:cloud-download-bold-duotone" class="inline-icon" />  How can I get Kando?
 
 To get started with Kando, you need to install it on your computer.
 The installation process is different for Windows, macOS, and Linux, so please choose the guide that fits your operating system!

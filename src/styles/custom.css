@@ -75,6 +75,12 @@ img {
     width: 100%;
 }
 
+table {
+    display: table;
+    table-layout: auto;
+    width: 100%;
+}
+
 /* We do not want to limit the width of the YouTube embeds. */
 lite-youtube {
     max-width: none !important;
