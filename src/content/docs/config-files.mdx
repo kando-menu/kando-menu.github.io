@@ -127,7 +127,7 @@ Below are the default values of the configuration file.
 }
 ```
 
-#### version <Badge text="new!" variant="tip" />
+#### version
 
 <small>Default value: `"version": "2.0.0"`</small>
 
@@ -196,7 +196,7 @@ This is only used if `enableDarkModeForMenuThemes` is set to `true`.
 Whether Kando should use the dark menu theme if the system is in dark mode.
 If enabled, Kando will use the `darkMenuTheme` and `darkMenuThemeColors` properties to configure the menu theme if the system is in dark mode.
 
-#### enableSelectionWedges <Badge text="new!" variant="tip" />
+#### enableSelectionWedges
 
 <small>Default value: `"enableSelectionWedges": false`</small>
 
@@ -245,7 +245,7 @@ If the special value `'auto'` is used, Kando will choose a transparent flavor if
 
 Can be one of `'color'`, `'white'`, `'light'`, `'dark'`, `'black'`, or `'none'`. The color flavors are only available on Windows and Linux. On macOS, the color always depends on your system colors. If set to `'none'`, the tray icon will be hidden.
 
-#### hardwareAcceleration <Badge text="new!" variant="tip" />
+#### hardwareAcceleration
 
 <small>Default value: `"hardwareAcceleration": true`</small>
 
@@ -276,7 +276,7 @@ If true, the settings button will be hidden if not hovered.
 The position of the settings button.
 Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
 
-#### windowsInkWorkaround <Badge text="soon!" variant="tip" />
+#### windowsInkWorkaround <Badge text="new!" variant="tip" />
 
 <small>Default value: `"windowsInkWorkaround": true`</small>
 
@@ -415,13 +415,13 @@ Can be one of the following:
 
 If enabled, pressing <kbd>Command</kbd>+<kbd>,</kbd> on macOS or <kbd>Ctrl</kbd>+<kbd>,</kbd> on Linux or Windows will open the settings window. If disabled, the default hotkey will be ignored.
 
-#### enableAchievements <Badge text="new!" variant="tip" />
+#### enableAchievements
 
 <small>Default value: `"enableAchievements": true`</small>
 
 If enabled, the user will earn achievements for completing certain tasks within the menu.
 
-#### enableAchievementNotifications <Badge text="soon!" variant="tip" />
+#### enableAchievementNotifications <Badge text="new!" variant="tip" />
 
 <small>Default value: `"enableAchievementNotifications": true`</small>
 
@@ -457,7 +457,7 @@ The latter is used in the settings dialog to group menus together.
 }
 ```
 
-#### version <Badge text="new!" variant="tip" />
+#### version
 
 <small>Default value: `"version": "2.0.0"`</small>
 
@@ -513,6 +513,7 @@ Each menu item is a JSON object with the following properties:
 | `name`               | The name of the menu item. This is shown in the center of the menu when the item is hovered. The name of the root item defines the name of the menu.                                                                                                                                                                                                                            |
 | `iconTheme`          | Either one of the built-in icon themes (`material-symbols-rounded`, `simple-icons`, `simple-icons-colored`, `base64`, or `emoji`) or a subdirectory of the `icon-themes` directory in Kando’s config directory. [See details](/icon-themes).                                                                                                                                    |
 | `icon`               | The name of the icon from the selected icon theme, an emoji like `🚀` (when `iconTheme` is `emoji`), or a base64-encoded image such as `data:image/gif;base64,...` (when the icon theme is `base64`). [See details](/icon-themes).                                                                                                                                              |
+| `quickSelectKey` <Badge text="new!" variant="tip" /> | The key that can be used to quickly select this menu item. A single letter like "A", "B", etc. can be used.                                                                                                                                                                                                                                                                            |
 | `angle` (_optional_) | Defines the angle of the menu item in degrees. If omitted, the angle is calculated automatically. `0°` places the item at the top of the menu, `90°` on the right, and so on. Among sibling items, angles must be monotonically increasing. The first angle must be ≥ `0°`, and all following angles must be smaller than the first angle + `360°`. Invalid angles are ignored. |
 | `type`               | The type of the menu item. Several types are available. [See details](#menu-item-types).                                                                                                                                                                                                                                                                                        |
 | `data`               | Depending on the item type, this may contain additional data or be required. [See details](#menu-item-types).                                                                                                                                                                                                                                                                   |
