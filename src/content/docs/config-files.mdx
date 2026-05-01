@@ -106,6 +106,8 @@ Below are the default values of the configuration file.
   "dragThreshold": 15,
   "fadeInDuration": 150,
   "fadeOutDuration": 200,
+  "enableMenuAnimations": true,
+  "enablePointerReactiveEffects": true,
   "keepInputFocus": false,
   "enableMarkingMode": true,
   "enableTurboMode": true,
@@ -311,6 +313,18 @@ The duration of the fade-in animation in milliseconds. Set to `0` to disable the
 <small>Default value: `"fadeOutDuration": 200`</small>
 
 The duration of the fade-out animation in milliseconds. Set to `0` to disable the animation. Some actions are only executed after the fade-out animation has finished, so reducing this value can make the menu much "snappier".
+
+#### enableMenuAnimations <Badge text="soon!" variant="tip" />
+
+<small>Default value: `"enableMenuAnimations": true`</small>
+
+If disabled, all transitions and most animations of the menu theme are prevented.
+
+#### enablePointerReactiveEffects <Badge text="soon!" variant="tip" />
+
+<small>Default value: `"enablePointerReactiveEffects": true`</small>
+
+If disabled, some zooming or scaling effects of the menu theme which are based on the current pointer position are prevented.
 
 #### keepInputFocus
 
