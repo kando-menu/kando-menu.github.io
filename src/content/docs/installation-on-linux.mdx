@@ -190,7 +190,28 @@ You will need some window rules for Kando.
 Else, the menu will not float above other windows.
 
 <Tabs>
-  <TabItem label="Hyprland 0.53+">
+  <TabItem label="Hyprland 0.55+">
+    ```
+    // ~/.config/hypr/hyprland.lua
+    hl.windowrule({
+ 	    name = "kando",
+      match = {
+        class = "menu.kando.Kando",
+        title = "Kando Menu"
+      },
+ 	    no_blur = true,
+ 	    opaque = true,
+      move = {0, 0}
+      rounding = 0
+ 	    size = { "100%", "100%" },
+ 	    border_size = 0,
+ 	    no_anim = true,
+ 	    float = true,
+	    pin = true,
+    })
+    ```
+  </TabItem>
+  <TabItem label="Hyprland 0.53 to 0.55">
     ```
     // ~/.config/hypr/hyprland.conf
     windowrule {
@@ -226,14 +247,14 @@ Else, the menu will not float above other windows.
 #### Shortcuts
 
 Also, Kando cannot directly bind global shortcuts on Hyprland.
-Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination in `hyprland.conf`.
+Instead, you specify a shortcut ID for each menu in Kando's menu editor and bind a key combination in `hyprland.conf` or `hyprland.lua`.
 For this, do the following:
 
 <Steps>
 
 1. Run Kando and set a shortcut ID for your menu in the menu editor.
 2. Open a terminal and run `hyprctl globalshortcuts` to list all currently registered global shortcuts.
-3. Find the line that corresponds to your shortcut ID and add a line like `bind = CTRL, Space, global, <shortcut ID>` to your `hyprland.conf`.
+3. Find the line that corresponds to your shortcut ID and add a line like `bind = CTRL, Space, global, <shortcut ID>` to your `hyprland.conf` or `hl.bind("CTRL + Space", hl.dsp.global("<shorcut ID>"))` if you're using `hyprland.lua`.
 
 </Steps>
 
@@ -245,12 +266,18 @@ Here are some examples:
     ```
     // ~/.config/hypr/hyprland.conf
     bind = CTRL, Space, global, menu.kando.Kando:example-menu
+
+    // ~/.config/hypr/hyprland.lua
+    hl.bind("CTRL + Space", hl.dsp.global("menu.kando.Kando:example-menu"))
     ```
   </TabItem>
   <TabItem label="Older non-Flatpak installations">
     ```
     // ~/.config/hypr/hyprland.conf
     bind = CTRL, Space, global, :example-menu
+
+    // ~/.config/hypr/hyprland.lua
+    hl.bind("CTRL + Space", hl.dsp.global(":example-menu"))
     ```
   </TabItem>
 </Tabs>
@@ -266,6 +293,9 @@ To do this, add the following line to your config:
 ```
 // ~/.config/hypr/hyprland.conf
 env=ELECTRON_OZONE_PLATFORM_HINT,auto
+
+// ~/.config/hypr/hyprland.lua
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 ```
 
 #### Input Issues
