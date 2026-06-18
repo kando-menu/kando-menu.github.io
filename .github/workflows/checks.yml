@@ -16,6 +16,21 @@ jobs:
     name: Check REUSE
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: REUSE Compliance Check
-        uses: fsfe/reuse-action@v4
+        uses: fsfe/reuse-action@v6
+
+  build:
+    name: Check Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build website
+        run: npm run build
