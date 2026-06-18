@@ -20,7 +20,7 @@
     "astro": "^6.0.0",
     "astro-icon": "^1.1.5",
     "astro-og-canvas": "^0.11.1",
-    "astro-swiper": "^1.4.0",
+    "astro-swiper": "^2.7.0",
     "sharp": "^0.34.5",
     "typescript": "^5.9.3"
   },
