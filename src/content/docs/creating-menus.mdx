@@ -41,25 +41,50 @@ Drag new items from the toolbar to the menu preview, reorder them, and change th
 <ThemeImage lightSrc={editorLight} darkSrc={editorDark} alt="menu editor" class="shadow" />
 <center><sup>Once you configured some menus, the editor may look like this.</sup></center>
 
-### Menu Items and Submenus
+### Organizing Menus
 
+In Kando, you can create any number of menus.
+All your menus are shown in the **menu list on the left** side of the editor.
+Here you can add new menus, reorder your menus, group them in collections by using tags, and more.
 
+With a menu selected, you can edit its properties in the **menu properties panel on the right** side of the editor.
+Here you can change the menu's name, icon, and more.
+
+### Adding Menu Items
+
+To each menu, you can add any number of **menu items**.
+A menu item is a single entry in the menu which can either be a submenu or a so called "button item".
+New menu items can be added by dragging them from the toolbar at the bottom of the menu preview to the desired position in the menu.
+
+The first menu item type in the toolbar is the **submenu item**.
+All other item types are **button items** with some predefined example workflows.
 
 ### Creating Workflows
 
-You can compose your menus from a variety of item types.
-Below you can find a list of all currently available item types.
-Click on an item to learn more about it!
+Each menu item offers several workflows which are executed when certain events happen, e.g. when the item is selected.
+You can edit these workflows by clicking on the corresponding tabs in the item properties panel on the right side of the editor.
 
-<LinkCard title="Submenu" description='Use this to create nested menus.' href="/item-submenu"/>
-<LinkCard title="Run Command" description='Can be used to open applications or run shell commands.' href="/item-run-command"/>
-<LinkCard title="Open File" description='Can be used to open files, websites, and more.' href="/item-file"/>
-<LinkCard title="Simulate Hotkey" description='Simulates a simple keyboard shortcut.' href="/item-simulate-hotkey"/>
-<LinkCard title="Execute Macro" description='Simulates a complex sequence of keyboard shortcuts.' href="/item-execute-macro"/>
-<LinkCard title="Paste Text" description='Paste a given text into the focused application.' href="/item-paste-text"/>
-<LinkCard title="Open URI" description='Use this to open files, websites, and more.' href="/item-open-uri"/>
-<LinkCard title="Redirect to another Menu" description='Use this as a link to another menu.' href="/item-redirect"/>
-<LinkCard title="Open Settings" description="Opens Kando's settings dialog." href="/item-settings"/>
+For instance, **submenu items** have a "Open Workflow" (which is executed when you select the submenu), a "Hover Workflow" (which is executed when you hover over the submenu before selecting it), and a "Center-Click Workflow" (which is executed when you click the center of the submenu when it is open).
+
+![choose-workflow](../../assets/img/choose-workflow.gif)
+
+**Button items** have only two workflows: a "Select Workflow" and a "Hover Workflow".
+Now you can add any number of actions to these workflows, and compose complex sequences of actions which are executed when you select or hover over the item.
+
+You can reorder the actions in a workflow by dragging and dropping them in the workflow editor.
+
+![reorder-actions](../../assets/img/reorder-actions.gif)
+
+You can compose your workflows from a variety of action types.
+Below you can find a list of the most commonly used actions.
+For a list of all available action types, checkout **Available Actions** in the navigation on the left.
+
+<LinkCard title="Execute Command" description='Can be used to open applications or run shell commands.' href="/actions/execute-command"/>
+<LinkCard title="Open File" description='Can be used to open files, websites, and more.' href="/actions/open-file"/>
+<LinkCard title="Simulate Hotkey" description='Simulates a simple keyboard shortcut.' href="/actions/simulate-hotkey"/>
+<LinkCard title="Execute Macro" description='Simulates a complex sequence of keyboard shortcuts.' href="/actions/execute-macro"/>
+<LinkCard title="Open URI" description='Use this to open files, websites, and more.' href="/actions/open-uri"/>
+<LinkCard title="Focus Window" description="Switches focus to a specific window." href="/actions/focus-window"/>
 
 ## <Icon name="solar:safe-2-bold-duotone" class="inline-icon" /> Backup your Menus and Settings!
 
