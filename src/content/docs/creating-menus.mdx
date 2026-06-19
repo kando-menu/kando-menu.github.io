@@ -11,10 +11,12 @@ next:
 
 import { Aside, LinkCard } from '@astrojs/starlight/components';
 import Intro from '../../components/Intro.astro';
+import ThemeImage from '../../components/ThemeImage.astro';
 import { Icon } from 'astro-icon/components';
 import {Image} from 'astro:assets';
 
-import editor from '../../assets/img/editor.png';
+import editorLight from '../../assets/editor-screen-light.png';
+import editorDark from '../../assets/editor-screen-dark.png';
 
 ![banner](../../assets/banners/banner01.png)
 
@@ -36,8 +38,14 @@ There are four ways to open the menu editor:
 In the editor, you can create new menus, and edit existing menus.
 Drag new items from the toolbar to the menu preview, reorder them, and change their properties on the right side of the screen.
 
-<Image src={editor} alt="menu editor" class="shadow"/>
-<center><sup>If you open the menu editor for the first time, it will look like this.</sup></center>
+<ThemeImage lightSrc={editorLight} darkSrc={editorDark} alt="menu editor" class="shadow" />
+<center><sup>Once you configured some menus, the editor may look like this.</sup></center>
+
+### Menu Items and Submenus
+
+
+
+### Creating Workflows
 
 You can compose your menus from a variety of item types.
 Below you can find a list of all currently available item types.

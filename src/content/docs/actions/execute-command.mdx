@@ -2,41 +2,44 @@
 # SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
 # SPDX-License-Identifier: CC-BY-4.0
 
-title: Run Command
-description: A menu item which executes a command.
+title: Execute Command
+description: A menu action to execute a command.
 tableOfContents: true
 ---
 
-import Intro from '../../components/Intro.astro';
+import Intro from '../../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 import { Tabs, TabItem, Steps, Badge, Icon as AstroIcon } from '@astrojs/starlight/components';
 
-![banner](../../assets/img/type-command.png)
+![banner](../../../assets/img/actions/execute-command.png)
 
 <Intro>
-This item type is used to execute any command.
 You can use this to run applications, scripts, or any other command that you can run in a shell.
 </Intro>
 
 ## <Icon name="solar:menu-dots-circle-bold-duotone" class="inline-icon" /> Getting the Command to Run an App
 
-Starting with version 2.1.0, Kando comes with an **app picker** which allows you to select one of your installed applications.
+Kando comes with an **app picker** which allows you to select one of your installed applications.
 If the app picker does not show the app you want to run, you can use tips further below to find the command to run the app.
 
 ### Use the App Picker (recommended)
+
 If you select an application from the app picker, Kando will automatically fill in the command, name, and icon for you.
-![banner](../../assets/img/app-picker.png)
+![app-picker](../../../assets/img/app-picker.png)
 <center><sup>The app picker allows you to select one of your installed of apps.</sup></center>
 
 ### Use Drag and Drop
+
 Usually, you can drag and drop an application from your start menu or application launcher into Kando!
 * On **Windows**, this works with the Start Menu and most application shortcuts.
 * On **macOS**, you can drag and drop applications from the Applications folder.
 * On **Linux**, you can drag and drop desktop files from your file manager and on some desktop environments, you can also drag and drop applications from the application launcher.
 
 ### <AstroIcon name="seti:windows" class="inline-icon" /> Windows
+
 If the app picker does not work for you, you can find the command to run an application in a few different ways.
 The steps for launching an application on Windows depends on where it is and what type of application it is.
+
 <Tabs>
   <TabItem label="Start Menu Apps">
     <Steps>
@@ -94,13 +97,16 @@ The steps for launching an application on Windows depends on where it is and wha
     </Steps>
   </TabItem>
 </Tabs>
+
 ### <AstroIcon name="apple" class="inline-icon" /> macOS
+
 On macOS, you can usually run an application from the terminal by using the `open` command.
 ```bash
 open -a "Application Name"
 ```
 
 ### <AstroIcon name="linux" class="inline-icon" /> Linux
+
 On Linux, this is pretty straightforward. Just use the command you would use to run the app from a terminal.
 If you do not now this, you can have a look at the desktop file of the app you want to run. This file is usually located in `/usr/share/applications/` or `~/.local/share/applications/`. The `Exec` line in this file contains the command you need to run.
 
@@ -110,7 +116,6 @@ There are a few other options you can set for the command item:
 
 * **Run isolated:** This is only available on Linux with `systemd-run` installed. This will run the command in a clean environment, meaning that it will not inherit any environment variables from Kando. This can help with commands that do not start properly.
 * **Run detached:** This will disconnect the command from Kando, so it will continue to run even if Kando is closed. Disabling this may resolve issues with commands that do not start properly.
-* **Wait for fade-out animation:** If enabled, the command will be executed _after_ the Kando window is closed. This can be useful if the command targets another window which needs to be focused.
 
 ## <Icon name="solar:code-line-duotone" class="inline-icon" /> Placeholders
 
@@ -125,23 +130,21 @@ Below are the available placeholders:
 
 ## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
 
-If you happen to edit your `menus.json` file by hand, you can create a Command item with something like the following.
-You can read more about the structure of the `menus.json` file in its [documentation](/config-files).
+If you edit your [`menus.json`](/config-files) file by hand or use the [IPC interface](/ipc-interface), you can create this action with something like the following.
 
-The `data` property of the menu item must contain a `command` property which contains the shell command to execute.
-The optional `delayed` property will ensure that the command is executed _after_ the Kando window is closed.
-
-```json title="menus.json"
-// ...
-{
-  "name": "Inkscape",
-  "type": "command",
-  "icon": "inkscape",
-  "iconTheme": "simple-icons",
-  "data": {
-    "command": "/usr/bin/inkscape",
-    "delayed": false
-  }
-},
-// ...
+```json title="menus.json" {5-10}
+...
+"selectWorkflow": {
+  "actions": [
+    ...
+    {
+      "type": "execute-command",
+      "command": "firefox",
+      "detached": true,
+      "isolated": false
+    },
+    ...
+  ]
+}
+...
 ```

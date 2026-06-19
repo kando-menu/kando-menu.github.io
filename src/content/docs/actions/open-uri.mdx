@@ -3,19 +3,24 @@
 # SPDX-License-Identifier: CC-BY-4.0
 
 title: Open URI
-description: A menu item which opens a URI.
+description: A menu action which opens a URI.
 tableOfContents: true
 ---
 
-import Intro from '../../components/Intro.astro';
+import Intro from '../../../components/Intro.astro';
 import { Icon } from 'astro-icon/components';
 
-![banner](../../assets/img/type-uri.png)
+![banner](../../../assets/img/actions/open-uri.png)
 
 <Intro>
 An URI item can not only be used to open a website but also to open any URI that your operating system can handle.
 This includes opening files, directories, or even other applications.
 </Intro>
+
+## <Icon name="solar:check-circle-bold-duotone" class="inline-icon" /> Options
+
+This action has the following options. 
+* **URI**: The URI to open. This can be a website, a file, a directory, or any other URI that your operating system can handle.
 
 ## <Icon name="solar:globus-bold-duotone" class="inline-icon" /> Example URIs
 
@@ -36,23 +41,21 @@ Below are the available placeholders:
 - `{{pointer_x}}`: The x-coordinate of the mouse pointer when the menu was opened.
 - `{{pointer_y}}`: The y-coordinate of the mouse pointer when the menu was opened.
 
-## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> Example Configuration
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> JSON Configuration
 
-If you happen to edit your `menus.json` file by hand, you can create an Open-URI item with something like the following.
-You can read more about the structure of the `menus.json` file in its [documentation](/config-files).
+If you edit your [`menus.json`](/config-files) file by hand or use the [IPC interface](/ipc-interface), you can create this action with something like the following.
 
-The `data` property of the menu item must contain a `uri` property which contains the URI to open.
-
-```json title="menus.json"
-// ...
-{
-  "name": "GitHub",
-  "type": "uri",
-  "icon": "github",
-  "iconTheme": "simple-icons",
-  "data": {
-    "uri": "https://github.com"
-  }
-},
-// ...
+```json title="menus.json" {5-8}
+...
+"selectWorkflow": {
+  "actions": [
+    ...
+    {
+      "type": "open-uri",
+      "uri": "https://ko-fi.com/schneegans"
+    }
+    ...
+  ]
+}
+...
 ```

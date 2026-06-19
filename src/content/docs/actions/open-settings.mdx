@@ -1,0 +1,39 @@
+---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
+title: Open Settings
+description: A menu action which opens the settings dialog.
+tableOfContents: true
+---
+
+import Intro from '../../../components/Intro.astro';
+import { Icon } from 'astro-icon/components';
+
+![banner](../../../assets/img/actions/open-settings.png)
+
+<Intro>
+This action simply opens the settings dialog of Kando.
+</Intro>
+
+## <Icon name="solar:check-circle-bold-duotone" class="inline-icon" /> Options
+
+This action has no options.
+
+## <Icon name="solar:settings-bold-duotone" class="inline-icon" /> JSON Configuration
+
+If you edit your [`menus.json`](/config-files) file by hand or use the [IPC interface](/ipc-interface), you can create this action with something like the following.
+
+```json title="menus.json" {5-7}
+...
+"selectWorkflow": {
+  "actions": [
+    ...
+    {
+      "type": "open-settings"
+    }
+    ...
+  ]
+}
+...
+```

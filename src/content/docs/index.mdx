@@ -27,13 +27,13 @@ import { LinkButton, Icon as AstroIcon, Badge } from '@astrojs/starlight/compone
 import { Icon } from 'astro-icon/components';
 import { Swiper, SwiperWrapper, SwiperSlide, SwiperPagination } from 'astro-swiper';
 import { YouTube } from '@astro-community/astro-embed-youtube';
-import { Image } from 'astro:assets';
 
 import ScrollIndicator from '../../components/ScrollIndicator.astro';
 import ShowCase from '../../components/ShowCase.astro';
 import ShowCaseItem from '../../components/ShowCaseItem.astro';
 import ShowCaseGrid from '../../components/ShowCaseGrid.astro';
 import ShowCaseGridItem from '../../components/ShowCaseGridItem.astro';
+import ThemeImage from '../../components/ThemeImage.astro';
 
 import icon from '../../assets/kando.svg';
 
@@ -44,8 +44,10 @@ import slide4 from '../../assets/accordion-slide4.webp';
 import slide5 from '../../assets/accordion-slide5.webp';
 import slide6 from '../../assets/accordion-slide6.webp';
 
-import editor from '../../assets/editor-screen.png';
-import achievements from '../../assets/achievement-screen.png';
+import editorLight from '../../assets/editor-screen-light.png';
+import editorDark from '../../assets/editor-screen-dark.png';
+import achievementsLight from '../../assets/achievement-screen-light.png';
+import achievementsDark from '../../assets/achievement-screen-dark.png';
 
 <ScrollIndicator />
 
@@ -127,9 +129,9 @@ import achievements from '../../assets/achievement-screen.png';
         <p slot="description">Open your favorite applications with a single gesture. No more hunting through menus.</p>
       </ShowCaseGridItem>
       <ShowCaseGridItem type="feature">
-        <Icon slot="icon" name="solar:keyboard-bold" />
-        <div slot="title">Execute complex macros</div>
-        <p slot="description">Execute keyboard shortcuts with a single gesture. No need to remember complex key combinations.</p>
+        <Icon slot="icon" name="solar:menu-dots-line-duotone" />
+        <div slot="title">Execute complex workflows</div>
+        <p slot="description">Execute a series of actions with a single gesture. No need to remember complex key combinations.</p>
       </ShowCaseGridItem>
       <ShowCaseGridItem type="feature">
         <Icon slot="icon" name="solar:file-bold" />
@@ -232,7 +234,7 @@ import achievements from '../../assets/achievement-screen.png';
           Kando supports opening different menus, depending on the current application or window.
           This allows you to have a dedicated menu for each of your favorite applications!
         </p>
-        <Image src={editor} alt="menu editor" class="shadow" />
+        <ThemeImage lightSrc={editorLight} darkSrc={editorDark} alt="menu editor" class="shadow" />
       </SwiperSlide>
       <SwiperSlide>
         <h2><Icon name="solar:heart-pulse-bold" class="inline-icon" /> Kando receives <span class="sakura-font">regular updates</span>.</h2>
@@ -251,7 +253,7 @@ import achievements from '../../assets/achievement-screen.png';
           the gestures.
           Unlock achievements along the way for an extra dose of motivation!
         </p>
-        <Image src={achievements} alt="achievements screen" class="shadow" />
+        <ThemeImage lightSrc={achievementsLight} darkSrc={achievementsDark} alt="achievements screen" class="shadow" />
       </SwiperSlide>
     </SwiperWrapper>
 
