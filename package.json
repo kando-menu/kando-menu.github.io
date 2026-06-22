@@ -15,13 +15,13 @@
     "@astrojs/markdown-remark": "^6.3.10",
     "@astrojs/starlight": "^0.40.0",
     "@fontsource/neucha": "^5.2.8",
-    "@iconify-json/simple-icons": "^1.2.82",
+    "@iconify-json/simple-icons": "^1.2.87",
     "@iconify-json/solar": "^1.2.5",
     "astro": "^6.0.0",
     "astro-icon": "^1.1.5",
     "astro-og-canvas": "^0.11.1",
     "astro-swiper": "^2.7.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
