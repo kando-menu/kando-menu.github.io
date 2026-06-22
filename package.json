@@ -12,7 +12,7 @@
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
     "@astrojs/check": "^0.9.9",
-    "@astrojs/markdown-remark": "^6.3.10",
+    "@astrojs/markdown-remark": "^7.2.0",
     "@astrojs/starlight": "^0.40.0",
     "@fontsource/neucha": "^5.2.8",
     "@iconify-json/simple-icons": "^1.2.82",
