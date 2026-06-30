@@ -79,7 +79,7 @@ Below are the default values of the configuration file.
 
 ```json title="config.json"
 {
-  "version": "2.1.0",
+  "version": "3.0.0",
   "locale": "auto",
   "showIntroductionDialog": true,
   "menuTheme": "default",
@@ -101,6 +101,7 @@ Below are the default values of the configuration file.
   "hideSettingsButton": false,
   "settingsButtonPosition": "bottom-right",
   "windowsInkWorkaround": true,
+  "maxSelectionRadius": 0,
   "centerDeadZone": 50,
   "minParentDistance": 150,
   "dragThreshold": 15,
@@ -112,6 +113,7 @@ Below are the default values of the configuration file.
   "enableMarkingMode": true,
   "enableTurboMode": true,
   "warpMouse": true,
+  "returnPointerToMenuOpeningPosition": false,
   "hoverModeNeedsConfirmation": false,
   "gestureMinStrokeLength": 150,
   "gestureMinStrokeAngle": 20,
@@ -278,11 +280,17 @@ If true, the settings button will be hidden if not hovered.
 The position of the settings button.
 Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
 
-#### windowsInkWorkaround <Badge text="new!" variant="tip" />
+#### windowsInkWorkaround
 
 <small>Default value: `"windowsInkWorkaround": true`</small>
 
 If true, the menu will introduce a delay of 100ms before opening on Windows to work around the issue where getting the stylus position is otherwise not possible.
+
+#### maxSelectionRadius <Badge text="new!" variant="tip" />
+
+<small>Default value: `"maxSelectionRadius": 0`</small>
+
+If set to a value greater than 0, the menu will be closed if the user clicks outside of the menu and the distance to the center of the menu is greater than this value (in pixels).
 
 #### centerDeadZone
 
@@ -350,6 +358,12 @@ If enabled, items can be selected by hovering over them while holding down a key
 <small>Default value: `"warpMouse": true`</small>
 
 If true, the mouse pointer will be warped to the center of the menu when necessary.
+
+#### returnPointerToMenuOpeningPosition <Badge text="new!" variant="tip" />
+
+<small>Default value: `"returnPointerToMenuOpeningPosition": false`</small>
+
+If enabled, the mouse pointer will be returned to its original position when the menu is closed.
 
 #### hoverModeNeedsConfirmation
 
