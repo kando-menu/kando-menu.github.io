@@ -286,7 +286,7 @@ Can be one of `'top-left'`, `'top-right'`, `'bottom-left'`, or `'bottom-right'`.
 
 If true, the menu will introduce a delay of 100ms before opening on Windows to work around the issue where getting the stylus position is otherwise not possible.
 
-#### maxSelectionRadius <Badge text="new!" variant="tip" />
+#### maxSelectionRadius
 
 <small>Default value: `"maxSelectionRadius": 0`</small>
 
@@ -322,13 +322,13 @@ The duration of the fade-in animation in milliseconds. Set to `0` to disable the
 
 The duration of the fade-out animation in milliseconds. Set to `0` to disable the animation. Some actions are only executed after the fade-out animation has finished, so reducing this value can make the menu much "snappier".
 
-#### enableMenuAnimations <Badge text="soon!" variant="tip" />
+#### enableMenuAnimations <Badge text="new!" variant="tip" />
 
 <small>Default value: `"enableMenuAnimations": true`</small>
 
 If disabled, all transitions and most animations of the menu theme are prevented.
 
-#### enablePointerReactiveEffects <Badge text="soon!" variant="tip" />
+#### enablePointerReactiveEffects <Badge text="new!" variant="tip" />
 
 <small>Default value: `"enablePointerReactiveEffects": true`</small>
 
@@ -449,7 +449,7 @@ If enabled, pressing <kbd>Command</kbd>+<kbd>,</kbd> on macOS or <kbd>Ctrl</kbd>
 
 If enabled, the user will earn achievements for completing certain tasks within the menu.
 
-#### enableAchievementNotifications <Badge text="new!" variant="tip" />
+#### enableAchievementNotifications
 
 <small>Default value: `"enableAchievementNotifications": true`</small>
 
@@ -463,7 +463,7 @@ The latter is used in the settings dialog to group menus together.
 
 ```json title=menus.json
 {
-  "version": "2.1.0",
+  "version": "3.0.0",
   "menus": [
     {
       // First Menu Description.
@@ -487,7 +487,7 @@ The latter is used in the settings dialog to group menus together.
 
 #### version
 
-<small>Default value: `"version": "2.0.0"`</small>
+<small>Default value: `"version": "3.0.0"`</small>
 
 This is the last Kando version which was used to write this configuration file.
 Kando will use this to determine whether the configuration file is up-to-date or needs a migration.
@@ -518,6 +518,59 @@ They are JSON objects with the following properties:
 | `conditions`         | A dictionary of conditions which must be met for the menu to be shown. [See below for details](#menu-conditions).                                                                                                                                                                    |
 | `tags`               | A list of tags which can be used to filter the menu in the settings dialog. If a menu has no tags, it will only be shown in the all-menus list or if a collection has no tags at all.                                                                                                |
 
+##### Menu Item Descriptions
+
+The layout of the menu is described by a tree of menu items.
+Each menu item is a JSON object with the following properties:
+
+| Property    | Description                                                                                                                                                                                                                                  |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`      | The type of the menu item. Currently, `root`, `submenu`, and `button` are supported. Depending on the type, some other properties. See below for details.                                                                                    |
+| `name`      | The name of the menu item. This is shown in the center of the menu when the item is hovered. The name of the root item defines the name of the menu.                                                                                         |
+| `iconTheme` | Either one of the built-in icon themes (`material-symbols-rounded`, `simple-icons`, `simple-icons-colored`, `base64`, or `emoji`) or a subdirectory of the `icon-themes` directory in Kando’s config directory. [See details](/icon-themes). |
+| `icon`      | The name of the icon from the selected icon theme, an emoji like `🚀` (when `iconTheme` is `emoji`), or a base64-encoded image such as `data:image/gif;base64,...` (when the icon theme is `base64`). [See details](/icon-themes).           |
+
+###### Type-Specific Properties
+
+Depending on the `type` of the menu item, some other properties should be present.
+The following table lists the properties which are valid for each type of menu item.
+
+| Property           | For Types           | Description                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `angle`            | `button`, `submenu` | Defines the angle of the menu item in degrees. If omitted, the angle is calculated automatically. `0°` places the item at the top of the menu, `90°` on the right, and so on. Among sibling items, angles must be monotonically increasing. The first angle must be ≥ `0°`, and all following angles must be smaller than the first angle + `360°`. Invalid angles are ignored. |
+| `children`         | `root`, `submenu`   | Contains a list of child menu items. Each entry is itself a menu item description.                                                                                                                                                                                                                                                                                              |
+| `openWorkflow`     | `submenu`           | This workflow will be executed when the submenu is opened. [See below for how to configure a workflow](#workflows--actions).                                                                                                                                                                                                                                                    |
+| `activateWorkflow` | `root`, `submenu`   | This workflow will be executed when the center of the menu is clicked. [See below for how to configure a workflow](#workflows--actions).                                                                                                                                                                                                                                        |
+| `hoverWorkflow`    | `submenu`, `button` | This workflow will be executed when the menu item is hovered. [See below for how to configure a workflow](#workflows--actions).                                                                                                                                                                                                                                                 |
+| `selectWorkflow`   | `button`            | This workflow will be executed when the button item is finally selected. [See below for how to configure a workflow](#workflows--actions).                                                                                                                                                                                                                                      |
+
+##### Workflows & Actions
+
+As listed above, each menu item can have multiple associated workflows.
+A workflow contains a list of actions which will be executed in order when the workflow is triggered.
+
+| Property         | Description                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `quickSelectKey` | The key that can be used to trigger the workflow with the keyboard. A single letter like "A", "B", etc. can be used.           |
+| `actions`        | The list of actions that will be executed when the workflow is triggered. See below for details on the different action types. |
+
+Below is a list of all currently supported action types.
+Click on these links to learn more about the individual action types and how they are configured in the JSON format.
+
+- [Close Menu](/actions/close-menu): Closes the menu immediately. 
+- [Close Submenu](/actions/close-submenu): Closes the currently open submenu and returns to the parent menu.
+- [Delay](/actions/delay): Waits for a given amount of time before executing the next action.
+- [Execute Command](/actions/execute-command): Executes a command in the system shell.
+- [Execute Macro](/actions/execute-macro): Performs a series of key presses.
+- [Focus Window](/actions/focus-window): Focuses a window with a given title.
+- [Inhibit Shortcuts](/actions/inhibit-shortcuts): Temporarily disables all global Kando shortcuts.
+- [Open File](/actions/open-file): Opens a file or directory with the default application.
+- [Open Menu](/actions/open-menu): Switches to another menu.
+- [Open Settings](/actions/open-settings): Opens the Kando settings window.
+- [Open URI](/actions/open-uri): Opens a URI in the default application.
+- [Set Clipboard](/actions/set-clipboard): Sets the system clipboard to a given text.
+- [Simulate Hotkey](/actions/simulate-hotkey): Simulates a key press of a given hotkey.
+
 ##### Menu Conditions
 
 The `conditions` property of a menu description can contain a dictionary of conditions.
@@ -530,40 +583,6 @@ The following properties can be used as **menu conditions**:
 | `appName`    | The name of the application which must be focused for the menu to be shown. If it is a simple string, the condition is met if the name of the focused application contains the given string (case-insensitive). If the string starts with `/`, it is interpreted as a regular expression.                              |
 | `windowName` | The name of the window which must be focused for the menu to be shown. It is interpreted in the same way as `appName`.                                                                                                                                                                                                 |
 | `screenArea` | A dictionary with the optional properties `xMin`, `xMax`, `yMin`, and `yMax`. The menu will only be shown if the mouse cursor is within the given screen area. Values are given in pixels and are relative to the top-left corner of the screen. If a value is not specified, the area is unbounded in that direction. |
-
-##### Menu Item Descriptions
-
-The layout of the menu is described by a tree of menu items.
-Each menu item is a JSON object with the following properties:
-
-| Property             | Description                                                                                                                                                                                                                                                                                                                                                                     |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`               | The name of the menu item. This is shown in the center of the menu when the item is hovered. The name of the root item defines the name of the menu.                                                                                                                                                                                                                            |
-| `iconTheme`          | Either one of the built-in icon themes (`material-symbols-rounded`, `simple-icons`, `simple-icons-colored`, `base64`, or `emoji`) or a subdirectory of the `icon-themes` directory in Kando’s config directory. [See details](/icon-themes).                                                                                                                                    |
-| `icon`               | The name of the icon from the selected icon theme, an emoji like `🚀` (when `iconTheme` is `emoji`), or a base64-encoded image such as `data:image/gif;base64,...` (when the icon theme is `base64`). [See details](/icon-themes).                                                                                                                                              |
-| `quickSelectKey` <Badge text="new!" variant="tip" /> | The key that can be used to quickly select this menu item. A single letter like "A", "B", etc. can be used.                                                                                                                                                                                                                                                                            |
-| `angle` (_optional_) | Defines the angle of the menu item in degrees. If omitted, the angle is calculated automatically. `0°` places the item at the top of the menu, `90°` on the right, and so on. Among sibling items, angles must be monotonically increasing. The first angle must be ≥ `0°`, and all following angles must be smaller than the first angle + `360°`. Invalid angles are ignored. |
-| `type`               | The type of the menu item. Several types are available. [See details](#menu-item-types).                                                                                                                                                                                                                                                                                        |
-| `data`               | Depending on the item type, this may contain additional data or be required. [See details](#menu-item-types).                                                                                                                                                                                                                                                                   |
-| `children`           | If the menu item is a submenu, this contains a list of child menu items. Each entry is itself a menu item description.                                                                                                                                                                                                                                                          |
-
-##### Menu Item Types
-
-For now, the `type` property of a menu item can be one of the following values:
-
-- [`"command"`](/item-run-command)
-- [`"file"`](/item-file)
-- [`"hotkey"`](/item-simulate-hotkey)
-- [`"macro"`](/item-execute-macro)
-- [`"redirect"`](/item-redirect)
-- [`"settings"`](/item-settings)
-- [`"submenu"`](/item-submenu)
-- [`"text"`](/item-paste-text)
-- [`"uri"`](/item-open-uri)
-
-Click on these links to learn more about the individual item types and which `data` properties they require.
-
-Starting with Kando 2.3.0, there is also the `"simple-button"` item type, which is meant to be used with the [IPC Interface](/ipc-interface) and does not require a `data` property. 
 
 #### collections
 

@@ -49,7 +49,7 @@ export default defineConfig({
             'creating-menus',
             {
               label: 'Available Actions',
-              collapsed: true,
+              collapsed: false,
               items: [
                 'actions/close-menu',
                 'actions/close-submenu',
