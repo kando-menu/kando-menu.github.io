@@ -60,11 +60,11 @@ The location of this file depends on the operating system and installation metho
 ```json
 {
   "port": 12345,
-  "apiVersion": 1
+  "apiVersion": 2
 }
 ```
 
-Your client should always check this file before connecting, as the port may change between Kando sessions.
+Your client should always check this file before connecting, as the port will change between Kando sessions.
 
 ### Example code to find `ipc-info.json`
 
@@ -100,26 +100,25 @@ Once you have the connection info, you can connect to the WebSocket server and s
 To open a custom menu in Kando and receive the user's selection, connect to the WebSocket server and send a `show-menu` message.
 Kando will display your menu and send back events as the user interacts.
 
+<Aside type="caution" title="Version Compatibility">
+ With Kando 3.0, the IPC API has been updated to version 2. Previously, there were `select-item`, `hover-item`, and `cancel-menu` messages. In version 2, these have been replaced by a single `menu-interaction` message that provides more detailed information about the user's actions.
+</Aside>
+
 ### Available Messages
 
 | Message&nbsp;Name    | Sender | Description                                      |
 |-----------------|-----------|--------------------------------------------------|
-| `show-menu`       | Client | Request to show a custom menu. Pass the menu structure via the `menu` parameter as JSON. **The format of the menu is the same as the one used in the `menus.json` file.** See [Menu Configuration](/config-files/#menu-item-descriptions) for more details. |
-| `select-item`     | Server | The selected item is passed via the `path` and `target` parameters. These describe its position in the menu tree and the type of item which was selected. See below for an example. |
-| `hover-item`      | Server | Use this to get notified when the user hovers over a menu item. The same parameters are used as in `select-item`. |
-| `cancel-menu`     | Server | Triggered when user closed the menu without a selection.               |
-| `error`           | Server | An error occurred. Inspect the `reason` and `description` properties for more details.  |
+| `show-menu`        | Client | Request to show a custom menu. Pass the menu structure via the `menu` parameter as JSON. **The format of the menu is the same as the one used in the `menus.json` file.** See [Menu Configuration](/config-files/#menu-item-descriptions) for more details. |
+| `menu-interaction` | Server | The selected item is passed via the `path` parameter. The type of interaction via the `interaction` parameter. See below for details. |
+| `error`            | Server | An error occurred. Inspect the `reason` and `description` properties for more details.  |
 
-#### Message Arguments: `path` and `target`
+#### Message Arguments: `path` and `interaction`
 
-Some messages (such as `select-item` and `hover-item`) include the arguments `path` and `target`:
+The menu-interaction message contains two important arguments: `path` and `interaction`.
 
 **`path`** is an array of zero-based integers representing the position of the item in the menu tree. For example, `[2, 1]` means the third child of the root, then the second child of that submenu.
 
-**`target`** indicates what kind of menu element was interacted with. Possible values are:
-  - `item`: A regular final menu item (button). Selection of this item usually triggers an action and closes the menu.
-  - `submenu`: A submenu which contains other items. Selection of this item opens the submenu and does not close the menu.
-  - `parent`: The parent menu of the currently opened submenu. If this is selected, the current submenu will be closed and the parent menu will be shown.
+**`interaction`** indicates what the user did. It can be one of the following: `'openMenu'`, `'openSubmenu'`, `'closeMenu'`, `'closeSubmenu'`, `'hoverParent'`, `'hoverCenter'`, `'hoverButton'`, `'hoverSubmenu'`, `'selectButton'`, `'activateMenu'`.
 
 **Example**
 
@@ -127,8 +126,8 @@ This means the user selected the third item in the first submenu.
 
 ```json
 {
-  "type": "select-item",
-  "target": "item",
+  "type": "menu-interaction",
+  "interaction": "selectButton",
   "path": [0, 2]
 }
 ```
@@ -139,6 +138,10 @@ This means the user selected the third item in the first submenu.
 The code snippet below demonstrates how to open a custom menu in Kando using Python. 
 It reads the connection info from `ipc-info.json`, connects to the WebSocket server, and sends a `show-menu` message with a simple menu structure.
 It then listens for user interactions and prints the selected item or cancellation.
+
+<Aside type="note" title="Complete Code Examples">
+At the bottom of the page, you can find [a complete code example](#complete-code-examples) that includes error handling and API version checking.
+</Aside>
 
 ```python title="open_menu.py"
 import asyncio
@@ -152,13 +155,16 @@ async def main():
     uri = f"ws://127.0.0.1:{info['port']}"
 
     menu = {
-        "type": "submenu",
+        "type": "root",
         "name": "Example Menu",
         "icon": "🌸",
         "iconTheme": "emoji",
+        "activateWorkflow": {"actions": [{"type": "close-menu"}]},
         "children": [
-            {"type": "simple-button", "name": "Item 1", "icon": "🚀", "iconTheme": "emoji"},
-            {"type": "simple-button", "name": "Item 2", "icon": "💖", "iconTheme": "emoji"},
+            {"type": "button", "name": "Item 1", "icon": "🚀", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
+            {"type": "button", "name": "Item 2", "icon": "💖", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
+            {"type": "button", "name": "Item 3", "icon": "🎇", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
+            {"type": "button", "name": "Item 4", "icon": "🎉", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
         ]
     }
 
@@ -168,12 +174,15 @@ async def main():
 
         async for message in ws:
             msg = json.loads(message)
-            if msg.get("type") == "select-item":
-                print(f"Selected: {msg.get('path')}")
-                break
-            elif msg.get("type") == "cancel-menu":
-                print("Menu canceled by user.")
-                break
+            if msg.get("type") == "menu-interaction":
+                path = msg.get("path", [])
+                interaction = msg.get("interaction")
+
+                if interaction == "selectButton":
+                    print(f"Selected: {menu['children'][path[0]]['icon']}")
+                    break
+                else:
+                    print(f"Interaction: {interaction} at path {path}")
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -182,9 +191,13 @@ if __name__ == "__main__":
 
 ## Listening to Menu Interactions
 
-To observe all menu interactions (open, hover, select, cancel), of any opened menu, connect to the WebSocket server and send a `start-observing` message.
+To observe all menu interactions (open, hover, select, cancel), of any menu opened by Kando, connect to the WebSocket server and send a `start-observing` message.
 Kando will then send you events as they happen.
 If you want to stop receiving events, send a `stop-observing` message.
+
+<Aside type="caution" title="Version Compatibility">
+ With Kando 3.0, the IPC API has been updated to version 2. Previously, there were `select-item`, `hover-item`, and `cancel-menu` messages. In version 2, these have been replaced by a single `menu-interaction` message that provides more detailed information about the user's actions.
+</Aside>
 
 ### Available Messages
 
@@ -192,16 +205,17 @@ If you want to stop receiving events, send a `stop-observing` message.
 |-------------------|-----------|-----------------------------------------------------|
 | `start-observing`   | Client | Send this to start receiving menu interactions. events.         |
 | `stop-observing`    | Client | Send this to stop receiving menu interaction events.          |
-| `open-menu`         | Server | This will be sent by Kando when a menu is opened.                              |
-| `hover-item`        | Server | _Same as above_                        |
-| `select-item`       | Server | _Same as above_                       |
-| `cancel-menu`       | Server | _Same as above_                        |
+| `menu-interaction`  | Server | _Same as above_                        |
 | `error`             | Server | _Same as above_      |
 
 ### Example code to observe menu interactions
 
 The code snippet below demonstrates how to observe menu interactions in Kando using Python.
 It connects to the WebSocket server, sends a `start-observing` message, and prints events as they happen (menu opened, item hovered, item selected, menu canceled).
+
+<Aside type="note" title="Complete Code Examples">
+At the bottom of the page, you can find [a complete code example](#complete-code-examples) that includes error handling and API version checking.
+</Aside>
 
 ```python title="observe_interaction.py"
 import asyncio
@@ -220,14 +234,13 @@ async def main():
 
         async for message in ws:
             msg = json.loads(message)
-            if msg.get("type") == "open-menu":
-                print("Menu opened")
-            elif msg.get("type") == "hover-item":
-                print(f"Item hovered: {msg.get('path')} target={msg.get('target')}")
-            elif msg.get("type") == "select-item":
-                print(f"Item selected: {msg.get('path')} target={msg.get('target')}")
-            elif msg.get("type") == "cancel-menu":
-                print("Menu canceled")
+            msg_type = msg.get("type")
+            if msg_type == "menu-interaction":
+                interaction = msg.get("interaction")
+                path = msg.get("path", [])
+                print(f"Interaction: {interaction} at path {path}")
+            elif msg_type == "error":
+                print(f"Error: {msg.get('reason')} - {msg.get('description')}")
 
 if __name__ == "__main__":
     asyncio.run(main())
@@ -272,22 +285,23 @@ Below, you find two complete code examples for both opening a custom menu and ob
         port = info['port']
         api_version = info['apiVersion']
 
-        client_api_version = 1
+        client_api_version = 2
         if api_version != client_api_version:
             print(f"API version mismatch: server={api_version}, client={client_api_version}")
             return
 
         uri = f"ws://127.0.0.1:{port}"
         menu = {
-            "type": "submenu",
+            "type": "root",
             "name": "Example Menu",
             "icon": "🌸",
             "iconTheme": "emoji",
+            "activateWorkflow": {"actions": [{"type": "close-menu"}]},
             "children": [
-                {"type": "simple-button", "name": "Item 1", "icon": "🚀", "iconTheme": "emoji"},
-                {"type": "simple-button", "name": "Item 2", "icon": "💖", "iconTheme": "emoji"},
-                {"type": "simple-button", "name": "Item 3", "icon": "🎇", "iconTheme": "emoji"},
-                {"type": "simple-button", "name": "Item 4", "icon": "🎉", "iconTheme": "emoji"},
+                {"type": "button", "name": "Item 1", "icon": "🚀", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
+                {"type": "button", "name": "Item 2", "icon": "💖", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
+                {"type": "button", "name": "Item 3", "icon": "🎇", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
+                {"type": "button", "name": "Item 4", "icon": "🎉", "iconTheme": "emoji", "selectWorkflow": {"actions": [{"type": "close-menu"}]}},
             ]
         }
 
@@ -299,16 +313,15 @@ Below, you find two complete code examples for both opening a custom menu and ob
                 async for message in ws:
                     msg = json.loads(message)
                     msg_type = msg.get("type")
-                    if msg_type == "select-item":
+                    if msg_type == "menu-interaction":
                         path = msg.get("path", [])
-                        if path and isinstance(path[0], int) and 0 <= path[0] < 4:
+                        interaction = msg.get("interaction")
+
+                        if interaction == "selectButton":
                             print(f"Selected: {menu['children'][path[0]]['icon']}")
+                            break
                         else:
-                            print(f"Selected: Unknown item (path={path})")
-                        break
-                    elif msg_type == "cancel-menu":
-                        print("Menu canceled by user.")
-                        break
+                            print(f"Interaction: {interaction} at path {path}")
                     elif msg_type == "error":
                         print(f"Error: {msg.get('reason')} - {msg.get('description')}")
                         break
@@ -353,7 +366,7 @@ Below, you find two complete code examples for both opening a custom menu and ob
         port = info['port']
         api_version = info['apiVersion']
 
-        client_api_version = 1
+        client_api_version = 2
         if api_version != client_api_version:
             print(f"API version mismatch: server={api_version}, client={client_api_version}")
             return
@@ -368,14 +381,10 @@ Below, you find two complete code examples for both opening a custom menu and ob
                     async for message in ws:
                         msg = json.loads(message)
                         msg_type = msg.get("type")
-                        if msg_type == "open-menu":
-                            print("Menu opened")
-                        elif msg_type == "cancel-menu":
-                            print("Menu canceled")
-                        elif msg_type == "select-item":
-                            print(f"Item selected: path={msg.get('path')} target={msg.get('target')}")
-                        elif msg_type == "hover-item":
-                            print(f"Item hovered: path={msg.get('path')} target={msg.get('target')}")
+                        if msg_type == "menu-interaction":
+                            interaction = msg.get("interaction")
+                            path = msg.get("path", [])
+                            print(f"Interaction: {interaction} at path {path}")
                         elif msg_type == "error":
                             print(f"Error: {msg.get('reason')} - {msg.get('description')}")
                 except websockets.ConnectionClosed:
