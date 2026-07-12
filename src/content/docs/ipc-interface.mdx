@@ -180,6 +180,8 @@ async def main():
 
                 if interaction == "selectButton":
                     print(f"Selected: {menu['children'][path[0]]['icon']}")
+                elif interaction == "closeMenu":
+                    print("Menu closed.")
                     break
                 else:
                     print(f"Interaction: {interaction} at path {path}")
@@ -319,9 +321,12 @@ Below, you find two complete code examples for both opening a custom menu and ob
 
                         if interaction == "selectButton":
                             print(f"Selected: {menu['children'][path[0]]['icon']}")
+                        elif interaction == "closeMenu":
+                            print("Menu closed.")
                             break
                         else:
                             print(f"Interaction: {interaction} at path {path}")
+
                     elif msg_type == "error":
                         print(f"Error: {msg.get('reason')} - {msg.get('description')}")
                         break
