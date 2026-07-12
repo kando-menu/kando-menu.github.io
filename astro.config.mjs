@@ -113,6 +113,7 @@ export default defineConfig({
           label: 'Reference',
           items: [
             'config-files',
+            'cli-interface',
             'ipc-interface',
             'valid-keynames',
             'release-management',
