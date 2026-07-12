@@ -11,6 +11,7 @@ tableOfContents:
   maxHeadingLevel: 6
 ---
 
+import { Icon } from 'astro-icon/components';
 import { Tabs, TabItem, Aside, FileTree, Badge } from '@astrojs/starlight/components';
 
 ![banner](../../assets/banners/banner03.png)
@@ -18,13 +19,13 @@ import { Tabs, TabItem, Aside, FileTree, Badge } from '@astrojs/starlight/compon
 All settings of Kando are stored in **two configuration files** JSON files which you can edit with any text editor.
 [`config.json`](#general-configuration-configjson) stores the general configuration of the application and [`menus.json`](#menu-configuration-menusjson) stores the configuration of the individual menus.
 
-<Aside type="tip" title="Edit the config files while Kando is running!">
-  Whenever you save a file, Kando will automatically 🔥 **hot-reload** the configuration.
-  Kando will ✅ **validate** the configuration files. If you [launched Kando from a
-  terminal](../../launch-from-cli), it will print errors to the console if it finds any.
-  In this case, the configuration will not be reloaded. If a configuration file is invalid
-  at startup, Kando will refuse to start.
-</Aside>
+## <Icon name="solar:safe-2-bold-duotone" class="inline-icon" /> Backup your Menus and Settings!
+
+It's a good idea to backup your menus and settings regularly, especially if you have spent a lot of time customizing them.
+As noted above, all of Kando's settings, including your menus, are stored in two JSON files.
+You can either backup these files manually, or use the corresponding buttons in the general settings dialog.
+
+![Backup buttons](../../assets/img/backup-settings.png)
 
 ## Location of the Configuration Files
 
@@ -72,6 +73,14 @@ Use you file manager or terminal to navigate to the following directories.
 </Aside>
 
 ## General Configuration: `config.json`
+
+<Aside type="tip" title="Edit the config files while Kando is running!">
+  Whenever you save a file, Kando will automatically 🔥 **hot-reload** the configuration.
+  Kando will ✅ **validate** the configuration files. If you [launched Kando from a
+  terminal](../../launch-from-cli), it will print errors to the console if it finds any.
+  In this case, the configuration will not be reloaded. If a configuration file is invalid
+  at startup, Kando will refuse to start.
+</Aside>
 
 This file contains the general configuration of Kando.
 Here you can configure the menu theme, sound theme, and various other settings.
