@@ -17,7 +17,7 @@
     "@fontsource/neucha": "^5.2.8",
     "@iconify-json/simple-icons": "^1.2.82",
     "@iconify-json/solar": "^1.2.5",
-    "astro": "^6.0.0",
+    "astro": "^7.0.3",
     "astro-icon": "^1.1.5",
     "astro-og-canvas": "^0.11.1",
     "astro-swiper": "^2.7.0",
