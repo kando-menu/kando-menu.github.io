@@ -20,8 +20,9 @@ import { Icon } from 'astro-icon/components';
 Kando offers a powerful Inter-Process Communication (IPC) API via WebSockets, enabling seamless integration with third-party applications and plugins. 
 </Intro>
 
-This API allows you to both open custom menus in Kando and observe user interactions in any menu. 
+This API allows you to both open menus in Kando and observe user interactions in any menu:
 
+- **Opening Predefined Menus:** Open one of your predefined menus by its name. This is similar to the `--menu` command-line option, but faster as it doesn't require starting a new Kando instance.
 - **Opening Custom Menus:** Trigger Kando to display a menu you define, and receive the user's selection. This is ideal for integrating Kando with other applications or workflows.
 - **Listening to Menu Interactions:** Observe when users open, hover, or select items in any Kando menu. This is useful for plugins that provide feedback (e.g., haptic feedback) or analytics.
 
@@ -94,10 +95,52 @@ def find_ipc_info_path():
 </Aside>
 
 
-## Opening Custom Menus
+## Opening Predefined Menus
 
 Once you have the connection info, you can connect to the WebSocket server and send messages to control Kando.
-To open a custom menu in Kando and receive the user's selection, connect to the WebSocket server and send a `show-menu` message.
+To open a predefined menu, send a `show-menu` message with the menu name as a parameter.
+
+### Available Messages
+
+| Message&nbsp;Name  | Sender | Description                                      |
+|--------------------|--------|--------------------------------------------------|
+| `show-menu` | Client | Request to show a predefined menu. Pass the menu name via the `name` parameter. |
+
+### Example code to open a predefined menu
+
+The code snippet below demonstrates how to open a predefined menu in Kando using Python.
+It reads the connection info from `ipc-info.json`, connects to the WebSocket server, and sends a `show-menu` message with the name `"Example Menu"`.
+
+<Aside type="note" title="Complete Code Examples">
+At the bottom of the page, you can find [a complete code example](#complete-code-examples) that includes error handling and API version checking.
+</Aside>
+
+```python title="open_predefined_menu.py"
+import asyncio
+import json
+import websockets
+
+menu_name = "Example Menu"
+
+async def main():
+    # Read ipc-info.json (see previous section for locating the file)
+    with open("/path/to/ipc-info.json") as f:
+        info = json.load(f)
+    uri = f"ws://127.0.0.1:{info['port']}"
+
+    async with websockets.connect(uri) as ws:
+        await ws.send(json.dumps({"type": "show-menu", "name": menu_name}))
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+```
+
+
+
+## Opening Custom Menus
+
+To open a custom menu in Kando and receive the user's selection, connect to the WebSocket server and send a `show-custom-menu` message.
 Kando will display your menu and send back events as the user interacts.
 
 <Aside type="caution" title="Version Compatibility">
@@ -106,9 +149,9 @@ Kando will display your menu and send back events as the user interacts.
 
 ### Available Messages
 
-| Message&nbsp;Name    | Sender | Description                                      |
-|-----------------|-----------|--------------------------------------------------|
-| `show-menu`        | Client | Request to show a custom menu. Pass the menu structure via the `menu` parameter as JSON. **The format of the menu is the same as the one used in the `menus.json` file.** See [Menu Configuration](/config-files/#menu-item-descriptions) for more details. |
+| Message&nbsp;Name  | Sender | Description                                      |
+|--------------------|--------|--------------------------------------------------|
+| `show-custom-menu` | Client | Request to show a custom menu. Pass the menu structure via the `menu` parameter as JSON. **The format of the menu is the same as the one used in the `menus.json` file.** See [Menu Configuration](/config-files/#menu-item-descriptions) for more details. |
 | `menu-interaction` | Server | The selected item is passed via the `path` parameter. The type of interaction via the `interaction` parameter. See below for details. |
 | `error`            | Server | An error occurred. Inspect the `reason` and `description` properties for more details.  |
 
@@ -136,14 +179,14 @@ This means the user selected the third item in the first submenu.
 ### Example code to open a custom menu
 
 The code snippet below demonstrates how to open a custom menu in Kando using Python. 
-It reads the connection info from `ipc-info.json`, connects to the WebSocket server, and sends a `show-menu` message with a simple menu structure.
+It reads the connection info from `ipc-info.json`, connects to the WebSocket server, and sends a `show-custom-menu` message with a simple menu structure.
 It then listens for user interactions and prints the selected item or cancellation.
 
 <Aside type="note" title="Complete Code Examples">
 At the bottom of the page, you can find [a complete code example](#complete-code-examples) that includes error handling and API version checking.
 </Aside>
 
-```python title="open_menu.py"
+```python title="open_custom_menu.py"
 import asyncio
 import json
 import websockets
@@ -169,7 +212,7 @@ async def main():
     }
 
     async with websockets.connect(uri) as ws:
-        await ws.send(json.dumps({"type": "show-menu", "menu": menu}))
+        await ws.send(json.dumps({"type": "show-custom-menu", "menu": menu}))
         print("Menu sent. Waiting for user interaction...")
 
         async for message in ws:
@@ -254,8 +297,62 @@ if __name__ == "__main__":
 Below, you find two complete code examples for both opening a custom menu and observing menu interactions.
 
 <Tabs>
+  <TabItem label="Open a Predefined Menu">
+    ```python title="open_predefined_menu.py"
+    import asyncio
+    import json
+    import os
+    import platform
+    import websockets
+
+    menu_name = "Example Menu"
+
+    def find_ipc_info_path():
+        system = platform.system()
+        home = os.path.expanduser("~")
+        if system == "Windows":
+            appdata = os.environ.get("APPDATA", os.path.join(home, "AppData", "Roaming"))
+            return os.path.join(appdata, "kando", "ipc-info.json")
+        elif system == "Darwin":
+            return os.path.join(home, "Library", "Application Support", "kando", "ipc-info.json")
+        else:
+            flatpak_path = os.path.join(home, ".var", "app", "menu.kando.Kando", "config", "kando", "ipc-info.json")
+            if os.path.exists(flatpak_path):
+                return flatpak_path
+            return os.path.join(home, ".config", "kando", "ipc-info.json")
+
+    async def main():
+        info_path = find_ipc_info_path()
+        if not os.path.exists(info_path):
+            print(f"ipc-info.json not found at {info_path}")
+            return
+
+        with open(info_path, 'r') as f:
+            info = json.load(f)
+        port = info['port']
+        api_version = info['apiVersion']
+
+        client_api_version = 2
+        if api_version != client_api_version:
+            print(f"API version mismatch: server={api_version}, client={client_api_version}")
+            return
+
+        uri = f"ws://127.0.0.1:{port}"
+
+        try:
+            async with websockets.connect(uri) as ws:
+                await ws.send(json.dumps({"type": "show-menu", "name": menu_name}))
+
+        except (ConnectionRefusedError, OSError) as e:
+            print(f"Could not connect to Kando IPC server at {uri}: Is Kando running?")
+
+    if __name__ == "__main__":
+        asyncio.run(main())
+
+    ```
+  </TabItem>
   <TabItem label="Open a Custom Menu">
-    ```python title="open_menu.py"
+    ```python title="open_custom_menu.py"
     import asyncio
     import json
     import os
@@ -309,7 +406,7 @@ Below, you find two complete code examples for both opening a custom menu and ob
 
         try:
             async with websockets.connect(uri) as ws:
-                await ws.send(json.dumps({"type": "show-menu", "menu": menu}))
+                await ws.send(json.dumps({"type": "show-custom-menu", "menu": menu}))
                 print("Menu sent. Waiting for user interaction...")
 
                 async for message in ws:
