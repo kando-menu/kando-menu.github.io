@@ -25,6 +25,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "node-gyp": "^13.0.1",
     "sass-embedded": "^1.99.0"
   }
 }
