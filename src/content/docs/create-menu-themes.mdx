@@ -203,22 +203,28 @@ The overall tree structure of the menu may look like this:
 
 ```
 #kando-menu
-├ .menu-node.level-0.top.type-submenu.parent                    <-- This is the root item of the menu.
+├ .menu-node.level-0.top.type-root.parent                       <-- This is the root item of the menu.
 │  ├ .menu-node.level-1.top.type-submenu.grandchild                 It has three children, the third one
-│  │  ├ .menu-node.level-2.right.type-uri                           is a submenu which is currently open.
-│  │  └ .menu-node.level-2.left.type-command
+│  │  ├ .menu-node.level-2.right.type-button                        is a submenu which is currently open.
+│  │  └ .menu-node.level-2.left.type-button
 │  ├ .menu-node.level-1.right.type-submenu.grandchild
-│  │  ├ .menu-node.level-2.top.type-hotkey
-│  │  └ .menu-node.level-2.bottom.type-macro
+│  │  ├ .menu-node.level-2.top.type-button
+│  │  └ .menu-node.level-2.bottom.type-button
 │  └ .menu-node.level-1.left.type-submenu.active                <-- This is the currently active menu item.
-│     ├ .menu-node.level-2.child.top.type-uri                       It has four children.
+│     ├ .menu-node.level-2.child.top.type-button                    It has four children.
 │     ├ .menu-node.level-2.type-submenu.child.hovered.dragged   <-- The second child is a submenu which is
-│     │  ├ .menu-node.level-3.grandchild.top.type-command           currently dragged around in marking or
-│     │  └ .menu-node.level-3.grandchild.bottom.type-command        turbo mode.
+│     │  ├ .menu-node.level-3.grandchild.top.type-button            currently dragged around in marking or
+│     │  └ .menu-node.level-3.grandchild.bottom.type-button         turbo mode.
 │     ├ .menu-node.level-2.child.left.type-submenu
-│     │  ├ .menu-node.level-3.grandchild.top.type-command
-│     │  └ .menu-node.level-3.grandchild.bottom.type-command
-│     └ .menu-node.level-2.child.right.type-macro
+│     │  ├ .menu-node.level-3.grandchild.top.type-button
+│     │  └ .menu-node.level-3.grandchild.bottom.type-button
+│     └ .menu-node.level-2.child.right.type-button
+├ .selection-wedges                                             <-- This is the layer which draws the
+│                                                                   currently highlighted wedge background.
+├ .wedge-separators                                             <-- This contains individual divs for the
+│  ├ .separator                                                     separator lines between the wedges.
+│  ├ .separator
+│  └ .separator
 └ .center-text                                                  <-- This is the text shown in the center
                                                                     of the menu.
 ```
@@ -237,7 +243,7 @@ In addition, each menu node has a **class for the current level** (`.level-0`, `
 This can be used to style the menu items differently depending on their depth in the menu tree.
 Only the root item has the class `.level-0`.
 
-Furthermore, the **menu node classes contain the type of the item** (`.type-submenu`, `.type-uri`, `.type-command`, etc).
+Furthermore, the **menu node classes contain the type of the item** (`.type-root`, `.type-submenu`, or `.type-button`).
 This can be used to style different item types differently.
 
 Last but not least, **each menu node has a class for its approximate direction** relative to the center of the menu (`.top`, `.right`, `.bottom`, `.left`). Escept for the root node, which is always in the center.
@@ -250,7 +256,7 @@ They have the class `.connector` and can be styled as well.
 In the "Development" tab of the sidebar, you can find a button to open the inspector. You can use them to explore the structure of the menu and find out how the layers are created.
 </Aside>
 
-### CSS Properties of the Menu Items
+### CSS Properties of the Menu Elements
 
 In addition to the colors specified in the theme's JSON file, Kando sets some custom CSS properties on some `.menu-node` and layer div elements.
 
@@ -275,6 +281,14 @@ _Available on all elements with the `.menu-node` class except for the root node.
 
 The angle of the item in degrees, starting at the top with 0° and going clockwise.
 This is useful if you want to rotate a layer with respect to the item's position.
+</details>
+
+<details>
+<summary>`--start-angle` and `--end-angle`</summary>
+_Available on all elements with the `.menu-node` class except for the root node._
+
+The angles at which the item's wedge starts and ends in degrees.
+Can be useful for styling the background of the wedge.
 </details>
 
 <details>
@@ -322,8 +336,31 @@ You can use this to rotate a layer towards the hovered item.
 The same as `--hover-angle`, but if the center is hovered, this will not be updated.
 </details>
 
+#### Selection Wedge Properties
 
+The `.selection-wedges` element is a full-screen div which is drawn below the menu items.
+It has four custom CSS properties which can be used to highlight the currently hovered wedge.
 
+<details>
+<summary>`--center-x` and `--center-y`</summary>
+The coordinates of the center of the selection wedge in pixels.
+</details>
+
+<details>
+<summary>`--start-angle` and `--end-angle`</summary>
+The angles at which the currently hovered wedge starts and ends in degrees.
+</details>
+
+#### Wedge Separator Properties
+
+The `.wedge-separators` contains individual divs for each separator line between the wedges.
+Each separator is already rotated and positioned correctly, so you can just style them with a background color and height.
+Per default, they have a width of `100vmax` and a height of `1px` which makes them span the whole screen.
+
+<details>
+<summary>`--angle`</summary>
+The angle of the wedge in degrees, starting at the top with 0° and going clockwise.
+</details>
 
 ### Styling the Layers
 
@@ -387,7 +424,11 @@ Here's how the `theme.css` file of the default theme looks like:
     opacity: 0;
     color: var(--text-color);
     transition: var(--opacity-transition);
-    clip-path: circle(45% at 50% 50%);
+    margin: 5%;
+    width: 90% !important;
+    height: 90% !important;
+    border-radius: 50%;
+    overflow: hidden;
   }
 
   /* All menu items have a border and are circles in this theme. */
@@ -422,15 +463,11 @@ Here's how the `theme.css` file of the default theme looks like:
     background-color: var(--hover-color);
   }
 
-  /* If the parent or a child node is clicked, we scale it down to normal size. */
+  /* If an item is clicked, we scale it down a bit. */
   &.parent.hovered.clicked>.icon-layer,
-  &.child.hovered.clicked>.icon-layer {
-    transform: scale(0.95);
-  }
-
-  /* If the center node is clicked, we scale it down a bit. */
+  &.child.hovered.clicked>.icon-layer,
   &.active.hovered.clicked>.icon-layer {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 
   /* Show the icons of the center, parent and child items. */
@@ -482,8 +519,7 @@ Here's how the `theme.css` file of the default theme looks like:
     top: calc(-1 * var(--connector-width) / 2);
   }
 
-  &:has(.dragged)>.connector,
-  &:has(.clicked)>.connector {
+  &:has(.dragged)>.connector {
     transition: none;
   }
 
@@ -503,6 +539,21 @@ Here's how the `theme.css` file of the default theme looks like:
   transition: var(--opacity-transition);
   font-size: 16px;
   line-height: 22px;
+}
+
+/* Selection Wedges ------------------------------------------------------------------- */
+
+.selection-wedges {
+  mask: radial-gradient(circle at var(--center-x) var(--center-y), black 100px, transparent 50%);
+
+  &.hovered {
+    --width: calc(var(--end-angle) - var(--start-angle));
+    background: conic-gradient(from calc(var(--start-angle)) at var(--center-x) var(--center-y),
+        var(--wedge-highlight-color) var(--width),
+        var(--wedge-color) var(--width));
+  }
+
+  background: var(--wedge-color);
 }
 ```
 
