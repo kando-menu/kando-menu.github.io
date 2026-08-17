@@ -87,6 +87,7 @@ export default defineConfig({
                 'bm-tutorial',
                 'btt-tutorial',
                 'kanata-tutorial',
+                'linguax-tutorial',
               ],
             },
             'portable-mode',
