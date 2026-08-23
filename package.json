@@ -12,7 +12,7 @@
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
     "@astrojs/check": "^0.9.9",
-    "@astrojs/markdown-remark": "^6.3.10",
+    "@astrojs/markdown-remark": "^7.2.0",
     "@astrojs/starlight": "^0.40.0",
     "@fontsource/neucha": "^5.2.8",
     "@iconify-json/simple-icons": "^1.2.82",
@@ -22,9 +22,10 @@
     "astro-og-canvas": "^0.11.1",
     "astro-swiper": "^2.7.0",
     "sharp": "^0.34.5",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "node-gyp": "^13.0.1",
     "sass-embedded": "^1.99.0"
   }
 }
