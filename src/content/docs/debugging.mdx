@@ -6,7 +6,7 @@ title: Debugging & Profiling
 description: Learn how to debug or profile Kando.
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 import Intro from '../../components/Intro.astro';
 import {Image} from 'astro:assets';
 import { Icon } from 'astro-icon/components';
@@ -91,7 +91,7 @@ You can then set breakpoints in your code and inspect variables!
 If you are using [Zed](https://zed.dev/), you can set up debugging by editing the `.zed/debug.json` file with `Run > Edit debug.json...`.
 Put the following content into that file:
 
-```json5 title=".vscode/launch.json"
+```json5 title=".zed/tasks.json"
 [
   {
     "label": "Kando: Main Process",
@@ -188,3 +188,30 @@ This is extremely useful to identify performance bottlenecks in your code.
 <Aside type="tip" title="Need Help?">
 If you encounter a problem at any stage, feel free to ask for help in the **#support** or **#dev-chat** channel on [Kando's Discord Server](https://discord.gg/hZwbVSDkhy)!
 </Aside>
+
+## <Icon name="solar:document-text-bold-duotone" class="inline-icon" /> Specifying a Custom Configuration Directory
+It may be beneficial to specify a custom configuration directory when developing Kando,
+this way your main configuration files are not affected by your development changes.
+
+As such, you can specify a custom configuration directory using the <a href="../cli-interface/">`--config-dir`</a> flag when running Kando.
+
+<Tabs syncKey="ide">
+  <TabItem label="Zed" value="zed" icon="zed">
+    ```json5 title=".zed/tasks.json"
+    [
+      {
+        "label": "Kando: Main Process",
+        ...
+        "runtimeArgs": [
+          "node_modules/@electron-forge/cli/src/electron-forge-start",
+          "--",
+          "--remote-debugging-port=9223"
+          "--config-dir=DevConfigFiles"
+        ],
+        ...
+      },
+      ...
+    ]
+    ```
+  </TabItem>
+</Tabs>
