@@ -34,7 +34,7 @@ GNOME X11 | ✅ |
 GNOME Wayland | ✅ | Requires [adapter GNOME Shell extension](https://github.com/kando-menu/gnome-shell-integration) which provides a DBus interface for Kando to communicate with.
 KDE X11 | ✅ |
 KDE Wayland | ✅ | Works both on Plasma 5 and Plasma 6. See [below](#-kde-plasma-on-wayland) for how to bind global shortcuts.
-Cosmic | ❌ | Contributions are welcome! Read the [corresponding feature request](https://github.com/kando-menu/kando/issues/738).
+Cosmic | ✅ | Requires the [kando-cosmic-integration](https://github.com/sam-ludford/kando-cosmic-integration) helper. See [below](#-cosmic) for the required config.
 Hyprland | ✅ | See [below](#-hyprland) for the required configs.
 Cinnamon X11 | ✅ |
 Cinnamon Wayland | ❌ | Contributions are welcome! Read the [corresponding feature request](https://github.com/kando-menu/kando/issues/833).
@@ -177,6 +177,37 @@ Once you inserted an ID, the KDE's system settings will pop up automatically and
 
 It is perfectly fine to use the same shortcut ID for multiple menus.
 Use this in combination with the app-dependent menu feature to open different menus depending on the currently focused application!
+
+### <Icon name="simple-icons:system76" class="inline-icon" /> COSMIC
+
+Kando's COSMIC backend talks to a small D-Bus helper, similar to the GNOME Shell extension.
+Install it from [kando-cosmic-integration](https://github.com/sam-ludford/kando-cosmic-integration):
+
+```bash
+git clone https://github.com/sam-ludford/kando-cosmic-integration.git
+cd kando-cosmic-integration
+make install   # needs cargo, pkg-config and libxkbcommon-dev
+make setup     # wizard: floating rule, custom shortcut, named workspaces
+```
+
+cosmic-comp tiles every new window unless there is an exception for it, so Kando's menu window needs this rule in `~/.config/cosmic/com.system76.CosmicSettings.WindowRules/v1/tiling_exception_custom` (`make setup` writes it; COSMIC picks it up without a restart):
+
+```ron
+[
+    (
+        enabled: true,
+        appid: "menu.kando.Kando",
+        title: "^Kando Menu$",
+    ),
+]
+```
+
+COSMIC does not provide the GlobalShortcuts portal yet, so Kando cannot bind shortcuts itself.
+Open menus with `kando --menu "Menu Name"` bound to a custom shortcut in *COSMIC Settings → Input Devices → Keyboard → Keyboard Shortcuts → Custom*.
+Mouse buttons can do the same through a [Solaar](https://github.com/pwr-Solaar/Solaar) rule that executes the command.
+
+Simulated shortcuts do not trigger cosmic-comp's own key bindings (such as <kbd>Super</kbd>+<kbd>M</kbd>).
+Use the helper's commands instead, for example `kando-cosmic-helper state @focused "" toggle-maximize` or `kando-cosmic-helper workspace send "Coding"`; the COSMIC example menu shows how.
 
 ### <Icon name="simple-icons:hyprland" class="inline-icon" /> Hyprland
 
