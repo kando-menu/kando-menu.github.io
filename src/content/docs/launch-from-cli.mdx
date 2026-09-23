@@ -6,7 +6,7 @@ title: Launching Kando from a Terminal
 description: How to run Kando from the command line.
 ---
 
-import { Tabs, TabItem, Aside, Badge } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Aside, Badge, LinkCard } from '@astrojs/starlight/components';
 import { Icon } from 'astro-icon/components';
 
 ![banner](../../assets/banners/banner08.png)
@@ -47,67 +47,7 @@ If you installed Kando via a package manager or via one of the installers from G
 
 ## <Icon name="solar:sidebar-code-bold-duotone" class="inline-icon" /> Command Line Interface
 
-Kando comes with a command line interface (CLI) that allows you to interact with Kando from the terminal.
-For now, these commands are available:
+When you run Kando from the command line, you can use the [command line interface](/cli-interface) to interact with Kando.
+This allows you to open menus, trigger shortcuts, and more.
 
-<details>
-  <summary>`--help`</summary>
-  Prints the help message for the CLI.
-</details>
-
-<details>
-  <summary>`--version` or `-v`</summary>
-  Prints the version of Kando.
-</details>
-
-<details>
-  <summary>`--menu "Menu Name"` or `-m "Menu Name"`</summary>
-Opens the menu with the given name. This also works if Kando is already running. In this
-case, the menu will be opened in the running instance.
-
-This behaves as if the menu's shortcut had been pressed, so all context conditions are checked.
-Also, if multiple menus have the same name, the one with the most specific conditions will
-be opened. Furthermore, if a menu is already open, calling this command will be like
-pressing the shortcut again - so it will either close the menu or cycle through the
-matching menus depending on your settings.
-
-</details>
-
-<details>
-  <summary>`--trigger <shortcut>` or `-t <shortcut>`</summary>
-Opens the menu which is assigned to the given shortcut or shortcut ID. This also works
-if Kando is already running. In this case, the menu will be opened in the running instance.
-
-This behaves as if the shortcut had been pressed, so all context conditions are checked.
-Also, if multiple menus are bound to the same shortcut, the one with the most specific conditions will
-be opened. Furthermore, if a menu is already open, calling this command will be like
-pressing the shortcut again - so it will either close the menu or cycle through the
-matching menus depending on your settings.
-
-</details>
-
-<details>
-  <summary>
-    `--close-menu`
-  </summary>
-  Closes the currently opened menu. This will do nothing if no menu is shown or Kando is
-  not running.
-</details>
-
-<details>
-  <summary>`--settings` or `-s`</summary>
-  Opens the settings window. This also works if Kando is already running. In this case,
-  the settings window will be opened in the running instance.
-</details>
-
-<details>
-  <summary>`--reload-menu-theme`</summary>
-  Reloads the menu theme. This can be useful if you are developing a theme and want to see
-  the changes without restarting Kando.
-</details>
-
-<details>
-  <summary>`--reload-sound-theme`</summary>
-  Reloads the sound theme. This can be useful if you are developing a theme and want to
-  hear the changes without restarting Kando.
-</details>
+<LinkCard title="Command Line Interface" description="Click here to learn more about Kando's command line interface." href="/cli-interface"/>

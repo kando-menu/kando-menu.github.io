@@ -1,0 +1,35 @@
+---
+// SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+// SPDX-License-Identifier: CC0-1.0
+
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  lightSrc: ImageMetadata;
+  darkSrc: ImageMetadata;
+  alt: string;
+  class?: string;
+}
+
+const { lightSrc, darkSrc, alt, class: className = '' } = Astro.props;
+---
+
+<div class="theme-aware-image">
+  <Image src={lightSrc} alt={alt} class:list={['theme-light-image', className]} />
+  <Image src={darkSrc} alt={alt} class:list={['theme-dark-image', className]} />
+</div>
+
+<style>
+  .theme-aware-image .theme-dark-image {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .theme-aware-image .theme-light-image {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .theme-aware-image .theme-dark-image {
+    display: block;
+  }
+</style>

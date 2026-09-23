@@ -266,7 +266,9 @@ Here are some examples:
     ```
     // ~/.config/hypr/hyprland.conf
     bind = CTRL, Space, global, menu.kando.Kando:example-menu
+    ```
 
+    ```
     // ~/.config/hypr/hyprland.lua
     hl.bind("CTRL + Space", hl.dsp.global("menu.kando.Kando:example-menu"))
     ```
@@ -275,7 +277,9 @@ Here are some examples:
     ```
     // ~/.config/hypr/hyprland.conf
     bind = CTRL, Space, global, :example-menu
+    ```
 
+    ```
     // ~/.config/hypr/hyprland.lua
     hl.bind("CTRL + Space", hl.dsp.global(":example-menu"))
     ```
@@ -293,7 +297,9 @@ To do this, add the following line to your config:
 ```
 // ~/.config/hypr/hyprland.conf
 env=ELECTRON_OZONE_PLATFORM_HINT,auto
+```
 
+```
 // ~/.config/hypr/hyprland.lua
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 ```
