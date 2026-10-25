@@ -23,7 +23,7 @@ This is mostly for the maintainers of Kando, so that we do not forget anything, 
 2. Bump the version number in [`package.json`](https://github.com/kando-menu/kando/blob/main/package.json).
 3. Run `npm install` to update the lock file.
 4. Set the release date and the version name in [`changelog.md`](https://github.com/kando-menu/kando/blob/main/docs/changelog.md).
-5. Add the new release also to the [`menu.kando.Kando.metainfo.xml`](https://github.com/kando-menu/kando/blob/main/appstream/menu.kando.Kando.metainfo.xml) file.
+5. Add the new release also to the [`menu.kando.Kando.metainfo.xml`](https://github.com/kando-menu/kando/blob/main/packaging/appstream/menu.kando.Kando.metainfo.xml) file.
 6. Commit the changes with a message like `:tada: Bump version number` to the `main` branch.
 7. Run the following:
    ```bash
@@ -67,15 +67,15 @@ To update this to a new version, the following steps need to be performed:
     sha256sum Kando-X.Y.Z-aarch64.AppImage
     ```
 2. Edit [`menu.kando.Kando.yml`](https://github.com/flathub/menu.kando.Kando/blob/master/menu.kando.Kando.yml) to include the new links to the AppImages and the new sha256s.
-3. `menu.kando.Kando.metainfo.xml` needs to be updated as well as it now contains the new release date and the new version number. Go [here](https://github.com/kando-menu/kando/blob/main/appstream/menu.kando.Kando.metainfo.xml) and press <kbd>y</kbd> to change the URL to the commit hash variant. Copy the hash.
+3. `menu.kando.Kando.metainfo.xml` needs to be updated as well as it now contains the new release date and the new version number. Go [here](https://github.com/kando-menu/kando/blob/main/packaging/appstream/menu.kando.Kando.metainfo.xml) and press <kbd>y</kbd> to change the URL to the commit hash variant. Copy the hash.
 4. Run this:
     ```bash
-    wget https://raw.githubusercontent.com/kando-menu/kando/<hash>/appstream/menu.kando.Kando.metainfo.xml
+    wget https://raw.githubusercontent.com/kando-menu/kando/<hash>/packaging/appstream/menu.kando.Kando.metainfo.xml
     sha256sum menu.kando.Kando.metainfo.xml
     ```
 5. Edit the `menu.kando.Kando.yml` file again and replace the commit hash and the sha256 for the `menu.kando.Kando.metainfo.xml` accordingly.
-4. If `menu.kando.Kando.svg` or `menu.kando.Kando.desktop` had been changed since the last release, you need to update them as well. You can do this in the same manner as above.
-5. Commit the changes to the `menu.kando.Kando.yml` file to a new branch and create a pull request.
+6. If `menu.kando.Kando.svg` or `menu.kando.Kando.desktop` had been changed since the last release, you need to update them as well. You can do this in the same manner as above.
+7. Commit the changes to the `menu.kando.Kando.yml` file to a new branch and create a pull request.
 </Steps>
 
 
