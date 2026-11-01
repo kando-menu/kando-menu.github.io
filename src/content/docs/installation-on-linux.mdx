@@ -33,7 +33,7 @@ Environment | Status | Notes
 GNOME X11 | ✅ |
 GNOME Wayland | ✅ | Requires [adapter GNOME Shell extension](https://github.com/kando-menu/gnome-shell-integration) which provides a DBus interface for Kando to communicate with.
 KDE X11 | ✅ |
-KDE Wayland | ✅ | Works both on Plasma 5 and Plasma 6. See [below](#-kde-plasma-on-wayland) for how to bind global shortcuts.
+KDE Wayland | ✅ | Works both on Plasma 5 and Plasma 6. Requires the [Kando Integration for KDE](https://github.com/kando-menu/kwin-integration). See [below](#-kde-plasma-on-wayland) for details.
 Cosmic | ❌ | Contributions are welcome! Read the [corresponding feature request](https://github.com/kando-menu/kando/issues/738).
 Hyprland | ✅ | See [below](#-hyprland) for the required configs.
 Cinnamon X11 | ✅ |
@@ -46,10 +46,10 @@ LXQt | ✅ |
 LXDE | ✅ | Requires a compositor for the transparency to work.
 Openbox | ✅ | Requires a compositor for the transparency to work.
 i3 | ✅ | Requires a compositor for the transparency to work.
-dusk | ✅ | Requires a compositor for the transparency to work. See [below](#dusk) for the required config.
+Dusk | ✅ | Requires a compositor for the transparency to work. See [below](#-dusk) for the required config.
 Qtile | ➖ | It works with some flaws. Contributions are welcome! Read the [corresponding bug report](https://github.com/kando-menu/kando/issues/621).
 Niri | ➖ | See [below](#-niri) for the required configs. It works with some flaws. Contributions are welcome!
-Umbriel | ✅ | See [below](#umbriel) for the required configs.
+Umbriel | ✅ | See [below](#-umbriel-) for the required configs.
 
 <CustomAside type="thanks" title="Have you tested another environment?">
 If you have tested Kando on another desktop environment, please add it to the list above by editing this page on GitHub!
@@ -162,16 +162,21 @@ There are also some X11 based desktop environments that need some additional set
 
 [![ego image](../../assets/img/ego.png)](https://extensions.gnome.org/extension/7068/kando-integration/)
 
-You will also need to install the [🐚 Kando Integration Extension](https://extensions.gnome.org/extension/7068/kando-integration/).
+On GNOME, you will need to install the [🐚 Kando Integration Extension](https://extensions.gnome.org/extension/7068/kando-integration/).
 Via a D-Bus interface, it provides the name of the currently focused window, and the current mouse pointer position.
 Furthermore, it allows registering and simulating keyboard shortcuts.
 
 
 ### <Icon name="simple-icons:kde" class="inline-icon" /> KDE Plasma on Wayland
 
+Since Kando 3.0.0, you will need to install the [Kando Integration for KDE](https://github.com/kando-menu/kwin-integration).
+Via a D-Bus interface, it provides the name of the currently focused window, the current mouse pointer position, and a few more pieces of information required by Kando.
+
+Simply follow the installation instructions provided in the [repository](https://github.com/kando-menu/kwin-integration).
+
 ![kde image](../../assets/img/kde-shortcuts.png)
 
-If you are using Plasma on Wayland, Kando cannot directly bind global shortcuts.
+Also, Kando cannot directly bind global shortcuts on KDE Plasma Wayland.
 Instead, it uses the Global-Shortcuts Desktop Portal.
 This means, you specify a shortcut ID for each menu in Kando's menu editor.
 Once you inserted an ID, the KDE's system settings will pop up automatically and you can assign a shortcut to the ID.
@@ -345,7 +350,7 @@ In that case, have Kando run a command `niri msg action <action>` where the acti
 Niri does not yet support global shortcuts.
 But you can open menus using `kando --menu "Menu Name"` or `kando --trigger <shortcut>` from the command line or from your Niri config.
 
-### Umbriel <Badge text="soon!" variant="tip" />
+### <Icon name="simple-icons:wayland" class="inline-icon" /> Umbriel <Badge text="soon!" variant="tip" />
 
 Since version 3.1.0, Kando works on [Umbriel](https://github.com/noctalia-dev/umbriel) as a native Wayland application.
 #### Window Rules
@@ -411,7 +416,7 @@ allow_globals = [
 ]
 ```
 
-### Dusk
+### <Icon name="simple-icons:xdotorg" class="inline-icon" /> Dusk
 
 On Dusk, you will have to install and use a compositor like `picom` or `compton` to make the transparency work.
 Also, you will need some window rules for Kando:
@@ -424,6 +429,6 @@ static const Rule clientrules[] = {
 };
 ```
 
-### LXDE, i3, Openbox, and others
+### <Icon name="simple-icons:xdotorg" class="inline-icon" /> LXDE, i3, Openbox, and others
 
 On some minimal desktop environments, you will have to install and use a compositor like `picom` or `compton` to make the transparency work.
