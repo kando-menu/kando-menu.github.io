@@ -12,7 +12,7 @@ next:
   label: How to Use the Menu
 ---
 
-import { Steps, Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps, Aside, Tabs, TabItem, Badge } from '@astrojs/starlight/components';
 import { Icon } from 'astro-icon/components';
 import CustomAside from '../../components/CustomAside.astro';
 import Intro from '../../components/Intro.astro';
@@ -49,6 +49,7 @@ i3 | ✅ | Requires a compositor for the transparency to work.
 dusk | ✅ | Requires a compositor for the transparency to work. See [below](#dusk) for the required config.
 Qtile | ➖ | It works with some flaws. Contributions are welcome! Read the [corresponding bug report](https://github.com/kando-menu/kando/issues/621).
 Niri | ➖ | See [below](#-niri) for the required configs. It works with some flaws. Contributions are welcome!
+Umbriel | ✅ | See [below](#umbriel) for the required configs.
 
 <CustomAside type="thanks" title="Have you tested another environment?">
 If you have tested Kando on another desktop environment, please add it to the list above by editing this page on GitHub!
@@ -343,6 +344,72 @@ In that case, have Kando run a command `niri msg action <action>` where the acti
 
 Niri does not yet support global shortcuts.
 But you can open menus using `kando --menu "Menu Name"` or `kando --trigger <shortcut>` from the command line or from your Niri config.
+
+### Umbriel <Badge text="soon!" variant="tip" />
+
+Since version 3.1.0, Kando works on [Umbriel](https://github.com/noctalia-dev/umbriel) as a native Wayland application.
+#### Window Rules
+
+You will need a window rule for Kando.
+Else, the menu will be tiled instead of floating fullscreen above other windows.
+
+```toml
+# ~/.config/umbriel/config.toml
+[[window_rule]]
+match.title = "^Kando Menu$"
+default_floating = true
+default_pinned = true
+default_focused = true
+default_floating_size = { width = 1.0, height = 1.0 }
+default_position = { x = 0, y = 0, anchor = "top_left" }
+border_width = 0
+outer_border_width = 0
+corner_radius = 0
+shadow = false
+blur = false
+border_effect = "off"
+```
+
+#### Shortcuts
+
+Umbriel does not yet support the global-shortcuts portal, so Kando cannot bind shortcuts itself.
+Instead, bind a key combination in Umbriel's `keybinds.toml` which opens a menu by its name:
+
+<Tabs syncKey="umbriel-install">
+  <TabItem label="Native">
+    ```toml
+    # ~/.config/umbriel/keybinds.toml
+    [keybinds]
+    "Ctrl+Space" = { action = "spawn:kando --menu \"Example Menu\"", repeat = false }
+    ```
+  </TabItem>
+  <TabItem label="Flatpak">
+    ```toml
+    # ~/.config/umbriel/keybinds.toml
+    [keybinds]
+    "Ctrl+Space" = { action = "spawn:flatpak run menu.kando.Kando --menu \"Example Menu\"", repeat = false }
+    ```
+  </TabItem>
+</Tabs>
+
+#### Flatpak
+
+Umbriel hides privileged Wayland protocols from sandboxed applications.
+If you installed Kando from Flathub, you have to allow the protocols Kando needs in Umbriel's `config.toml`.
+Else, Kando will not be able to open menus.
+
+```toml
+# ~/.config/umbriel/config.toml
+[[security_context_rule]]
+match.app_id = "^menu\\.kando\\.Kando$"
+allow_globals = [
+  "zwlr_layer_shell_v1",
+  "zwlr_virtual_pointer_manager_v1",
+  "zwp_virtual_keyboard_manager_v1",
+  "zwlr_foreign_toplevel_manager_v1",
+  "zxdg_output_manager_v1",
+]
+```
 
 ### Dusk
 
